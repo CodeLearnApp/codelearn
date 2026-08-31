@@ -16,6 +16,9 @@ const UI_LANGS = {
     explainTitle: "¿Qué hace y por qué?",
     copy: "📋 Copiar",
     copied: "✅ Copiado",
+    shareCode: "📤 Compartir código",
+    shareExplanation: "📤 Compartir explicación",
+    shared: "✅ Copiado para compartir",
     error: "Hubo un error generando el código. Intentá de nuevo.",
     footer: "Aprendé programando — generado con IA • CodeLearn",
     uiLangLabel: "Idioma de la app",
@@ -35,6 +38,9 @@ const UI_LANGS = {
     explainTitle: "What does it do and why?",
     copy: "📋 Copy",
     copied: "✅ Copied",
+    shareCode: "📤 Share code",
+    shareExplanation: "📤 Share explanation",
+    shared: "✅ Copied to share",
     error: "There was an error generating the code. Please try again.",
     footer: "Learn by coding — powered by AI • CodeLearn",
     uiLangLabel: "App language",
@@ -54,6 +60,9 @@ const UI_LANGS = {
     explainTitle: "O que faz e por quê?",
     copy: "📋 Copiar",
     copied: "✅ Copiado",
+    shareCode: "📤 Compartilhar código",
+    shareExplanation: "📤 Compartilhar explicação",
+    shared: "✅ Copiado para compartilhar",
     error: "Houve um erro ao gerar o código. Tente novamente.",
     footer: "Aprenda programando — gerado com IA • CodeLearn",
     uiLangLabel: "Idioma do app",
@@ -73,6 +82,9 @@ const UI_LANGS = {
     explainTitle: "Que fait-il et pourquoi ?",
     copy: "📋 Copier",
     copied: "✅ Copié",
+    shareCode: "📤 Partager le code",
+    shareExplanation: "📤 Partager l'explication",
+    shared: "✅ Copié pour partager",
     error: "Une erreur s'est produite. Veuillez réessayer.",
     footer: "Apprenez en codant — généré par IA • CodeLearn",
     uiLangLabel: "Langue de l'app",
@@ -92,6 +104,9 @@ const UI_LANGS = {
     explainTitle: "Was macht es und warum?",
     copy: "📋 Kopieren",
     copied: "✅ Kopiert",
+    shareCode: "📤 Code teilen",
+    shareExplanation: "📤 Erklärung teilen",
+    shared: "✅ Zum Teilen kopiert",
     error: "Beim Generieren ist ein Fehler aufgetreten. Bitte erneut versuchen.",
     footer: "Lerne durch Programmieren — KI-gestützt • CodeLearn",
     uiLangLabel: "App-Sprache",
@@ -111,6 +126,9 @@ const UI_LANGS = {
     explainTitle: "它做什么？为什么这样写？",
     copy: "📋 复制",
     copied: "✅ 已复制",
+    shareCode: "📤 分享代码",
+    shareExplanation: "📤 分享解释",
+    shared: "✅ 已复制分享",
     error: "生成代码时出错，请重试。",
     footer: "边编程边学习 — AI 驱动 • CodeLearn",
     uiLangLabel: "应用语言",
@@ -157,6 +175,29 @@ function CopyButton({ text, t }) {
   return (
     <button onClick={copy} style={styles.copyBtn}>
       {copied ? t.copied : t.copy}
+    </button>
+  );
+}
+
+function ShareButton({ text, label, shared, style }) {
+  const [sharing, setSharing] = useState(false);
+
+  const share = async () => {
+    const shareText = text + "\n\n— Generado con CodeLearn: codelearn.codes";
+    if (navigator.share) {
+      try {
+        await navigator.share({ text: shareText });
+      } catch (e) {}
+    } else {
+      navigator.clipboard.writeText(shareText);
+      setSharing(true);
+      setTimeout(() => setSharing(false), 2000);
+    }
+  };
+
+  return (
+    <button onClick={share} style={{ ...styles.shareBtn, ...style }}>
+      {sharing ? shared : label}
     </button>
   );
 }
@@ -240,7 +281,7 @@ Respond ONLY in this JSON (no backticks):
           "anthropic-version": "2023-06-01",
           "anthropic-dangerous-direct-browser-access": "true",
         },
-        body: JSON.stringify({ model: "claude-haiku-4-5-20251001", max_tokens: 1000, messages: [{ role: "user", content: prompt }] }),
+        body: JSON.stringify({ model: "claude-sonnet-4-6", max_tokens: 1000, messages: [{ role: "user", content: prompt }] }),
       });
       const data   = await res.json();
       const raw    = data.content.map(b => b.text || "").join("");
@@ -341,7 +382,10 @@ Respond ONLY in this JSON (no backticks):
                   <div style={styles.card}>
                     <div style={styles.cardHeader}>
                       <div style={styles.cardTitle}>{t.codeTitle(selectedProgLang.label, selectedProgLang.icon)}</div>
-                      <CopyButton text={result.code} t={t} />
+                      <div style={styles.btnGroup}>
+                        <CopyButton text={result.code} t={t} />
+                        <ShareButton text={result.code} label={t.shareCode} shared={t.shared} />
+                      </div>
                     </div>
                     <pre style={{ ...styles.codeBlock, fontSize: 12, maxHeight: "30vh", overflowY: "auto" }}>
                       <code>{result.code}</code>
@@ -350,7 +394,10 @@ Respond ONLY in this JSON (no backticks):
                   <div style={styles.card}>
                     <div style={styles.cardHeader}>
                       <div style={styles.cardTitle}>📖 {t.explainTitle}</div>
-                      <span style={styles.badge}>{selectedProgLang.label}</span>
+                      <div style={styles.btnGroup}>
+                        <span style={styles.badge}>{selectedProgLang.label}</span>
+                        <ShareButton text={result.explanation} label={t.shareExplanation} shared={t.shared} />
+                      </div>
                     </div>
                     <div style={{ maxHeight: "30vh", overflowY: "auto" }}>
                       <ExplanationBlock explanation={result.explanation} />
@@ -499,6 +546,8 @@ const styles = {
   expUl: { listStyle: "none", paddingLeft: 0, marginBottom: 8 },
   expLi: { fontSize: 13, color: "#b0accc", lineHeight: 1.65, paddingLeft: 4, marginBottom: 5 },
   footer: { textAlign: "center", padding: "16px", fontSize: 11, color: "#3a3750", borderTop: "1px solid #1a1830", fontFamily: "'IBM Plex Mono', monospace" },
+  btnGroup: { display: "flex", alignItems: "center", gap: 6 },
+  shareBtn: { fontSize: 11, fontWeight: 600, color: "#7c6af7", background: "#1e1a35", border: "1px solid #3a3060", borderRadius: 6, padding: "5px 10px", cursor: "pointer" },
   emptyState: { display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100%", minHeight: 200, opacity: 0.25 },
   emptyIcon: { fontSize: 48, fontFamily: "'IBM Plex Mono', monospace", color: "#7c6af7", marginBottom: 12 },
   emptyText: { fontSize: 13, color: "#9691b8", fontFamily: "'IBM Plex Mono', monospace" },
