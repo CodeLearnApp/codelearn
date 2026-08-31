@@ -202,6 +202,25 @@ function ShareButton({ text, label, shared, style }) {
   );
 }
 
+function ShareButton({ text, label, shared }) {
+  const [done, setDone] = useState(false);
+  const share = async () => {
+    const msg = text + "\n\n— Generado con CodeLearn: codelearn.codes";
+    if (navigator.share) {
+      try { await navigator.share({ text: msg }); } catch(e) {}
+    } else {
+      navigator.clipboard.writeText(msg);
+      setDone(true);
+      setTimeout(() => setDone(false), 2000);
+    }
+  };
+  return (
+    <button onClick={share} style={styles.shareBtn}>
+      {done ? shared : label}
+    </button>
+  );
+}
+
 function ExplanationBlock({ explanation }) {
   const lines = explanation.split("\n");
   const elements = [];
@@ -547,6 +566,7 @@ const styles = {
   expLi: { fontSize: 13, color: "#b0accc", lineHeight: 1.65, paddingLeft: 4, marginBottom: 5 },
   footer: { textAlign: "center", padding: "16px", fontSize: 11, color: "#3a3750", borderTop: "1px solid #1a1830", fontFamily: "'IBM Plex Mono', monospace" },
   btnGroup: { display: "flex", alignItems: "center", gap: 6 },
+  shareBtn: { fontSize: 11, fontWeight: 600, color: "#7c6af7", background: "#1e1a35", border: "1px solid #3a3060", borderRadius: 6, padding: "5px 10px", cursor: "pointer" },
   shareBtn: { fontSize: 11, fontWeight: 600, color: "#7c6af7", background: "#1e1a35", border: "1px solid #3a3060", borderRadius: 6, padding: "5px 10px", cursor: "pointer" },
   emptyState: { display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100%", minHeight: 200, opacity: 0.25 },
   emptyIcon: { fontSize: 48, fontFamily: "'IBM Plex Mono', monospace", color: "#7c6af7", marginBottom: 12 },
