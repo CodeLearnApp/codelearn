@@ -488,14 +488,20 @@ Respond ONLY in this JSON (no backticks):
                 <div style={styles.card}>
                   <div style={styles.cardHeader}>
                     <div style={styles.cardTitle}>{t.codeTitle(selectedProgLang.label, selectedProgLang.icon)}</div>
-                    <CopyButton text={result.code} t={t} />
+                    <div style={styles.btnGroup}>
+                      <CopyButton text={result.code} t={t} />
+                      <ShareButton text={result.code} label={t.shareCode} shared={t.shared} />
+                    </div>
                   </div>
                   <pre style={styles.codeBlock}><code>{result.code}</code></pre>
                 </div>
                 <div style={styles.card}>
                   <div style={styles.cardHeader}>
                     <div style={styles.cardTitle}>📖 {t.explainTitle}</div>
-                    <span style={styles.badge}>{selectedProgLang.label}</span>
+                    <div style={styles.btnGroup}>
+                      <span style={styles.badge}>{selectedProgLang.label}</span>
+                      <ShareButton text={result.explanation} label={t.shareExplanation} shared={t.shared} />
+                    </div>
                   </div>
                   <ExplanationBlock explanation={result.explanation} />
                 </div>
@@ -566,7 +572,6 @@ const styles = {
   expLi: { fontSize: 13, color: "#b0accc", lineHeight: 1.65, paddingLeft: 4, marginBottom: 5 },
   footer: { textAlign: "center", padding: "16px", fontSize: 11, color: "#3a3750", borderTop: "1px solid #1a1830", fontFamily: "'IBM Plex Mono', monospace" },
   btnGroup: { display: "flex", alignItems: "center", gap: 6 },
-  shareBtn: { fontSize: 11, fontWeight: 600, color: "#7c6af7", background: "#1e1a35", border: "1px solid #3a3060", borderRadius: 6, padding: "5px 10px", cursor: "pointer" },
   shareBtn: { fontSize: 11, fontWeight: 600, color: "#7c6af7", background: "#1e1a35", border: "1px solid #3a3060", borderRadius: 6, padding: "5px 10px", cursor: "pointer" },
   emptyState: { display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100%", minHeight: 200, opacity: 0.25 },
   emptyIcon: { fontSize: 48, fontFamily: "'IBM Plex Mono', monospace", color: "#7c6af7", marginBottom: 12 },
