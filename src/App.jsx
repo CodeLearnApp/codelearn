@@ -202,25 +202,6 @@ function ShareButton({ text, label, shared, style }) {
   );
 }
 
-function ShareButton({ text, label, shared }) {
-  const [done, setDone] = useState(false);
-  const share = async () => {
-    const msg = text + "\n\n— Generado con CodeLearn: codelearn.codes";
-    if (navigator.share) {
-      try { await navigator.share({ text: msg }); } catch(e) {}
-    } else {
-      navigator.clipboard.writeText(msg);
-      setDone(true);
-      setTimeout(() => setDone(false), 2000);
-    }
-  };
-  return (
-    <button onClick={share} style={styles.shareBtn}>
-      {done ? shared : label}
-    </button>
-  );
-}
-
 function ExplanationBlock({ explanation }) {
   const lines = explanation.split("\n");
   const elements = [];
