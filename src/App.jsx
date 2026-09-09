@@ -4,7 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 const SUPABASE_URL = "https://xbzgajevunqawdxemyqt.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhiemdhamV2dW5xYXdkeGVteXF0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg4NzIxNTIsImV4cCI6MjEwNDQ0ODE1Mn0.8gi6FZoScxWB3HSrdYElzNN3vwUseIDly1OFFle4Sz0";
 const PADDLE_CLIENT_TOKEN = "live_816261a82bc71161cd2de30da5b";
-const PADDLE_PRODUCT_ID = "pro_01m20s5jn6jgr3e6j0234nxysm";
+const PADDLE_PRODUCT_ID = "pri_01m2399cv4zp3yb31qp0z05mys";
 const FREE_DAILY_LIMIT = 5;
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
