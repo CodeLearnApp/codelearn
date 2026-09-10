@@ -437,14 +437,15 @@ export default function App() {
     return () => subscription.unsubscribe();
   }, []);
 
-  // Load Paddle
+// Load Paddle
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://cdn.paddle.com/paddle/v2/paddle.js";
- script.onload = () => {
-  window.Paddle.Initialize({ token: PADDLE_CLIENT_TOKEN });
-};
+    script.onload = () => {
+      window.Paddle.Initialize({ token: PADDLE_CLIENT_TOKEN });
     };
+    document.head.appendChild(script);
+  }, []);
     document.head.appendChild(script);
   }, []);
 
