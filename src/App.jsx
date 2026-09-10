@@ -446,8 +446,7 @@ export default function App() {
     };
     document.head.appendChild(script);
   }, []);
-    document.head.appendChild(script);
-  }, []);
+   
 
   const loadUserData = async (u) => {
     const today = new Date().toISOString().split("T")[0];
