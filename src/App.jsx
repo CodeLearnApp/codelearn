@@ -441,10 +441,9 @@ export default function App() {
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://cdn.paddle.com/paddle/v2/paddle.js";
-    script.onload = () => {window.Paddle.Initialize({ 
-  token: PADDLE_CLIENT_TOKEN,
-  environment: "production"
-});
+ script.onload = () => {
+  window.Paddle.Initialize({ token: PADDLE_CLIENT_TOKEN });
+};
     };
     document.head.appendChild(script);
   }, []);
