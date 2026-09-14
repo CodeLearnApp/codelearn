@@ -54,6 +54,16 @@ const UI_LANGS = {
     freeBadge: "🆓 Free",
     switchToRegister: "¿No tenés cuenta? Registrate",
     switchToLogin: "¿Ya tenés cuenta? Ingresá",
+    forgotPassword: "¿Olvidaste tu contraseña?",
+    resetPassword: "Resetear contraseña",
+    resetSent: "¡Te enviamos un email para resetear tu contraseña!",
+    historyTitle: "📋 Historial de consultas",
+    historyEmpty: "Todavía no hiciste ninguna consulta.",
+    historyDelete: "🗑️",
+    footerTerms: "Términos",
+    footerPrivacy: "Privacidad",
+    footerRefund: "Reembolsos",
+    footerContact: "Contacto",
   },
   en: {
     flag: "🇬🇧", label: "English",
@@ -99,6 +109,16 @@ const UI_LANGS = {
     freeBadge: "🆓 Free",
     switchToRegister: "Don't have an account? Register",
     switchToLogin: "Already have an account? Sign in",
+    forgotPassword: "Forgot your password?",
+    resetPassword: "Reset password",
+    resetSent: "We sent you an email to reset your password!",
+    historyTitle: "📋 Query history",
+    historyEmpty: "You haven't made any queries yet.",
+    historyDelete: "🗑️",
+    footerTerms: "Terms",
+    footerPrivacy: "Privacy",
+    footerRefund: "Refunds",
+    footerContact: "Contact",
   },
   pt: {
     flag: "🇧🇷", label: "Português",
@@ -144,6 +164,16 @@ const UI_LANGS = {
     freeBadge: "🆓 Free",
     switchToRegister: "Não tem conta? Registre-se",
     switchToLogin: "Já tem conta? Entre",
+    forgotPassword: "Esqueceu sua senha?",
+    resetPassword: "Redefinir senha",
+    resetSent: "Enviamos um email para redefinir sua senha!",
+    historyTitle: "📋 Histórico de consultas",
+    historyEmpty: "Você ainda não fez nenhuma consulta.",
+    historyDelete: "🗑️",
+    footerTerms: "Termos",
+    footerPrivacy: "Privacidade",
+    footerRefund: "Reembolsos",
+    footerContact: "Contato",
   },
   fr: {
     flag: "🇫🇷", label: "Français",
@@ -189,6 +219,16 @@ const UI_LANGS = {
     freeBadge: "🆓 Free",
     switchToRegister: "Pas de compte ? S'inscrire",
     switchToLogin: "Déjà un compte ? Se connecter",
+    forgotPassword: "Mot de passe oublié ?",
+    resetPassword: "Réinitialiser le mot de passe",
+    resetSent: "Nous vous avons envoyé un email pour réinitialiser votre mot de passe !",
+    historyTitle: "📋 Historique des requêtes",
+    historyEmpty: "Vous n'avez pas encore fait de requêtes.",
+    historyDelete: "🗑️",
+    footerTerms: "Conditions",
+    footerPrivacy: "Confidentialité",
+    footerRefund: "Remboursements",
+    footerContact: "Contact",
   },
   de: {
     flag: "🇩🇪", label: "Deutsch",
@@ -234,6 +274,16 @@ const UI_LANGS = {
     freeBadge: "🆓 Free",
     switchToRegister: "Kein Konto? Registrieren",
     switchToLogin: "Haben Sie ein Konto? Anmelden",
+    forgotPassword: "Passwort vergessen?",
+    resetPassword: "Passwort zurücksetzen",
+    resetSent: "Wir haben Ihnen eine E-Mail zum Zurücksetzen des Passworts gesendet!",
+    historyTitle: "📋 Anfragenverlauf",
+    historyEmpty: "Sie haben noch keine Anfragen gestellt.",
+    historyDelete: "🗑️",
+    footerTerms: "Nutzungsbedingungen",
+    footerPrivacy: "Datenschutz",
+    footerRefund: "Rückerstattungen",
+    footerContact: "Kontakt",
   },
   zh: {
     flag: "🇨🇳", label: "中文",
@@ -279,6 +329,16 @@ const UI_LANGS = {
     freeBadge: "🆓 免费",
     switchToRegister: "没有账户？注册",
     switchToLogin: "已有账户？登录",
+    forgotPassword: "忘记密码？",
+    resetPassword: "重置密码",
+    resetSent: "我们已向您发送了重置密码的邮件！",
+    historyTitle: "📋 查询历史",
+    historyEmpty: "您还没有进行任何查询。",
+    historyDelete: "🗑️",
+    footerTerms: "服务条款",
+    footerPrivacy: "隐私政策",
+    footerRefund: "退款政策",
+    footerContact: "联系我们",
   },
 };
 
@@ -523,6 +583,50 @@ function LangSwitcher({ uiLang, setUiLang, t }) {
   );
 }
 
+
+function HistoryPanel({ history, setHistory, onSelect, setProgLang, t, onClose }) {
+  const deleteEntry = (id) => {
+    const updated = history.filter(h => h.id !== id);
+    setHistory(updated);
+    try { localStorage.setItem("cl_history", JSON.stringify(updated)); } catch {}
+  };
+
+  return (
+    <div style={styles.modalOverlay} onClick={onClose}>
+      <div style={{ ...styles.modal, maxWidth: 600, maxHeight: "80vh", display: "flex", flexDirection: "column" }} onClick={e => e.stopPropagation()}>
+        <div style={styles.modalHeader}>
+          <div style={styles.modalTitle}>{t.historyTitle}</div>
+          <button onClick={onClose} style={styles.modalClose}>✕</button>
+        </div>
+        <div style={{ overflowY: "auto", flex: 1, padding: "12px" }}>
+          {history.length === 0 ? (
+            <p style={{ color: "#6b6880", fontSize: 13, textAlign: "center", padding: "20px" }}>{t.historyEmpty}</p>
+          ) : history.map(h => (
+            <div key={h.id} style={styles.historyItem}>
+              <div style={styles.historyTop}>
+                <span style={styles.historyLang}>{h.icon} {h.lang}</span>
+                <span style={styles.historyDate}>{h.date}</span>
+                <button onClick={() => deleteEntry(h.id)} style={styles.historyDelete}>{t.historyDelete}</button>
+              </div>
+              <div style={styles.historyInput}>{h.input}{h.input.length >= 80 ? "..." : ""}</div>
+              <button
+                onClick={() => {
+                  onSelect(h.input);
+                  setProgLang(PROG_LANGS.find(l => l.label === h.lang)?.id || "python");
+                  onClose();
+                }}
+                style={styles.historyUseBtn}
+              >
+                ↩ Usar de nuevo
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function AuthModal({ t, onClose }) {
   const [isRegister, setIsRegister] = useState(false);
   const [email, setEmail] = useState("");
@@ -531,10 +635,18 @@ function AuthModal({ t, onClose }) {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
+  const [isForgot, setIsForgot] = useState(false);
+
   const handleSubmit = async () => {
     setLoading(true); setError(""); setSuccess("");
     try {
-      if (isRegister) {
+      if (isForgot) {
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: "https://codelearn.codes",
+        });
+        if (error) throw error;
+        setSuccess(t.resetSent || "¡Email enviado! Revisá tu bandeja de entrada.");
+      } else if (isRegister) {
         const { error } = await supabase.auth.signUp({ email, password });
         if (error) throw error;
         setSuccess("¡Cuenta creada! Revisá tu email para confirmar.");
@@ -554,7 +666,7 @@ function AuthModal({ t, onClose }) {
     <div style={styles.modalOverlay}>
       <div style={styles.modal}>
         <div style={styles.modalHeader}>
-          <div style={styles.modalTitle}>{isRegister ? t.registerBtn : t.loginTitle}</div>
+          <div style={styles.modalTitle}>{isForgot ? (t.resetPassword || "Resetear contraseña") : isRegister ? t.registerBtn : t.loginTitle}</div>
           <button onClick={onClose} style={styles.modalClose}>✕</button>
         </div>
         <div style={{ padding: "20px" }}>
@@ -565,14 +677,16 @@ function AuthModal({ t, onClose }) {
             onChange={e => setEmail(e.target.value)}
             style={styles.authInput}
           />
-          <input
-            type="password"
-            placeholder={t.loginPassword}
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            style={{ ...styles.authInput, marginTop: 10 }}
-            onKeyDown={e => { if (e.key === "Enter") handleSubmit(); }}
-          />
+          {!isForgot && (
+            <input
+              type="password"
+              placeholder={t.loginPassword}
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              style={{ ...styles.authInput, marginTop: 10 }}
+              onKeyDown={e => { if (e.key === "Enter") handleSubmit(); }}
+            />
+          )}
           {error && <div style={styles.authError}>{error}</div>}
           {success && <div style={styles.authSuccess}>{success}</div>}
           <button
@@ -582,12 +696,16 @@ function AuthModal({ t, onClose }) {
           >
             {loading ? "..." : (isRegister ? t.registerBtn : t.loginBtn)}
           </button>
-          <button
-            onClick={() => setIsRegister(r => !r)}
-            style={styles.switchBtn}
-          >
-            {isRegister ? t.switchToLogin : t.switchToRegister}
-          </button>
+          {!isForgot && (
+            <button onClick={() => setIsRegister(r => !r)} style={styles.switchBtn}>
+              {isRegister ? t.switchToLogin : t.switchToRegister}
+            </button>
+          )}
+          {!isRegister && (
+            <button onClick={() => { setIsForgot(f => !f); setError(""); setSuccess(""); }} style={{ ...styles.switchBtn, color: "#4e4b62", marginTop: 4 }}>
+              {isForgot ? (t.switchToLogin || "Volver al login") : (t.forgotPassword || "¿Olvidaste tu contraseña?")}
+            </button>
+          )}
         </div>
       </div>
     </div>
@@ -605,6 +723,10 @@ export default function App() {
   const [userPlan, setUserPlan] = useState("free");
   const [dailyCount, setDailyCount] = useState(0);
   const [showAuth, setShowAuth] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
+  const [history, setHistory] = useState(() => {
+    try { return JSON.parse(localStorage.getItem("cl_history") || "[]"); } catch { return []; }
+  });
   const outputRef               = useRef(null);
   const isLandscape             = useOrientation();
 
@@ -715,6 +837,18 @@ Respond ONLY in this JSON (no backticks):
       const raw = data.content.map(b => b.text || "").join("");
       const parsed = JSON.parse(raw.replace(/```json|```/g, "").trim());
       setResult(parsed);
+      const newEntry = {
+        id: Date.now(),
+        lang: selectedProgLang.label,
+        icon: selectedProgLang.icon,
+        input: input.slice(0, 80),
+        code: parsed.code,
+        explanation: parsed.explanation,
+        date: new Date().toLocaleDateString(),
+      };
+      const newHistory = [newEntry, ...history].slice(0, 20);
+      setHistory(newHistory);
+      try { localStorage.setItem("cl_history", JSON.stringify(newHistory)); } catch {}
       await incrementCount();
       setTimeout(() => outputRef.current?.scrollIntoView({ behavior: "smooth" }), 100);
     } catch { setError(t.error); }
@@ -753,9 +887,9 @@ Respond ONLY in this JSON (no backticks):
             <span style={styles.hint}>{t.ctrlHint}</span>
           </div>
         )}
-        {!input && (
-  <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} />
-)}
+        {!input && !landscape && (
+          <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} />
+        )}
       </div>
 
       {/* Free limit bar */}
@@ -827,6 +961,7 @@ Respond ONLY in this JSON (no backticks):
   return (
     <div style={styles.root}>
       {showAuth && <AuthModal t={t} onClose={() => setShowAuth(false)} />}
+      {showHistory && <HistoryPanel history={history} setHistory={setHistory} onSelect={setInput} setProgLang={setProgLang} t={t} onClose={() => setShowHistory(false)} />}
 
       <header style={{ ...styles.header, padding: isLandscape ? "0 16px" : "0 20px" }}>
         <div style={{ ...styles.headerInner, padding: isLandscape ? "10px 0" : "16px 0" }}>
@@ -840,6 +975,7 @@ Respond ONLY in this JSON (no backticks):
               <>
                 <span style={{ ...styles.badge, fontSize: 11 }}>{isPremium ? t.premiumBadge : t.freeBadge}</span>
                 {!isPremium && <button onClick={handleUpgrade} style={styles.upgradeBtn}>⭐ Premium</button>}
+                <button onClick={() => setShowHistory(true)} style={styles.historyBtn}>📋</button>
                 <button onClick={() => supabase.auth.signOut()} style={styles.logoutBtn}>{t.logoutBtn}</button>
               </>
             ) : (
@@ -867,7 +1003,20 @@ Respond ONLY in this JSON (no backticks):
         )}
       </main>
 
-      {!isLandscape && <footer style={styles.footer}>{t.footer}</footer>}
+      {!isLandscape && (
+        <footer style={styles.footer}>
+          <div>{t.footer}</div>
+          <div style={styles.footerLinks}>
+            <a href="/legal.html" target="_blank" style={styles.footerLink}>{t.footerTerms || "Términos"}</a>
+            <span style={{ color: "#2a2440" }}>·</span>
+            <a href="/legal.html#privacy" target="_blank" style={styles.footerLink}>{t.footerPrivacy || "Privacidad"}</a>
+            <span style={{ color: "#2a2440" }}>·</span>
+            <a href="/legal.html#refund" target="_blank" style={styles.footerLink}>{t.footerRefund || "Reembolsos"}</a>
+            <span style={{ color: "#2a2440" }}>·</span>
+            <a href="mailto:codelearn.app@gmail.com" style={styles.footerLink}>{t.footerContact || "Contacto"}</a>
+          </div>
+        </footer>
+      )}
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;600;700&display=swap');
@@ -948,6 +1097,16 @@ const styles = {
   upgradeBtn: { fontSize: 11, fontWeight: 600, color: "#f0c040", background: "#2a2010", border: "1px solid #5a4010", borderRadius: 6, padding: "5px 10px", cursor: "pointer" },
   loginHeaderBtn: { fontSize: 12, fontWeight: 600, color: "#c4beff", background: "#1e1a35", border: "1px solid #3a3060", borderRadius: 8, padding: "7px 12px", cursor: "pointer" },
   logoutBtn: { fontSize: 11, fontWeight: 600, color: "#6b6880", background: "none", border: "1px solid #2a2440", borderRadius: 6, padding: "5px 10px", cursor: "pointer" },
+  historyBtn: { fontSize: 14, background: "#1e1a35", border: "1px solid #3a3060", borderRadius: 6, padding: "5px 10px", cursor: "pointer" },
+  historyItem: { background: "#0f0d18", border: "1px solid #2a2440", borderRadius: 8, padding: "12px", marginBottom: 8 },
+  historyTop: { display: "flex", alignItems: "center", gap: 8, marginBottom: 6 },
+  historyLang: { fontSize: 11, fontWeight: 600, color: "#7c6af7", background: "#1e1a35", border: "1px solid #3a3060", padding: "2px 8px", borderRadius: 20 },
+  historyDate: { fontSize: 11, color: "#4e4b62", marginLeft: "auto" },
+  historyDelete: { background: "none", border: "none", cursor: "pointer", fontSize: 13, color: "#4e4b62", padding: "2px 6px" },
+  historyInput: { fontSize: 12, color: "#9691b8", lineHeight: 1.5, marginBottom: 8 },
+  historyUseBtn: { fontSize: 11, fontWeight: 600, color: "#7c6af7", background: "none", border: "1px solid #3a3060", borderRadius: 6, padding: "4px 10px", cursor: "pointer" },
+  footerLinks: { display: "flex", justifyContent: "center", gap: 12, marginTop: 8, flexWrap: "wrap" },
+  footerLink: { fontSize: 11, color: "#4e4b62", textDecoration: "none" },
   suggestedWrap: { marginTop: 12, marginBottom: 4 },
   suggestedLabel: { fontSize: 11, color: "#4e4b62", fontFamily: "'IBM Plex Mono', monospace", marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.5 },
   suggestedList: { display: "flex", flexDirection: "column", gap: 6 },
