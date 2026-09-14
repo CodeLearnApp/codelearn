@@ -19,6 +19,16 @@ const UI_LANGS = {
     inputHint: "— escribilo como si le explicaras a alguien",
     placeholder: 'Ej: "Quiero una función que reciba una lista de números y devuelva solo los pares, ordenados de mayor a menor"',
     ctrlHint: "Ctrl + Enter para generar",
+    suggestedLabel: "Ejemplos para empezar:",
+    nextStepsTitle: "¿Qué hago con este código?",
+    step1Title: "ENTENDÉ EL CÓDIGO", step1Desc: "Leé la explicación línea por línea. No pases al siguiente paso hasta entender qué hace cada parte. Si no entendés algo, hacele una nueva consulta a CodeLearn.",
+    step2Title: "ABRÍ UN EDITOR ONLINE GRATIS", step2Desc: "No necesitás instalar nada. Hacé clic en el botón de abajo para abrir un editor online con tu lenguaje listo para usar.", step2Link: "▶️ Abrir editor",
+    step3Title: "PEGÁ EL CÓDIGO", step3Desc: "Copiá el código con el botón 📋 de arriba. Pegalo en el editor con Ctrl+V. El código ya está listo para ejecutarse.",
+    step4Title: "EJECUTALO", step4Desc: "Buscá el botón ▶️ Run o Ejecutar. Mirá el resultado — ¿hace lo que esperabas? Si hay un error, leé el mensaje con calma, te dice qué falló.",
+    step5Title: "EXPERIMENTÁ", step5Desc: "Cambiá un número, una palabra o un valor. Ejecutalo de nuevo y observá cómo cambia. Así aprenden los programadores de verdad.",
+    step6Title: "PERSONALIZALO", step6Desc: "Modificá el código para que haga algo diferente. No tengas miedo de romperlo, siempre podés volver a generarlo.",
+    step7Title: "COMPARTÍ LO QUE APRENDISTE", step7Desc: "Usá el botón 📤 para compartir con amigos o grupos de programación. Explicarle a otros consolida el conocimiento.",
+    step8Title: "SEGUÍ APRENDIENDO", step8Desc: "Volvé a CodeLearn y hacé una nueva consulta. Cada consulta es una lección. Probá el mismo ejercicio en otro lenguaje y compará las diferencias.",
     generateBtn: (lang, icon) => `Generar en ${lang} ${icon}`,
     generating: "Generando...",
     codeTitle: (lang, icon) => `${icon} Código en ${lang}`,
@@ -54,6 +64,16 @@ const UI_LANGS = {
     inputHint: "— write it as if explaining to a friend",
     placeholder: 'E.g: "I want a function that takes a list of numbers and returns only the even ones, sorted descending"',
     ctrlHint: "Ctrl + Enter to generate",
+    suggestedLabel: "Examples to get started:",
+    nextStepsTitle: "What do I do with this code?",
+    step1Title: "UNDERSTAND THE CODE", step1Desc: "Read the explanation line by line. Don't move to the next step until you understand what each part does. If you don't understand something, ask CodeLearn a new question.",
+    step2Title: "OPEN A FREE ONLINE EDITOR", step2Desc: "No installation needed. Click the button below to open an online editor with your language ready to use.", step2Link: "▶️ Open editor",
+    step3Title: "PASTE THE CODE", step3Desc: "Copy the code with the 📋 button above. Paste it in the editor with Ctrl+V. The code is ready to run.",
+    step4Title: "RUN IT", step4Desc: "Find the ▶️ Run button in the editor. Look at the result — does it do what you expected? If there's an error, read the message carefully.",
+    step5Title: "EXPERIMENT", step5Desc: "Change a number, a word or a value. Run it again and observe how the result changes. This is how real programmers learn.",
+    step6Title: "CUSTOMIZE IT", step6Desc: "Modify the code to do something different. Don't be afraid to break it, you can always regenerate it.",
+    step7Title: "SHARE WHAT YOU LEARNED", step7Desc: "Use the 📤 button to share with friends or programming groups. Teaching others consolidates knowledge.",
+    step8Title: "KEEP LEARNING", step8Desc: "Come back to CodeLearn and make a new query. Each query is a lesson. Try the same exercise in another language and compare.",
     generateBtn: (lang, icon) => `Generate in ${lang} ${icon}`,
     generating: "Generating...",
     codeTitle: (lang, icon) => `${icon} Code in ${lang}`,
@@ -89,6 +109,16 @@ const UI_LANGS = {
     inputHint: "— escreva como se estivesse explicando para alguém",
     placeholder: 'Ex: "Quero uma função que receba uma lista de números e retorne só os pares, ordenados do maior para o menor"',
     ctrlHint: "Ctrl + Enter para gerar",
+    suggestedLabel: "Exemplos para começar:",
+    nextStepsTitle: "O que faço com este código?",
+    step1Title: "ENTENDA O CÓDIGO", step1Desc: "Leia a explicação linha por linha. Não passe para o próximo passo até entender o que cada parte faz.",
+    step2Title: "ABRA UM EDITOR ONLINE GRATUITO", step2Desc: "Sem instalação necessária. Clique no botão abaixo para abrir um editor online.", step2Link: "▶️ Abrir editor",
+    step3Title: "COLE O CÓDIGO", step3Desc: "Copie o código com o botão 📋. Cole no editor com Ctrl+V.",
+    step4Title: "EXECUTE", step4Desc: "Encontre o botão ▶️ Run. Veja o resultado — faz o que você esperava?",
+    step5Title: "EXPERIMENTE", step5Desc: "Mude um número ou valor. Execute novamente e observe como o resultado muda.",
+    step6Title: "PERSONALIZE", step6Desc: "Modifique o código para fazer algo diferente.",
+    step7Title: "COMPARTILHE", step7Desc: "Use o botão 📤 para compartilhar com amigos.",
+    step8Title: "CONTINUE APRENDENDO", step8Desc: "Volte ao CodeLearn e faça uma nova consulta. Cada consulta é uma lição.",
     generateBtn: (lang, icon) => `Gerar em ${lang} ${icon}`,
     generating: "Gerando...",
     codeTitle: (lang, icon) => `${icon} Código em ${lang}`,
@@ -124,6 +154,16 @@ const UI_LANGS = {
     inputHint: "— écrivez-le comme si vous l'expliquiez à quelqu'un",
     placeholder: 'Ex : "Je veux une fonction qui reçoit une liste de nombres et retourne uniquement les pairs"',
     ctrlHint: "Ctrl + Entrée pour générer",
+    suggestedLabel: "Exemples pour commencer:",
+    nextStepsTitle: "Que faire avec ce code?",
+    step1Title: "COMPRENDRE LE CODE", step1Desc: "Lisez l'explication ligne par ligne.",
+    step2Title: "OUVRIR UN ÉDITEUR EN LIGNE", step2Desc: "Cliquez sur le bouton ci-dessous.", step2Link: "▶️ Ouvrir l'éditeur",
+    step3Title: "COLLER LE CODE", step3Desc: "Copiez le code avec le bouton 📋 et collez-le avec Ctrl+V.",
+    step4Title: "EXÉCUTER", step4Desc: "Trouvez le bouton ▶️ Run et regardez le résultat.",
+    step5Title: "EXPÉRIMENTER", step5Desc: "Changez une valeur et observez le résultat.",
+    step6Title: "PERSONNALISER", step6Desc: "Modifiez le code pour faire quelque chose de différent.",
+    step7Title: "PARTAGER", step7Desc: "Utilisez le bouton 📤 pour partager.",
+    step8Title: "CONTINUER À APPRENDRE", step8Desc: "Revenez sur CodeLearn pour une nouvelle requête.",
     generateBtn: (lang, icon) => `Générer en ${lang} ${icon}`,
     generating: "Génération...",
     codeTitle: (lang, icon) => `${icon} Code en ${lang}`,
@@ -159,6 +199,16 @@ const UI_LANGS = {
     inputHint: "— schreiben Sie es, als würden Sie es jemandem erklären",
     placeholder: 'Z.B.: "Ich möchte eine Funktion, die eine Zahlenliste nimmt und nur die geraden zurückgibt"',
     ctrlHint: "Strg + Eingabe zum Generieren",
+    suggestedLabel: "Beispiele zum Einstieg:",
+    nextStepsTitle: "Was mache ich mit diesem Code?",
+    step1Title: "CODE VERSTEHEN", step1Desc: "Lesen Sie die Erklärung Zeile für Zeile.",
+    step2Title: "ONLINE-EDITOR ÖFFNEN", step2Desc: "Klicken Sie auf die Schaltfläche unten.", step2Link: "▶️ Editor öffnen",
+    step3Title: "CODE EINFÜGEN", step3Desc: "Kopieren Sie den Code mit 📋 und fügen Sie ihn mit Ctrl+V ein.",
+    step4Title: "AUSFÜHREN", step4Desc: "Finden Sie die ▶️ Run-Schaltfläche und schauen Sie das Ergebnis an.",
+    step5Title: "EXPERIMENTIEREN", step5Desc: "Ändern Sie einen Wert und beobachten Sie das Ergebnis.",
+    step6Title: "ANPASSEN", step6Desc: "Ändern Sie den Code, damit er etwas anderes macht.",
+    step7Title: "TEILEN", step7Desc: "Verwenden Sie die 📤-Schaltfläche zum Teilen.",
+    step8Title: "WEITERLERNEN", step8Desc: "Kommen Sie zu CodeLearn zurück für eine neue Anfrage.",
     generateBtn: (lang, icon) => `In ${lang} generieren ${icon}`,
     generating: "Generiert...",
     codeTitle: (lang, icon) => `${icon} Code in ${lang}`,
@@ -194,6 +244,16 @@ const UI_LANGS = {
     inputHint: "— 像向别人解释一样描述",
     placeholder: '例："我想要一个函数，接收一个数字列表，只返回偶数，并按降序排列"',
     ctrlHint: "Ctrl + Enter 生成",
+    suggestedLabel: "入门示例:",
+    nextStepsTitle: "我该如何使用这段代码?",
+    step1Title: "理解代码", step1Desc: "逐行阅读下面的解释。",
+    step2Title: "打开免费在线编辑器", step2Desc: "点击下面的按钮打开在线编辑器。", step2Link: "▶️ 打开编辑器",
+    step3Title: "粘贴代码", step3Desc: "用📋按钮复制代码，然后用Ctrl+V粘贴。",
+    step4Title: "运行", step4Desc: "找到▶️运行按钮，查看结果。",
+    step5Title: "实验", step5Desc: "改变一个值，再次运行，观察结果如何变化。",
+    step6Title: "自定义", step6Desc: "修改代码使其做不同的事情。",
+    step7Title: "分享", step7Desc: "使用📤按钮与朋友分享。",
+    step8Title: "继续学习", step8Desc: "回到CodeLearn提出新问题。",
     generateBtn: (lang, icon) => `用 ${lang} 生成 ${icon}`,
     generating: "生成中...",
     codeTitle: (lang, icon) => `${icon} ${lang} 代码`,
@@ -220,6 +280,33 @@ const UI_LANGS = {
     switchToRegister: "没有账户？注册",
     switchToLogin: "已有账户？登录",
   },
+};
+
+
+const SUGGESTED_PROMPTS = [
+  { text: "Quiero una función que ordene una lista de nombres alfabéticamente", lang: "python", icon: "🐍" },
+  { text: "Quiero una calculadora que sume, reste, multiplique y divida", lang: "javascript", icon: "🟨" },
+  { text: "Quiero una función que verifique si una palabra es palíndromo", lang: "python", icon: "🐍" },
+  { text: "Quiero una función que cuente cuántas veces aparece una letra en un texto", lang: "typescript", icon: "🔷" },
+  { text: "Quiero un programa que convierta grados Celsius a Fahrenheit", lang: "go", icon: "🐹" },
+  { text: "Quiero una clase con atributos y métodos básicos", lang: "java", icon: "☕" },
+  { text: "Quiero una función que calcule el factorial de un número", lang: "kotlin", icon: "🎯" },
+  { text: "Quiero una función que encuentre el número mayor de una lista", lang: "swift", icon: "🍎" },
+  { text: "Quiero una función que invierta una cadena de texto", lang: "rust", icon: "🦀" },
+  { text: "Quiero una función que calcule la secuencia de Fibonacci", lang: "cpp", icon: "➕" },
+];
+
+const NEXT_STEPS = {
+  python: "https://replit.com/new/python3",
+  javascript: "https://codepen.io/pen/",
+  typescript: "https://www.typescriptlang.org/play",
+  rust: "https://play.rust-lang.org/",
+  go: "https://go.dev/play/",
+  java: "https://replit.com/new/java",
+  kotlin: "https://play.kotlinlang.org/",
+  swift: "https://swiftfiddle.com/",
+  c: "https://replit.com/new/c",
+  cpp: "https://replit.com/new/cpp",
 };
 
 const PROG_LANGS = [
@@ -281,6 +368,108 @@ function ShareButton({ text, label, shared, style }) {
     <button onClick={share} style={{ ...styles.shareBtn, ...style }}>
       {sharing ? shared : label}
     </button>
+  );
+}
+
+
+function SuggestedPrompts({ onSelect, setProgLang, t }) {
+  return (
+    <div style={styles.suggestedWrap}>
+      <div style={styles.suggestedLabel}>💡 {t.suggestedLabel || "Ejemplos para empezar:"}</div>
+      <div style={styles.suggestedList}>
+        {SUGGESTED_PROMPTS.map((p, i) => (
+          <button
+            key={i}
+            onClick={() => {
+              onSelect(p.text);
+              setProgLang(p.lang);
+            }}
+            style={styles.suggestedBtn}
+          >
+            <span>{p.icon}</span>
+            <span>{p.text}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function NextSteps({ progLang, t }) {
+  const [open, setOpen] = useState(false);
+  const editorUrl = NEXT_STEPS[progLang] || "https://replit.com";
+  const lang = progLang;
+
+  const steps = [
+    {
+      n: "1️⃣",
+      title: t.step1Title || "ENTENDÉ EL CÓDIGO",
+      desc: t.step1Desc || "Leé la explicación línea por línea. No pases al siguiente paso hasta entender qué hace cada parte. Si no entendés algo, hacele una nueva consulta a CodeLearn."
+    },
+    {
+      n: "2️⃣",
+      title: t.step2Title || "ABRÍ UN EDITOR ONLINE GRATIS",
+      desc: t.step2Desc || "No necesitás instalar nada. Hacé clic en el botón de abajo para abrir un editor online con tu lenguaje listo para usar.",
+      link: editorUrl,
+      linkLabel: t.step2Link || `▶️ Abrir editor para ${lang}`
+    },
+    {
+      n: "3️⃣",
+      title: t.step3Title || "PEGÁ EL CÓDIGO",
+      desc: t.step3Desc || "Copiá el código con el botón 📋 de arriba. Pegalo en el editor con Ctrl+V (o Cmd+V en Mac). El código ya está listo para ejecutarse."
+    },
+    {
+      n: "4️⃣",
+      title: t.step4Title || "EJECUTALO",
+      desc: t.step4Desc || "Buscá el botón ▶️ Run o Ejecutar en el editor. Mirá el resultado — ¿hace lo que esperabas? Si hay un error, leé el mensaje con calma, generalmente te dice qué falló."
+    },
+    {
+      n: "5️⃣",
+      title: t.step5Title || "EXPERIMENTÁ",
+      desc: t.step5Desc || "Cambiá un número, una palabra o un valor dentro del código. Ejecutalo de nuevo y observá cómo cambia el resultado. Así es exactamente como aprenden los programadores de verdad."
+    },
+    {
+      n: "6️⃣",
+      title: t.step6Title || "PERSONALIZALO",
+      desc: t.step6Desc || "Modificá el código para que haga algo diferente — agregá un parámetro nuevo, cambiá la lógica, combinalo con otra función. No tengas miedo de romperlo, siempre podés volver a generarlo."
+    },
+    {
+      n: "7️⃣",
+      title: t.step7Title || "COMPARTÍ LO QUE APRENDISTE",
+      desc: t.step7Desc || "Usá el botón 📤 para compartir el código con amigos, compañeros o en grupos de programación. Explicarle a otros lo que aprendiste es la mejor forma de consolidar el conocimiento."
+    },
+    {
+      n: "8️⃣",
+      title: t.step8Title || "SEGUÍ APRENDIENDO CON CODELEARN",
+      desc: t.step8Desc || "Volvé a CodeLearn y hacé una nueva consulta. Cada vez que describís algo nuevo aprendés un concepto diferente. Probá el mismo ejercicio en otro lenguaje y compará las diferencias. ¡Cada consulta es una lección!"
+    },
+  ];
+
+  return (
+    <div style={styles.nextStepsWrap}>
+      <button onClick={() => setOpen(o => !o)} style={styles.nextStepsToggle}>
+        <span>📚 {t.nextStepsTitle || "¿Qué hago con este código?"}</span>
+        <span style={{ fontSize: 16 }}>{open ? "▲" : "▼"}</span>
+      </button>
+      {open && (
+        <div style={styles.nextStepsList}>
+          {steps.map((s, i) => (
+            <div key={i} style={styles.nextStep}>
+              <div style={styles.nextStepHeader}>
+                <span style={styles.nextStepN}>{s.n}</span>
+                <span style={styles.nextStepTitle}>{s.title}</span>
+              </div>
+              <p style={styles.nextStepDesc}>{s.desc}</p>
+              {s.link && (
+                <a href={s.link} target="_blank" rel="noopener noreferrer" style={styles.nextStepLink}>
+                  {s.linkLabel}
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -564,6 +753,9 @@ Respond ONLY in this JSON (no backticks):
             <span style={styles.hint}>{t.ctrlHint}</span>
           </div>
         )}
+        {!input && !landscape && (
+          <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} />
+        )}
       </div>
 
       {/* Free limit bar */}
@@ -623,6 +815,7 @@ Respond ONLY in this JSON (no backticks):
           <ExplanationBlock explanation={result.explanation} />
         </div>
       </div>
+      <NextSteps progLang={progLang} t={t} />
     </div>
   ) : isLandscape ? (
     <div style={styles.emptyState}>
@@ -755,4 +948,17 @@ const styles = {
   upgradeBtn: { fontSize: 11, fontWeight: 600, color: "#f0c040", background: "#2a2010", border: "1px solid #5a4010", borderRadius: 6, padding: "5px 10px", cursor: "pointer" },
   loginHeaderBtn: { fontSize: 12, fontWeight: 600, color: "#c4beff", background: "#1e1a35", border: "1px solid #3a3060", borderRadius: 8, padding: "7px 12px", cursor: "pointer" },
   logoutBtn: { fontSize: 11, fontWeight: 600, color: "#6b6880", background: "none", border: "1px solid #2a2440", borderRadius: 6, padding: "5px 10px", cursor: "pointer" },
+  suggestedWrap: { marginTop: 12, marginBottom: 4 },
+  suggestedLabel: { fontSize: 11, color: "#4e4b62", fontFamily: "'IBM Plex Mono', monospace", marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.5 },
+  suggestedList: { display: "flex", flexDirection: "column", gap: 6 },
+  suggestedBtn: { display: "flex", alignItems: "flex-start", gap: 8, padding: "8px 12px", background: "#13111c", border: "1px solid #2a2440", borderRadius: 8, cursor: "pointer", color: "#9691b8", fontSize: 12, textAlign: "left", lineHeight: 1.4, transition: "all 0.15s" },
+  nextStepsWrap: { marginTop: 8 },
+  nextStepsToggle: { width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px", background: "#13111c", border: "1px solid #2a2440", borderRadius: 10, cursor: "pointer", color: "#7c6af7", fontSize: 13, fontWeight: 600 },
+  nextStepsList: { background: "#13111c", border: "1px solid #2a2440", borderTop: "none", borderRadius: "0 0 10px 10px", padding: "8px 0" },
+  nextStep: { padding: "12px 16px", borderBottom: "1px solid #1a1830" },
+  nextStepHeader: { display: "flex", alignItems: "center", gap: 8, marginBottom: 6 },
+  nextStepN: { fontSize: 16 },
+  nextStepTitle: { fontSize: 11, fontWeight: 700, color: "#7c6af7", textTransform: "uppercase", letterSpacing: 0.8 },
+  nextStepDesc: { fontSize: 13, color: "#b0accc", lineHeight: 1.65, marginBottom: 6 },
+  nextStepLink: { display: "inline-block", marginTop: 6, padding: "6px 14px", background: "linear-gradient(135deg, #7c6af7 0%, #5b4de0 100%)", borderRadius: 6, color: "#fff", fontSize: 12, fontWeight: 600, textDecoration: "none" },
 };
