@@ -724,6 +724,10 @@ export default function App() {
   const [dailyCount, setDailyCount] = useState(0);
   const [showAuth, setShowAuth] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
+  const [showResetForm, setShowResetForm] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [resetDone, setResetDone] = useState(false);
+  const [resetError, setResetError] = useState("");
   const [history, setHistory] = useState(() => {
     try { return JSON.parse(localStorage.getItem("cl_history") || "[]"); } catch { return []; }
   });
@@ -741,9 +745,12 @@ export default function App() {
       setUser(session?.user ?? null);
       if (session?.user) loadUserData(session.user);
     });
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null);
       if (session?.user) loadUserData(session.user);
+      if (event === "PASSWORD_RECOVERY") {
+        setShowResetForm(true);
+      }
     });
     return () => subscription.unsubscribe();
   }, []);
@@ -810,6 +817,22 @@ export default function App() {
         setUserPlan("premium");
       },
     });
+  };
+
+  const handleResetPassword = async () => {
+    setResetError("");
+    if (newPassword.length < 6) {
+      setResetError("La contraseña debe tener al menos 6 caracteres.");
+      return;
+    }
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
+    if (error) {
+      setResetError(error.message);
+    } else {
+      setResetDone(true);
+      setShowResetForm(false);
+      setNewPassword("");
+    }
   };
 
   const generate = async () => {
@@ -961,6 +984,42 @@ Respond ONLY in this JSON (no backticks):
   return (
     <div style={styles.root}>
       {showAuth && <AuthModal t={t} onClose={() => setShowAuth(false)} />}
+      {showResetForm && (
+        <div style={styles.modalOverlay}>
+          <div style={{ ...styles.modal, maxWidth: 400 }}>
+            <div style={styles.modalHeader}>
+              <div style={styles.modalTitle}>🔑 Nueva contraseña</div>
+            </div>
+            <div style={{ padding: "20px" }}>
+              <p style={{ fontSize: 13, color: "#b0accc", marginBottom: 16 }}>
+                Ingresá tu nueva contraseña. Debe tener al menos 6 caracteres.
+              </p>
+              <input
+                type="password"
+                placeholder="Nueva contraseña"
+                value={newPassword}
+                onChange={e => setNewPassword(e.target.value)}
+                style={styles.authInput}
+                onKeyDown={e => { if (e.key === "Enter") handleResetPassword(); }}
+              />
+              {resetError && <div style={styles.authError}>{resetError}</div>}
+              {resetDone && <div style={styles.authSuccess}>✅ ¡Contraseña actualizada correctamente!</div>}
+              <button
+                onClick={handleResetPassword}
+                style={{ ...styles.generateBtn, width: "100%", marginTop: 16 }}
+              >
+                Guardar nueva contraseña
+              </button>
+              <button
+                onClick={() => setShowResetForm(false)}
+                style={styles.switchBtn}
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {showHistory && <HistoryPanel history={history} setHistory={setHistory} onSelect={setInput} setProgLang={setProgLang} t={t} onClose={() => setShowHistory(false)} />}
 
       <header style={{ ...styles.header, padding: isLandscape ? "0 16px" : "0 20px" }}>
