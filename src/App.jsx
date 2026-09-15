@@ -433,24 +433,31 @@ function ShareButton({ text, label, shared, style }) {
 
 
 function SuggestedPrompts({ onSelect, setProgLang, t }) {
+  const [open, setOpen] = useState(false);
   return (
     <div style={styles.suggestedWrap}>
-      <div style={styles.suggestedLabel}>💡 {t.suggestedLabel || "Ejemplos para empezar:"}</div>
-      <div style={styles.suggestedList}>
-        {SUGGESTED_PROMPTS.map((p, i) => (
-          <button
-            key={i}
-            onClick={() => {
-              onSelect(p.text);
-              setProgLang(p.lang);
-            }}
-            style={styles.suggestedBtn}
-          >
-            <span>{p.icon}</span>
-            <span>{p.text}</span>
-          </button>
-        ))}
-      </div>
+      <button onClick={() => setOpen(o => !o)} style={styles.suggestedToggle}>
+        <span>💡 {t.suggestedLabel || "Ejemplos para empezar"}</span>
+        <span>{open ? "▲" : "▼"}</span>
+      </button>
+      {open && (
+        <div style={styles.suggestedList}>
+          {SUGGESTED_PROMPTS.map((p, i) => (
+            <button
+              key={i}
+              onClick={() => {
+                onSelect(p.text);
+                setProgLang(p.lang);
+                setOpen(false);
+              }}
+              style={styles.suggestedBtn}
+            >
+              <span>{p.icon}</span>
+              <span>{p.text}</span>
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -503,6 +510,33 @@ function NextSteps({ progLang, t }) {
       title: t.step8Title || "SEGUÍ APRENDIENDO CON CODELEARN",
       desc: t.step8Desc || "Volvé a CodeLearn y hacé una nueva consulta. Cada vez que describís algo nuevo aprendés un concepto diferente. Probá el mismo ejercicio en otro lenguaje y compará las diferencias. ¡Cada consulta es una lección!"
     },
+    {
+      n: "━━━",
+      title: t.proFlowTitle || "FLUJO DE UN PROGRAMADOR REAL",
+      desc: t.proFlowDesc || "¿Querés ir más allá? Estas son las herramientas que usan los programadores profesionales todos los días.",
+      isDivider: true,
+    },
+    {
+      n: "9️⃣",
+      title: t.step9Title || "INSTALÁ VS CODE — EL EDITOR PROFESIONAL",
+      desc: t.step9Desc || "VS Code es el editor de código más usado en el mundo. Es gratuito, potente y tiene miles de extensiones. Descargalo, abrí un archivo nuevo, pegá tu código y ejecutalo directamente desde ahí.",
+      link: "https://code.visualstudio.com/download",
+      linkLabel: t.step9Link || "⬇️ Descargar VS Code gratis",
+    },
+    {
+      n: "🔟",
+      title: t.step10Title || "GUARDÁ TU CÓDIGO EN GITHUB",
+      desc: t.step10Desc || "GitHub es la plataforma donde los programadores guardan y comparten su código. Es como Google Drive pero para código. Creá una cuenta gratuita, subí tu código y tenelo disponible desde cualquier dispositivo. Es también tu portafolio como programador.",
+      link: "https://github.com/signup",
+      linkLabel: t.step10Link || "🐙 Crear cuenta en GitHub gratis",
+    },
+    {
+      n: "1️⃣1️⃣",
+      title: t.step11Title || "PUBLICÁ TU PROYECTO EN INTERNET — VERCEL",
+      desc: t.step11Desc || "Vercel te permite publicar tu proyecto en internet en minutos, completamente gratis. Conectás tu repositorio de GitHub y Vercel hace todo automáticamente. En segundos tenés una URL real para compartir con cualquiera en el mundo.",
+      link: "https://vercel.com/signup",
+      linkLabel: t.step11Link || "🚀 Publicar en Vercel gratis",
+    },
   ];
 
   return (
@@ -514,18 +548,26 @@ function NextSteps({ progLang, t }) {
       {open && (
         <div style={styles.nextStepsList}>
           {steps.map((s, i) => (
-            <div key={i} style={styles.nextStep}>
-              <div style={styles.nextStepHeader}>
-                <span style={styles.nextStepN}>{s.n}</span>
-                <span style={styles.nextStepTitle}>{s.title}</span>
+            s.isDivider ? (
+              <div key={i} style={styles.nextStepDivider}>
+                <div style={styles.nextStepDividerLine} />
+                <span style={styles.nextStepDividerText}>{s.title}</span>
+                <div style={styles.nextStepDividerLine} />
               </div>
-              <p style={styles.nextStepDesc}>{s.desc}</p>
-              {s.link && (
-                <a href={s.link} target="_blank" rel="noopener noreferrer" style={styles.nextStepLink}>
-                  {s.linkLabel}
-                </a>
-              )}
-            </div>
+            ) : (
+              <div key={i} style={styles.nextStep}>
+                <div style={styles.nextStepHeader}>
+                  <span style={styles.nextStepN}>{s.n}</span>
+                  <span style={styles.nextStepTitle}>{s.title}</span>
+                </div>
+                <p style={styles.nextStepDesc}>{s.desc}</p>
+                {s.link && (
+                  <a href={s.link} target="_blank" rel="noopener noreferrer" style={styles.nextStepLink}>
+                    {s.linkLabel}
+                  </a>
+                )}
+              </div>
+            )
           ))}
         </div>
       )}
@@ -910,9 +952,9 @@ Respond ONLY in this JSON (no backticks):
             <span style={styles.hint}>{t.ctrlHint}</span>
           </div>
         )}
-       {!input && (
-  <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} />
-)}
+        {!input && !landscape && (
+          <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} />
+        )}
       </div>
 
       {/* Free limit bar */}
@@ -1167,6 +1209,7 @@ const styles = {
   footerLinks: { display: "flex", justifyContent: "center", gap: 12, marginTop: 8, flexWrap: "wrap" },
   footerLink: { fontSize: 11, color: "#4e4b62", textDecoration: "none" },
   suggestedWrap: { marginTop: 12, marginBottom: 4 },
+  suggestedToggle: { width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 12px", background: "#13111c", border: "1px solid #2a2440", borderRadius: 8, cursor: "pointer", color: "#6b6880", fontSize: 12, fontWeight: 600, marginBottom: 0 },
   suggestedLabel: { fontSize: 11, color: "#4e4b62", fontFamily: "'IBM Plex Mono', monospace", marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.5 },
   suggestedList: { display: "flex", flexDirection: "column", gap: 6 },
   suggestedBtn: { display: "flex", alignItems: "flex-start", gap: 8, padding: "8px 12px", background: "#13111c", border: "1px solid #2a2440", borderRadius: 8, cursor: "pointer", color: "#9691b8", fontSize: 12, textAlign: "left", lineHeight: 1.4, transition: "all 0.15s" },
@@ -1179,4 +1222,7 @@ const styles = {
   nextStepTitle: { fontSize: 11, fontWeight: 700, color: "#7c6af7", textTransform: "uppercase", letterSpacing: 0.8 },
   nextStepDesc: { fontSize: 13, color: "#b0accc", lineHeight: 1.65, marginBottom: 6 },
   nextStepLink: { display: "inline-block", marginTop: 6, padding: "6px 14px", background: "linear-gradient(135deg, #7c6af7 0%, #5b4de0 100%)", borderRadius: 6, color: "#fff", fontSize: 12, fontWeight: 600, textDecoration: "none" },
+  nextStepDivider: { display: "flex", alignItems: "center", gap: 10, padding: "16px 16px 8px" },
+  nextStepDividerLine: { flex: 1, height: 1, background: "#2a2440" },
+  nextStepDividerText: { fontSize: 10, fontWeight: 700, color: "#7c6af7", textTransform: "uppercase", letterSpacing: 1, whiteSpace: "nowrap" },
 };
