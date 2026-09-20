@@ -633,11 +633,49 @@ function Playground({ code, progLang, t }) {
 
   const pistonLang = PISTON_LANGS[progLang];
 
+  const wrapCode = (code, lang) => {
+    // Add wrapper to call functions and show output
+    const wrappers = {
+      python: `${code}\n\n# Auto-ejecutar\nimport re\nfuncs = re.findall(r'def (\\w+)\\(', """${code.replace(/`/g, '')}""")\nif funcs:\n    try:\n        result = eval(funcs[0] + '()')\n        if result is not None: print(result)\n    except: pass`,
+      javascript: `${code}\n\n// Auto-ejecutar\nconst funcs = Object.getOwnPropertyNames(global).filter(f => typeof global[f] === 'function' && !['require','setTimeout'].includes(f));\ntry { const r = eval(code.match(/function (\\w+)/)?.[1] + '()'); if(r !== undefined) console.log(r); } catch(e) {}`,
+    };
+    return code;
+  };
+
   const runCode = async () => {
     if (!pistonLang) return;
     setRunning(true);
     setOutput("");
     setError(false);
+
+    // Build executable code by adding a test call if needed
+    let execCode = code;
+
+    // For Python - add print wrapper
+    if (progLang === 'python' && !code.includes('print(')) {
+      const funcMatch = code.match(/def (\w+)\s*\(([^)]*)\)/);
+      if (funcMatch) {
+        const funcName = funcMatch[1];
+        const params = funcMatch[2];
+        const testArgs = params.split(',').map(p => {
+          p = p.trim().split(':')[0].trim();
+          return '[1, 2, 3, "hello"]'.split(',')[Math.floor(Math.random() * 4)];
+        }).join(', ');
+        execCode += `\n\n# Test automático\nresult = ${funcName}(${params ? '[1, 2, 3]' : ''})\nprint("Resultado:", result)`;
+      }
+    }
+
+    // For JavaScript - add console.log wrapper
+    if (progLang === 'javascript' && !code.includes('console.log')) {
+      const funcMatch = code.match(/function (\w+)\s*\(([^)]*)\)|const (\w+)\s*=.*?=>/);
+      if (funcMatch) {
+        const funcName = funcMatch[1] || funcMatch[3];
+        if (funcName) {
+          execCode += `\n\n// Test automático\nconsole.log("Resultado:", ${funcName}(${funcMatch[2] ? '[1, 2, 3]' : ''}));`;
+        }
+      }
+    }
+
     try {
       const res = await fetch("https://emkc.org/api/v2/piston/execute", {
         method: "POST",
@@ -645,13 +683,15 @@ function Playground({ code, progLang, t }) {
         body: JSON.stringify({
           language: pistonLang.language,
           version: pistonLang.version,
-          files: [{ content: code }],
+          files: [{ content: execCode }],
         }),
       });
       const data = await res.json();
-      const out = data.run?.stdout || data.run?.stderr || data.run?.output || "";
-      const err = !!data.run?.stderr && !data.run?.stdout;
-      setOutput(out || "(Sin salida)");
+      const stdout = data.run?.stdout || "";
+      const stderr = data.run?.stderr || "";
+      const out = stdout || stderr || "";
+      const err = !!stderr && !stdout;
+      setOutput(out || "✅ Código ejecutado sin salida visible\n(probá agregar un print() o console.log())");
       setError(err);
     } catch (e) {
       setOutput(t.outputError || "Error al ejecutar");
@@ -1096,6 +1136,7 @@ Respond ONLY in this JSON (no backticks):
       )}
 
       {error && <div style={{ ...styles.error, marginTop: 10 }}>{error}</div>}
+      {result && isLandscape && <Playground code={result.code} progLang={progLang} t={t} />}
     </div>
   );
 
@@ -1113,7 +1154,7 @@ Respond ONLY in this JSON (no backticks):
           <code>{result.code}</code>
         </pre>
       </div>
-      <Playground code={result.code} progLang={progLang} t={t} />
+      {!isLandscape && <Playground code={result.code} progLang={progLang} t={t} />}
       <div style={styles.card}>
         <div style={styles.cardHeader}>
           <div style={styles.cardTitle}>📖 {t.explainTitle}</div>
