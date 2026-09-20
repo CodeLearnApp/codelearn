@@ -64,6 +64,12 @@ const UI_LANGS = {
     footerPrivacy: "Privacidad",
     footerRefund: "Reembolsos",
     footerContact: "Contacto",
+    runBtn: "▶️ Ejecutar código",
+    running: "⏳ Ejecutando...",
+    outputTitle: "📤 Resultado",
+    outputEmpty: "El código se ejecutará acá",
+    outputError: "Error al ejecutar",
+    notSupported: "Este lenguaje no soporta ejecución en vivo",
   },
   en: {
     flag: "🇬🇧", label: "English",
@@ -119,6 +125,12 @@ const UI_LANGS = {
     footerPrivacy: "Privacy",
     footerRefund: "Refunds",
     footerContact: "Contact",
+    runBtn: "▶️ Run code",
+    running: "⏳ Running...",
+    outputTitle: "📤 Output",
+    outputEmpty: "The code will run here",
+    outputError: "Error running code",
+    notSupported: "This language doesn't support live execution",
   },
   pt: {
     flag: "🇧🇷", label: "Português",
@@ -174,6 +186,12 @@ const UI_LANGS = {
     footerPrivacy: "Privacidade",
     footerRefund: "Reembolsos",
     footerContact: "Contato",
+    runBtn: "▶️ Executar código",
+    running: "⏳ Executando...",
+    outputTitle: "📤 Resultado",
+    outputEmpty: "O código será executado aqui",
+    outputError: "Erro ao executar",
+    notSupported: "Este idioma não suporta execução ao vivo",
   },
   fr: {
     flag: "🇫🇷", label: "Français",
@@ -229,6 +247,12 @@ const UI_LANGS = {
     footerPrivacy: "Confidentialité",
     footerRefund: "Remboursements",
     footerContact: "Contact",
+    runBtn: "▶️ Exécuter le code",
+    running: "⏳ Exécution...",
+    outputTitle: "📤 Résultat",
+    outputEmpty: "Le code s'exécutera ici",
+    outputError: "Erreur d'exécution",
+    notSupported: "Ce langage ne supporte pas l'exécution en direct",
   },
   de: {
     flag: "🇩🇪", label: "Deutsch",
@@ -284,6 +308,12 @@ const UI_LANGS = {
     footerPrivacy: "Datenschutz",
     footerRefund: "Rückerstattungen",
     footerContact: "Kontakt",
+    runBtn: "▶️ Code ausführen",
+    running: "⏳ Wird ausgeführt...",
+    outputTitle: "📤 Ergebnis",
+    outputEmpty: "Der Code wird hier ausgeführt",
+    outputError: "Fehler bei der Ausführung",
+    notSupported: "Diese Sprache unterstützt keine Live-Ausführung",
   },
   zh: {
     flag: "🇨🇳", label: "中文",
@@ -339,6 +369,12 @@ const UI_LANGS = {
     footerPrivacy: "隐私政策",
     footerRefund: "退款政策",
     footerContact: "联系我们",
+    runBtn: "▶️ 运行代码",
+    running: "⏳ 运行中...",
+    outputTitle: "📤 输出",
+    outputEmpty: "代码将在这里运行",
+    outputError: "运行错误",
+    notSupported: "此语言不支持实时执行",
   },
 };
 
@@ -367,6 +403,20 @@ const NEXT_STEPS = {
   swift: "https://swiftfiddle.com/",
   c: "https://replit.com/new/c",
   cpp: "https://replit.com/new/cpp",
+};
+
+
+const PISTON_LANGS = {
+  python:     { language: "python",     version: "3.10.0" },
+  javascript: { language: "javascript", version: "18.15.0" },
+  typescript: { language: "typescript", version: "5.0.3" },
+  rust:       { language: "rust",       version: "1.68.2" },
+  go:         { language: "go",         version: "1.16.2" },
+  java:       { language: "java",       version: "15.0.2" },
+  kotlin:     { language: "kotlin",     version: "1.8.20" },
+  swift:      { language: "swift",      version: "5.3.3" },
+  c:          { language: "c",          version: "10.2.0" },
+  cpp:        { language: "c++",        version: "10.2.0" },
 };
 
 const PROG_LANGS = [
@@ -571,6 +621,67 @@ function NextSteps({ progLang, t }) {
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+
+function Playground({ code, progLang, t }) {
+  const [output, setOutput] = useState("");
+  const [running, setRunning] = useState(false);
+  const [error, setError] = useState(false);
+
+  const pistonLang = PISTON_LANGS[progLang];
+
+  const runCode = async () => {
+    if (!pistonLang) return;
+    setRunning(true);
+    setOutput("");
+    setError(false);
+    try {
+      const res = await fetch("https://emkc.org/api/v2/piston/execute", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          language: pistonLang.language,
+          version: pistonLang.version,
+          files: [{ content: code }],
+        }),
+      });
+      const data = await res.json();
+      const out = data.run?.stdout || data.run?.stderr || data.run?.output || "";
+      const err = !!data.run?.stderr && !data.run?.stdout;
+      setOutput(out || "(Sin salida)");
+      setError(err);
+    } catch (e) {
+      setOutput(t.outputError || "Error al ejecutar");
+      setError(true);
+    } finally {
+      setRunning(false);
+    }
+  };
+
+  if (!pistonLang) return null;
+
+  return (
+    <div style={styles.playgroundWrap}>
+      <div style={styles.playgroundHeader}>
+        <span style={styles.playgroundTitle}>{t.outputTitle || "📤 Resultado"}</span>
+        <button
+          onClick={runCode}
+          disabled={running}
+          style={{ ...styles.runBtn, ...(running ? styles.generateBtnDisabled : {}) }}
+        >
+          {running ? (t.running || "⏳ Ejecutando...") : (t.runBtn || "▶️ Ejecutar código")}
+        </button>
+      </div>
+      <div style={{
+        ...styles.playgroundOutput,
+        color: error ? "#f08080" : "#c8c2ff",
+        fontStyle: output ? "normal" : "italic",
+      }}>
+        {output || (t.outputEmpty || "El código se ejecutará acá")}
+      </div>
     </div>
   );
 }
@@ -952,9 +1063,9 @@ Respond ONLY in this JSON (no backticks):
             <span style={styles.hint}>{t.ctrlHint}</span>
           </div>
         )}
-        {!input && (
-  <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} />
-)}
+        {!input && !landscape && (
+          <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} />
+        )}
       </div>
 
       {/* Free limit bar */}
@@ -1002,6 +1113,7 @@ Respond ONLY in this JSON (no backticks):
           <code>{result.code}</code>
         </pre>
       </div>
+      <Playground code={result.code} progLang={progLang} t={t} />
       <div style={styles.card}>
         <div style={styles.cardHeader}>
           <div style={styles.cardTitle}>📖 {t.explainTitle}</div>
@@ -1225,4 +1337,9 @@ const styles = {
   nextStepDivider: { display: "flex", alignItems: "center", gap: 10, padding: "16px 16px 8px" },
   nextStepDividerLine: { flex: 1, height: 1, background: "#2a2440" },
   nextStepDividerText: { fontSize: 10, fontWeight: 700, color: "#7c6af7", textTransform: "uppercase", letterSpacing: 1, whiteSpace: "nowrap" },
+  playgroundWrap: { background: "#13111c", border: "1px solid #2a2440", borderRadius: 10, overflow: "hidden" },
+  playgroundHeader: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px", borderBottom: "1px solid #1e1c2a", background: "#0f0d18" },
+  playgroundTitle: { fontSize: 13, fontWeight: 600, color: "#c4beff" },
+  runBtn: { padding: "7px 16px", background: "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)", border: "none", borderRadius: 7, color: "#fff", fontSize: 12, fontWeight: 600, cursor: "pointer" },
+  playgroundOutput: { padding: "16px", fontFamily: "'IBM Plex Mono', monospace", fontSize: 12, lineHeight: 1.7, minHeight: 80, whiteSpace: "pre-wrap", wordBreak: "break-word" },
 };
