@@ -412,17 +412,17 @@ const NEXT_STEPS = {
 };
 
 
-const PISTON_LANGS = {
-  python:     { language: "python",     version: "3.10.0" },
-  javascript: { language: "javascript", version: "18.15.0" },
-  typescript: { language: "typescript", version: "5.0.3" },
-  rust:       { language: "rust",       version: "1.68.2" },
-  go:         { language: "go",         version: "1.16.2" },
-  java:       { language: "java",       version: "15.0.2" },
-  kotlin:     { language: "kotlin",     version: "1.8.20" },
-  swift:      { language: "swift",      version: "5.3.3" },
-  c:          { language: "c",          version: "10.2.0" },
-  cpp:        { language: "c++",        version: "10.2.0" },
+const GLOT_LANGS = {
+  python:     "python",
+  javascript: "javascript",
+  typescript: "javascript",
+  rust:       "rust",
+  go:         "go",
+  java:       "java",
+  kotlin:     "kotlin",
+  swift:      "swift",
+  c:          "c",
+  cpp:        "cpp",
 };
 
 const PROG_LANGS = [
@@ -637,68 +637,30 @@ function Playground({ code, progLang, t }) {
   const [running, setRunning] = useState(false);
   const [error, setError] = useState(false);
 
-  const pistonLang = PISTON_LANGS[progLang];
-
-  const wrapCode = (code, lang) => {
-    // Add wrapper to call functions and show output
-    const wrappers = {
-      python: `${code}\n\n# Auto-ejecutar\nimport re\nfuncs = re.findall(r'def (\\w+)\\(', """${code.replace(/`/g, '')}""")\nif funcs:\n    try:\n        result = eval(funcs[0] + '()')\n        if result is not None: print(result)\n    except: pass`,
-      javascript: `${code}\n\n// Auto-ejecutar\nconst funcs = Object.getOwnPropertyNames(global).filter(f => typeof global[f] === 'function' && !['require','setTimeout'].includes(f));\ntry { const r = eval(code.match(/function (\\w+)/)?.[1] + '()'); if(r !== undefined) console.log(r); } catch(e) {}`,
-    };
-    return code;
-  };
+  const glotLang = GLOT_LANGS[progLang];
 
   const runCode = async () => {
-    if (!pistonLang) return;
+    if (!glotLang) return;
     setRunning(true);
     setOutput("");
     setError(false);
-
-    // Build executable code by adding a test call if needed
-    let execCode = code;
-
-    // For Python - add print wrapper
-    if (progLang === 'python' && !code.includes('print(')) {
-      const funcMatch = code.match(/def (\w+)\s*\(([^)]*)\)/);
-      if (funcMatch) {
-        const funcName = funcMatch[1];
-        const params = funcMatch[2];
-        const testArgs = params.split(',').map(p => {
-          p = p.trim().split(':')[0].trim();
-          return '[1, 2, 3, "hello"]'.split(',')[Math.floor(Math.random() * 4)];
-        }).join(', ');
-        execCode += `\n\n# Test automático\nresult = ${funcName}(${params ? '[1, 2, 3]' : ''})\nprint("Resultado:", result)`;
-      }
-    }
-
-    // For JavaScript - add console.log wrapper
-    if (progLang === 'javascript' && !code.includes('console.log')) {
-      const funcMatch = code.match(/function (\w+)\s*\(([^)]*)\)|const (\w+)\s*=.*?=>/);
-      if (funcMatch) {
-        const funcName = funcMatch[1] || funcMatch[3];
-        if (funcName) {
-          execCode += `\n\n// Test automático\nconsole.log("Resultado:", ${funcName}(${funcMatch[2] ? '[1, 2, 3]' : ''}));`;
-        }
-      }
-    }
-
     try {
-      const res = await fetch("https://emkc.org/api/v2/piston/execute", {
+      const res = await fetch(`https://glot.io/api/run/${glotLang}/latest`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
-          language: pistonLang.language,
-          version: pistonLang.version,
-          files: [{ content: execCode }],
+          files: [{ name: "main", content: code }],
         }),
       });
       const data = await res.json();
-      const stdout = data.run?.stdout || "";
-      const stderr = data.run?.stderr || "";
+      const stdout = data.stdout || "";
+      const stderr = data.stderr || "";
       const out = stdout || stderr || "";
-      const err = !!stderr && !stdout;
-      setOutput(out || "✅ Código ejecutado sin salida visible\n(probá agregar un print() o console.log())");
-      setError(err);
+      const isErr = !!stderr && !stdout;
+      setOutput(out || "✅ Código ejecutado sin salida\n(el código no tiene print/console.log)");
+      setError(isErr);
     } catch (e) {
       setOutput(t.outputError || "Error al ejecutar");
       setError(true);
@@ -707,7 +669,7 @@ function Playground({ code, progLang, t }) {
     }
   };
 
-  if (!pistonLang) return null;
+    if (!glotLang) return null;
 
   return (
     <div style={styles.playgroundWrap}>
