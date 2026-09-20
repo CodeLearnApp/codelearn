@@ -64,6 +64,7 @@ const UI_LANGS = {
     footerPrivacy: "Privacidad",
     footerRefund: "Reembolsos",
     footerContact: "Contacto",
+    newQuery: "🔄 Nueva consulta",
     runBtn: "▶️ Ejecutar código",
     running: "⏳ Ejecutando...",
     outputTitle: "📤 Resultado",
@@ -125,6 +126,7 @@ const UI_LANGS = {
     footerPrivacy: "Privacy",
     footerRefund: "Refunds",
     footerContact: "Contact",
+    newQuery: "🔄 New query",
     runBtn: "▶️ Run code",
     running: "⏳ Running...",
     outputTitle: "📤 Output",
@@ -186,6 +188,7 @@ const UI_LANGS = {
     footerPrivacy: "Privacidade",
     footerRefund: "Reembolsos",
     footerContact: "Contato",
+    newQuery: "🔄 Nova consulta",
     runBtn: "▶️ Executar código",
     running: "⏳ Executando...",
     outputTitle: "📤 Resultado",
@@ -247,6 +250,7 @@ const UI_LANGS = {
     footerPrivacy: "Confidentialité",
     footerRefund: "Remboursements",
     footerContact: "Contact",
+    newQuery: "🔄 Nouvelle requête",
     runBtn: "▶️ Exécuter le code",
     running: "⏳ Exécution...",
     outputTitle: "📤 Résultat",
@@ -308,6 +312,7 @@ const UI_LANGS = {
     footerPrivacy: "Datenschutz",
     footerRefund: "Rückerstattungen",
     footerContact: "Kontakt",
+    newQuery: "🔄 Neue Anfrage",
     runBtn: "▶️ Code ausführen",
     running: "⏳ Wird ausgeführt...",
     outputTitle: "📤 Ergebnis",
@@ -369,6 +374,7 @@ const UI_LANGS = {
     footerPrivacy: "隐私政策",
     footerRefund: "退款政策",
     footerContact: "联系我们",
+    newQuery: "🔄 新查询",
     runBtn: "▶️ 运行代码",
     running: "⏳ 运行中...",
     outputTitle: "📤 输出",
@@ -1036,6 +1042,7 @@ export default function App() {
     setLoading(true); setResult(null); setError(null);
     const prompt = `The user wants to learn ${selectedProgLang.label}. UI language is ${UI_LANGS[uiLang].label}, write ALL explanations in ${UI_LANGS[uiLang].label}.
 They described: "${input}"
+IMPORTANT: The generated code MUST always include a working example call with test data and print/console.log/System.out.println (or the equivalent output function for the language) so the result is visible when executed. The code must be runnable as-is.
 Respond ONLY in this JSON (no backticks):
 {"code":"...","explanation":"... use ## for section titles and - for bullet points"}`;
     try {
@@ -1142,6 +1149,12 @@ Respond ONLY in this JSON (no backticks):
 
   const renderResult = () => result ? (
     <div style={{ display: "flex", flexDirection: "column", gap: isLandscape ? 12 : 16 }}>
+      <button
+        onClick={() => { setResult(null); setInput(""); setError(null); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+        style={styles.newQueryBtn}
+      >
+        {t.newQuery || "🔄 Nueva consulta"}
+      </button>
       <div style={styles.card}>
         <div style={styles.cardHeader}>
           <div style={styles.cardTitle}>{t.codeTitle(selectedProgLang.label, selectedProgLang.icon)}</div>
@@ -1378,6 +1391,7 @@ const styles = {
   nextStepDivider: { display: "flex", alignItems: "center", gap: 10, padding: "16px 16px 8px" },
   nextStepDividerLine: { flex: 1, height: 1, background: "#2a2440" },
   nextStepDividerText: { fontSize: 10, fontWeight: 700, color: "#7c6af7", textTransform: "uppercase", letterSpacing: 1, whiteSpace: "nowrap" },
+  newQueryBtn: { padding: "10px 20px", background: "#1e1a35", border: "1px solid #3a3060", borderRadius: 8, color: "#9691b8", fontSize: 13, fontWeight: 600, cursor: "pointer", textAlign: "center", width: "100%" },
   playgroundWrap: { background: "#13111c", border: "1px solid #2a2440", borderRadius: 10, overflow: "hidden" },
   playgroundHeader: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px", borderBottom: "1px solid #1e1c2a", background: "#0f0d18" },
   playgroundTitle: { fontSize: 13, fontWeight: 600, color: "#c4beff" },
