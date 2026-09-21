@@ -993,9 +993,9 @@ Respond ONLY in this JSON (no backticks):
             <span style={styles.hint}>{t.ctrlHint}</span>
           </div>
         )}
-        {!input && !landscape && (
-          <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} />
-        )}
+       {!input && (
+  <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} />
+)}
       </div>
 
       {/* Free limit bar */}
