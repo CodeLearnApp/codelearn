@@ -645,10 +645,13 @@ function Playground({ code, progLang, t }) {
     setOutput("");
     setError(false);
     try {
-      // Submit code
-      const submitRes = await fetch("https://ce.judge0.com/submissions?base64_encoded=false&wait=true", {
+      const submitRes = await fetch("https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true&fields=stdout,stderr,compile_output,status", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "X-RapidAPI-Key": "aa9a7a7accmsh39132af9c72c381p14190ejsnbbce65ce268d",
+          "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
+        },
         body: JSON.stringify({
           language_id: langId,
           source_code: code,
@@ -1072,9 +1075,9 @@ Respond ONLY in this JSON (no backticks):
             <span style={styles.hint}>{t.ctrlHint}</span>
           </div>
         )}
-       {!input && (
-  <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} />
-)}
+        {!input && !landscape && (
+          <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} />
+        )}
       </div>
 
       {/* Free limit bar */}
