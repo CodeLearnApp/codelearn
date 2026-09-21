@@ -640,75 +640,102 @@ function Playground({ code, progLang, t }) {
   const langId = JUDGE0_LANGS[progLang];
 
   const addAutoTest = (code, lang) => {
-    // Extract function name from code
-    let funcName = null;
-    let params = [];
+    // Detect function type from code content
+    const codeL = code.toLowerCase();
+    
+    const isListSort = codeL.includes("sort") || codeL.includes("orden") || codeL.includes("lista") || codeL.includes("list");
+    const isPalindrome = codeL.includes("palin") || codeL.includes("reverse") || codeL.includes("invert") || codeL.includes("revert");
+    const isTemp = codeL.includes("celsius") || codeL.includes("fahrenheit") || codeL.includes("temp") || codeL.includes("grado");
+    const isCalc = codeL.includes("calculadora") || codeL.includes("calculator") || codeL.includes("suma") || codeL.includes("resta") || (codeL.includes("suma") && codeL.includes("mult"));
+    const isFactorial = codeL.includes("factorial");
+    const isFibonacci = codeL.includes("fibonacci") || codeL.includes("fib");
+    const isEven = codeL.includes("par") || codeL.includes("even") || codeL.includes("impar") || codeL.includes("odd");
+    const isMax = codeL.includes("mayor") || codeL.includes("maximo") || codeL.includes("max") || codeL.includes("minimo") || codeL.includes("min");
+    const isCount = codeL.includes("contar") || codeL.includes("count") || codeL.includes("veces") || codeL.includes("cuantas");
+    const isAvg = codeL.includes("promedio") || codeL.includes("average") || codeL.includes("media");
+    const isPower = codeL.includes("potencia") || codeL.includes("power") || codeL.includes("pow");
+
+    const getTestArgs = (funcName, paramCount) => {
+      if (isListSort) return ['["Ana", "Carlos", "Beatriz", "David"]', '["Zara", "María", "Luis"]'];
+      if (isPalindrome) return ['"radar"', '"hola"', '"ana"'];
+      if (isTemp) return ['100', '0', '37'];
+      if (isCalc && paramCount >= 2) return ['10, 5', '20, 4', '15, 3'];
+      if (isFactorial) return ['5', '0', '7'];
+      if (isFibonacci) return ['10', '5', '8'];
+      if (isEven) return ['[1,2,3,4,5,6]', '[10,15,20,25]'];
+      if (isMax) return ['[3,1,4,1,5,9,2,6]', '[10,20,5,15]'];
+      if (isCount) return ['"programacion", "a"', '"hola mundo", "o"'];
+      if (isAvg) return ['[10, 20, 30, 40, 50]', '[5, 15, 25]'];
+      if (isPower) return ['2, 10', '3, 4'];
+      return paramCount === 1 ? ['"test"', '"hola"'] : paramCount === 2 ? ['5, 3', '10, 2'] : ['"test"'];
+    };
 
     if (lang === "python") {
       const match = code.match(/def\s+(\w+)\s*\(([^)]*)\)/);
-      if (match) {
-        funcName = match[1];
-        params = match[2].split(",").filter(p => p.trim());
-      }
-      // If no print in code, add auto test
-      if (funcName && !code.includes("print(")) {
-        const testArgs = params.map(() => '"test"').join(", ");
-        const testArgs2 = params.map(() => '"radar"').join(", ");
-        const testArgs3 = params.map((_, i) => i === 0 ? '"hola"' : '"mundo"').join(", ");
-        return code + `\n\n# --- Test automático de CodeLearn ---\nprint("Resultado 1:", ${funcName}(${testArgs2}))\nprint("Resultado 2:", ${funcName}(${testArgs3}))`;
+      if (match && !code.includes("print(")) {
+        const funcName = match[1];
+        const params = match[2].split(",").filter(p => p.trim());
+        const args = getTestArgs(funcName, params.length);
+        let testCode = `\n\n# --- Test automático de CodeLearn ---`;
+        args.forEach((a, i) => {
+          testCode += `\nprint("Resultado ${i+1}:", ${funcName}(${a}))`;
+        });
+        return code + testCode;
       }
     }
 
     if (lang === "javascript") {
       const match = code.match(/function\s+(\w+)\s*\(([^)]*)\)|const\s+(\w+)\s*=.*?(?:function|=>)/);
+      if (match && !code.includes("console.log")) {
+        const funcName = match[1] || match[3];
+        const params = (match[2] || "").split(",").filter(p => p.trim());
+        const args = getTestArgs(funcName, params.length);
+        let testCode = `\n\n// --- Test automático de CodeLearn ---`;
+        args.forEach((a, i) => {
+          testCode += `\nconsole.log("Resultado ${i+1}:", ${funcName}(${a}));`;
+        });
+        return code + testCode;
+      }
+    }
+
+    if (lang === "java" && !code.includes("System.out.print") && !code.includes("public static void main")) {
+      const match = code.match(/public\s+static\s+\w+\s+(\w+)\s*\(([^)]*)\)/);
       if (match) {
-        funcName = match[1] || match[3];
-        params = (match[2] || "").split(",").filter(p => p.trim());
-      }
-      if (funcName && !code.includes("console.log")) {
-        const testArgs = params.map(() => '"radar"').join(", ");
-        const testArgs2 = params.map(() => '"hola"').join(", ");
-        return code + `\n\n// --- Test automático de CodeLearn ---\nconsole.log("Resultado 1:", ${funcName}(${testArgs}));\nconsole.log("Resultado 2:", ${funcName}(${testArgs2}));`;
-      }
-    }
-
-    if (lang === "java") {
-      if (!code.includes("System.out.print")) {
-        // Find main or add test in main
-        if (!code.includes("public static void main")) {
-          const match = code.match(/public\s+static\s+\w+\s+(\w+)\s*\(/);
-          if (match) {
-            funcName = match[1];
-            return code.replace(
-              /}\s*$/,
-              `\n    public static void main(String[] args) {\n        System.out.println("Resultado: " + ${funcName}("radar"));\n    }\n}`
-            );
-          }
-        }
+        const funcName = match[1];
+        const params = (match[2] || "").split(",").filter(p => p.trim());
+        const args = getTestArgs(funcName, params.length);
+        const mainCode = args.map((a, i) => 
+          `        System.out.println("Resultado ${i+1}: " + ${funcName}(${a}));`
+        ).join("\n");
+        return code.replace(/}\s*$/, 
+          `\n    public static void main(String[] args) {\n${mainCode}\n    }\n}`
+        );
       }
     }
 
-    if (lang === "go") {
-      if (!code.includes("fmt.Print") && !code.includes("fmt.Println")) {
-        const match = code.match(/func\s+(\w+)\s*\(/);
-        if (match && match[1] !== "main") {
-          funcName = match[1];
-          if (!code.includes("func main")) {
-            return code + `\n\nfunc main() {\n\tfmt.Println("Resultado:", ${funcName}("radar"))\n}`;
-          }
-        }
+    if (lang === "go" && !code.includes("fmt.Print") && !code.includes("func main")) {
+      const match = code.match(/func\s+(\w+)\s*\(([^)]*)\)/);
+      if (match && match[1] !== "main") {
+        const funcName = match[1];
+        const params = (match[2] || "").split(",").filter(p => p.trim());
+        const args = getTestArgs(funcName, params.length);
+        let mainCode = args.map((a, i) => 
+          `\tfmt.Println("Resultado ${i+1}:", ${funcName}(${a}))`
+        ).join("\n");
+        return code + `\n\nfunc main() {\n${mainCode}\n}`;
       }
     }
 
-    if (lang === "rust") {
-      if (!code.includes("println!")) {
-        const match = code.match(/fn\s+(\w+)\s*\(/);
-        if (match && match[1] !== "main") {
-          funcName = match[1];
-          if (!code.includes("fn main")) {
-            return code + `\n\nfn main() {\n    println!("Resultado: {}", ${funcName}("radar"));\n}`;
-          }
-        }
+    if (lang === "rust" && !code.includes("println!") && !code.includes("fn main")) {
+      const match = code.match(/fn\s+(\w+)\s*\(([^)]*)\)/);
+      if (match && match[1] !== "main") {
+        const funcName = match[1];
+        const params = (match[2] || "").split(",").filter(p => p.trim());
+        const args = getTestArgs(funcName, params.length);
+        let mainCode = args.map((a, i) => 
+          `    println!("Resultado ${i+1}: {:?}", ${funcName}(${a}));`
+        ).join("\n");
+        return code + `\n\nfn main() {\n${mainCode}\n}`;
       }
     }
 
@@ -1082,24 +1109,9 @@ export default function App() {
     if (limitReached) return;
 
     setLoading(true); setResult(null); setError(null);
-   const prompt = `The user wants to learn ${selectedProgLang.label}. UI language is ${UI_LANGS[uiLang].label}, write ALL explanations in ${UI_LANGS[uiLang].label}.
+    const prompt = `The user wants to learn ${selectedProgLang.label}. UI language is ${UI_LANGS[uiLang].label}, write ALL explanations in ${UI_LANGS[uiLang].label}.
 They described: "${input}"
-
-CRITICAL: You MUST follow these rules for the code:
-1. Write the complete function/program
-2. After the function, ALWAYS add 3 example calls with REAL appropriate test data
-3. ALWAYS use print() for Python, console.log() for JavaScript, System.out.println() for Java, fmt.Println() for Go, println!() for Rust, or equivalent
-4. The code MUST produce visible output when run - NO EXCEPTIONS
-5. Use realistic test data that matches the function purpose (lists for sorting, strings for text functions, numbers for math, etc.)
-
-Example for Python palindrome:
-def es_palindromo(palabra):
-    return palabra == palabra[::-1]
-
-print("radar:", es_palindromo("radar"))
-print("hola:", es_palindromo("hola"))  
-print("ana:", es_palindromo("ana"))
-
+IMPORTANT: The generated code MUST always include a working example call with test data and print/console.log/System.out.println (or the equivalent output function for the language) so the result is visible when executed. The code must be runnable as-is.
 Respond ONLY in this JSON (no backticks):
 {"code":"...","explanation":"... use ## for section titles and - for bullet points"}`;
     try {
