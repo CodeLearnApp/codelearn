@@ -639,11 +639,88 @@ function Playground({ code, progLang, t }) {
 
   const langId = JUDGE0_LANGS[progLang];
 
+  const addAutoTest = (code, lang) => {
+    // Extract function name from code
+    let funcName = null;
+    let params = [];
+
+    if (lang === "python") {
+      const match = code.match(/def\s+(\w+)\s*\(([^)]*)\)/);
+      if (match) {
+        funcName = match[1];
+        params = match[2].split(",").filter(p => p.trim());
+      }
+      // If no print in code, add auto test
+      if (funcName && !code.includes("print(")) {
+        const testArgs = params.map(() => '"test"').join(", ");
+        const testArgs2 = params.map(() => '"radar"').join(", ");
+        const testArgs3 = params.map((_, i) => i === 0 ? '"hola"' : '"mundo"').join(", ");
+        return code + `\n\n# --- Test automático de CodeLearn ---\nprint("Resultado 1:", ${funcName}(${testArgs2}))\nprint("Resultado 2:", ${funcName}(${testArgs3}))`;
+      }
+    }
+
+    if (lang === "javascript") {
+      const match = code.match(/function\s+(\w+)\s*\(([^)]*)\)|const\s+(\w+)\s*=.*?(?:function|=>)/);
+      if (match) {
+        funcName = match[1] || match[3];
+        params = (match[2] || "").split(",").filter(p => p.trim());
+      }
+      if (funcName && !code.includes("console.log")) {
+        const testArgs = params.map(() => '"radar"').join(", ");
+        const testArgs2 = params.map(() => '"hola"').join(", ");
+        return code + `\n\n// --- Test automático de CodeLearn ---\nconsole.log("Resultado 1:", ${funcName}(${testArgs}));\nconsole.log("Resultado 2:", ${funcName}(${testArgs2}));`;
+      }
+    }
+
+    if (lang === "java") {
+      if (!code.includes("System.out.print")) {
+        // Find main or add test in main
+        if (!code.includes("public static void main")) {
+          const match = code.match(/public\s+static\s+\w+\s+(\w+)\s*\(/);
+          if (match) {
+            funcName = match[1];
+            return code.replace(
+              /}\s*$/,
+              `\n    public static void main(String[] args) {\n        System.out.println("Resultado: " + ${funcName}("radar"));\n    }\n}`
+            );
+          }
+        }
+      }
+    }
+
+    if (lang === "go") {
+      if (!code.includes("fmt.Print") && !code.includes("fmt.Println")) {
+        const match = code.match(/func\s+(\w+)\s*\(/);
+        if (match && match[1] !== "main") {
+          funcName = match[1];
+          if (!code.includes("func main")) {
+            return code + `\n\nfunc main() {\n\tfmt.Println("Resultado:", ${funcName}("radar"))\n}`;
+          }
+        }
+      }
+    }
+
+    if (lang === "rust") {
+      if (!code.includes("println!")) {
+        const match = code.match(/fn\s+(\w+)\s*\(/);
+        if (match && match[1] !== "main") {
+          funcName = match[1];
+          if (!code.includes("fn main")) {
+            return code + `\n\nfn main() {\n    println!("Resultado: {}", ${funcName}("radar"));\n}`;
+          }
+        }
+      }
+    }
+
+    return code;
+  };
+
   const runCode = async () => {
     if (!langId) return;
     setRunning(true);
     setOutput("");
     setError(false);
+    const execCode = addAutoTest(code, progLang);
     try {
       const submitRes = await fetch("https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true&fields=stdout,stderr,compile_output,status", {
         method: "POST",
@@ -654,7 +731,7 @@ function Playground({ code, progLang, t }) {
         },
         body: JSON.stringify({
           language_id: langId,
-          source_code: code,
+          source_code: execCode,
         }),
       });
       const data = await submitRes.json();
@@ -1007,11 +1084,7 @@ export default function App() {
     setLoading(true); setResult(null); setError(null);
     const prompt = `The user wants to learn ${selectedProgLang.label}. UI language is ${UI_LANGS[uiLang].label}, write ALL explanations in ${UI_LANGS[uiLang].label}.
 They described: "${input}"
-CRITICAL REQUIREMENT: The code MUST be 100% executable and show output. You MUST:
-1. Define the function
-2. Call the function with real test data (at least 2-3 examples)
-3. Print/display every result using print() for Python, console.log() for JavaScript, System.out.println() for Java, println!() for Rust, fmt.Println() for Go, or the equivalent for the language
-The code MUST produce visible output when executed. Never return a function without calling it and printing the result.
+IMPORTANT: The generated code MUST always include a working example call with test data and print/console.log/System.out.println (or the equivalent output function for the language) so the result is visible when executed. The code must be runnable as-is.
 Respond ONLY in this JSON (no backticks):
 {"code":"...","explanation":"... use ## for section titles and - for bullet points"}`;
     try {
