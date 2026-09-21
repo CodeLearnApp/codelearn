@@ -21,14 +21,14 @@ const UI_LANGS = {
     ctrlHint: "Ctrl + Enter para generar",
     suggestedLabel: "Ejemplos para empezar:",
     nextStepsTitle: "¿Qué hago con este código?",
-    step1Title: "ENTENDÉ EL CÓDIGO", step1Desc: "Leé la explicación línea por línea. No pases al siguiente paso hasta entender qué hace cada parte.",
+    step1Title: "ENTENDÉ EL CÓDIGO", step1Desc: "Leé la explicación línea por línea. No pases al siguiente paso hasta entender qué hace cada parte. Si no entendés algo, hacele una nueva consulta a CodeLearn.",
     step2Title: "ABRÍ UN EDITOR ONLINE GRATIS", step2Desc: "No necesitás instalar nada. Hacé clic en el botón de abajo para abrir un editor online con tu lenguaje listo para usar.", step2Link: "▶️ Abrir editor",
-    step3Title: "PEGÁ EL CÓDIGO", step3Desc: "Copiá el código con el botón 📋 de arriba. Pegalo en el editor con Ctrl+V.",
-    step4Title: "EJECUTALO", step4Desc: "Buscá el botón ▶️ Run o Ejecutar. Mirá el resultado — ¿hace lo que esperabas?",
-    step5Title: "EXPERIMENTÁ", step5Desc: "Cambiá un número, una palabra o un valor. Ejecutalo de nuevo y observá cómo cambia.",
-    step6Title: "PERSONALIZALO", step6Desc: "Modificá el código para que haga algo diferente. No tengas miedo de romperlo.",
-    step7Title: "COMPARTÍ LO QUE APRENDISTE", step7Desc: "Usá el botón 📤 para compartir con amigos o grupos de programación.",
-    step8Title: "SEGUÍ APRENDIENDO", step8Desc: "Volvé a CodeLearn y hacé una nueva consulta. Cada consulta es una lección.",
+    step3Title: "PEGÁ EL CÓDIGO", step3Desc: "Copiá el código con el botón 📋 de arriba. Pegalo en el editor con Ctrl+V. El código ya está listo para ejecutarse.",
+    step4Title: "EJECUTALO", step4Desc: "Buscá el botón ▶️ Run o Ejecutar. Mirá el resultado — ¿hace lo que esperabas? Si hay un error, leé el mensaje con calma, te dice qué falló.",
+    step5Title: "EXPERIMENTÁ", step5Desc: "Cambiá un número, una palabra o un valor. Ejecutalo de nuevo y observá cómo cambia. Así aprenden los programadores de verdad.",
+    step6Title: "PERSONALIZALO", step6Desc: "Modificá el código para que haga algo diferente. No tengas miedo de romperlo, siempre podés volver a generarlo.",
+    step7Title: "COMPARTÍ LO QUE APRENDISTE", step7Desc: "Usá el botón 📤 para compartir con amigos o grupos de programación. Explicarle a otros consolida el conocimiento.",
+    step8Title: "SEGUÍ APRENDIENDO", step8Desc: "Volvé a CodeLearn y hacé una nueva consulta. Cada consulta es una lección. Probá el mismo ejercicio en otro lenguaje y compará las diferencias.",
     generateBtn: (lang, icon) => `Generar en ${lang} ${icon}`,
     generating: "Generando...",
     codeTitle: (lang, icon) => `${icon} Código en ${lang}`,
@@ -65,17 +65,12 @@ const UI_LANGS = {
     footerRefund: "Reembolsos",
     footerContact: "Contacto",
     newQuery: "🔄 Nueva consulta",
-    proFlowTitle: "FLUJO DE UN PROGRAMADOR REAL",
-    proFlowDesc: "¿Querés ir más allá? Estas son las herramientas que usan los programadores profesionales todos los días.",
-    step9Title: "INSTALÁ VS CODE — EL EDITOR PROFESIONAL",
-    step9Desc: "VS Code es el editor de código más usado en el mundo. Es gratuito, potente y tiene miles de extensiones. Descargalo, abrí un archivo nuevo, pegá tu código y ejecutalo directamente desde ahí.",
-    step9Link: "⬇️ Descargar VS Code gratis",
-    step10Title: "GUARDÁ TU CÓDIGO EN GITHUB",
-    step10Desc: "GitHub es la plataforma donde los programadores guardan y comparten su código. Es como Google Drive pero para código. Creá una cuenta gratuita, subí tu código y tenelo disponible desde cualquier dispositivo. Es también tu portafolio como programador.",
-    step10Link: "🐙 Crear cuenta en GitHub gratis",
-    step11Title: "PUBLICÁ TU PROYECTO EN INTERNET — VERCEL",
-    step11Desc: "Vercel te permite publicar tu proyecto en internet en minutos, completamente gratis. Conectás tu repositorio de GitHub y Vercel hace todo automáticamente. En segundos tenés una URL real para compartir con cualquiera en el mundo.",
-    step11Link: "🚀 Publicar en Vercel gratis",
+    runBtn: "▶️ Ejecutar código",
+    running: "⏳ Ejecutando...",
+    outputTitle: "📤 Resultado",
+    outputEmpty: "El código se ejecutará acá",
+    outputError: "Error al ejecutar",
+    notSupported: "Este lenguaje no soporta ejecución en vivo",
   },
   en: {
     flag: "🇬🇧", label: "English",
@@ -87,15 +82,15 @@ const UI_LANGS = {
     placeholder: 'E.g: "I want a function that takes a list of numbers and returns only the even ones, sorted descending"',
     ctrlHint: "Ctrl + Enter to generate",
     suggestedLabel: "Examples to get started:",
-    nextStepsTitle: "What should I do with this code?",
-    step1Title: "UNDERSTAND THE CODE", step1Desc: "Read the explanation line by line.",
-    step2Title: "OPEN A FREE ONLINE EDITOR", step2Desc: "No installation needed. Click the button below to open an online editor.", step2Link: "▶️ Open editor",
-    step3Title: "PASTE THE CODE", step3Desc: "Copy the code with the 📋 button and paste it with Ctrl+V.",
-    step4Title: "RUN IT", step4Desc: "Find the ▶️ Run button and see the result.",
-    step5Title: "EXPERIMENT", step5Desc: "Change a number or value and run again to see how it changes.",
-    step6Title: "CUSTOMIZE", step6Desc: "Modify the code to do something different.",
-    step7Title: "SHARE YOUR LEARNING", step7Desc: "Use the 📤 button to share with friends or coding groups.",
-    step8Title: "KEEP LEARNING", step8Desc: "Come back to CodeLearn and make a new query. Each query is a lesson.",
+    nextStepsTitle: "What do I do with this code?",
+    step1Title: "UNDERSTAND THE CODE", step1Desc: "Read the explanation line by line. Don't move to the next step until you understand what each part does. If you don't understand something, ask CodeLearn a new question.",
+    step2Title: "OPEN A FREE ONLINE EDITOR", step2Desc: "No installation needed. Click the button below to open an online editor with your language ready to use.", step2Link: "▶️ Open editor",
+    step3Title: "PASTE THE CODE", step3Desc: "Copy the code with the 📋 button above. Paste it in the editor with Ctrl+V. The code is ready to run.",
+    step4Title: "RUN IT", step4Desc: "Find the ▶️ Run button in the editor. Look at the result — does it do what you expected? If there's an error, read the message carefully.",
+    step5Title: "EXPERIMENT", step5Desc: "Change a number, a word or a value. Run it again and observe how the result changes. This is how real programmers learn.",
+    step6Title: "CUSTOMIZE IT", step6Desc: "Modify the code to do something different. Don't be afraid to break it, you can always regenerate it.",
+    step7Title: "SHARE WHAT YOU LEARNED", step7Desc: "Use the 📤 button to share with friends or programming groups. Teaching others consolidates knowledge.",
+    step8Title: "KEEP LEARNING", step8Desc: "Come back to CodeLearn and make a new query. Each query is a lesson. Try the same exercise in another language and compare.",
     generateBtn: (lang, icon) => `Generate in ${lang} ${icon}`,
     generating: "Generating...",
     codeTitle: (lang, icon) => `${icon} Code in ${lang}`,
@@ -105,21 +100,21 @@ const UI_LANGS = {
     shareCode: "📤 Share code",
     shareExplanation: "📤 Share explanation",
     shared: "✅ Copied to share",
-    error: "An error occurred generating the code. Try again.",
+    error: "There was an error generating the code. Please try again.",
     footer: "Learn by coding — powered by AI • CodeLearn",
     uiLangLabel: "App language",
     loginTitle: "Sign in",
     loginEmail: "Email",
     loginPassword: "Password",
     loginBtn: "Sign in",
-    registerBtn: "Sign up",
+    registerBtn: "Register",
     logoutBtn: "Sign out",
-    freeLimit: (n) => `Queries today: ${n}/${FREE_DAILY_LIMIT}`,
+    freeLimit: (n) => `Today's queries: ${n}/${FREE_DAILY_LIMIT}`,
     limitReached: "Daily limit reached. Subscribe to Premium for unlimited queries!",
-    upgradeBtn: "🚀 Go to Premium — $10/mo",
+    upgradeBtn: "🚀 Go Premium — $10/month",
     premiumBadge: "⭐ Premium",
     freeBadge: "🆓 Free",
-    switchToRegister: "Don't have an account? Sign up",
+    switchToRegister: "Don't have an account? Register",
     switchToLogin: "Already have an account? Sign in",
     forgotPassword: "Forgot your password?",
     resetPassword: "Reset password",
@@ -132,17 +127,12 @@ const UI_LANGS = {
     footerRefund: "Refunds",
     footerContact: "Contact",
     newQuery: "🔄 New query",
-    proFlowTitle: "A REAL PROGRAMMER'S FLOW",
-    proFlowDesc: "Want to go further? These are the tools that professional programmers use every day.",
-    step9Title: "INSTALL VS CODE — THE PROFESSIONAL EDITOR",
-    step9Desc: "VS Code is the most used code editor in the world. It's free, powerful, and has thousands of extensions. Download it, open a new file, paste your code and run it directly from there.",
-    step9Link: "⬇️ Download VS Code free",
-    step10Title: "SAVE YOUR CODE ON GITHUB",
-    step10Desc: "GitHub is the platform where programmers save and share their code. It's like Google Drive but for code. Create a free account, upload your code and have it available from anywhere. It's also your portfolio as a programmer.",
-    step10Link: "🐙 Create GitHub account free",
-    step11Title: "PUBLISH YOUR PROJECT ON THE INTERNET — VERCEL",
-    step11Desc: "Vercel lets you publish your project on the internet in minutes, completely free. You connect your GitHub repository and Vercel does everything automatically. In seconds you have a real URL to share with anyone in the world.",
-    step11Link: "🚀 Publish on Vercel free",
+    runBtn: "▶️ Run code",
+    running: "⏳ Running...",
+    outputTitle: "📤 Output",
+    outputEmpty: "The code will run here",
+    outputError: "Error running code",
+    notSupported: "This language doesn't support live execution",
   },
   pt: {
     flag: "🇧🇷", label: "Português",
@@ -174,21 +164,21 @@ const UI_LANGS = {
     shared: "✅ Copiado para compartilhar",
     error: "Houve um erro ao gerar o código. Tente novamente.",
     footer: "Aprenda programando — gerado com IA • CodeLearn",
-    uiLangLabel: "Idioma da app",
+    uiLangLabel: "Idioma do app",
     loginTitle: "Entrar",
     loginEmail: "Email",
     loginPassword: "Senha",
     loginBtn: "Entrar",
-    registerBtn: "Cadastrar",
+    registerBtn: "Registrar",
     logoutBtn: "Sair",
     freeLimit: (n) => `Consultas hoje: ${n}/${FREE_DAILY_LIMIT}`,
-    limitReached: "Limite diário atingido. Inscreva-se no Premium para consultas ilimitadas!",
-    upgradeBtn: "🚀 Ir Premium — $10/mês",
+    limitReached: "Limite diário atingido. Assine o Premium para consultas ilimitadas!",
+    upgradeBtn: "🚀 Ir para Premium — $10/mês",
     premiumBadge: "⭐ Premium",
-    freeBadge: "🆓 Grátis",
-    switchToRegister: "Não tem conta? Cadastre-se",
+    freeBadge: "🆓 Free",
+    switchToRegister: "Não tem conta? Registre-se",
     switchToLogin: "Já tem conta? Entre",
-    forgotPassword: "Esqueceu a senha?",
+    forgotPassword: "Esqueceu sua senha?",
     resetPassword: "Redefinir senha",
     resetSent: "Enviamos um email para redefinir sua senha!",
     historyTitle: "📋 Histórico de consultas",
@@ -199,17 +189,12 @@ const UI_LANGS = {
     footerRefund: "Reembolsos",
     footerContact: "Contato",
     newQuery: "🔄 Nova consulta",
-    proFlowTitle: "FLUXO DE UM PROGRAMADOR REAL",
-    proFlowDesc: "Quer ir além? Estas são as ferramentas que os programadores profissionais usam todos os dias.",
-    step9Title: "INSTALE O VS CODE — O EDITOR PROFISSIONAL",
-    step9Desc: "VS Code é o editor de código mais usado do mundo. É gratuito, poderoso e tem milhares de extensões. Baixe-o, abra um novo arquivo, cole seu código e execute-o diretamente de lá.",
-    step9Link: "⬇️ Baixar VS Code grátis",
-    step10Title: "SALVE SEU CÓDIGO NO GITHUB",
-    step10Desc: "GitHub é a plataforma onde os programadores salvam e compartilham seu código. É como Google Drive mas para código. Crie uma conta gratuita, envie seu código e tenha-o disponível em qualquer lugar. É também seu portfólio como programador.",
-    step10Link: "🐙 Criar conta GitHub grátis",
-    step11Title: "PUBLIQUE SEU PROJETO NA INTERNET — VERCEL",
-    step11Desc: "Vercel permite que você publique seu projeto na internet em minutos, completamente grátis. Você conecta seu repositório do GitHub e Vercel faz tudo automaticamente. Em segundos você tem uma URL real para compartilhar com qualquer pessoa no mundo.",
-    step11Link: "🚀 Publicar em Vercel grátis",
+    runBtn: "▶️ Executar código",
+    running: "⏳ Executando...",
+    outputTitle: "📤 Resultado",
+    outputEmpty: "O código será executado aqui",
+    outputError: "Erro ao executar",
+    notSupported: "Este idioma não suporta execução ao vivo",
   },
   fr: {
     flag: "🇫🇷", label: "Français",
@@ -266,17 +251,12 @@ const UI_LANGS = {
     footerRefund: "Remboursements",
     footerContact: "Contact",
     newQuery: "🔄 Nouvelle requête",
-    proFlowTitle: "FLUX D'UN PROGRAMMEUR PROFESSIONNEL",
-    proFlowDesc: "Vous voulez aller plus loin ? Ce sont les outils que les programmeurs professionnels utilisent quotidiennement.",
-    step9Title: "INSTALLEZ VS CODE — L'ÉDITEUR PROFESSIONNEL",
-    step9Desc: "VS Code est l'éditeur de code le plus utilisé au monde. Il est gratuit, puissant et dispose de milliers d'extensions. Téléchargez-le, ouvrez un nouveau fichier, collez votre code et exécutez-le directement à partir de là.",
-    step9Link: "⬇️ Télécharger VS Code gratuitement",
-    step10Title: "SAUVEGARDEZ VOTRE CODE SUR GITHUB",
-    step10Desc: "GitHub est la plateforme où les programmeurs sauvegardent et partagent leur code. C'est comme Google Drive mais pour le code. Créez un compte gratuit, téléchargez votre code et ayez-le disponible de n'importe où. C'est aussi votre portfolio en tant que programmeur.",
-    step10Link: "🐙 Créer un compte GitHub gratuitement",
-    step11Title: "PUBLIEZ VOTRE PROJET SUR INTERNET — VERCEL",
-    step11Desc: "Vercel vous permet de publier votre projet sur Internet en minutes, complètement gratuitement. Vous connectez votre référentiel GitHub et Vercel fait tout automatiquement. En quelques secondes, vous avez une véritable URL à partager avec n'importe qui dans le monde.",
-    step11Link: "🚀 Publier sur Vercel gratuitement",
+    runBtn: "▶️ Exécuter le code",
+    running: "⏳ Exécution...",
+    outputTitle: "📤 Résultat",
+    outputEmpty: "Le code s'exécutera ici",
+    outputError: "Erreur d'exécution",
+    notSupported: "Ce langage ne supporte pas l'exécution en direct",
   },
   de: {
     flag: "🇩🇪", label: "Deutsch",
@@ -333,17 +313,12 @@ const UI_LANGS = {
     footerRefund: "Rückerstattungen",
     footerContact: "Kontakt",
     newQuery: "🔄 Neue Anfrage",
-    proFlowTitle: "DER WORKFLOW EINES ECHTEN PROGRAMMIERERS",
-    proFlowDesc: "Möchten Sie noch weiter gehen? Dies sind die Tools, die professionelle Programmierer jeden Tag verwenden.",
-    step9Title: "INSTALLIEREN SIE VS CODE — DER PROFESSIONELLE EDITOR",
-    step9Desc: "VS Code ist der weltweit am meisten verwendete Code-Editor. Er ist kostenlos, leistungsstark und hat Tausende von Erweiterungen. Laden Sie ihn herunter, öffnen Sie eine neue Datei, fügen Sie Ihren Code ein und führen Sie ihn direkt von dort aus.",
-    step9Link: "⬇️ VS Code kostenlos herunterladen",
-    step10Title: "SPEICHERN SIE IHREN CODE AUF GITHUB",
-    step10Desc: "GitHub ist die Plattform, auf der Programmierer ihren Code speichern und teilen. Es ist wie Google Drive, aber für Code. Erstellen Sie ein kostenloses Konto, laden Sie Ihren Code hoch und haben Sie ihn von überall verfügbar. Es ist auch Ihr Portfolio als Programmierer.",
-    step10Link: "🐙 GitHub-Konto kostenlos erstellen",
-    step11Title: "VERÖFFENTLICHEN SIE IHR PROJEKT IM INTERNET — VERCEL",
-    step11Desc: "Mit Vercel können Sie Ihr Projekt in Minuten völlig kostenlos im Internet veröffentlichen. Sie verbinden Ihr GitHub-Repository und Vercel macht alles automatisch. In wenigen Sekunden haben Sie eine echte URL zum Teilen mit jedem auf der Welt.",
-    step11Link: "🚀 Auf Vercel kostenlos veröffentlichen",
+    runBtn: "▶️ Code ausführen",
+    running: "⏳ Wird ausgeführt...",
+    outputTitle: "📤 Ergebnis",
+    outputEmpty: "Der Code wird hier ausgeführt",
+    outputError: "Fehler bei der Ausführung",
+    notSupported: "Diese Sprache unterstützt keine Live-Ausführung",
   },
   zh: {
     flag: "🇨🇳", label: "中文",
@@ -400,19 +375,15 @@ const UI_LANGS = {
     footerRefund: "退款政策",
     footerContact: "联系我们",
     newQuery: "🔄 新查询",
-    proFlowTitle: "真正程序员的工作流",
-    proFlowDesc: "想要进一步了解？这些是专业程序员每天使用的工具。",
-    step9Title: "安装 VS CODE — 专业编辑器",
-    step9Desc: "VS Code 是世界上最常用的代码编辑器。它是免费的、功能强大的，并且有数千个扩展。下载它，打开一个新文件，粘贴您的代码并直接从那里运行它。",
-    step9Link: "⬇️ 免费下载 VS Code",
-    step10Title: "在 GITHUB 上保存您的代码",
-    step10Desc: "GitHub 是程序员保存和共享代码的平台。它就像 Google Drive，但用于代码。创建一个免费帐户，上传您的代码并从任何地方访问它。它也是您作为程序员的作品集。",
-    step10Link: "🐙 免费创建 GitHub 账户",
-    step11Title: "在互联网上发布您的项目 — VERCEL",
-    step11Desc: "Vercel 允许您在几分钟内完全免费地在互联网上发布您的项目。您连接 GitHub 存储库，Vercel 会自动完成所有工作。几秒钟内，您就有一个真正的 URL 可以与世界上的任何人分享。",
-    step11Link: "🚀 免费发布到 Vercel",
+    runBtn: "▶️ 运行代码",
+    running: "⏳ 运行中...",
+    outputTitle: "📤 输出",
+    outputEmpty: "代码将在这里运行",
+    outputError: "运行错误",
+    notSupported: "此语言不支持实时执行",
   },
 };
+
 
 const SUGGESTED_PROMPTS = [
   { text: "Quiero una función que ordene una lista de nombres alfabéticamente", lang: "python", icon: "🐍" },
@@ -438,6 +409,20 @@ const NEXT_STEPS = {
   swift: "https://swiftfiddle.com/",
   c: "https://replit.com/new/c",
   cpp: "https://replit.com/new/cpp",
+};
+
+
+const JUDGE0_LANGS = {
+  python:     71,
+  javascript: 63,
+  typescript: 74,
+  rust:       73,
+  go:         60,
+  java:       62,
+  kotlin:     78,
+  swift:      83,
+  c:          50,
+  cpp:        54,
 };
 
 const PROG_LANGS = [
@@ -486,7 +471,7 @@ function CopyButton({ text, t }) {
 function ShareButton({ text, label, shared, style }) {
   const [sharing, setSharing] = useState(false);
   const share = async () => {
-    const shareText = text + "\n\n— Generated with CodeLearn: codelearn.codes";
+    const shareText = text + "\n\n— Generado con CodeLearn: codelearn.codes";
     if (navigator.share) {
       try { await navigator.share({ text: shareText }); } catch (e) {}
     } else {
@@ -502,12 +487,13 @@ function ShareButton({ text, label, shared, style }) {
   );
 }
 
+
 function SuggestedPrompts({ onSelect, setProgLang, t }) {
   const [open, setOpen] = useState(false);
   return (
     <div style={styles.suggestedWrap}>
       <button onClick={() => setOpen(o => !o)} style={styles.suggestedToggle}>
-        <span>💡 {t.suggestedLabel}</span>
+        <span>💡 {t.suggestedLabel || "Ejemplos para empezar"}</span>
         <span>{open ? "▲" : "▼"}</span>
       </button>
       {open && (
@@ -535,49 +521,50 @@ function SuggestedPrompts({ onSelect, setProgLang, t }) {
 function NextSteps({ progLang, t }) {
   const [open, setOpen] = useState(false);
   const editorUrl = NEXT_STEPS[progLang] || "https://replit.com";
+  const lang = progLang;
 
   const steps = [
     {
       n: "1️⃣",
-      title: t.step1Title,
-      desc: t.step1Desc
+      title: t.step1Title || "ENTENDÉ EL CÓDIGO",
+      desc: t.step1Desc || "Leé la explicación línea por línea. No pases al siguiente paso hasta entender qué hace cada parte. Si no entendés algo, hacele una nueva consulta a CodeLearn."
     },
     {
       n: "2️⃣",
-      title: t.step2Title,
-      desc: t.step2Desc,
+      title: t.step2Title || "ABRÍ UN EDITOR ONLINE GRATIS",
+      desc: t.step2Desc || "No necesitás instalar nada. Hacé clic en el botón de abajo para abrir un editor online con tu lenguaje listo para usar.",
       link: editorUrl,
-      linkLabel: t.step2Link
+      linkLabel: t.step2Link || `▶️ Abrir editor para ${lang}`
     },
     {
       n: "3️⃣",
-      title: t.step3Title,
-      desc: t.step3Desc
+      title: t.step3Title || "PEGÁ EL CÓDIGO",
+      desc: t.step3Desc || "Copiá el código con el botón 📋 de arriba. Pegalo en el editor con Ctrl+V (o Cmd+V en Mac). El código ya está listo para ejecutarse."
     },
     {
       n: "4️⃣",
-      title: t.step4Title,
-      desc: t.step4Desc
+      title: t.step4Title || "EJECUTALO",
+      desc: t.step4Desc || "Buscá el botón ▶️ Run o Ejecutar en el editor. Mirá el resultado — ¿hace lo que esperabas? Si hay un error, leé el mensaje con calma, generalmente te dice qué falló."
     },
     {
       n: "5️⃣",
-      title: t.step5Title,
-      desc: t.step5Desc
+      title: t.step5Title || "EXPERIMENTÁ",
+      desc: t.step5Desc || "Cambiá un número, una palabra o un valor dentro del código. Ejecutalo de nuevo y observá cómo cambia el resultado. Así es exactamente como aprenden los programadores de verdad."
     },
     {
       n: "6️⃣",
-      title: t.step6Title,
-      desc: t.step6Desc
+      title: t.step6Title || "PERSONALIZALO",
+      desc: t.step6Desc || "Modificá el código para que haga algo diferente — agregá un parámetro nuevo, cambiá la lógica, combinalo con otra función. No tengas miedo de romperlo, siempre podés volver a generarlo."
     },
     {
       n: "7️⃣",
-      title: t.step7Title,
-      desc: t.step7Desc
+      title: t.step7Title || "COMPARTÍ LO QUE APRENDISTE",
+      desc: t.step7Desc || "Usá el botón 📤 para compartir el código con amigos, compañeros o en grupos de programación. Explicarle a otros lo que aprendiste es la mejor forma de consolidar el conocimiento."
     },
     {
       n: "8️⃣",
-      title: t.step8Title,
-      desc: t.step8Desc
+      title: t.step8Title || "SEGUÍ APRENDIENDO CON CODELEARN",
+      desc: t.step8Desc || "Volvé a CodeLearn y hacé una nueva consulta. Cada vez que describís algo nuevo aprendés un concepto diferente. Probá el mismo ejercicio en otro lenguaje y compará las diferencias. ¡Cada consulta es una lección!"
     },
     {
       n: "━━━",
@@ -611,29 +598,205 @@ function NextSteps({ progLang, t }) {
   return (
     <div style={styles.nextStepsWrap}>
       <button onClick={() => setOpen(o => !o)} style={styles.nextStepsToggle}>
-        <span>🚀 {t.nextStepsTitle}</span>
-        <span>{open ? "▲" : "▼"}</span>
+        <span>📚 {t.nextStepsTitle || "¿Qué hago con este código?"}</span>
+        <span style={{ fontSize: 16 }}>{open ? "▲" : "▼"}</span>
       </button>
       {open && (
         <div style={styles.nextStepsList}>
           {steps.map((s, i) => (
-            <div key={i}>
-              <div style={styles.nextStep}>
+            s.isDivider ? (
+              <div key={i} style={styles.nextStepDivider}>
+                <div style={styles.nextStepDividerLine} />
+                <span style={styles.nextStepDividerText}>{s.title}</span>
+                <div style={styles.nextStepDividerLine} />
+              </div>
+            ) : (
+              <div key={i} style={styles.nextStep}>
                 <div style={styles.nextStepHeader}>
-                  <div style={styles.nextStepN}>{s.n}</div>
-                  <div style={styles.nextStepTitle}>{s.title}</div>
+                  <span style={styles.nextStepN}>{s.n}</span>
+                  <span style={styles.nextStepTitle}>{s.title}</span>
                 </div>
-                <div style={styles.nextStepDesc}>{s.desc}</div>
+                <p style={styles.nextStepDesc}>{s.desc}</p>
                 {s.link && (
                   <a href={s.link} target="_blank" rel="noopener noreferrer" style={styles.nextStepLink}>
                     {s.linkLabel}
                   </a>
                 )}
               </div>
-            </div>
+            )
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+
+function Playground({ code, progLang, t }) {
+  const [output, setOutput] = useState("");
+  const [running, setRunning] = useState(false);
+  const [error, setError] = useState(false);
+
+  const langId = JUDGE0_LANGS[progLang];
+
+  const addAutoTest = (code, lang) => {
+    // Detect function type from code content
+    const codeL = code.toLowerCase();
+    
+    const isListSort = codeL.includes("sort") || codeL.includes("orden") || codeL.includes("lista") || codeL.includes("list");
+    const isPalindrome = codeL.includes("palin") || codeL.includes("reverse") || codeL.includes("invert") || codeL.includes("revert");
+    const isTemp = codeL.includes("celsius") || codeL.includes("fahrenheit") || codeL.includes("temp") || codeL.includes("grado");
+    const isCalc = codeL.includes("calculadora") || codeL.includes("calculator") || codeL.includes("suma") || codeL.includes("resta") || (codeL.includes("suma") && codeL.includes("mult"));
+    const isFactorial = codeL.includes("factorial");
+    const isFibonacci = codeL.includes("fibonacci") || codeL.includes("fib");
+    const isEven = codeL.includes("par") || codeL.includes("even") || codeL.includes("impar") || codeL.includes("odd");
+    const isMax = codeL.includes("mayor") || codeL.includes("maximo") || codeL.includes("max") || codeL.includes("minimo") || codeL.includes("min");
+    const isCount = codeL.includes("contar") || codeL.includes("count") || codeL.includes("veces") || codeL.includes("cuantas");
+    const isAvg = codeL.includes("promedio") || codeL.includes("average") || codeL.includes("media");
+    const isPower = codeL.includes("potencia") || codeL.includes("power") || codeL.includes("pow");
+
+    const getTestArgs = (funcName, paramCount) => {
+      if (isListSort) return ['["Ana", "Carlos", "Beatriz", "David"]', '["Zara", "María", "Luis"]'];
+      if (isPalindrome) return ['"radar"', '"hola"', '"ana"'];
+      if (isTemp) return ['100', '0', '37'];
+      if (isCalc && paramCount >= 2) return ['10, 5', '20, 4', '15, 3'];
+      if (isFactorial) return ['5', '0', '7'];
+      if (isFibonacci) return ['10', '5', '8'];
+      if (isEven) return ['[1,2,3,4,5,6]', '[10,15,20,25]'];
+      if (isMax) return ['[3,1,4,1,5,9,2,6]', '[10,20,5,15]'];
+      if (isCount) return ['"programacion", "a"', '"hola mundo", "o"'];
+      if (isAvg) return ['[10, 20, 30, 40, 50]', '[5, 15, 25]'];
+      if (isPower) return ['2, 10', '3, 4'];
+      return paramCount === 1 ? ['"test"', '"hola"'] : paramCount === 2 ? ['5, 3', '10, 2'] : ['"test"'];
+    };
+
+    if (lang === "python") {
+      const match = code.match(/def\s+(\w+)\s*\(([^)]*)\)/);
+      if (match && !code.includes("print(")) {
+        const funcName = match[1];
+        const params = match[2].split(",").filter(p => p.trim());
+        const args = getTestArgs(funcName, params.length);
+        let testCode = `\n\n# --- Test automático de CodeLearn ---`;
+        args.forEach((a, i) => {
+          testCode += `\nprint("Resultado ${i+1}:", ${funcName}(${a}))`;
+        });
+        return code + testCode;
+      }
+    }
+
+    if (lang === "javascript") {
+      const match = code.match(/function\s+(\w+)\s*\(([^)]*)\)|const\s+(\w+)\s*=.*?(?:function|=>)/);
+      if (match && !code.includes("console.log")) {
+        const funcName = match[1] || match[3];
+        const params = (match[2] || "").split(",").filter(p => p.trim());
+        const args = getTestArgs(funcName, params.length);
+        let testCode = `\n\n// --- Test automático de CodeLearn ---`;
+        args.forEach((a, i) => {
+          testCode += `\nconsole.log("Resultado ${i+1}:", ${funcName}(${a}));`;
+        });
+        return code + testCode;
+      }
+    }
+
+    if (lang === "java" && !code.includes("System.out.print") && !code.includes("public static void main")) {
+      const match = code.match(/public\s+static\s+\w+\s+(\w+)\s*\(([^)]*)\)/);
+      if (match) {
+        const funcName = match[1];
+        const params = (match[2] || "").split(",").filter(p => p.trim());
+        const args = getTestArgs(funcName, params.length);
+        const mainCode = args.map((a, i) => 
+          `        System.out.println("Resultado ${i+1}: " + ${funcName}(${a}));`
+        ).join("\n");
+        return code.replace(/}\s*$/, 
+          `\n    public static void main(String[] args) {\n${mainCode}\n    }\n}`
+        );
+      }
+    }
+
+    if (lang === "go" && !code.includes("fmt.Print") && !code.includes("func main")) {
+      const match = code.match(/func\s+(\w+)\s*\(([^)]*)\)/);
+      if (match && match[1] !== "main") {
+        const funcName = match[1];
+        const params = (match[2] || "").split(",").filter(p => p.trim());
+        const args = getTestArgs(funcName, params.length);
+        let mainCode = args.map((a, i) => 
+          `\tfmt.Println("Resultado ${i+1}:", ${funcName}(${a}))`
+        ).join("\n");
+        return code + `\n\nfunc main() {\n${mainCode}\n}`;
+      }
+    }
+
+    if (lang === "rust" && !code.includes("println!") && !code.includes("fn main")) {
+      const match = code.match(/fn\s+(\w+)\s*\(([^)]*)\)/);
+      if (match && match[1] !== "main") {
+        const funcName = match[1];
+        const params = (match[2] || "").split(",").filter(p => p.trim());
+        const args = getTestArgs(funcName, params.length);
+        let mainCode = args.map((a, i) => 
+          `    println!("Resultado ${i+1}: {:?}", ${funcName}(${a}));`
+        ).join("\n");
+        return code + `\n\nfn main() {\n${mainCode}\n}`;
+      }
+    }
+
+    return code;
+  };
+
+  const runCode = async () => {
+    if (!langId) return;
+    setRunning(true);
+    setOutput("");
+    setError(false);
+    const execCode = addAutoTest(code, progLang);
+    try {
+      const submitRes = await fetch("https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true&fields=stdout,stderr,compile_output,status", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-RapidAPI-Key": import.meta.env.VITE_JUDGE0_KEY,
+          "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
+        },
+        body: JSON.stringify({
+          language_id: langId,
+          source_code: execCode,
+        }),
+      });
+      const data = await submitRes.json();
+      const stdout = data.stdout || "";
+      const stderr = data.stderr || data.compile_output || "";
+      const out = stdout || stderr || "";
+      const isErr = !!stderr && !stdout;
+      setOutput(out || "✅ Código ejecutado sin salida\n(el código no tiene print/console.log)");
+      setError(isErr);
+    } catch (e) {
+      setOutput(t.outputError || "Error al ejecutar");
+      setError(true);
+    } finally {
+      setRunning(false);
+    }
+  };
+
+    if (!langId) return null;
+
+  return (
+    <div style={styles.playgroundWrap}>
+      <div style={styles.playgroundHeader}>
+        <span style={styles.playgroundTitle}>{t.outputTitle || "📤 Resultado"}</span>
+        <button
+          onClick={runCode}
+          disabled={running}
+          style={{ ...styles.runBtn, ...(running ? styles.generateBtnDisabled : {}) }}
+        >
+          {running ? (t.running || "⏳ Ejecutando...") : (t.runBtn || "▶️ Ejecutar código")}
+        </button>
+      </div>
+      <div style={{
+        ...styles.playgroundOutput,
+        color: error ? "#f08080" : "#c8c2ff",
+        fontStyle: output ? "normal" : "italic",
+      }}>
+        {output || (t.outputEmpty || "El código se ejecutará acá")}
+      </div>
     </div>
   );
 }
@@ -688,6 +851,7 @@ function LangSwitcher({ uiLang, setUiLang, t }) {
   );
 }
 
+
 function HistoryPanel({ history, setHistory, onSelect, setProgLang, t, onClose }) {
   const deleteEntry = (id) => {
     const updated = history.filter(h => h.id !== id);
@@ -735,31 +899,42 @@ function AuthModal({ t, onClose }) {
   const [isRegister, setIsRegister] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState("");
 
-  const handleAuth = async () => {
-    setError(""); setSuccess(false);
-    if (!email || !password) { setError("Completa todos los campos"); return; }
+  const [isForgot, setIsForgot] = useState(false);
+
+  const handleSubmit = async () => {
+    setLoading(true); setError(""); setSuccess("");
     try {
-      const res = isRegister
-        ? await supabase.auth.signUp({ email, password })
-        : await supabase.auth.signInWithPassword({ email, password });
-      if (res.error) setError(res.error.message);
-      else {
-        setSuccess(true);
-        setTimeout(() => onClose(), 1500);
+      if (isForgot) {
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: "https://codelearn.codes",
+        });
+        if (error) throw error;
+        setSuccess(t.resetSent || "¡Email enviado! Revisá tu bandeja de entrada.");
+      } else if (isRegister) {
+        const { error } = await supabase.auth.signUp({ email, password });
+        if (error) throw error;
+        setSuccess("¡Cuenta creada! Revisá tu email para confirmar.");
+      } else {
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        onClose();
       }
     } catch (e) {
-      setError("Error de conexión");
+      setError(e.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div style={styles.modalOverlay} onClick={onClose}>
-      <div style={styles.modal} onClick={e => e.stopPropagation()}>
+    <div style={styles.modalOverlay}>
+      <div style={styles.modal}>
         <div style={styles.modalHeader}>
-          <div style={styles.modalTitle}>👤 {t.loginTitle}</div>
+          <div style={styles.modalTitle}>{isForgot ? (t.resetPassword || "Resetear contraseña") : isRegister ? t.registerBtn : t.loginTitle}</div>
           <button onClick={onClose} style={styles.modalClose}>✕</button>
         </div>
         <div style={{ padding: "20px" }}>
@@ -770,25 +945,35 @@ function AuthModal({ t, onClose }) {
             onChange={e => setEmail(e.target.value)}
             style={styles.authInput}
           />
-          <input
-            type="password"
-            placeholder={t.loginPassword}
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            style={{ ...styles.authInput, marginTop: 10 }}
-            onKeyDown={e => { if (e.key === "Enter") handleAuth(); }}
-          />
+          {!isForgot && (
+            <input
+              type="password"
+              placeholder={t.loginPassword}
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              style={{ ...styles.authInput, marginTop: 10 }}
+              onKeyDown={e => { if (e.key === "Enter") handleSubmit(); }}
+            />
+          )}
           {error && <div style={styles.authError}>{error}</div>}
-          {success && <div style={styles.authSuccess}>✅ ¡Listo!</div>}
-          <button onClick={handleAuth} style={{ ...styles.generateBtn, width: "100%", marginTop: 16 }}>
-            {isRegister ? t.registerBtn : t.loginBtn}
-          </button>
+          {success && <div style={styles.authSuccess}>{success}</div>}
           <button
-            onClick={() => { setIsRegister(!isRegister); setError(""); }}
-            style={styles.switchBtn}
+            onClick={handleSubmit}
+            disabled={loading}
+            style={{ ...styles.generateBtn, width: "100%", marginTop: 16 }}
           >
-            {isRegister ? t.switchToLogin : t.switchToRegister}
+            {loading ? "..." : (isRegister ? t.registerBtn : t.loginBtn)}
           </button>
+          {!isForgot && (
+            <button onClick={() => setIsRegister(r => !r)} style={styles.switchBtn}>
+              {isRegister ? t.switchToLogin : t.switchToRegister}
+            </button>
+          )}
+          {!isRegister && (
+            <button onClick={() => { setIsForgot(f => !f); setError(""); setSuccess(""); }} style={{ ...styles.switchBtn, color: "#4e4b62", marginTop: 4 }}>
+              {isForgot ? (t.switchToLogin || "Volver al login") : (t.forgotPassword || "¿Olvidaste tu contraseña?")}
+            </button>
+          )}
         </div>
       </div>
     </div>
@@ -796,26 +981,26 @@ function AuthModal({ t, onClose }) {
 }
 
 export default function App() {
+  const [uiLang, setUiLang]     = useState("es");
   const [progLang, setProgLang] = useState("python");
-  const [input, setInput] = useState("");
-  const [result, setResult] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [uiLang, setUiLang] = useState("es");
-  const [user, setUser] = useState(null);
+  const [input, setInput]       = useState("");
+  const [result, setResult]     = useState(null);
+  const [loading, setLoading]   = useState(false);
+  const [error, setError]       = useState(null);
+  const [user, setUser]         = useState(null);
+  const [userPlan, setUserPlan] = useState("free");
+  const [dailyCount, setDailyCount] = useState(0);
   const [showAuth, setShowAuth] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
+  const [showResetForm, setShowResetForm] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [resetDone, setResetDone] = useState(false);
+  const [resetError, setResetError] = useState("");
   const [history, setHistory] = useState(() => {
     try { return JSON.parse(localStorage.getItem("cl_history") || "[]"); } catch { return []; }
   });
-  const [userPlan, setUserPlan] = useState("free");
-  const [dailyCount, setDailyCount] = useState(0);
-  const [showResetForm, setShowResetForm] = useState(false);
-  const [newPassword, setNewPassword] = useState("");
-  const [resetError, setResetError] = useState("");
-  const [resetDone, setResetDone] = useState(false);
-  const outputRef = useRef(null);
-  const isLandscape = useOrientation();
+  const outputRef               = useRef(null);
+  const isLandscape             = useOrientation();
 
   const t = UI_LANGS[uiLang];
   const selectedProgLang = PROG_LANGS.find(l => l.id === progLang);
@@ -838,15 +1023,16 @@ export default function App() {
     return () => subscription.unsubscribe();
   }, []);
 
-  // Load Paddle
+// Load Paddle
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://cdn.paddle.com/paddle/v2/paddle.js";
     script.onload = () => {
-      window.Paddle.Initialize({ token: "live_816261a82bc71161cd2de30da5b" });
+      window.Paddle.Initialize({ token: PADDLE_CLIENT_TOKEN });
     };
     document.head.appendChild(script);
   }, []);
+   
 
   const loadUserData = async (u) => {
     const today = new Date().toISOString().split("T")[0];
@@ -925,7 +1111,7 @@ export default function App() {
     setLoading(true); setResult(null); setError(null);
     const prompt = `The user wants to learn ${selectedProgLang.label}. UI language is ${UI_LANGS[uiLang].label}, write ALL explanations in ${UI_LANGS[uiLang].label}.
 They described: "${input}"
-IMPORTANT: The generated code MUST always include a working example call with test data and print/console.log/System.out.println (or the equivalent output function for the language) so the result is visible when executed.
+IMPORTANT: The generated code MUST always include a working example call with test data and print/console.log/System.out.println (or the equivalent output function for the language) so the result is visible when executed. The code must be runnable as-is.
 Respond ONLY in this JSON (no backticks):
 {"code":"...","explanation":"... use ## for section titles and - for bullet points"}`;
     try {
@@ -993,9 +1179,9 @@ Respond ONLY in this JSON (no backticks):
             <span style={styles.hint}>{t.ctrlHint}</span>
           </div>
         )}
-       {!input && (
-  <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} />
-)}
+        {!input && !landscape && (
+          <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} />
+        )}
       </div>
 
       {/* Free limit bar */}
@@ -1026,6 +1212,7 @@ Respond ONLY in this JSON (no backticks):
       )}
 
       {error && <div style={{ ...styles.error, marginTop: 10 }}>{error}</div>}
+      {result && isLandscape && <Playground code={result.code} progLang={progLang} t={t} />}
     </div>
   );
 
@@ -1035,7 +1222,7 @@ Respond ONLY in this JSON (no backticks):
         onClick={() => { setResult(null); setInput(""); setError(null); window.scrollTo({ top: 0, behavior: "smooth" }); }}
         style={styles.newQueryBtn}
       >
-        {t.newQuery}
+        {t.newQuery || "🔄 Nueva consulta"}
       </button>
       <div style={styles.card}>
         <div style={styles.cardHeader}>
@@ -1049,6 +1236,7 @@ Respond ONLY in this JSON (no backticks):
           <code>{result.code}</code>
         </pre>
       </div>
+      {!isLandscape && <Playground code={result.code} progLang={progLang} t={t} />}
       <div style={styles.card}>
         <div style={styles.cardHeader}>
           <div style={styles.cardTitle}>📖 {t.explainTitle}</div>
@@ -1155,13 +1343,13 @@ Respond ONLY in this JSON (no backticks):
         <footer style={styles.footer}>
           <div>{t.footer}</div>
           <div style={styles.footerLinks}>
-            <a href="/legal.html" target="_blank" style={styles.footerLink}>{t.footerTerms}</a>
+            <a href="/legal.html" target="_blank" style={styles.footerLink}>{t.footerTerms || "Términos"}</a>
             <span style={{ color: "#2a2440" }}>·</span>
-            <a href="/legal.html#privacy" target="_blank" style={styles.footerLink}>{t.footerPrivacy}</a>
+            <a href="/legal.html#privacy" target="_blank" style={styles.footerLink}>{t.footerPrivacy || "Privacidad"}</a>
             <span style={{ color: "#2a2440" }}>·</span>
-            <a href="/legal.html#refund" target="_blank" style={styles.footerLink}>{t.footerRefund}</a>
+            <a href="/legal.html#refund" target="_blank" style={styles.footerLink}>{t.footerRefund || "Reembolsos"}</a>
             <span style={{ color: "#2a2440" }}>·</span>
-            <a href="mailto:codelearn.app@gmail.com" style={styles.footerLink}>{t.footerContact}</a>
+            <a href="mailto:codelearn.app@gmail.com" style={styles.footerLink}>{t.footerContact || "Contacto"}</a>
           </div>
         </footer>
       )}
@@ -1269,5 +1457,13 @@ const styles = {
   nextStepTitle: { fontSize: 11, fontWeight: 700, color: "#7c6af7", textTransform: "uppercase", letterSpacing: 0.8 },
   nextStepDesc: { fontSize: 13, color: "#b0accc", lineHeight: 1.65, marginBottom: 6 },
   nextStepLink: { display: "inline-block", marginTop: 6, padding: "6px 14px", background: "linear-gradient(135deg, #7c6af7 0%, #5b4de0 100%)", borderRadius: 6, color: "#fff", fontSize: 12, fontWeight: 600, textDecoration: "none" },
+  nextStepDivider: { display: "flex", alignItems: "center", gap: 10, padding: "16px 16px 8px" },
+  nextStepDividerLine: { flex: 1, height: 1, background: "#2a2440" },
+  nextStepDividerText: { fontSize: 10, fontWeight: 700, color: "#7c6af7", textTransform: "uppercase", letterSpacing: 1, whiteSpace: "nowrap" },
   newQueryBtn: { padding: "10px 20px", background: "#1e1a35", border: "1px solid #3a3060", borderRadius: 8, color: "#9691b8", fontSize: 13, fontWeight: 600, cursor: "pointer", textAlign: "center", width: "100%" },
+  playgroundWrap: { background: "#13111c", border: "1px solid #2a2440", borderRadius: 10, overflow: "hidden" },
+  playgroundHeader: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px", borderBottom: "1px solid #1e1c2a", background: "#0f0d18" },
+  playgroundTitle: { fontSize: 13, fontWeight: 600, color: "#c4beff" },
+  runBtn: { padding: "7px 16px", background: "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)", border: "none", borderRadius: 7, color: "#fff", fontSize: 12, fontWeight: 600, cursor: "pointer" },
+  playgroundOutput: { padding: "16px", fontFamily: "'IBM Plex Mono', monospace", fontSize: 12, lineHeight: 1.7, minHeight: 80, whiteSpace: "pre-wrap", wordBreak: "break-word" },
 };
