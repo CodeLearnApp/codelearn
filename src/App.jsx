@@ -753,7 +753,7 @@ function Playground({ code, progLang, t }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-RapidAPI-Key": "aa9a7a7accmsh39132af9c72c381p14190ejsnbbce65ce268d",
+          "X-RapidAPI-Key": import.meta.env.VITE_JUDGE0_KEY,
           "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
         },
         body: JSON.stringify({
