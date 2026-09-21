@@ -412,17 +412,17 @@ const NEXT_STEPS = {
 };
 
 
-const GLOT_LANGS = {
-  python:     "python",
-  javascript: "javascript",
-  typescript: "javascript",
-  rust:       "rust",
-  go:         "go",
-  java:       "java",
-  kotlin:     "kotlin",
-  swift:      "swift",
-  c:          "c",
-  cpp:        "cpp",
+const JUDGE0_LANGS = {
+  python:     71,
+  javascript: 63,
+  typescript: 74,
+  rust:       73,
+  go:         60,
+  java:       62,
+  kotlin:     78,
+  swift:      83,
+  c:          50,
+  cpp:        54,
 };
 
 const PROG_LANGS = [
@@ -637,26 +637,26 @@ function Playground({ code, progLang, t }) {
   const [running, setRunning] = useState(false);
   const [error, setError] = useState(false);
 
-  const glotLang = GLOT_LANGS[progLang];
+  const langId = JUDGE0_LANGS[progLang];
 
   const runCode = async () => {
-    if (!glotLang) return;
+    if (!langId) return;
     setRunning(true);
     setOutput("");
     setError(false);
     try {
-      const res = await fetch(`https://glot.io/api/run/${glotLang}/latest`, {
+      // Submit code
+      const submitRes = await fetch("https://ce.judge0.com/submissions?base64_encoded=false&wait=true", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          files: [{ name: "main", content: code }],
+          language_id: langId,
+          source_code: code,
         }),
       });
-      const data = await res.json();
+      const data = await submitRes.json();
       const stdout = data.stdout || "";
-      const stderr = data.stderr || "";
+      const stderr = data.stderr || data.compile_output || "";
       const out = stdout || stderr || "";
       const isErr = !!stderr && !stdout;
       setOutput(out || "✅ Código ejecutado sin salida\n(el código no tiene print/console.log)");
@@ -669,7 +669,7 @@ function Playground({ code, progLang, t }) {
     }
   };
 
-    if (!glotLang) return null;
+    if (!langId) return null;
 
   return (
     <div style={styles.playgroundWrap}>
@@ -1072,9 +1072,9 @@ Respond ONLY in this JSON (no backticks):
             <span style={styles.hint}>{t.ctrlHint}</span>
           </div>
         )}
-        {!input && (
-  <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} />
-)}
+        {!input && !landscape && (
+          <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} />
+        )}
       </div>
 
       {/* Free limit bar */}
