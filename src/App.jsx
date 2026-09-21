@@ -1082,9 +1082,24 @@ export default function App() {
     if (limitReached) return;
 
     setLoading(true); setResult(null); setError(null);
-    const prompt = `The user wants to learn ${selectedProgLang.label}. UI language is ${UI_LANGS[uiLang].label}, write ALL explanations in ${UI_LANGS[uiLang].label}.
+   const prompt = `The user wants to learn ${selectedProgLang.label}. UI language is ${UI_LANGS[uiLang].label}, write ALL explanations in ${UI_LANGS[uiLang].label}.
 They described: "${input}"
-IMPORTANT: The generated code MUST always include a working example call with test data and print/console.log/System.out.println (or the equivalent output function for the language) so the result is visible when executed. The code must be runnable as-is.
+
+CRITICAL: You MUST follow these rules for the code:
+1. Write the complete function/program
+2. After the function, ALWAYS add 3 example calls with REAL appropriate test data
+3. ALWAYS use print() for Python, console.log() for JavaScript, System.out.println() for Java, fmt.Println() for Go, println!() for Rust, or equivalent
+4. The code MUST produce visible output when run - NO EXCEPTIONS
+5. Use realistic test data that matches the function purpose (lists for sorting, strings for text functions, numbers for math, etc.)
+
+Example for Python palindrome:
+def es_palindromo(palabra):
+    return palabra == palabra[::-1]
+
+print("radar:", es_palindromo("radar"))
+print("hola:", es_palindromo("hola"))  
+print("ana:", es_palindromo("ana"))
+
 Respond ONLY in this JSON (no backticks):
 {"code":"...","explanation":"... use ## for section titles and - for bullet points"}`;
     try {
