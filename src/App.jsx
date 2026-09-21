@@ -128,8 +128,13 @@ const SUGGESTED_PROMPTS = [
   { text: "Quiero una función que ordene una lista de nombres alfabéticamente", lang: "python", icon: "🐍" },
   { text: "Quiero una calculadora que sume, reste, multiplique y divida", lang: "javascript", icon: "🟨" },
   { text: "Quiero una función que verifique si una palabra es palíndromo", lang: "python", icon: "🐍" },
-  { text: "Quiero un programa que convierta grados Celsius a Fahrenheit", lang: "python", icon: "🐍" },
-  { text: "Quiero una función que calcule el factorial de un número", lang: "javascript", icon: "🟨" },
+  { text: "Quiero una función que cuente cuántas veces aparece una letra en un texto", lang: "typescript", icon: "🔷" },
+  { text: "Quiero un programa que convierta grados Celsius a Fahrenheit", lang: "go", icon: "🐹" },
+  { text: "Quiero una clase con atributos y métodos básicos", lang: "java", icon: "☕" },
+  { text: "Quiero una función que calcule el factorial de un número", lang: "kotlin", icon: "🎯" },
+  { text: "Quiero una función que encuentre el número mayor de una lista", lang: "swift", icon: "🍎" },
+  { text: "Quiero una función que invierta una cadena de texto", lang: "rust", icon: "🦀" },
+  { text: "Quiero una función que calcule la secuencia de Fibonacci", lang: "cpp", icon: "➕" },
 ];
 
 const NEXT_STEPS = {
