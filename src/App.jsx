@@ -1007,7 +1007,11 @@ export default function App() {
     setLoading(true); setResult(null); setError(null);
     const prompt = `The user wants to learn ${selectedProgLang.label}. UI language is ${UI_LANGS[uiLang].label}, write ALL explanations in ${UI_LANGS[uiLang].label}.
 They described: "${input}"
-IMPORTANT: The generated code MUST always include a working example call with test data and print/console.log/System.out.println (or the equivalent output function for the language) so the result is visible when executed. The code must be runnable as-is.
+CRITICAL REQUIREMENT: The code MUST be 100% executable and show output. You MUST:
+1. Define the function
+2. Call the function with real test data (at least 2-3 examples)
+3. Print/display every result using print() for Python, console.log() for JavaScript, System.out.println() for Java, println!() for Rust, fmt.Println() for Go, or the equivalent for the language
+The code MUST produce visible output when executed. Never return a function without calling it and printing the result.
 Respond ONLY in this JSON (no backticks):
 {"code":"...","explanation":"... use ## for section titles and - for bullet points"}`;
     try {
