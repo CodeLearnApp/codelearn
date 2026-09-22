@@ -9,10 +9,6 @@ const FREE_DAILY_LIMIT = 5;
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// Las llamadas a Claude y a Judge0 ahora pasan por Supabase Edge Functions,
-// así las API keys quedan en el servidor y nunca en el bundle del navegador.
-const FUNCTIONS_URL = `${SUPABASE_URL}/functions/v1`;
-
 const UI_LANGS = {
   es: {
     flag: "🇪🇸", label: "Español",
@@ -753,18 +749,12 @@ function Playground({ code, progLang, t }) {
     setError(false);
     const execCode = addAutoTest(code, progLang);
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        setOutput(t.outputError || "Error al ejecutar");
-        setError(true);
-        setRunning(false);
-        return;
-      }
-      const submitRes = await fetch(`${FUNCTIONS_URL}/run-code`, {
+      const submitRes = await fetch("https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true&fields=stdout,stderr,compile_output,status", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${session.access_token}`,
+          "X-RapidAPI-Key": import.meta.env.VITE_JUDGE0_KEY,
+          "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
         },
         body: JSON.stringify({
           language_id: langId,
@@ -990,204 +980,6 @@ function AuthModal({ t, onClose }) {
   );
 }
 
-// Componente para generar apps completas (Backend + Frontend)
-function FullStackGenerator({ user, isPremium, userPlan, dailyCount, FREE_DAILY_LIMIT, FUNCTIONS_URL, supabase, t, uiLang, setShowAuth }) {
-  const [activeTab, setActiveTab] = useState("backend"); // "backend", "frontend", "integration"
-  const [appDescription, setAppDescription] = useState("");
-  const [generatedCode, setGeneratedCode] = useState(null);
-  const [selectedTemplate, setSelectedTemplate] = useState("minimalist");
-  const [primaryColor, setPrimaryColor] = useState("#7c6af7");
-  const [generating, setGenerating] = useState(false);
-  const [fullstackHistory, setFullstackHistory] = useState(() => {
-    try { return JSON.parse(localStorage.getItem("cl_fullstack_history") || "[]"); } catch { return []; }
-  });
-
-  const generateFullStack = async () => {
-    if (!appDescription.trim()) return;
-    if (!user) { setShowAuth(true); return; }
-
-    setGenerating(true);
-    const limitReached = !isPremium && userPlan === "free" && dailyCount >= FREE_DAILY_LIMIT;
-    if (limitReached) { setGenerating(false); return; }
-
-    try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) { setShowAuth(true); setGenerating(false); return; }
-
-      const prompt = `Crea una aplicación completa Full-Stack basada en: "${appDescription}"
-
-      Responde SOLO en este JSON (sin backticks):
-      {
-        "backend": {
-          "code": "// código Node.js/Express con rutas REST...",
-          "explanation": "Explicación del backend..."
-        },
-        "frontend": {
-          "code": "<!-- HTML vanilla -->...",
-          "explanation": "Explicación del frontend..."
-        },
-        "steps": ["Paso 1...", "Paso 2...", "Paso 3..."]
-      }`;
-
-      const res = await fetch(`${FUNCTIONS_URL}/generate-code`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${session.access_token}`,
-        },
-        body: JSON.stringify({ prompt }),
-      });
-
-      const data = await res.json();
-      if (data.content && data.content[0]) {
-        const responseText = data.content[0].text;
-        const jsonMatch = responseText.match(/\{[\s\S]*\}/);
-        if (jsonMatch) {
-          const parsed = JSON.parse(jsonMatch[0]);
-          setGeneratedCode(parsed);
-
-          // Guardar en historial
-          const newEntry = {
-            id: Date.now(),
-            description: appDescription,
-            code: parsed,
-            timestamp: new Date().toLocaleString(),
-          };
-          const updated = [newEntry, ...fullstackHistory].slice(0, 50);
-          setFullstackHistory(updated);
-          localStorage.setItem("cl_fullstack_history", JSON.stringify(updated));
-        }
-      }
-    } catch (e) {
-      console.error("Error:", e);
-    } finally {
-      setGenerating(false);
-    }
-  };
-
-  return (
-    <div style={{ display: "grid", gridTemplateColumns: "280px 1fr", gap: 20, minHeight: "80vh" }}>
-      {/* PANEL IZQUIERDO */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-
-        {/* A) BACKEND */}
-        <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 16 }}>
-          <div style={{ fontSize: 13, fontWeight: 600, color: "#7c6af7", marginBottom: 12 }}>A) Backend</div>
-          <div style={{ fontSize: 12, color: "#9691b8", lineHeight: 1.6 }}>
-            <div>• Estructura RESTful</div>
-            <div>• Rutas y métodos HTTP</div>
-            <div>• Conexión Supabase</div>
-            <div>• Validaciones y errores</div>
-          </div>
-        </div>
-
-        {/* B) FRONTEND */}
-        <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 16 }}>
-          <div style={{ fontSize: 13, fontWeight: 600, color: "#7c6af7", marginBottom: 12 }}>B) Frontend</div>
-          <div style={{ fontSize: 12, color: "#9691b8", marginBottom: 12 }}>
-            <div style={{ marginBottom: 8 }}>Template:</div>
-            <select value={selectedTemplate} onChange={(e) => setSelectedTemplate(e.target.value)} style={{ width: "100%", padding: 6, background: "#2a2440", border: "1px solid #3a3855", borderRadius: 6, color: "#fff", fontSize: 11 }}>
-              <option value="minimalist">Minimalista</option>
-              <option value="modern">Moderno</option>
-              <option value="colorful">Colorido</option>
-            </select>
-          </div>
-          <div style={{ fontSize: 12, color: "#9691b8", marginBottom: 8 }}>
-            <div style={{ marginBottom: 6 }}>Color primario:</div>
-            <input type="color" value={primaryColor} onChange={(e) => setPrimaryColor(e.target.value)} style={{ width: "100%", height: 32, border: "1px solid #3a3855", borderRadius: 6, cursor: "pointer" }} />
-          </div>
-        </div>
-
-        {/* C) INTEGRACIÓN */}
-        <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 16 }}>
-          <div style={{ fontSize: 13, fontWeight: 600, color: "#7c6af7", marginBottom: 12 }}>C) Guía</div>
-          <div style={{ fontSize: 12, color: "#9691b8", lineHeight: 1.6 }}>
-            <div>✓ Deploy a Vercel</div>
-            <div>✓ Conectar APIs</div>
-            <div>✓ Variables de entorno</div>
-            <div>✓ Testing local</div>
-          </div>
-        </div>
-
-        {/* PROMPTS SUGERIDOS */}
-        <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 12 }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: "#7c6af7", marginBottom: 8 }}>💡 Ejemplos</div>
-          {["Sistema de login", "TODO list", "Chat en vivo"].map((ex) => (
-            <button key={ex} onClick={() => setAppDescription(ex)} style={{ display: "block", width: "100%", padding: "6px 8px", background: "transparent", border: "1px solid #2a2440", borderRadius: 4, color: "#9691b8", fontSize: 10, marginBottom: 4, cursor: "pointer", textAlign: "left" }}>{ex}</button>
-          ))}
-        </div>
-
-        {/* HISTORIAL */}
-        {fullstackHistory.length > 0 && (
-          <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 12 }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: "#7c6af7", marginBottom: 8 }}>📜 Historial</div>
-            <div style={{ maxHeight: 200, overflowY: "auto" }}>
-              {fullstackHistory.slice(0, 5).map((item) => (
-                <button key={item.id} onClick={() => { setAppDescription(item.description); setGeneratedCode(item.code); }} style={{ display: "block", width: "100%", padding: "6px 8px", background: "transparent", border: "1px solid #2a2440", borderRadius: 4, color: "#9691b8", fontSize: 10, marginBottom: 4, cursor: "pointer", textAlign: "left", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={item.description}>{item.description}</button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* NUEVA CONSULTA */}
-        <button onClick={() => { setAppDescription(""); setGeneratedCode(null); }} style={{ padding: "8px 12px", background: "#7c6af7", border: "none", borderRadius: 6, color: "#fff", fontSize: 12, fontWeight: 600, cursor: "pointer", width: "100%" }}>+ Nueva App</button>
-      </div>
-
-      {/* PANEL DERECHO */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-
-        {/* INPUT */}
-        <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 16 }}>
-          <label style={{ fontSize: 12, fontWeight: 600, color: "#9691b8", display: "block", marginBottom: 8 }}>¿Qué app quieres crear?</label>
-          <textarea value={appDescription} onChange={(e) => setAppDescription(e.target.value)} placeholder="Ej: Sistema de notas con login" style={{ width: "100%", padding: 12, background: "#2a2440", border: "1px solid #3a3855", borderRadius: 6, color: "#fff", fontSize: 13, minHeight: 80, fontFamily: "inherit", resize: "none" }} />
-          <button onClick={generateFullStack} disabled={generating || !appDescription.trim()} style={{ marginTop: 12, width: "100%", padding: "10px 16px", background: generating ? "#4e4b62" : "#7c6af7", border: "none", borderRadius: 6, color: "#fff", fontSize: 12, fontWeight: 600, cursor: generating ? "wait" : "pointer" }}>
-            {generating ? "⏳ Generando..." : "🚀 Generar App"}
-          </button>
-        </div>
-
-        {/* CÓDIGO GENERADO */}
-        {generatedCode && (
-          <>
-            <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 16 }}>
-              <div style={{ fontSize: 13, fontWeight: 600, color: "#7c6af7", marginBottom: 12 }}>📋 Código</div>
-              <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
-                <button onClick={() => setActiveTab("backend")} style={{ flex: 1, padding: "8px", background: activeTab === "backend" ? "#7c6af7" : "#2a2440", border: "none", borderRadius: 4, color: "#fff", fontSize: 11, fontWeight: 600, cursor: "pointer" }}>Backend</button>
-                <button onClick={() => setActiveTab("frontend")} style={{ flex: 1, padding: "8px", background: activeTab === "frontend" ? "#7c6af7" : "#2a2440", border: "none", borderRadius: 4, color: "#fff", fontSize: 11, fontWeight: 600, cursor: "pointer" }}>Frontend</button>
-              </div>
-              <pre style={{ background: "#2a2440", padding: 12, borderRadius: 6, color: "#90ff90", fontSize: 11, overflow: "auto", maxHeight: 300 }}>
-                {activeTab === "backend" ? generatedCode.backend?.code : generatedCode.frontend?.code}
-              </pre>
-            </div>
-
-            {/* EXPLICACIÓN */}
-            <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 16 }}>
-              <div style={{ fontSize: 13, fontWeight: 600, color: "#7c6af7", marginBottom: 12 }}>💡 Explicación</div>
-              <div style={{ fontSize: 12, color: "#9691b8", lineHeight: 1.8 }}>
-                {activeTab === "backend" ? generatedCode.backend?.explanation : generatedCode.frontend?.explanation}
-              </div>
-            </div>
-
-            {/* GUÍA PASO A PASO */}
-            <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 16 }}>
-              <div style={{ fontSize: 13, fontWeight: 600, color: "#7c6af7", marginBottom: 12 }}>🚀 Qué hacer</div>
-              <ol style={{ fontSize: 12, color: "#9691b8", lineHeight: 2, paddingLeft: 20 }}>
-                {generatedCode.steps?.map((step, i) => <li key={i}>{step}</li>)}
-              </ol>
-            </div>
-          </>
-        )}
-
-        {/* ESTADO VACÍO */}
-        {!generatedCode && (
-          <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", color: "#4e4b62", fontSize: 14 }}>
-            Describe tu idea y presiona "Generar App"
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
 export default function App() {
   const [uiLang, setUiLang]     = useState("es");
   const [progLang, setProgLang] = useState("python");
@@ -1207,7 +999,6 @@ export default function App() {
   const [history, setHistory] = useState(() => {
     try { return JSON.parse(localStorage.getItem("cl_history") || "[]"); } catch { return []; }
   });
-  const [viewMode, setViewMode] = useState("simple"); // "simple" o "fullstack"
   const outputRef               = useRef(null);
   const isLandscape             = useOrientation();
 
@@ -1324,15 +1115,15 @@ IMPORTANT: The generated code MUST always include a working example call with te
 Respond ONLY in this JSON (no backticks):
 {"code":"...","explanation":"... use ## for section titles and - for bullet points"}`;
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) { setShowAuth(true); setLoading(false); return; }
-      const res = await fetch(`${FUNCTIONS_URL}/generate-code`, {
+      const res = await fetch("https://api.anthropic.com/v1/messages", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${session.access_token}`,
+          "x-api-key": import.meta.env.VITE_API_KEY,
+          "anthropic-version": "2023-06-01",
+          "anthropic-dangerous-direct-browser-access": "true",
         },
-        body: JSON.stringify({ prompt }),
+        body: JSON.stringify({ model: "claude-haiku-4-5-20251001", max_tokens: 1000, messages: [{ role: "user", content: prompt }] }),
       });
       const data = await res.json();
       const raw = data.content.map(b => b.text || "").join("");
@@ -1388,8 +1179,8 @@ Respond ONLY in this JSON (no backticks):
             <span style={styles.hint}>{t.ctrlHint}</span>
           </div>
         )}
-        {!input && (
-          <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} landscape={landscape} />
+        {!input && !landscape && (
+          <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} />
         )}
       </div>
 
@@ -1515,12 +1306,6 @@ Respond ONLY in this JSON (no backticks):
             {!isLandscape && <div><div style={styles.logoTitle}>CodeLearn</div><div style={styles.logoSub}>{t.tagline}</div></div>}
             {isLandscape && <div style={styles.logoTitle}>CodeLearn</div>}
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <div style={{ display: "flex", gap: 4, background: "#2a2440", padding: 4, borderRadius: 6 }}>
-              <button onClick={() => setViewMode("simple")} style={{ padding: "6px 12px", background: viewMode === "simple" ? "#7c6af7" : "transparent", border: "none", borderRadius: 4, color: "#fff", fontSize: 12, fontWeight: 600, cursor: "pointer", transition: "all 0.2s" }}>📝 Código</button>
-              <button onClick={() => setViewMode("fullstack")} style={{ padding: "6px 12px", background: viewMode === "fullstack" ? "#7c6af7" : "transparent", border: "none", borderRadius: 4, color: "#fff", fontSize: 12, fontWeight: 600, cursor: "pointer", transition: "all 0.2s" }}>🚀 App</button>
-            </div>
-          </div>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             {user ? (
               <>
@@ -1538,9 +1323,7 @@ Respond ONLY in this JSON (no backticks):
       </header>
 
       <main style={{ ...styles.main, padding: isLandscape ? "12px 16px" : "24px 20px" }}>
-        {viewMode === "fullstack" ? (
-          <FullStackGenerator user={user} isPremium={isPremium} userPlan={userPlan} dailyCount={dailyCount} FREE_DAILY_LIMIT={FREE_DAILY_LIMIT} FUNCTIONS_URL={FUNCTIONS_URL} supabase={supabase} t={t} uiLang={uiLang} setShowAuth={setShowAuth} />
-        ) : isLandscape ? (
+        {isLandscape ? (
           <div style={landscapeLayout}>
             <div>{renderInput(true)}</div>
             <div ref={outputRef}>{renderResult()}</div>
