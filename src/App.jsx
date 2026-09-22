@@ -1207,6 +1207,7 @@ export default function App() {
   const [history, setHistory] = useState(() => {
     try { return JSON.parse(localStorage.getItem("cl_history") || "[]"); } catch { return []; }
   });
+  const [viewMode, setViewMode] = useState("simple"); // "simple" o "fullstack"
   const outputRef               = useRef(null);
   const isLandscape             = useOrientation();
 
@@ -1514,6 +1515,12 @@ Respond ONLY in this JSON (no backticks):
             {!isLandscape && <div><div style={styles.logoTitle}>CodeLearn</div><div style={styles.logoSub}>{t.tagline}</div></div>}
             {isLandscape && <div style={styles.logoTitle}>CodeLearn</div>}
           </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <div style={{ display: "flex", gap: 4, background: "#2a2440", padding: 4, borderRadius: 6 }}>
+              <button onClick={() => setViewMode("simple")} style={{ padding: "6px 12px", background: viewMode === "simple" ? "#7c6af7" : "transparent", border: "none", borderRadius: 4, color: "#fff", fontSize: 12, fontWeight: 600, cursor: "pointer", transition: "all 0.2s" }}>📝 Código</button>
+              <button onClick={() => setViewMode("fullstack")} style={{ padding: "6px 12px", background: viewMode === "fullstack" ? "#7c6af7" : "transparent", border: "none", borderRadius: 4, color: "#fff", fontSize: 12, fontWeight: 600, cursor: "pointer", transition: "all 0.2s" }}>🚀 App</button>
+            </div>
+          </div>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             {user ? (
               <>
@@ -1531,7 +1538,9 @@ Respond ONLY in this JSON (no backticks):
       </header>
 
       <main style={{ ...styles.main, padding: isLandscape ? "12px 16px" : "24px 20px" }}>
-        {isLandscape ? (
+        {viewMode === "fullstack" ? (
+          <FullStackGenerator user={user} isPremium={isPremium} userPlan={userPlan} dailyCount={dailyCount} FREE_DAILY_LIMIT={FREE_DAILY_LIMIT} FUNCTIONS_URL={FUNCTIONS_URL} supabase={supabase} t={t} uiLang={uiLang} setShowAuth={setShowAuth} />
+        ) : isLandscape ? (
           <div style={landscapeLayout}>
             <div>{renderInput(true)}</div>
             <div ref={outputRef}>{renderResult()}</div>
@@ -1546,11 +1555,6 @@ Respond ONLY in this JSON (no backticks):
           </div>
         )}
       </main>
-
-      {/* NUEVA SECCIÓN: Generador de Apps Fullstack */}
-      <section style={{ background: "#0a0812", borderTop: "1px solid #2a2440", padding: isLandscape ? "20px 16px" : "24px 20px" }}>
-        <FullStackGenerator user={user} isPremium={isPremium} userPlan={userPlan} dailyCount={dailyCount} FREE_DAILY_LIMIT={FREE_DAILY_LIMIT} FUNCTIONS_URL={FUNCTIONS_URL} supabase={supabase} t={t} uiLang={uiLang} setShowAuth={setShowAuth} />
-      </section>
 
       {!isLandscape && (
         <footer style={styles.footer}>
