@@ -9,11 +9,6 @@ const FREE_DAILY_LIMIT = 5;
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// Las llamadas a Claude y a Judge0 ahora pasan por Supabase Edge Functions,
-// así las API keys quedan en el servidor y nunca en el bundle del navegador.
-const PROJECT_ID = "xbzgajevunqawdxemyqt";
-const EDGE_FUNCTIONS_URL = `https://${PROJECT_ID}.functions.supabase.co`;
-
 const UI_LANGS = {
   es: {
     flag: "🇪🇸", label: "Español",
@@ -21,20 +16,6 @@ const UI_LANGS = {
     intro: (lang) => `Describí en tu idioma qué querés que haga tu programa. Recibís el código listo para copiar + la explicación completa en <strong style="color:#7c6af7">${lang}</strong>.`,
     sectionLang: "Lenguaje a aprender",
     sectionInput: "¿Qué querés que haga tu programa?",
-    // Traducciones para apps
-    appTitle: "Crear Full-Stack App",
-    appDescription: "Estructura y Lógica",
-    appExplanation: "Describe tu idea de app. Recibirás el código backend (API REST), frontend (HTML/CSS/JS) y los pasos para desplegarlo.",
-    appInputLabel: "¿Qué app quieres crear?",
-    appInputPlaceholder: "Ej: Sistema de notas con login y base de datos",
-    appGenerateBtn: "🚀 Generar App",
-    appBackendLabel: "Backend",
-    appFrontendLabel: "Frontend",
-    appTemplateLabel: "Template",
-    appColorLabel: "Color primario",
-    appExamplesLabel: "💡 Ejemplos",
-    appHistoryLabel: "📜 Historial",
-    appNewApp: "+ Nueva App",
     inputHint: "— escribilo como si le explicaras a alguien",
     placeholder: 'Ej: "Quiero una función que reciba una lista de números y devuelva solo los pares, ordenados de mayor a menor"',
     ctrlHint: "Ctrl + Enter para generar",
@@ -97,20 +78,6 @@ const UI_LANGS = {
     intro: (lang) => `Describe in your language what you want your program to do. Get the code ready to copy + a full explanation in <strong style="color:#7c6af7">${lang}</strong>.`,
     sectionLang: "Language to learn",
     sectionInput: "What should your program do?",
-    // Translations for apps
-    appTitle: "Create Full-Stack App",
-    appDescription: "Structure and Logic",
-    appExplanation: "Describe your app idea. You'll receive the backend code (REST API), frontend (HTML/CSS/JS) and deployment steps.",
-    appInputLabel: "What app do you want to create?",
-    appInputPlaceholder: "E.g: Note system with login and database",
-    appGenerateBtn: "🚀 Generate App",
-    appBackendLabel: "Backend",
-    appFrontendLabel: "Frontend",
-    appTemplateLabel: "Template",
-    appColorLabel: "Primary color",
-    appExamplesLabel: "💡 Examples",
-    appHistoryLabel: "📜 History",
-    appNewApp: "+ New App",
     inputHint: "— write it as if explaining to a friend",
     placeholder: 'E.g: "I want a function that takes a list of numbers and returns only the even ones, sorted descending"',
     ctrlHint: "Ctrl + Enter to generate",
@@ -297,20 +264,6 @@ const UI_LANGS = {
     intro: (lang) => `Beschreiben Sie in Ihrer Sprache, was das Programm tun soll. Erhalten Sie den Code + eine vollständige Erklärung in <strong style="color:#7c6af7">${lang}</strong>.`,
     sectionLang: "Programmiersprache zum Lernen",
     sectionInput: "Was soll Ihr Programm tun?",
-    // Übersetzungen für Apps
-    appTitle: "Full-Stack-App erstellen",
-    appDescription: "Struktur und Logik",
-    appExplanation: "Beschreiben Sie Ihre App-Idee. Sie erhalten den Backend-Code (REST-API), Frontend (HTML/CSS/JS) und Bereitstellungsschritte.",
-    appInputLabel: "Welche App möchten Sie erstellen?",
-    appInputPlaceholder: "Z.B: Notiz-System mit Login und Datenbank",
-    appGenerateBtn: "🚀 App generieren",
-    appBackendLabel: "Backend",
-    appFrontendLabel: "Frontend",
-    appTemplateLabel: "Vorlage",
-    appColorLabel: "Primärfarbe",
-    appExamplesLabel: "💡 Beispiele",
-    appHistoryLabel: "📜 Verlauf",
-    appNewApp: "+ Neue App",
     inputHint: "— schreiben Sie es, als würden Sie es jemandem erklären",
     placeholder: 'Z.B.: "Ich möchte eine Funktion, die eine Zahlenliste nimmt und nur die geraden zurückgibt"',
     ctrlHint: "Strg + Eingabe zum Generieren",
@@ -373,20 +326,6 @@ const UI_LANGS = {
     intro: (lang) => `用您的语言描述您希望程序做什么。获得可直接复制的代码 + 用 <strong style="color:#7c6af7">${lang}</strong> 写的完整解释。`,
     sectionLang: "要学习的编程语言",
     sectionInput: "您希望程序做什么？",
-    // 应用翻译
-    appTitle: "创建全栈应用",
-    appDescription: "结构与逻辑",
-    appExplanation: "描述您的应用想法。您将获得后端代码 (REST API)、前端 (HTML/CSS/JS) 和部署步骤。",
-    appInputLabel: "您想创建什么应用？",
-    appInputPlaceholder: "例:带登录和数据库的笔记系统",
-    appGenerateBtn: "🚀 生成应用",
-    appBackendLabel: "后端",
-    appFrontendLabel: "前端",
-    appTemplateLabel: "模板",
-    appColorLabel: "主要颜色",
-    appExamplesLabel: "💡 示例",
-    appHistoryLabel: "📜 历史",
-    appNewApp: "+ 新应用",
     inputHint: "— 像向别人解释一样描述",
     placeholder: '例："我想要一个函数，接收一个数字列表，只返回偶数，并按降序排列"',
     ctrlHint: "Ctrl + Enter 生成",
@@ -457,19 +396,6 @@ const SUGGESTED_PROMPTS = [
   { text: "Quiero una función que encuentre el número mayor de una lista", lang: "swift", icon: "🍎" },
   { text: "Quiero una función que invierta una cadena de texto", lang: "rust", icon: "🦀" },
   { text: "Quiero una función que calcule la secuencia de Fibonacci", lang: "cpp", icon: "➕" },
-];
-
-const SUGGESTED_APPS = [
-  { text: "Blog con categorías", icon: "📝" },
-  { text: "Sistema de tickets", icon: "🎫" },
-  { text: "Tienda online", icon: "🛒" },
-  { text: "Chat en vivo", icon: "💬" },
-  { text: "TODO list colaborativo", icon: "✅" },
-  { text: "Gestión de tareas", icon: "📊" },
-  { text: "Red social básica", icon: "👥" },
-  { text: "CRM simple", icon: "🤝" },
-  { text: "E-learning platform", icon: "📚" },
-  { text: "Dashboard de analytics", icon: "📈" },
 ];
 
 const NEXT_STEPS = {
@@ -823,18 +749,12 @@ function Playground({ code, progLang, t }) {
     setError(false);
     const execCode = addAutoTest(code, progLang);
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        setOutput(t.outputError || "Error al ejecutar");
-        setError(true);
-        setRunning(false);
-        return;
-      }
-      const submitRes = await fetch(`${EDGE_FUNCTIONS_URL}/run-code`, {
+      const submitRes = await fetch("https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true&fields=stdout,stderr,compile_output,status", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${session.access_token}`,
+          "X-RapidAPI-Key": import.meta.env.VITE_JUDGE0_KEY,
+          "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
         },
         body: JSON.stringify({
           language_id: langId,
@@ -1060,273 +980,6 @@ function AuthModal({ t, onClose }) {
   );
 }
 
-// Componente para generar apps completas (Backend + Frontend)
-function FullStackGenerator({ user, isPremium, userPlan, dailyCount, FREE_DAILY_LIMIT, supabase, t, uiLang, setShowAuth, isLandscape }) {
-  const [activeTab, setActiveTab] = useState("backend");
-  const [appDescription, setAppDescription] = useState("");
-  const [generatedCode, setGeneratedCode] = useState(null);
-  const [selectedTemplate, setSelectedTemplate] = useState("minimalist");
-  const [primaryColor, setPrimaryColor] = useState("#7c6af7");
-  const [generating, setGenerating] = useState(false);
-  const [fullstackHistory, setFullstackHistory] = useState(() => {
-    try { return JSON.parse(localStorage.getItem("cl_fullstack_history") || "[]"); } catch { return []; }
-  });
-
-  const generateFullStack = async () => {
-    if (!appDescription.trim()) return;
-    if (!user) { setShowAuth(true); return; }
-
-    setGenerating(true);
-    const limitReached = !isPremium && userPlan === "free" && dailyCount >= FREE_DAILY_LIMIT;
-    if (limitReached) { setGenerating(false); return; }
-
-    try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) { setShowAuth(true); setGenerating(false); return; }
-
-      const prompt = `Crea una aplicación completa Full-Stack basada en: "${appDescription}"
-      Template: ${selectedTemplate}
-      Color primario: ${primaryColor}
-
-      Responde SOLO en este JSON (sin backticks):
-      {
-        "backend": {
-          "code": "// código Node.js/Express con rutas REST...",
-          "explanation": "Explicación del backend..."
-        },
-        "frontend": {
-          "code": "<!-- HTML vanilla -->...",
-          "explanation": "Explicación del frontend..."
-        },
-        "steps": ["Paso 1...", "Paso 2...", "Paso 3..."]
-      }`;
-
-      const res = await fetch(`${EDGE_FUNCTIONS_URL}/generate-code`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${session.access_token}`,
-        },
-        body: JSON.stringify({ prompt }),
-      });
-
-      const data = await res.json();
-      if (data.content && data.content[0]) {
-        const responseText = data.content[0].text;
-        const jsonMatch = responseText.match(/\{[\s\S]*\}/);
-        if (jsonMatch) {
-          const parsed = JSON.parse(jsonMatch[0]);
-          setGeneratedCode(parsed);
-
-          // Guardar en historial
-          const newEntry = {
-            id: Date.now(),
-            description: appDescription,
-            code: parsed,
-            timestamp: new Date().toLocaleString(),
-          };
-          const updated = [newEntry, ...fullstackHistory].slice(0, 50);
-          setFullstackHistory(updated);
-          localStorage.setItem("cl_fullstack_history", JSON.stringify(updated));
-        }
-      }
-    } catch (e) {
-      console.error("Error:", e);
-    } finally {
-      setGenerating(false);
-    }
-  };
-
-  // SIDEBAR PANEL - Mostrar en landscape
-  const renderSidebar = () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-      {/* DESCRIPCIÓN DEL APP */}
-      <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 16 }}>
-        <div style={{ fontSize: 13, fontWeight: 600, color: "#7c6af7", marginBottom: 8 }}>{t.appDescription || "Estructura y Lógica"}</div>
-        <div style={{ fontSize: 12, color: "#9691b8", lineHeight: 1.6 }}>
-          <div>• Backend REST API</div>
-          <div>• Frontend HTML/CSS/JS</div>
-          <div>• Base de datos</div>
-          <div>• Autenticación</div>
-        </div>
-      </div>
-
-      {/* TEMPLATE SELECTOR */}
-      <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 12 }}>
-        <label style={{ fontSize: 11, fontWeight: 600, color: "#7c6af7", display: "block", marginBottom: 8 }}>{t.appTemplateLabel || "Template"}</label>
-        <select value={selectedTemplate} onChange={(e) => setSelectedTemplate(e.target.value)} style={{ width: "100%", padding: 8, background: "#2a2440", border: "1px solid #3a3855", borderRadius: 6, color: "#fff", fontSize: 11 }}>
-          <option value="minimalist">Minimalista</option>
-          <option value="modern">Moderno</option>
-          <option value="colorful">Colorido</option>
-        </select>
-      </div>
-
-      {/* COLOR PICKER */}
-      <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 12 }}>
-        <label style={{ fontSize: 11, fontWeight: 600, color: "#7c6af7", display: "block", marginBottom: 8 }}>{t.appColorLabel || "Color primario"}</label>
-        <input type="color" value={primaryColor} onChange={(e) => setPrimaryColor(e.target.value)} style={{ width: "100%", height: 36, border: "1px solid #3a3855", borderRadius: 6, cursor: "pointer" }} />
-      </div>
-
-      {/* PROMPTS SUGERIDOS */}
-      <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 12 }}>
-        <div style={{ fontSize: 11, fontWeight: 600, color: "#7c6af7", marginBottom: 8 }}>{t.appExamplesLabel || "💡 Ejemplos"}</div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-          {SUGGESTED_APPS.slice(0, 5).map((app) => (
-            <button key={app.text} onClick={() => setAppDescription(app.text)} style={{ display: "flex", alignItems: "center", gap: 6, width: "100%", padding: "6px 8px", background: "transparent", border: "1px solid #2a2440", borderRadius: 4, color: "#9691b8", fontSize: 10, cursor: "pointer", textAlign: "left", transition: "all 0.15s" }}>
-              <span style={{ fontSize: 14 }}>{app.icon}</span>
-              <span style={{ flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{app.text}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* HISTORIAL */}
-      {fullstackHistory.length > 0 && (
-        <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 12 }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: "#7c6af7", marginBottom: 8 }}>{t.appHistoryLabel || "📜 Historial"}</div>
-          <div style={{ maxHeight: 150, overflowY: "auto", display: "flex", flexDirection: "column", gap: 4 }}>
-            {fullstackHistory.slice(0, 5).map((item) => (
-              <button key={item.id} onClick={() => { setAppDescription(item.description); setGeneratedCode(item.code); }} style={{ padding: "6px 8px", background: "transparent", border: "1px solid #2a2440", borderRadius: 4, color: "#9691b8", fontSize: 10, cursor: "pointer", textAlign: "left", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={item.description}>{item.description}</button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* NUEVA CONSULTA */}
-      <button onClick={() => { setAppDescription(""); setGeneratedCode(null); }} style={{ padding: "8px 12px", background: "#7c6af7", border: "none", borderRadius: 6, color: "#fff", fontSize: 12, fontWeight: 600, cursor: "pointer", width: "100%" }}>{t.appNewApp || "+ Nueva App"}</button>
-    </div>
-  );
-
-  // MAIN CONTENT - Input y Resultados
-  const renderMainContent = () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: isLandscape ? 12 : 16 }}>
-      {/* INPUT */}
-      <div style={styles.card}>
-        <label style={{ ...styles.label, display: "block", marginBottom: 10 }}>{t.appInputLabel || "¿Qué app quieres crear?"}</label>
-        <textarea value={appDescription} onChange={(e) => setAppDescription(e.target.value)} placeholder={t.appInputPlaceholder || "Ej: Sistema de notas con login"} style={{ ...styles.textarea, minHeight: isLandscape ? 80 : 120 }} />
-        <button onClick={generateFullStack} disabled={generating || !appDescription.trim()} style={{ ...styles.generateBtn, width: "100%", marginTop: 12, ...(generating || !appDescription.trim() ? styles.generateBtnDisabled : {}) }}>
-          {generating ? `⏳ ${t.generating || "Generando..."}` : `${t.appGenerateBtn || "🚀 Generar App"}`}
-        </button>
-      </div>
-
-      {/* EJEMPLOS COLLAPSIBLE EN MOBILE */}
-      {!isLandscape && !appDescription && (
-        <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 12 }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: "#7c6af7", marginBottom: 8 }}>{t.appExamplesLabel || "💡 Ejemplos"}</div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-            {SUGGESTED_APPS.slice(0, 5).map((app) => (
-              <button key={app.text} onClick={() => setAppDescription(app.text)} style={{ display: "flex", alignItems: "center", gap: 6, width: "100%", padding: "8px 12px", background: "transparent", border: "1px solid #2a2440", borderRadius: 4, color: "#9691b8", fontSize: 11, cursor: "pointer", textAlign: "left", transition: "all 0.15s" }}>
-                <span style={{ fontSize: 16 }}>{app.icon}</span>
-                <span style={{ flex: 1 }}>{app.text}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* CÓDIGO GENERADO */}
-      {generatedCode && (
-        <>
-          <button onClick={() => { setAppDescription(""); setGeneratedCode(null); }} style={styles.newQueryBtn}>
-            {t.newQuery || "🔄 Nueva consulta"}
-          </button>
-
-          <div style={styles.card}>
-            <div style={styles.cardHeader}>
-              <div style={styles.cardTitle}>📋 Código</div>
-              <div style={styles.btnGroup}>
-                <button onClick={() => setActiveTab("backend")} style={{ flex: 1, padding: "6px 12px", background: activeTab === "backend" ? "#7c6af7" : "#2a2440", border: "none", borderRadius: 4, color: "#fff", fontSize: 11, fontWeight: 600, cursor: "pointer", marginRight: 4 }}>{t.appBackendLabel || "Backend"}</button>
-                <button onClick={() => setActiveTab("frontend")} style={{ flex: 1, padding: "6px 12px", background: activeTab === "frontend" ? "#7c6af7" : "#2a2440", border: "none", borderRadius: 4, color: "#fff", fontSize: 11, fontWeight: 600, cursor: "pointer" }}>{t.appFrontendLabel || "Frontend"}</button>
-              </div>
-            </div>
-            <pre style={{ ...styles.codeBlock, maxHeight: isLandscape ? "30vh" : "35vh", overflowY: "auto" }}>
-              <code>{activeTab === "backend" ? generatedCode.backend?.code : generatedCode.frontend?.code}</code>
-            </pre>
-          </div>
-
-          {/* EXPLICACIÓN */}
-          <div style={styles.card}>
-            <div style={styles.cardHeader}>
-              <div style={styles.cardTitle}>💡 {t.explainTitle || "¿Qué hace y por qué?"}</div>
-            </div>
-            <div style={{ maxHeight: isLandscape ? "25vh" : "auto", overflowY: isLandscape ? "auto" : "visible" }}>
-              <ExplanationBlock explanation={activeTab === "backend" ? generatedCode.backend?.explanation : generatedCode.frontend?.explanation} />
-            </div>
-          </div>
-
-          {/* PASOS */}
-          <div style={styles.card}>
-            <div style={styles.cardHeader}>
-              <div style={styles.cardTitle}>🚀 {t.nextStepsTitle || "¿Qué hago ahora?"}</div>
-            </div>
-            <ol style={{ fontSize: 12, color: "#9691b8", lineHeight: 1.8, paddingLeft: 20, padding: 16 }}>
-              {generatedCode.steps?.map((step, i) => <li key={i}>{step}</li>)}
-            </ol>
-          </div>
-        </>
-      )}
-
-      {/* ESTADO VACÍO */}
-      {!generatedCode && appDescription && (
-        <div style={styles.emptyState}>
-          <div style={styles.emptyIcon}>🚀</div>
-          <div style={styles.emptyText}>{t.appExplanation || "Describe tu idea de app"}</div>
-        </div>
-      )}
-    </div>
-  );
-
-  return (
-    <div style={isLandscape ? { display: "grid", gridTemplateColumns: "280px 1fr", gap: 20, minHeight: "60vh" } : { display: "flex", flexDirection: "column", gap: 16, minHeight: "auto" }}>
-      {/* PANEL IZQUIERDO - Solo en landscape */}
-      {isLandscape && renderSidebar()}
-
-      {/* PANEL CENTRAL/DERECHO - Contenido principal */}
-      {isLandscape ? (
-        renderMainContent()
-      ) : (
-        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          {/* INTRO CARD EN MOBILE */}
-          <div style={{ ...styles.intro, marginBottom: 4, padding: "14px 16px" }}>
-            <p style={styles.introText}>{t.appExplanation || "Describe tu idea de app. Recibirás el código backend (API REST), frontend (HTML/CSS/JS) y los pasos para desplegarlo."}</p>
-          </div>
-
-          {/* TEMPLATE Y COLOR EN MOBILE - Horizontal */}
-          <div style={{ display: "flex", gap: 12 }}>
-            <div style={{ flex: 1, background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 12 }}>
-              <label style={{ fontSize: 10, fontWeight: 600, color: "#7c6af7", display: "block", marginBottom: 8 }}>{t.appTemplateLabel || "Template"}</label>
-              <select value={selectedTemplate} onChange={(e) => setSelectedTemplate(e.target.value)} style={{ width: "100%", padding: 8, background: "#2a2440", border: "1px solid #3a3855", borderRadius: 6, color: "#fff", fontSize: 10 }}>
-                <option value="minimalist">Minimalista</option>
-                <option value="modern">Moderno</option>
-                <option value="colorful">Colorido</option>
-              </select>
-            </div>
-            <div style={{ flex: 1, background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 12 }}>
-              <label style={{ fontSize: 10, fontWeight: 600, color: "#7c6af7", display: "block", marginBottom: 8 }}>{t.appColorLabel || "Color"}</label>
-              <input type="color" value={primaryColor} onChange={(e) => setPrimaryColor(e.target.value)} style={{ width: "100%", height: 40, border: "1px solid #3a3855", borderRadius: 6, cursor: "pointer" }} />
-            </div>
-          </div>
-
-          {/* HISTORIAL EN MOBILE */}
-          {fullstackHistory.length > 0 && (
-            <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 12 }}>
-              <div style={{ fontSize: 11, fontWeight: 600, color: "#7c6af7", marginBottom: 8 }}>{t.appHistoryLabel || "📜 Historial"}</div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                {fullstackHistory.slice(0, 3).map((item) => (
-                  <button key={item.id} onClick={() => { setAppDescription(item.description); setGeneratedCode(item.code); }} style={{ padding: "8px 12px", background: "transparent", border: "1px solid #2a2440", borderRadius: 4, color: "#9691b8", fontSize: 11, cursor: "pointer", textAlign: "left", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={item.description}>{item.description}</button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* CONTENIDO PRINCIPAL */}
-          {renderMainContent()}
-        </div>
-      )}
-    </div>
-  );
-}
-
 export default function App() {
   const [uiLang, setUiLang]     = useState("es");
   const [progLang, setProgLang] = useState("python");
@@ -1339,7 +992,6 @@ export default function App() {
   const [dailyCount, setDailyCount] = useState(0);
   const [showAuth, setShowAuth] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
-  const [generatorMode, setGeneratorMode] = useState("function"); // "function" o "app"
   const [showResetForm, setShowResetForm] = useState(false);
   const [newPassword, setNewPassword] = useState("");
   const [resetDone, setResetDone] = useState(false);
@@ -1463,15 +1115,15 @@ IMPORTANT: The generated code MUST always include a working example call with te
 Respond ONLY in this JSON (no backticks):
 {"code":"...","explanation":"... use ## for section titles and - for bullet points"}`;
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) { setShowAuth(true); setLoading(false); return; }
-      const res = await fetch(`${EDGE_FUNCTIONS_URL}/generate-code`, {
+      const res = await fetch("https://api.anthropic.com/v1/messages", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${session.access_token}`,
+          "x-api-key": import.meta.env.VITE_API_KEY,
+          "anthropic-version": "2023-06-01",
+          "anthropic-dangerous-direct-browser-access": "true",
         },
-        body: JSON.stringify({ prompt }),
+        body: JSON.stringify({ model: "claude-haiku-4-5-20251001", max_tokens: 1000, messages: [{ role: "user", content: prompt }] }),
       });
       const data = await res.json();
       const raw = data.content.map(b => b.text || "").join("");
@@ -1527,8 +1179,8 @@ Respond ONLY in this JSON (no backticks):
             <span style={styles.hint}>{t.ctrlHint}</span>
           </div>
         )}
-        {!input && (
-          <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} landscape={landscape} />
+        {!input && !landscape && (
+          <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} />
         )}
       </div>
 
@@ -1654,17 +1306,6 @@ Respond ONLY in this JSON (no backticks):
             {!isLandscape && <div><div style={styles.logoTitle}>CodeLearn</div><div style={styles.logoSub}>{t.tagline}</div></div>}
             {isLandscape && <div style={styles.logoTitle}>CodeLearn</div>}
           </div>
-
-          {/* TOGGLE FUNCIÓN/APP */}
-          <div style={{ display: "flex", gap: 6 }}>
-            <button onClick={() => { setGeneratorMode("function"); setResult(null); setError(null); }} style={{ ...styles.generatorToggle, ...(generatorMode === "function" ? styles.generatorToggleActive : {}) }}>
-              📝 Función
-            </button>
-            <button onClick={() => { setGeneratorMode("app"); setResult(null); setError(null); }} style={{ ...styles.generatorToggle, ...(generatorMode === "app" ? styles.generatorToggleActive : {}) }}>
-              🚀 App
-            </button>
-          </div>
-
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             {user ? (
               <>
@@ -1682,29 +1323,19 @@ Respond ONLY in this JSON (no backticks):
       </header>
 
       <main style={{ ...styles.main, padding: isLandscape ? "12px 16px" : "24px 20px" }}>
-        {generatorMode === "function" ? (
-          // MODO FUNCIÓN
-          <>
-            {isLandscape ? (
-              <div style={landscapeLayout}>
-                <div>{renderInput(true)}</div>
-                <div ref={outputRef}>{renderResult()}</div>
-              </div>
-            ) : (
-              <div>
-                <div style={{ ...styles.intro, marginBottom: 20, padding: "14px 16px" }}>
-                  <p style={styles.introText} dangerouslySetInnerHTML={{ __html: t.intro(selectedProgLang.label) }} />
-                </div>
-                {renderInput(false)}
-                <div ref={outputRef} style={{ marginTop: 16 }}>{renderResult()}</div>
-              </div>
-            )}
-          </>
+        {isLandscape ? (
+          <div style={landscapeLayout}>
+            <div>{renderInput(true)}</div>
+            <div ref={outputRef}>{renderResult()}</div>
+          </div>
         ) : (
-          // MODO APP
-          <section style={{ background: "#0a0812", borderTop: "none", padding: 0 }}>
-            <FullStackGenerator user={user} isPremium={isPremium} userPlan={userPlan} dailyCount={dailyCount} FREE_DAILY_LIMIT={FREE_DAILY_LIMIT} supabase={supabase} t={t} uiLang={uiLang} setShowAuth={setShowAuth} isLandscape={isLandscape} />
-          </section>
+          <div>
+            <div style={{ ...styles.intro, marginBottom: 20, padding: "14px 16px" }}>
+              <p style={styles.introText} dangerouslySetInnerHTML={{ __html: t.intro(selectedProgLang.label) }} />
+            </div>
+            {renderInput(false)}
+            <div ref={outputRef} style={{ marginTop: 16 }}>{renderResult()}</div>
+          </div>
         )}
       </main>
 
@@ -1835,6 +1466,4 @@ const styles = {
   playgroundTitle: { fontSize: 13, fontWeight: 600, color: "#c4beff" },
   runBtn: { padding: "7px 16px", background: "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)", border: "none", borderRadius: 7, color: "#fff", fontSize: 12, fontWeight: 600, cursor: "pointer" },
   playgroundOutput: { padding: "16px", fontFamily: "'IBM Plex Mono', monospace", fontSize: 12, lineHeight: 1.7, minHeight: 80, whiteSpace: "pre-wrap", wordBreak: "break-word" },
-  generatorToggle: { padding: "7px 12px", background: "#1e1a35", border: "1px solid #3a3060", borderRadius: 8, color: "#9691b8", fontSize: 12, fontWeight: 600, cursor: "pointer" },
-  generatorToggleActive: { background: "#7c6af7", color: "#fff", border: "1px solid #7c6af7" },
 };
