@@ -1060,7 +1060,7 @@ function AuthModal({ t, onClose }) {
 }
 
 // Componente para generar apps completas (Backend + Frontend)
-function FullStackGenerator({ user, isPremium, userPlan, dailyCount, FREE_DAILY_LIMIT, FUNCTIONS_URL, supabase, t, uiLang, setShowAuth }) {
+function FullStackGenerator({ user, isPremium, userPlan, dailyCount, FREE_DAILY_LIMIT, FUNCTIONS_URL, supabase, t, uiLang, setShowAuth, isLandscape }) {
   const [activeTab, setActiveTab] = useState("backend");
   const [appDescription, setAppDescription] = useState("");
   const [generatedCode, setGeneratedCode] = useState(null);
@@ -1136,129 +1136,192 @@ function FullStackGenerator({ user, isPremium, userPlan, dailyCount, FREE_DAILY_
     }
   };
 
-  return (
-    <div style={{ display: "grid", gridTemplateColumns: "280px 1fr", gap: 20, minHeight: "60vh" }}>
-      {/* PANEL IZQUIERDO - Similar a CodeGenerator */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+  // SIDEBAR PANEL - Mostrar en landscape
+  const renderSidebar = () => (
+    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      {/* DESCRIPCIÓN DEL APP */}
+      <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 16 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: "#7c6af7", marginBottom: 8 }}>{t.appDescription || "Estructura y Lógica"}</div>
+        <div style={{ fontSize: 12, color: "#9691b8", lineHeight: 1.6 }}>
+          <div>• Backend REST API</div>
+          <div>• Frontend HTML/CSS/JS</div>
+          <div>• Base de datos</div>
+          <div>• Autenticación</div>
+        </div>
+      </div>
 
-        {/* DESCRIPCIÓN DEL APP */}
-        <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 16 }}>
-          <div style={{ fontSize: 13, fontWeight: 600, color: "#7c6af7", marginBottom: 8 }}>{t.appDescription || "Estructura y Lógica"}</div>
-          <div style={{ fontSize: 12, color: "#9691b8", lineHeight: 1.6 }}>
-            <div>• Backend REST API</div>
-            <div>• Frontend HTML/CSS/JS</div>
-            <div>• Base de datos</div>
-            <div>• Autenticación</div>
+      {/* TEMPLATE SELECTOR */}
+      <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 12 }}>
+        <label style={{ fontSize: 11, fontWeight: 600, color: "#7c6af7", display: "block", marginBottom: 8 }}>{t.appTemplateLabel || "Template"}</label>
+        <select value={selectedTemplate} onChange={(e) => setSelectedTemplate(e.target.value)} style={{ width: "100%", padding: 8, background: "#2a2440", border: "1px solid #3a3855", borderRadius: 6, color: "#fff", fontSize: 11 }}>
+          <option value="minimalist">Minimalista</option>
+          <option value="modern">Moderno</option>
+          <option value="colorful">Colorido</option>
+        </select>
+      </div>
+
+      {/* COLOR PICKER */}
+      <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 12 }}>
+        <label style={{ fontSize: 11, fontWeight: 600, color: "#7c6af7", display: "block", marginBottom: 8 }}>{t.appColorLabel || "Color primario"}</label>
+        <input type="color" value={primaryColor} onChange={(e) => setPrimaryColor(e.target.value)} style={{ width: "100%", height: 36, border: "1px solid #3a3855", borderRadius: 6, cursor: "pointer" }} />
+      </div>
+
+      {/* PROMPTS SUGERIDOS */}
+      <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 12 }}>
+        <div style={{ fontSize: 11, fontWeight: 600, color: "#7c6af7", marginBottom: 8 }}>{t.appExamplesLabel || "💡 Ejemplos"}</div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+          {SUGGESTED_APPS.slice(0, 5).map((app) => (
+            <button key={app.text} onClick={() => setAppDescription(app.text)} style={{ display: "flex", alignItems: "center", gap: 6, width: "100%", padding: "6px 8px", background: "transparent", border: "1px solid #2a2440", borderRadius: 4, color: "#9691b8", fontSize: 10, cursor: "pointer", textAlign: "left", transition: "all 0.15s" }}>
+              <span style={{ fontSize: 14 }}>{app.icon}</span>
+              <span style={{ flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{app.text}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* HISTORIAL */}
+      {fullstackHistory.length > 0 && (
+        <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 12 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: "#7c6af7", marginBottom: 8 }}>{t.appHistoryLabel || "📜 Historial"}</div>
+          <div style={{ maxHeight: 150, overflowY: "auto", display: "flex", flexDirection: "column", gap: 4 }}>
+            {fullstackHistory.slice(0, 5).map((item) => (
+              <button key={item.id} onClick={() => { setAppDescription(item.description); setGeneratedCode(item.code); }} style={{ padding: "6px 8px", background: "transparent", border: "1px solid #2a2440", borderRadius: 4, color: "#9691b8", fontSize: 10, cursor: "pointer", textAlign: "left", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={item.description}>{item.description}</button>
+            ))}
           </div>
         </div>
+      )}
 
-        {/* TEMPLATE SELECTOR */}
-        <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 12 }}>
-          <label style={{ fontSize: 11, fontWeight: 600, color: "#7c6af7", display: "block", marginBottom: 8 }}>{t.appTemplateLabel || "Template"}</label>
-          <select value={selectedTemplate} onChange={(e) => setSelectedTemplate(e.target.value)} style={{ width: "100%", padding: 8, background: "#2a2440", border: "1px solid #3a3855", borderRadius: 6, color: "#fff", fontSize: 11 }}>
-            <option value="minimalist">Minimalista</option>
-            <option value="modern">Moderno</option>
-            <option value="colorful">Colorido</option>
-          </select>
-        </div>
+      {/* NUEVA CONSULTA */}
+      <button onClick={() => { setAppDescription(""); setGeneratedCode(null); }} style={{ padding: "8px 12px", background: "#7c6af7", border: "none", borderRadius: 6, color: "#fff", fontSize: 12, fontWeight: 600, cursor: "pointer", width: "100%" }}>{t.appNewApp || "+ Nueva App"}</button>
+    </div>
+  );
 
-        {/* COLOR PICKER */}
-        <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 12 }}>
-          <label style={{ fontSize: 11, fontWeight: 600, color: "#7c6af7", display: "block", marginBottom: 8 }}>{t.appColorLabel || "Color primario"}</label>
-          <input type="color" value={primaryColor} onChange={(e) => setPrimaryColor(e.target.value)} style={{ width: "100%", height: 36, border: "1px solid #3a3855", borderRadius: 6, cursor: "pointer" }} />
-        </div>
+  // MAIN CONTENT - Input y Resultados
+  const renderMainContent = () => (
+    <div style={{ display: "flex", flexDirection: "column", gap: isLandscape ? 12 : 16 }}>
+      {/* INPUT */}
+      <div style={styles.card}>
+        <label style={{ ...styles.label, display: "block", marginBottom: 10 }}>{t.appInputLabel || "¿Qué app quieres crear?"}</label>
+        <textarea value={appDescription} onChange={(e) => setAppDescription(e.target.value)} placeholder={t.appInputPlaceholder || "Ej: Sistema de notas con login"} style={{ ...styles.textarea, minHeight: isLandscape ? 80 : 120 }} />
+        <button onClick={generateFullStack} disabled={generating || !appDescription.trim()} style={{ ...styles.generateBtn, width: "100%", marginTop: 12, ...(generating || !appDescription.trim() ? styles.generateBtnDisabled : {}) }}>
+          {generating ? `⏳ ${t.generating || "Generando..."}` : `${t.appGenerateBtn || "🚀 Generar App"}`}
+        </button>
+      </div>
 
-        {/* PROMPTS SUGERIDOS */}
+      {/* EJEMPLOS COLLAPSIBLE EN MOBILE */}
+      {!isLandscape && !appDescription && (
         <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 12 }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: "#7c6af7", marginBottom: 8 }}>{t.appExamplesLabel || "💡 Ejemplos"}</div>
           <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
             {SUGGESTED_APPS.slice(0, 5).map((app) => (
-              <button key={app.text} onClick={() => setAppDescription(app.text)} style={{ display: "flex", alignItems: "center", gap: 6, width: "100%", padding: "6px 8px", background: "transparent", border: "1px solid #2a2440", borderRadius: 4, color: "#9691b8", fontSize: 10, cursor: "pointer", textAlign: "left", transition: "all 0.15s" }}>
-                <span style={{ fontSize: 14 }}>{app.icon}</span>
-                <span style={{ flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{app.text}</span>
+              <button key={app.text} onClick={() => setAppDescription(app.text)} style={{ display: "flex", alignItems: "center", gap: 6, width: "100%", padding: "8px 12px", background: "transparent", border: "1px solid #2a2440", borderRadius: 4, color: "#9691b8", fontSize: 11, cursor: "pointer", textAlign: "left", transition: "all 0.15s" }}>
+                <span style={{ fontSize: 16 }}>{app.icon}</span>
+                <span style={{ flex: 1 }}>{app.text}</span>
               </button>
             ))}
           </div>
         </div>
+      )}
 
-        {/* HISTORIAL */}
-        {fullstackHistory.length > 0 && (
-          <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 12 }}>
-            <div style={{ fontSize: 11, fontWeight: 600, color: "#7c6af7", marginBottom: 8 }}>{t.appHistoryLabel || "📜 Historial"}</div>
-            <div style={{ maxHeight: 150, overflowY: "auto", display: "flex", flexDirection: "column", gap: 4 }}>
-              {fullstackHistory.slice(0, 5).map((item) => (
-                <button key={item.id} onClick={() => { setAppDescription(item.description); setGeneratedCode(item.code); }} style={{ padding: "6px 8px", background: "transparent", border: "1px solid #2a2440", borderRadius: 4, color: "#9691b8", fontSize: 10, cursor: "pointer", textAlign: "left", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={item.description}>{item.description}</button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* NUEVA CONSULTA */}
-        <button onClick={() => { setAppDescription(""); setGeneratedCode(null); }} style={{ padding: "8px 12px", background: "#7c6af7", border: "none", borderRadius: 6, color: "#fff", fontSize: 12, fontWeight: 600, cursor: "pointer", width: "100%" }}>{t.appNewApp || "+ Nueva App"}</button>
-      </div>
-
-      {/* PANEL DERECHO - Input y Resultados */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-
-        {/* INPUT */}
-        <div style={styles.card}>
-          <label style={{ ...styles.label, display: "block", marginBottom: 10 }}>{t.appInputLabel || "¿Qué app quieres crear?"}</label>
-          <textarea value={appDescription} onChange={(e) => setAppDescription(e.target.value)} placeholder={t.appInputPlaceholder || "Ej: Sistema de notas con login"} style={{ ...styles.textarea, minHeight: 100 }} />
-          <button onClick={generateFullStack} disabled={generating || !appDescription.trim()} style={{ ...styles.generateBtn, width: "100%", marginTop: 12, ...(generating || !appDescription.trim() ? styles.generateBtnDisabled : {}) }}>
-            {generating ? `⏳ ${t.generating || "Generando..."}` : `${t.appGenerateBtn || "🚀 Generar App"}`}
+      {/* CÓDIGO GENERADO */}
+      {generatedCode && (
+        <>
+          <button onClick={() => { setAppDescription(""); setGeneratedCode(null); }} style={styles.newQueryBtn}>
+            {t.newQuery || "🔄 Nueva consulta"}
           </button>
-        </div>
 
-        {/* CÓDIGO GENERADO */}
-        {generatedCode && (
-          <>
-            <button onClick={() => { setAppDescription(""); setGeneratedCode(null); }} style={styles.newQueryBtn}>
-              {t.newQuery || "🔄 Nueva consulta"}
-            </button>
-
-            <div style={styles.card}>
-              <div style={styles.cardHeader}>
-                <div style={styles.cardTitle}>📋 Código</div>
-                <div style={styles.btnGroup}>
-                  <button onClick={() => setActiveTab("backend")} style={{ flex: 1, padding: "6px 12px", background: activeTab === "backend" ? "#7c6af7" : "#2a2440", border: "none", borderRadius: 4, color: "#fff", fontSize: 11, fontWeight: 600, cursor: "pointer", marginRight: 4 }}>{t.appBackendLabel || "Backend"}</button>
-                  <button onClick={() => setActiveTab("frontend")} style={{ flex: 1, padding: "6px 12px", background: activeTab === "frontend" ? "#7c6af7" : "#2a2440", border: "none", borderRadius: 4, color: "#fff", fontSize: 11, fontWeight: 600, cursor: "pointer" }}>{t.appFrontendLabel || "Frontend"}</button>
-                </div>
-              </div>
-              <pre style={{ ...styles.codeBlock, maxHeight: "35vh", overflowY: "auto" }}>
-                <code>{activeTab === "backend" ? generatedCode.backend?.code : generatedCode.frontend?.code}</code>
-              </pre>
-            </div>
-
-            {/* EXPLICACIÓN */}
-            <div style={styles.card}>
-              <div style={styles.cardHeader}>
-                <div style={styles.cardTitle}>💡 {t.explainTitle || "¿Qué hace y por qué?"}</div>
-              </div>
-              <div style={{ maxHeight: "25vh", overflowY: "auto" }}>
-                <ExplanationBlock explanation={activeTab === "backend" ? generatedCode.backend?.explanation : generatedCode.frontend?.explanation} />
+          <div style={styles.card}>
+            <div style={styles.cardHeader}>
+              <div style={styles.cardTitle}>📋 Código</div>
+              <div style={styles.btnGroup}>
+                <button onClick={() => setActiveTab("backend")} style={{ flex: 1, padding: "6px 12px", background: activeTab === "backend" ? "#7c6af7" : "#2a2440", border: "none", borderRadius: 4, color: "#fff", fontSize: 11, fontWeight: 600, cursor: "pointer", marginRight: 4 }}>{t.appBackendLabel || "Backend"}</button>
+                <button onClick={() => setActiveTab("frontend")} style={{ flex: 1, padding: "6px 12px", background: activeTab === "frontend" ? "#7c6af7" : "#2a2440", border: "none", borderRadius: 4, color: "#fff", fontSize: 11, fontWeight: 600, cursor: "pointer" }}>{t.appFrontendLabel || "Frontend"}</button>
               </div>
             </div>
-
-            {/* PASOS */}
-            <div style={styles.card}>
-              <div style={styles.cardHeader}>
-                <div style={styles.cardTitle}>🚀 {t.nextStepsTitle || "¿Qué hago ahora?"}</div>
-              </div>
-              <ol style={{ fontSize: 12, color: "#9691b8", lineHeight: 1.8, paddingLeft: 20, padding: 16 }}>
-                {generatedCode.steps?.map((step, i) => <li key={i}>{step}</li>)}
-              </ol>
-            </div>
-          </>
-        )}
-
-        {/* ESTADO VACÍO */}
-        {!generatedCode && (
-          <div style={styles.emptyState}>
-            <div style={styles.emptyIcon}>🚀</div>
-            <div style={styles.emptyText}>{t.appExplanation || "Describe tu idea de app"}</div>
+            <pre style={{ ...styles.codeBlock, maxHeight: isLandscape ? "30vh" : "35vh", overflowY: "auto" }}>
+              <code>{activeTab === "backend" ? generatedCode.backend?.code : generatedCode.frontend?.code}</code>
+            </pre>
           </div>
-        )}
-      </div>
+
+          {/* EXPLICACIÓN */}
+          <div style={styles.card}>
+            <div style={styles.cardHeader}>
+              <div style={styles.cardTitle}>💡 {t.explainTitle || "¿Qué hace y por qué?"}</div>
+            </div>
+            <div style={{ maxHeight: isLandscape ? "25vh" : "auto", overflowY: isLandscape ? "auto" : "visible" }}>
+              <ExplanationBlock explanation={activeTab === "backend" ? generatedCode.backend?.explanation : generatedCode.frontend?.explanation} />
+            </div>
+          </div>
+
+          {/* PASOS */}
+          <div style={styles.card}>
+            <div style={styles.cardHeader}>
+              <div style={styles.cardTitle}>🚀 {t.nextStepsTitle || "¿Qué hago ahora?"}</div>
+            </div>
+            <ol style={{ fontSize: 12, color: "#9691b8", lineHeight: 1.8, paddingLeft: 20, padding: 16 }}>
+              {generatedCode.steps?.map((step, i) => <li key={i}>{step}</li>)}
+            </ol>
+          </div>
+        </>
+      )}
+
+      {/* ESTADO VACÍO */}
+      {!generatedCode && appDescription && (
+        <div style={styles.emptyState}>
+          <div style={styles.emptyIcon}>🚀</div>
+          <div style={styles.emptyText}>{t.appExplanation || "Describe tu idea de app"}</div>
+        </div>
+      )}
+    </div>
+  );
+
+  return (
+    <div style={isLandscape ? { display: "grid", gridTemplateColumns: "280px 1fr", gap: 20, minHeight: "60vh" } : { display: "flex", flexDirection: "column", gap: 16, minHeight: "auto" }}>
+      {/* PANEL IZQUIERDO - Solo en landscape */}
+      {isLandscape && renderSidebar()}
+
+      {/* PANEL CENTRAL/DERECHO - Contenido principal */}
+      {isLandscape ? (
+        renderMainContent()
+      ) : (
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          {/* INTRO CARD EN MOBILE */}
+          <div style={{ ...styles.intro, marginBottom: 4, padding: "14px 16px" }}>
+            <p style={styles.introText}>{t.appExplanation || "Describe tu idea de app. Recibirás el código backend (API REST), frontend (HTML/CSS/JS) y los pasos para desplegarlo."}</p>
+          </div>
+
+          {/* TEMPLATE Y COLOR EN MOBILE - Horizontal */}
+          <div style={{ display: "flex", gap: 12 }}>
+            <div style={{ flex: 1, background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 12 }}>
+              <label style={{ fontSize: 10, fontWeight: 600, color: "#7c6af7", display: "block", marginBottom: 8 }}>{t.appTemplateLabel || "Template"}</label>
+              <select value={selectedTemplate} onChange={(e) => setSelectedTemplate(e.target.value)} style={{ width: "100%", padding: 8, background: "#2a2440", border: "1px solid #3a3855", borderRadius: 6, color: "#fff", fontSize: 10 }}>
+                <option value="minimalist">Minimalista</option>
+                <option value="modern">Moderno</option>
+                <option value="colorful">Colorido</option>
+              </select>
+            </div>
+            <div style={{ flex: 1, background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 12 }}>
+              <label style={{ fontSize: 10, fontWeight: 600, color: "#7c6af7", display: "block", marginBottom: 8 }}>{t.appColorLabel || "Color"}</label>
+              <input type="color" value={primaryColor} onChange={(e) => setPrimaryColor(e.target.value)} style={{ width: "100%", height: 40, border: "1px solid #3a3855", borderRadius: 6, cursor: "pointer" }} />
+            </div>
+          </div>
+
+          {/* HISTORIAL EN MOBILE */}
+          {fullstackHistory.length > 0 && (
+            <div style={{ background: "#13111c", border: "1px solid #2a2440", borderRadius: 12, padding: 12 }}>
+              <div style={{ fontSize: 11, fontWeight: 600, color: "#7c6af7", marginBottom: 8 }}>{t.appHistoryLabel || "📜 Historial"}</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                {fullstackHistory.slice(0, 3).map((item) => (
+                  <button key={item.id} onClick={() => { setAppDescription(item.description); setGeneratedCode(item.code); }} style={{ padding: "8px 12px", background: "transparent", border: "1px solid #2a2440", borderRadius: 4, color: "#9691b8", fontSize: 11, cursor: "pointer", textAlign: "left", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={item.description}>{item.description}</button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* CONTENIDO PRINCIPAL */}
+          {renderMainContent()}
+        </div>
+      )}
     </div>
   );
 }
@@ -1639,7 +1702,7 @@ Respond ONLY in this JSON (no backticks):
         ) : (
           // MODO APP
           <section style={{ background: "#0a0812", borderTop: "none", padding: 0 }}>
-            <FullStackGenerator user={user} isPremium={isPremium} userPlan={userPlan} dailyCount={dailyCount} FREE_DAILY_LIMIT={FREE_DAILY_LIMIT} FUNCTIONS_URL={FUNCTIONS_URL} supabase={supabase} t={t} uiLang={uiLang} setShowAuth={setShowAuth} />
+            <FullStackGenerator user={user} isPremium={isPremium} userPlan={userPlan} dailyCount={dailyCount} FREE_DAILY_LIMIT={FREE_DAILY_LIMIT} FUNCTIONS_URL={FUNCTIONS_URL} supabase={supabase} t={t} uiLang={uiLang} setShowAuth={setShowAuth} isLandscape={isLandscape} />
           </section>
         )}
       </main>
