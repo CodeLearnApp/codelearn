@@ -11,7 +11,8 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Las llamadas a Claude y a Judge0 ahora pasan por Supabase Edge Functions,
 // así las API keys quedan en el servidor y nunca en el bundle del navegador.
-const FUNCTIONS_URL = `${SUPABASE_URL}/functions/v1`;
+const PROJECT_ID = "xbzgajevunqawdxemyqt";
+const EDGE_FUNCTIONS_URL = `https://${PROJECT_ID}.functions.supabase.co`;
 
 const UI_LANGS = {
   es: {
@@ -829,7 +830,7 @@ function Playground({ code, progLang, t }) {
         setRunning(false);
         return;
       }
-      const submitRes = await fetch(`${FUNCTIONS_URL}/run-code`, {
+      const submitRes = await fetch(`${EDGE_FUNCTIONS_URL}/run-code`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -1060,7 +1061,7 @@ function AuthModal({ t, onClose }) {
 }
 
 // Componente para generar apps completas (Backend + Frontend)
-function FullStackGenerator({ user, isPremium, userPlan, dailyCount, FREE_DAILY_LIMIT, FUNCTIONS_URL, supabase, t, uiLang, setShowAuth, isLandscape }) {
+function FullStackGenerator({ user, isPremium, userPlan, dailyCount, FREE_DAILY_LIMIT, supabase, t, uiLang, setShowAuth, isLandscape }) {
   const [activeTab, setActiveTab] = useState("backend");
   const [appDescription, setAppDescription] = useState("");
   const [generatedCode, setGeneratedCode] = useState(null);
@@ -1100,7 +1101,7 @@ function FullStackGenerator({ user, isPremium, userPlan, dailyCount, FREE_DAILY_
         "steps": ["Paso 1...", "Paso 2...", "Paso 3..."]
       }`;
 
-      const res = await fetch(`${FUNCTIONS_URL}/generate-code`, {
+      const res = await fetch(`${EDGE_FUNCTIONS_URL}/generate-code`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -1464,7 +1465,7 @@ Respond ONLY in this JSON (no backticks):
     try {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) { setShowAuth(true); setLoading(false); return; }
-      const res = await fetch(`${FUNCTIONS_URL}/generate-code`, {
+      const res = await fetch(`${EDGE_FUNCTIONS_URL}/generate-code`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -1702,7 +1703,7 @@ Respond ONLY in this JSON (no backticks):
         ) : (
           // MODO APP
           <section style={{ background: "#0a0812", borderTop: "none", padding: 0 }}>
-            <FullStackGenerator user={user} isPremium={isPremium} userPlan={userPlan} dailyCount={dailyCount} FREE_DAILY_LIMIT={FREE_DAILY_LIMIT} FUNCTIONS_URL={FUNCTIONS_URL} supabase={supabase} t={t} uiLang={uiLang} setShowAuth={setShowAuth} isLandscape={isLandscape} />
+            <FullStackGenerator user={user} isPremium={isPremium} userPlan={userPlan} dailyCount={dailyCount} FREE_DAILY_LIMIT={FREE_DAILY_LIMIT} supabase={supabase} t={t} uiLang={uiLang} setShowAuth={setShowAuth} isLandscape={isLandscape} />
           </section>
         )}
       </main>
