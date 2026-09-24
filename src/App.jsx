@@ -646,82 +646,28 @@ function Playground({ code, progLang, t }) {
     if (lang === "java" && code.includes("System.out")) return code;
     if (lang === "go" && code.includes("fmt.Print")) return code;
     if (lang === "rust" && code.includes("println!")) return code;
-    if (lang === "cpp" && code.includes("std::cout")) return code;
-    if (lang === "c" && code.includes("printf")) return code;
 
-    // SIEMPRE agrega output al final si no hay ninguno
+    // GARANTÍA: SIEMPRE hay output
     if (lang === "python") {
-      // Busca todas las funciones def
-      const funcMatches = code.match(/def\s+(\w+)\s*\(([^)]*)\)/g);
-      if (funcMatches && funcMatches.length > 0) {
-        const lastFunc = code.match(/def\s+(\w+)\s*\(([^)]*)\)/);
-        const funcName = lastFunc[1];
-        const params = lastFunc[2].trim();
-
-        // Crea argumentos inteligentes basado en los parámetros
-        let testArgs = [];
-        if (params) {
-          // Si tiene parámetros, prueba con una lista (lo más común)
-          testArgs = ['[1, 2, 3, 4, 5, 6]'];
-        }
-
-        // Agrega test al final con manejo de errores
-        let testCode = `\n\n# --- Test automático ---\ntry:\n    print("=== Resultado ===" )\n`;
-        if (testArgs.length > 0) {
-          testArgs.forEach(arg => {
-            testCode += `    print(${funcName}(${arg}))\n`;
-          });
-        } else {
-          testCode += `    print(${funcName}())\n`;
-        }
-        testCode += `except Exception as e:\n    print(f"Error: {e}")`;
-        return code + testCode;
-      } else {
-        // Si no hay función, ejecuta el código y muestra resultado
-        return code + `\nprint("✅ Código ejecutado correctamente")`;
-      }
+      return code + `\n\nprint("✅ Código Python ejecutado correctamente")`;
     }
 
     if (lang === "javascript" || lang === "typescript") {
-      const funcMatches = code.match(/function\s+\w+|const\s+\w+\s*=|let\s+\w+\s*=/g);
-      if (funcMatches && funcMatches.length > 0) {
-        const lastFunc = code.match(/function\s+(\w+)|const\s+(\w+)\s*=|let\s+(\w+)\s*=/);
-        const funcName = lastFunc[1] || lastFunc[2] || lastFunc[3];
-
-        // Intenta con array o número
-        let testCode = `\nconsole.log("=== Resultado ===");\ntry {\n    console.log(${funcName}([1, 2, 3, 4, 5, 6]));\n} catch(e) {\n    try {\n        console.log(${funcName}(5));\n    } catch(e2) {\n        console.log("✅ Función definida");\n    }\n}`;
-        return code + testCode;
-      } else {
-        return code + `\nconsole.log("✅ Código ejecutado correctamente");`;
-      }
+      return code + `\nconsole.log("✅ Código JavaScript ejecutado correctamente");`;
     }
 
     if (lang === "java") {
-      // Para Java, agrega println en el main
-      if (code.includes("public static void main")) {
-        return code.replace(/(\s*}\s*$)/, `\n    System.out.println("✅ Código ejecutado correctamente");\n$1`);
-      } else {
-        return code + `\n\npublic static void main(String[] args) {\n    System.out.println("✅ Código ejecutado");\n}`;
-      }
+      return code + `\n\npublic static void main(String[] args) {\n    System.out.println("✅ Código Java ejecutado correctamente");\n}`;
     }
 
     if (lang === "go") {
-      if (code.includes("func main")) {
-        return code.replace(/(\s*}\s*$)/, `\n\tfmt.Println("✅ Código ejecutado correctamente")\n$1`);
-      } else {
-        return code + `\n\nfunc main() {\n\tfmt.Println("✅ Código ejecutado correctamente")\n}`;
-      }
+      return code + `\n\nfunc main() {\n    fmt.Println("✅ Código Go ejecutado correctamente")\n}`;
     }
 
     if (lang === "rust") {
-      if (code.includes("fn main")) {
-        return code.replace(/(\s*}\s*$)/, `\n    println!("✅ Código ejecutado correctamente");\n$1`);
-      } else {
-        return code + `\n\nfn main() {\n    println!("✅ Código ejecutado correctamente");\n}`;
-      }
+      return code + `\n\nfn main() {\n    println!("✅ Código Rust ejecutado correctamente");\n}`;
     }
 
-    // Para otros lenguajes, devuelve el código sin cambios
     return code;
   };
 
