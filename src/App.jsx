@@ -65,12 +65,6 @@ const UI_LANGS = {
     footerRefund: "Reembolsos",
     footerContact: "Contacto",
     newQuery: "🔄 Nueva consulta",
-    runBtn: "▶️ Ejecutar código",
-    running: "⏳ Ejecutando...",
-    outputTitle: "📤 Resultado",
-    outputEmpty: "El código se ejecutará acá",
-    outputError: "Error al ejecutar",
-    notSupported: "Este lenguaje no soporta ejecución en vivo",
   },
   en: {
     flag: "🇬🇧", label: "English",
@@ -127,12 +121,6 @@ const UI_LANGS = {
     footerRefund: "Refunds",
     footerContact: "Contact",
     newQuery: "🔄 New query",
-    runBtn: "▶️ Run code",
-    running: "⏳ Running...",
-    outputTitle: "📤 Output",
-    outputEmpty: "The code will run here",
-    outputError: "Error running code",
-    notSupported: "This language doesn't support live execution",
   },
   pt: {
     flag: "🇧🇷", label: "Português",
@@ -189,12 +177,6 @@ const UI_LANGS = {
     footerRefund: "Reembolsos",
     footerContact: "Contato",
     newQuery: "🔄 Nova consulta",
-    runBtn: "▶️ Executar código",
-    running: "⏳ Executando...",
-    outputTitle: "📤 Resultado",
-    outputEmpty: "O código será executado aqui",
-    outputError: "Erro ao executar",
-    notSupported: "Este idioma não suporta execução ao vivo",
   },
   fr: {
     flag: "🇫🇷", label: "Français",
@@ -251,12 +233,6 @@ const UI_LANGS = {
     footerRefund: "Remboursements",
     footerContact: "Contact",
     newQuery: "🔄 Nouvelle requête",
-    runBtn: "▶️ Exécuter le code",
-    running: "⏳ Exécution...",
-    outputTitle: "📤 Résultat",
-    outputEmpty: "Le code s'exécutera ici",
-    outputError: "Erreur d'exécution",
-    notSupported: "Ce langage ne supporte pas l'exécution en direct",
   },
   de: {
     flag: "🇩🇪", label: "Deutsch",
@@ -313,12 +289,6 @@ const UI_LANGS = {
     footerRefund: "Rückerstattungen",
     footerContact: "Kontakt",
     newQuery: "🔄 Neue Anfrage",
-    runBtn: "▶️ Code ausführen",
-    running: "⏳ Wird ausgeführt...",
-    outputTitle: "📤 Ergebnis",
-    outputEmpty: "Der Code wird hier ausgeführt",
-    outputError: "Fehler bei der Ausführung",
-    notSupported: "Diese Sprache unterstützt keine Live-Ausführung",
   },
   zh: {
     flag: "🇨🇳", label: "中文",
@@ -375,12 +345,6 @@ const UI_LANGS = {
     footerRefund: "退款政策",
     footerContact: "联系我们",
     newQuery: "🔄 新查询",
-    runBtn: "▶️ 运行代码",
-    running: "⏳ 运行中...",
-    outputTitle: "📤 输出",
-    outputEmpty: "代码将在这里运行",
-    outputError: "运行错误",
-    notSupported: "此语言不支持实时执行",
   },
 };
 
@@ -411,19 +375,6 @@ const NEXT_STEPS = {
   cpp: "https://replit.com/new/cpp",
 };
 
-
-const JUDGE0_LANGS = {
-  python:     71,
-  javascript: 63,
-  typescript: 74,
-  rust:       73,
-  go:         60,
-  java:       62,
-  kotlin:     78,
-  swift:      83,
-  c:          50,
-  cpp:        54,
-};
 
 const PROG_LANGS = [
   { id: "python",     label: "Python",     icon: "🐍" },
@@ -631,100 +582,6 @@ function NextSteps({ progLang, t }) {
   );
 }
 
-
-function Playground({ code, progLang, t }) {
-  const [output, setOutput] = useState("");
-  const [running, setRunning] = useState(false);
-  const [error, setError] = useState(false);
-
-  const langId = JUDGE0_LANGS[progLang];
-
-  const addAutoTest = (code, lang) => {
-    // SIEMPRE agrega una línea de confirmación al final
-    // Esto garantiza que SIEMPRE hay output, aunque Judge0 no capture el resto
-
-    if (lang === "python") {
-      // Agrega una línea de output al final sin importar qué
-      return code + `\nprint("\\n✅ CÓDIGO EJECUTADO CORRECTAMENTE")`;
-    }
-
-    if (lang === "javascript" || lang === "typescript") {
-      return code + `\nconsole.log("\\n✅ CÓDIGO EJECUTADO CORRECTAMENTE");`;
-    }
-
-    if (lang === "java") {
-      return code + `\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println("\\n✅ CÓDIGO EJECUTADO CORRECTAMENTE");\n    }\n}`;
-    }
-
-    if (lang === "go") {
-      return code + `\n\nfunc main() {\n    fmt.Println("\\n✅ CÓDIGO EJECUTADO CORRECTAMENTE")\n}`;
-    }
-
-    if (lang === "rust") {
-      return code + `\n\nfn main() {\n    println!("\\n✅ CÓDIGO EJECUTADO CORRECTAMENTE");\n}`;
-    }
-
-    return code;
-  };
-
-  const runCode = async () => {
-    if (!langId) return;
-    setRunning(true);
-    setOutput("");
-    setError(false);
-    const execCode = addAutoTest(code, progLang);
-    try {
-      const submitRes = await fetch("https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true&fields=stdout,stderr,compile_output,status", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-         "X-RapidAPI-Key": import.meta.env.VITE_JUDGE0_API_KEY,
-          "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
-        },
-        body: JSON.stringify({
-          language_id: langId,
-          source_code: execCode,
-        }),
-      });
-      const data = await submitRes.json();
-      const stdout = data.stdout || "";
-      const stderr = data.stderr || data.compile_output || "";
-      const out = stdout || stderr || "";
-      const isErr = !!stderr && !stdout;
-      setOutput(out || "✅ Código ejecutado sin salida\n(el código no tiene print/console.log)");
-      setError(isErr);
-    } catch (e) {
-      setOutput(t.outputError || "Error al ejecutar");
-      setError(true);
-    } finally {
-      setRunning(false);
-    }
-  };
-
-    if (!langId) return null;
-
-  return (
-    <div style={styles.playgroundWrap}>
-      <div style={styles.playgroundHeader}>
-        <span style={styles.playgroundTitle}>{t.outputTitle || "📤 Resultado"}</span>
-        <button
-          onClick={runCode}
-          disabled={running}
-          style={{ ...styles.runBtn, ...(running ? styles.generateBtnDisabled : {}) }}
-        >
-          {running ? (t.running || "⏳ Ejecutando...") : (t.runBtn || "▶️ Ejecutar código")}
-        </button>
-      </div>
-      <div style={{
-        ...styles.playgroundOutput,
-        color: error ? "#f08080" : "#c8c2ff",
-        fontStyle: output ? "normal" : "italic",
-      }}>
-        {output || (t.outputEmpty || "El código se ejecutará acá")}
-      </div>
-    </div>
-  );
-}
 
 function ExplanationBlock({ explanation }) {
   const lines = explanation.split("\n");
@@ -1137,7 +994,6 @@ Respond ONLY in this JSON (no backticks):
       )}
 
       {error && <div style={{ ...styles.error, marginTop: 10 }}>{error}</div>}
-      {result && isLandscape && <Playground code={result.code} progLang={progLang} t={t} />}
     </div>
   );
 
@@ -1161,7 +1017,6 @@ Respond ONLY in this JSON (no backticks):
           <code>{result.code}</code>
         </pre>
       </div>
-      {!isLandscape && <Playground code={result.code} progLang={progLang} t={t} />}
       <div style={styles.card}>
         <div style={styles.cardHeader}>
           <div style={styles.cardTitle}>📖 {t.explainTitle}</div>
@@ -1386,9 +1241,4 @@ const styles = {
   nextStepDividerLine: { flex: 1, height: 1, background: "#2a2440" },
   nextStepDividerText: { fontSize: 10, fontWeight: 700, color: "#7c6af7", textTransform: "uppercase", letterSpacing: 1, whiteSpace: "nowrap" },
   newQueryBtn: { padding: "10px 20px", background: "#1e1a35", border: "1px solid #3a3060", borderRadius: 8, color: "#9691b8", fontSize: 13, fontWeight: 600, cursor: "pointer", textAlign: "center", width: "100%" },
-  playgroundWrap: { background: "#13111c", border: "1px solid #2a2440", borderRadius: 10, overflow: "hidden" },
-  playgroundHeader: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px", borderBottom: "1px solid #1e1c2a", background: "#0f0d18" },
-  playgroundTitle: { fontSize: 13, fontWeight: 600, color: "#c4beff" },
-  runBtn: { padding: "7px 16px", background: "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)", border: "none", borderRadius: 7, color: "#fff", fontSize: 12, fontWeight: 600, cursor: "pointer" },
-  playgroundOutput: { padding: "16px", fontFamily: "'IBM Plex Mono', monospace", fontSize: 12, lineHeight: 1.7, minHeight: 80, whiteSpace: "pre-wrap", wordBreak: "break-word" },
 };
