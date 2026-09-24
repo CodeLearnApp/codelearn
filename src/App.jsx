@@ -656,9 +656,25 @@ function Playground({ code, progLang, t }) {
       if (funcMatches && funcMatches.length > 0) {
         const lastFunc = code.match(/def\s+(\w+)\s*\(([^)]*)\)/);
         const funcName = lastFunc[1];
+        const params = lastFunc[2].trim();
 
-        // Agrega test al final
-        let testCode = `\n\n# --- Test automático ---\nprint("=== Resultado ===" )\nprint(${funcName}(5))\nprint(${funcName}("test"))`;
+        // Crea argumentos inteligentes basado en los parámetros
+        let testArgs = [];
+        if (params) {
+          // Si tiene parámetros, prueba con una lista (lo más común)
+          testArgs = ['[1, 2, 3, 4, 5, 6]'];
+        }
+
+        // Agrega test al final con manejo de errores
+        let testCode = `\n\n# --- Test automático ---\ntry:\n    print("=== Resultado ===" )\n`;
+        if (testArgs.length > 0) {
+          testArgs.forEach(arg => {
+            testCode += `    print(${funcName}(${arg}))\n`;
+          });
+        } else {
+          testCode += `    print(${funcName}())\n`;
+        }
+        testCode += `except Exception as e:\n    print(f"Error: {e}")`;
         return code + testCode;
       } else {
         // Si no hay función, ejecuta el código y muestra resultado
@@ -672,7 +688,8 @@ function Playground({ code, progLang, t }) {
         const lastFunc = code.match(/function\s+(\w+)|const\s+(\w+)\s*=|let\s+(\w+)\s*=/);
         const funcName = lastFunc[1] || lastFunc[2] || lastFunc[3];
 
-        let testCode = `\nconsole.log("=== Resultado ===");\nconsole.log(${funcName}(5));\nconsole.log(${funcName}("test"));`;
+        // Intenta con array o número
+        let testCode = `\nconsole.log("=== Resultado ===");\ntry {\n    console.log(${funcName}([1, 2, 3, 4, 5, 6]));\n} catch(e) {\n    try {\n        console.log(${funcName}(5));\n    } catch(e2) {\n        console.log("✅ Función definida");\n    }\n}`;
         return code + testCode;
       } else {
         return code + `\nconsole.log("✅ Código ejecutado correctamente");`;
