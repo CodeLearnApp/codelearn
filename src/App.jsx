@@ -640,105 +640,71 @@ function Playground({ code, progLang, t }) {
   const langId = JUDGE0_LANGS[progLang];
 
   const addAutoTest = (code, lang) => {
-    // Detect function type from code content
-    const codeL = code.toLowerCase();
-    
-    const isListSort = codeL.includes("sort") || codeL.includes("orden") || codeL.includes("lista") || codeL.includes("list");
-    const isPalindrome = codeL.includes("palin") || codeL.includes("reverse") || codeL.includes("invert") || codeL.includes("revert");
-    const isTemp = codeL.includes("celsius") || codeL.includes("fahrenheit") || codeL.includes("temp") || codeL.includes("grado");
-    const isCalc = codeL.includes("calculadora") || codeL.includes("calculator") || codeL.includes("suma") || codeL.includes("resta") || (codeL.includes("suma") && codeL.includes("mult"));
-    const isFactorial = codeL.includes("factorial");
-    const isFibonacci = codeL.includes("fibonacci") || codeL.includes("fib");
-    const isEven = codeL.includes("par") || codeL.includes("even") || codeL.includes("impar") || codeL.includes("odd");
-    const isMax = codeL.includes("mayor") || codeL.includes("maximo") || codeL.includes("max") || codeL.includes("minimo") || codeL.includes("min");
-    const isCount = codeL.includes("contar") || codeL.includes("count") || codeL.includes("veces") || codeL.includes("cuantas");
-    const isAvg = codeL.includes("promedio") || codeL.includes("average") || codeL.includes("media");
-    const isPower = codeL.includes("potencia") || codeL.includes("power") || codeL.includes("pow");
+    // Si el código ya tiene output, devuélvelo sin cambios
+    if (lang === "python" && code.includes("print(")) return code;
+    if (lang === "javascript" && code.includes("console.log")) return code;
+    if (lang === "java" && code.includes("System.out")) return code;
+    if (lang === "go" && code.includes("fmt.Print")) return code;
+    if (lang === "rust" && code.includes("println!")) return code;
+    if (lang === "cpp" && code.includes("std::cout")) return code;
+    if (lang === "c" && code.includes("printf")) return code;
 
-    const getTestArgs = (funcName, paramCount) => {
-      if (isListSort) return ['["Ana", "Carlos", "Beatriz", "David"]', '["Zara", "María", "Luis"]'];
-      if (isPalindrome) return ['"radar"', '"hola"', '"ana"'];
-      if (isTemp) return ['100', '0', '37'];
-      if (isCalc && paramCount >= 2) return ['10, 5', '20, 4', '15, 3'];
-      if (isFactorial) return ['5', '0', '7'];
-      if (isFibonacci) return ['10', '5', '8'];
-      if (isEven) return ['[1,2,3,4,5,6]', '[10,15,20,25]'];
-      if (isMax) return ['[3,1,4,1,5,9,2,6]', '[10,20,5,15]'];
-      if (isCount) return ['"programacion", "a"', '"hola mundo", "o"'];
-      if (isAvg) return ['[10, 20, 30, 40, 50]', '[5, 15, 25]'];
-      if (isPower) return ['2, 10', '3, 4'];
-      return paramCount === 1 ? ['"test"', '"hola"'] : paramCount === 2 ? ['5, 3', '10, 2'] : ['"test"'];
-    };
-
+    // SIEMPRE agrega output al final si no hay ninguno
     if (lang === "python") {
-      const match = code.match(/def\s+(\w+)\s*\(([^)]*)\)/);
-      if (match && !code.includes("print(")) {
-        const funcName = match[1];
-        const params = match[2].split(",").filter(p => p.trim());
-        const args = getTestArgs(funcName, params.length);
-        let testCode = `\n\n# --- Test automático de CodeLearn ---`;
-        args.forEach((a, i) => {
-          testCode += `\nprint("Resultado ${i+1}:", ${funcName}(${a}))`;
-        });
+      // Busca todas las funciones def
+      const funcMatches = code.match(/def\s+(\w+)\s*\(([^)]*)\)/g);
+      if (funcMatches && funcMatches.length > 0) {
+        const lastFunc = code.match(/def\s+(\w+)\s*\(([^)]*)\)/);
+        const funcName = lastFunc[1];
+
+        // Agrega test al final
+        let testCode = `\n\n# --- Test automático ---\nprint("=== Resultado ===" )\nprint(${funcName}(5))\nprint(${funcName}("test"))`;
         return code + testCode;
+      } else {
+        // Si no hay función, ejecuta el código y muestra resultado
+        return code + `\nprint("✅ Código ejecutado correctamente")`;
       }
     }
 
-    if (lang === "javascript") {
-      const match = code.match(/function\s+(\w+)\s*\(([^)]*)\)|const\s+(\w+)\s*=.*?(?:function|=>)/);
-      if (match && !code.includes("console.log")) {
-        const funcName = match[1] || match[3];
-        const params = (match[2] || "").split(",").filter(p => p.trim());
-        const args = getTestArgs(funcName, params.length);
-        let testCode = `\n\n// --- Test automático de CodeLearn ---`;
-        args.forEach((a, i) => {
-          testCode += `\nconsole.log("Resultado ${i+1}:", ${funcName}(${a}));`;
-        });
+    if (lang === "javascript" || lang === "typescript") {
+      const funcMatches = code.match(/function\s+\w+|const\s+\w+\s*=|let\s+\w+\s*=/g);
+      if (funcMatches && funcMatches.length > 0) {
+        const lastFunc = code.match(/function\s+(\w+)|const\s+(\w+)\s*=|let\s+(\w+)\s*=/);
+        const funcName = lastFunc[1] || lastFunc[2] || lastFunc[3];
+
+        let testCode = `\nconsole.log("=== Resultado ===");\nconsole.log(${funcName}(5));\nconsole.log(${funcName}("test"));`;
         return code + testCode;
+      } else {
+        return code + `\nconsole.log("✅ Código ejecutado correctamente");`;
       }
     }
 
-    if (lang === "java" && !code.includes("System.out.print") && !code.includes("public static void main")) {
-      const match = code.match(/public\s+static\s+\w+\s+(\w+)\s*\(([^)]*)\)/);
-      if (match) {
-        const funcName = match[1];
-        const params = (match[2] || "").split(",").filter(p => p.trim());
-        const args = getTestArgs(funcName, params.length);
-        const mainCode = args.map((a, i) => 
-          `        System.out.println("Resultado ${i+1}: " + ${funcName}(${a}));`
-        ).join("\n");
-        return code.replace(/}\s*$/, 
-          `\n    public static void main(String[] args) {\n${mainCode}\n    }\n}`
-        );
+    if (lang === "java") {
+      // Para Java, agrega println en el main
+      if (code.includes("public static void main")) {
+        return code.replace(/(\s*}\s*$)/, `\n    System.out.println("✅ Código ejecutado correctamente");\n$1`);
+      } else {
+        return code + `\n\npublic static void main(String[] args) {\n    System.out.println("✅ Código ejecutado");\n}`;
       }
     }
 
-    if (lang === "go" && !code.includes("fmt.Print") && !code.includes("func main")) {
-      const match = code.match(/func\s+(\w+)\s*\(([^)]*)\)/);
-      if (match && match[1] !== "main") {
-        const funcName = match[1];
-        const params = (match[2] || "").split(",").filter(p => p.trim());
-        const args = getTestArgs(funcName, params.length);
-        let mainCode = args.map((a, i) => 
-          `\tfmt.Println("Resultado ${i+1}:", ${funcName}(${a}))`
-        ).join("\n");
-        return code + `\n\nfunc main() {\n${mainCode}\n}`;
+    if (lang === "go") {
+      if (code.includes("func main")) {
+        return code.replace(/(\s*}\s*$)/, `\n\tfmt.Println("✅ Código ejecutado correctamente")\n$1`);
+      } else {
+        return code + `\n\nfunc main() {\n\tfmt.Println("✅ Código ejecutado correctamente")\n}`;
       }
     }
 
-    if (lang === "rust" && !code.includes("println!") && !code.includes("fn main")) {
-      const match = code.match(/fn\s+(\w+)\s*\(([^)]*)\)/);
-      if (match && match[1] !== "main") {
-        const funcName = match[1];
-        const params = (match[2] || "").split(",").filter(p => p.trim());
-        const args = getTestArgs(funcName, params.length);
-        let mainCode = args.map((a, i) => 
-          `    println!("Resultado ${i+1}: {:?}", ${funcName}(${a}));`
-        ).join("\n");
-        return code + `\n\nfn main() {\n${mainCode}\n}`;
+    if (lang === "rust") {
+      if (code.includes("fn main")) {
+        return code.replace(/(\s*}\s*$)/, `\n    println!("✅ Código ejecutado correctamente");\n$1`);
+      } else {
+        return code + `\n\nfn main() {\n    println!("✅ Código ejecutado correctamente");\n}`;
       }
     }
 
+    // Para otros lenguajes, devuelve el código sin cambios
     return code;
   };
 
