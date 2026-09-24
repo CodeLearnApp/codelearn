@@ -362,6 +362,119 @@ const SUGGESTED_PROMPTS = [
   { text: "Quiero una función que calcule la secuencia de Fibonacci", lang: "cpp", icon: "➕" },
 ];
 
+// ─── MODO "CREAR APP" ───────────────────────────────────────────────
+// Textos que reemplazan a los de UI_LANGS cuando el modo es "app".
+// Todo lo que no está acá (login, historial, pasos, etc.) se reutiliza tal cual.
+const APP_TEXTS = {
+  es: {
+    modeFunctions: "🧩 Crear funciones",
+    modeApp: "📱 Crear app",
+    intro: (lang) => `Describí en tu idioma la app que querés construir. Recibís el código completo de la app listo para copiar + la explicación de cómo está armada en <strong style="color:#7c6af7">${lang}</strong>.`,
+    sectionInput: "¿Qué app querés crear?",
+    inputHint: "— contá qué tiene que hacer y qué funciones querés que tenga",
+    placeholder: 'Ej: "Quiero una app de lista de tareas donde pueda agregar, marcar como hechas y borrar tareas, y ver cuántas me quedan"',
+    generateBtn: (lang, icon) => `Crear app en ${lang} ${icon}`,
+    generating: "Creando app...",
+    codeTitle: (lang, icon) => `${icon} App en ${lang}`,
+    explainTitle: "¿Cómo está armada la app?",
+    nextStepsTitle: "¿Qué hago con esta app?",
+    error: "Hubo un error creando la app. Intentá de nuevo o describila un poco más simple.",
+  },
+  en: {
+    modeFunctions: "🧩 Create functions",
+    modeApp: "📱 Create app",
+    intro: (lang) => `Describe in your language the app you want to build. Get the complete app code ready to copy + an explanation of how it's built in <strong style="color:#7c6af7">${lang}</strong>.`,
+    sectionInput: "What app do you want to create?",
+    inputHint: "— tell what it should do and which features you want",
+    placeholder: 'E.g: "I want a to-do list app where I can add, complete and delete tasks, and see how many are left"',
+    generateBtn: (lang, icon) => `Create app in ${lang} ${icon}`,
+    generating: "Creating app...",
+    codeTitle: (lang, icon) => `${icon} App in ${lang}`,
+    explainTitle: "How is the app built?",
+    nextStepsTitle: "What do I do with this app?",
+    error: "There was an error creating the app. Try again or describe it a bit simpler.",
+  },
+  pt: {
+    modeFunctions: "🧩 Criar funções",
+    modeApp: "📱 Criar app",
+    intro: (lang) => `Descreva no seu idioma o app que você quer construir. Receba o código completo do app pronto para copiar + a explicação de como ele é montado em <strong style="color:#7c6af7">${lang}</strong>.`,
+    sectionInput: "Que app você quer criar?",
+    inputHint: "— conte o que ele deve fazer e quais funções você quer",
+    placeholder: 'Ex: "Quero um app de lista de tarefas onde eu possa adicionar, marcar como feitas e apagar tarefas, e ver quantas faltam"',
+    generateBtn: (lang, icon) => `Criar app em ${lang} ${icon}`,
+    generating: "Criando app...",
+    codeTitle: (lang, icon) => `${icon} App em ${lang}`,
+    explainTitle: "Como o app é montado?",
+    nextStepsTitle: "O que faço com este app?",
+    error: "Houve um erro ao criar o app. Tente novamente ou descreva de forma mais simples.",
+  },
+  fr: {
+    modeFunctions: "🧩 Créer des fonctions",
+    modeApp: "📱 Créer une app",
+    intro: (lang) => `Décrivez dans votre langue l'app que vous voulez construire. Obtenez le code complet de l'app prêt à copier + une explication de sa structure en <strong style="color:#7c6af7">${lang}</strong>.`,
+    sectionInput: "Quelle app voulez-vous créer ?",
+    inputHint: "— dites ce qu'elle doit faire et quelles fonctionnalités vous voulez",
+    placeholder: 'Ex : "Je veux une app de liste de tâches où je peux ajouter, cocher et supprimer des tâches, et voir combien il en reste"',
+    generateBtn: (lang, icon) => `Créer l'app en ${lang} ${icon}`,
+    generating: "Création de l'app...",
+    codeTitle: (lang, icon) => `${icon} App en ${lang}`,
+    explainTitle: "Comment l'app est-elle construite ?",
+    nextStepsTitle: "Que faire avec cette app ?",
+    error: "Une erreur s'est produite lors de la création de l'app. Réessayez ou décrivez-la plus simplement.",
+  },
+  de: {
+    modeFunctions: "🧩 Funktionen erstellen",
+    modeApp: "📱 App erstellen",
+    intro: (lang) => `Beschreiben Sie in Ihrer Sprache die App, die Sie bauen möchten. Erhalten Sie den vollständigen App-Code + eine Erklärung ihres Aufbaus in <strong style="color:#7c6af7">${lang}</strong>.`,
+    sectionInput: "Welche App möchten Sie erstellen?",
+    inputHint: "— erzählen Sie, was sie tun soll und welche Funktionen sie haben soll",
+    placeholder: 'Z.B.: "Ich möchte eine To-do-App, in der ich Aufgaben hinzufügen, abhaken und löschen kann und sehe, wie viele noch offen sind"',
+    generateBtn: (lang, icon) => `App in ${lang} erstellen ${icon}`,
+    generating: "App wird erstellt...",
+    codeTitle: (lang, icon) => `${icon} App in ${lang}`,
+    explainTitle: "Wie ist die App aufgebaut?",
+    nextStepsTitle: "Was mache ich mit dieser App?",
+    error: "Beim Erstellen der App ist ein Fehler aufgetreten. Bitte erneut versuchen oder einfacher beschreiben.",
+  },
+  zh: {
+    modeFunctions: "🧩 创建函数",
+    modeApp: "📱 创建应用",
+    intro: (lang) => `用您的语言描述您想构建的应用。获得可直接复制的完整应用代码 + 用 <strong style="color:#7c6af7">${lang}</strong> 写的结构说明。`,
+    sectionInput: "您想创建什么应用？",
+    inputHint: "— 说明它要做什么以及您想要哪些功能",
+    placeholder: '例："我想要一个待办事项应用，可以添加、完成和删除任务，并查看还剩多少任务"',
+    generateBtn: (lang, icon) => `用 ${lang} 创建应用 ${icon}`,
+    generating: "正在创建应用...",
+    codeTitle: (lang, icon) => `${icon} ${lang} 应用`,
+    explainTitle: "应用是如何构建的？",
+    nextStepsTitle: "我该如何使用这个应用?",
+    error: "创建应用时出错，请重试或描述得更简单一些。",
+  },
+};
+
+const APP_SUGGESTED_PROMPTS = [
+  { text: "Quiero una app de lista de tareas: agregar, completar, borrar y ver las tareas pendientes", lang: "python", icon: "🐍" },
+  { text: "Quiero una app web de notas con HTML, CSS y JavaScript que guarde las notas en el navegador", lang: "javascript", icon: "🟨" },
+  { text: "Quiero una app de gastos personales que registre ingresos y gastos y muestre el saldo por categoría", lang: "typescript", icon: "🔷" },
+  { text: "Quiero un sistema de inventario de una tienda: agregar productos, actualizar stock y mostrar un reporte", lang: "rust", icon: "🦀" },
+  { text: "Quiero un sistema de biblioteca: prestar y devolver libros y ver cuáles están disponibles", lang: "go", icon: "🐹" },
+  { text: "Quiero una agenda de contactos: agregar, buscar, editar y eliminar contactos", lang: "java", icon: "☕" },
+  { text: "Quiero una app de quiz con preguntas de opción múltiple que muestre el puntaje final", lang: "kotlin", icon: "🎯" },
+  { text: "Quiero un juego de adivinar el número con intentos limitados y pistas de mayor o menor", lang: "swift", icon: "🍎" },
+  { text: "Quiero una app de gestión de notas de alumnos que calcule promedios y muestre quién aprobó", lang: "c", icon: "⚙️" },
+  { text: "Quiero un juego de ta-te-ti (tres en raya) para dos jugadores", lang: "cpp", icon: "➕" },
+];
+
+// Intenta leer el JSON que devuelve Claude aunque venga con texto extra alrededor
+function parseAIResponse(raw) {
+  const clean = raw.replace(/```json|```/g, "").trim();
+  try { return JSON.parse(clean); } catch {}
+  const start = clean.indexOf("{");
+  const end = clean.lastIndexOf("}");
+  if (start !== -1 && end > start) return JSON.parse(clean.slice(start, end + 1));
+  throw new Error("Invalid JSON");
+}
+
 const NEXT_STEPS = {
   python: "https://replit.com/new/python3",
   javascript: "https://codepen.io/pen/",
@@ -439,7 +552,7 @@ function ShareButton({ text, label, shared, style }) {
 }
 
 
-function SuggestedPrompts({ onSelect, setProgLang, t }) {
+function SuggestedPrompts({ onSelect, setProgLang, t, prompts = SUGGESTED_PROMPTS }) {
   const [open, setOpen] = useState(false);
   return (
     <div style={styles.suggestedWrap}>
@@ -449,7 +562,7 @@ function SuggestedPrompts({ onSelect, setProgLang, t }) {
       </button>
       {open && (
         <div style={styles.suggestedList}>
-          {SUGGESTED_PROMPTS.map((p, i) => (
+          {prompts.map((p, i) => (
             <button
               key={i}
               onClick={() => {
@@ -634,7 +747,7 @@ function LangSwitcher({ uiLang, setUiLang, t }) {
 }
 
 
-function HistoryPanel({ history, setHistory, onSelect, setProgLang, t, onClose }) {
+function HistoryPanel({ history, setHistory, onSelect, setProgLang, setMode, t, onClose }) {
   const deleteEntry = (id) => {
     const updated = history.filter(h => h.id !== id);
     setHistory(updated);
@@ -655,12 +768,14 @@ function HistoryPanel({ history, setHistory, onSelect, setProgLang, t, onClose }
             <div key={h.id} style={styles.historyItem}>
               <div style={styles.historyTop}>
                 <span style={styles.historyLang}>{h.icon} {h.lang}</span>
+                <span style={styles.historyMode}>{h.mode === "app" ? "📱 App" : "🧩"}</span>
                 <span style={styles.historyDate}>{h.date}</span>
                 <button onClick={() => deleteEntry(h.id)} style={styles.historyDelete}>{t.historyDelete}</button>
               </div>
               <div style={styles.historyInput}>{h.input}{h.input.length >= 80 ? "..." : ""}</div>
               <button
                 onClick={() => {
+                  setMode(h.mode === "app" ? "app" : "functions");
                   onSelect(h.input);
                   setProgLang(PROG_LANGS.find(l => l.label === h.lang)?.id || "python");
                   onClose();
@@ -764,6 +879,7 @@ function AuthModal({ t, onClose }) {
 
 export default function App() {
   const [uiLang, setUiLang]     = useState("es");
+  const [mode, setMode]         = useState("functions"); // "functions" | "app"
   const [progLang, setProgLang] = useState("python");
   const [input, setInput]       = useState("");
   const [result, setResult]     = useState(null);
@@ -784,8 +900,18 @@ export default function App() {
   const outputRef               = useRef(null);
   const isLandscape             = useOrientation();
 
-  const t = UI_LANGS[uiLang];
+  const isAppMode = mode === "app";
+  const baseT = { ...UI_LANGS[uiLang], ...APP_TEXTS[uiLang] };
+  const t = isAppMode ? baseT : { ...baseT, ...UI_LANGS[uiLang] };
   const selectedProgLang = PROG_LANGS.find(l => l.id === progLang);
+
+  const switchMode = (m) => {
+    if (m === mode) return;
+    setMode(m);
+    setResult(null);
+    setInput("");
+    setError(null);
+  };
   const isPremium = userPlan === "premium";
   const limitReached = !isPremium && user && dailyCount >= FREE_DAILY_LIMIT;
 
@@ -891,11 +1017,27 @@ export default function App() {
     if (limitReached) return;
 
     setLoading(true); setResult(null); setError(null);
-    const prompt = `The user wants to learn ${selectedProgLang.label}. UI language is ${UI_LANGS[uiLang].label}, write ALL explanations in ${UI_LANGS[uiLang].label}.
+    const uiLabel = UI_LANGS[uiLang].label;
+    const functionsPrompt = `The user wants to learn ${selectedProgLang.label}. UI language is ${uiLabel}, write ALL explanations in ${uiLabel}.
 They described: "${input}"
 IMPORTANT: The generated code MUST always include a working example call with test data and print/console.log/System.out.println (or the equivalent output function for the language) so the result is visible when executed. The code must be runnable as-is.
 Respond ONLY in this JSON (no backticks):
 {"code":"...","explanation":"... use ## for section titles and - for bullet points"}`;
+
+    const appPrompt = `The user wants to learn ${selectedProgLang.label} by building a complete small APPLICATION. UI language is ${uiLabel}: write ALL explanations, section titles, code comments and texts shown by the app in ${uiLabel}.
+They described the app: "${input}"
+REQUIREMENTS FOR THE CODE:
+- Build a COMPLETE, working application in a SINGLE file, well organized: data model (classes/structs), functions for each feature, and a main entry point.
+- It must run as-is in a free online editor/playground, with NO external libraries or installs (standard library only).
+- Do NOT depend on interactive keyboard input (stdin), because online playgrounds usually don't support it. Instead, in main, run a demo that simulates a user using every feature of the app step by step, printing clear output for each action, so the whole app is visible when executed.
+- For JavaScript: produce a single HTML file with embedded <style> and <script> that works in the browser (buttons, inputs, etc.).
+- For TypeScript: console app runnable in the TypeScript Playground.
+- Keep it clean, commented and under about 200 lines.
+EXPLANATION: explain how the app is built so a beginner understands it. Use these sections (translated to ${uiLabel}): app architecture, how each part works, how to run it, ideas to extend it.
+Respond ONLY in this JSON (no backticks), with the code correctly escaped as a JSON string:
+{"code":"...","explanation":"... use ## for section titles and - for bullet points"}`;
+
+    const prompt = isAppMode ? appPrompt : functionsPrompt;
     try {
       const res = await fetch("https://api.anthropic.com/v1/messages", {
         method: "POST",
@@ -905,14 +1047,15 @@ Respond ONLY in this JSON (no backticks):
           "anthropic-version": "2023-06-01",
           "anthropic-dangerous-direct-browser-access": "true",
         },
-        body: JSON.stringify({ model: "claude-haiku-4-5-20251001", max_tokens: 1000, messages: [{ role: "user", content: prompt }] }),
+        body: JSON.stringify({ model: "claude-haiku-4-5-20251001", max_tokens: isAppMode ? 8000 : 1000, messages: [{ role: "user", content: prompt }] }),
       });
       const data = await res.json();
       const raw = data.content.map(b => b.text || "").join("");
-      const parsed = JSON.parse(raw.replace(/```json|```/g, "").trim());
+      const parsed = parseAIResponse(raw);
       setResult(parsed);
       const newEntry = {
         id: Date.now(),
+        mode,
         lang: selectedProgLang.label,
         icon: selectedProgLang.icon,
         input: input.slice(0, 80),
@@ -962,7 +1105,7 @@ Respond ONLY in this JSON (no backticks):
           </div>
         )}
       {!input && (
-  <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} landscape={landscape} />
+  <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} landscape={landscape} prompts={isAppMode ? APP_SUGGESTED_PROMPTS : SUGGESTED_PROMPTS} />
 )}
       </div>
 
@@ -1077,7 +1220,7 @@ Respond ONLY in this JSON (no backticks):
           </div>
         </div>
       )}
-      {showHistory && <HistoryPanel history={history} setHistory={setHistory} onSelect={setInput} setProgLang={setProgLang} t={t} onClose={() => setShowHistory(false)} />}
+      {showHistory && <HistoryPanel history={history} setHistory={setHistory} onSelect={setInput} setProgLang={setProgLang} setMode={switchMode} t={t} onClose={() => setShowHistory(false)} />}
 
       <header style={{ ...styles.header, padding: isLandscape ? "0 16px" : "0 20px" }}>
         <div style={{ ...styles.headerInner, padding: isLandscape ? "10px 0" : "16px 0" }}>
@@ -1103,6 +1246,25 @@ Respond ONLY in this JSON (no backticks):
       </header>
 
       <main style={{ ...styles.main, padding: isLandscape ? "12px 16px" : "24px 20px" }}>
+        {/* Selector de modo: Crear funciones / Crear app */}
+        <div style={{ ...styles.modeSwitch, marginBottom: isLandscape ? 12 : 20 }}>
+          {[
+            { id: "functions", label: t.modeFunctions },
+            { id: "app", label: t.modeApp },
+          ].map(m => (
+            <button
+              key={m.id}
+              onClick={() => switchMode(m.id)}
+              style={{
+                ...styles.modeBtn,
+                padding: isLandscape ? "7px 12px" : "10px 12px",
+                ...(mode === m.id ? styles.modeBtnActive : {}),
+              }}
+            >
+              {m.label}
+            </button>
+          ))}
+        </div>
         {isLandscape ? (
           <div style={landscapeLayout}>
             <div>{renderInput(true)}</div>
@@ -1217,7 +1379,11 @@ const styles = {
   historyItem: { background: "#0f0d18", border: "1px solid #2a2440", borderRadius: 8, padding: "12px", marginBottom: 8 },
   historyTop: { display: "flex", alignItems: "center", gap: 8, marginBottom: 6 },
   historyLang: { fontSize: 11, fontWeight: 600, color: "#7c6af7", background: "#1e1a35", border: "1px solid #3a3060", padding: "2px 8px", borderRadius: 20 },
+  historyMode: { fontSize: 10, fontWeight: 600, color: "#9691b8", background: "#16141f", border: "1px solid #2a2440", padding: "2px 8px", borderRadius: 20 },
   historyDate: { fontSize: 11, color: "#4e4b62", marginLeft: "auto" },
+  modeSwitch: { display: "flex", gap: 4, padding: 4, background: "#13111c", border: "1px solid #2a2440", borderRadius: 10 },
+  modeBtn: { flex: 1, border: "none", borderRadius: 7, background: "transparent", color: "#8e8aac", fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.15s" },
+  modeBtnActive: { background: "linear-gradient(135deg, #7c6af7 0%, #5b4de0 100%)", color: "#fff" },
   historyDelete: { background: "none", border: "none", cursor: "pointer", fontSize: 13, color: "#4e4b62", padding: "2px 6px" },
   historyInput: { fontSize: 12, color: "#9691b8", lineHeight: 1.5, marginBottom: 8 },
   historyUseBtn: { fontSize: 11, fontWeight: 600, color: "#7c6af7", background: "none", border: "1px solid #3a3060", borderRadius: 6, padding: "4px 10px", cursor: "pointer" },
