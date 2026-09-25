@@ -947,35 +947,22 @@ export default function App() {
   }, []);
    
 
+  // Solo LEE el uso del usuario. Crear la fila, resetear el día y sumar consultas
+  // lo hace el servidor (Edge Function "generate"), así nadie puede tocarlo desde el navegador.
   const loadUserData = async (u) => {
     const today = new Date().toISOString().split("T")[0];
-    let { data } = await supabase
+    const { data: rows } = await supabase
       .from("user_usage")
-      .select("*")
-      .eq("user_id", u.id)
-      .single();
+      .select("plan, daily_count, last_reset")
+      .eq("user_id", u.id);
 
-    if (!data) {
-      const { data: newData } = await supabase
-        .from("user_usage")
-        .insert({ user_id: u.id, email: u.email, plan: "free", daily_count: 0, last_reset: today })
-        .select()
-        .single();
-      data = newData;
-    } else if (data.last_reset !== today) {
-      const { data: updated } = await supabase
-        .from("user_usage")
-        .update({ daily_count: 0, last_reset: today })
-        .eq("user_id", u.id)
-        .select()
-        .single();
-      data = updated;
-    }
-
-    if (data) {
-      setUserPlan(data.plan);
-      setDailyCount(data.daily_count);
-    }
+    const list = rows || [];
+    setUserPlan(list.some(r => r.plan === "premium") ? "premium" : "free");
+    setDailyCount(
+      list
+        .filter(r => String(r.last_reset || "").slice(0, 10) === today)
+        .reduce((max, r) => Math.max(max, r.daily_count || 0), 0)
+    );
   };
 
   const handleUpgrade = () => {
