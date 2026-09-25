@@ -465,15 +465,6 @@ const APP_SUGGESTED_PROMPTS = [
   { text: "Quiero un juego de ta-te-ti (tres en raya) para dos jugadores", lang: "cpp", icon: "➕" },
 ];
 
-// Intenta leer el JSON que devuelve Claude aunque venga con texto extra alrededor
-function parseAIResponse(raw) {
-  const clean = raw.replace(/```json|```/g, "").trim();
-  try { return JSON.parse(clean); } catch {}
-  const start = clean.indexOf("{");
-  const end = clean.lastIndexOf("}");
-  if (start !== -1 && end > start) return JSON.parse(clean.slice(start, end + 1));
-  throw new Error("Invalid JSON");
-}
 
 const NEXT_STEPS = {
   python: "https://replit.com/new/python3",
@@ -484,6 +475,20 @@ const NEXT_STEPS = {
   java: "https://replit.com/new/java",
   kotlin: "https://play.kotlinlang.org/",
   swift: "https://swiftfiddle.com/",
+  c: "https://replit.com/new/c",
+  cpp: "https://replit.com/new/cpp",
+};
+
+// Dónde se ejecuta cada app en el modo "Crear app"
+const APP_EDITORS = {
+  python: "https://replit.com/new/python3",
+  javascript: "https://codepen.io/pen/",
+  typescript: "https://replit.com/new/typescript",
+  rust: "https://replit.com/new/rust",
+  go: "https://replit.com/new/go",
+  java: "https://replit.com/new/java",
+  kotlin: "https://replit.com/new/kotlin",
+  swift: "https://www.apple.com/swift/playgrounds/",
   c: "https://replit.com/new/c",
   cpp: "https://replit.com/new/cpp",
 };
@@ -582,9 +587,9 @@ function SuggestedPrompts({ onSelect, setProgLang, t, prompts = SUGGESTED_PROMPT
   );
 }
 
-function NextSteps({ progLang, t }) {
+function NextSteps({ progLang, t, mode }) {
   const [open, setOpen] = useState(false);
-  const editorUrl = NEXT_STEPS[progLang] || "https://replit.com";
+  const editorUrl = (mode === "app" ? APP_EDITORS : NEXT_STEPS)[progLang] || "https://replit.com";
   const lang = progLang;
 
   const steps = [
@@ -973,16 +978,6 @@ export default function App() {
     }
   };
 
-  const incrementCount = async () => {
-    if (!user || isPremium) return;
-    const newCount = dailyCount + 1;
-    setDailyCount(newCount);
-    await supabase
-      .from("user_usage")
-      .update({ daily_count: newCount })
-      .eq("user_id", user.id);
-  };
-
   const handleUpgrade = () => {
     if (!window.Paddle) return;
     window.Paddle.Checkout.open({
@@ -1017,41 +1012,23 @@ export default function App() {
     if (limitReached) return;
 
     setLoading(true); setResult(null); setError(null);
-    const uiLabel = UI_LANGS[uiLang].label;
-    const functionsPrompt = `The user wants to learn ${selectedProgLang.label}. UI language is ${uiLabel}, write ALL explanations in ${uiLabel}.
-They described: "${input}"
-IMPORTANT: The generated code MUST always include a working example call with test data and print/console.log/System.out.println (or the equivalent output function for the language) so the result is visible when executed. The code must be runnable as-is.
-Respond ONLY in this JSON (no backticks):
-{"code":"...","explanation":"... use ## for section titles and - for bullet points"}`;
-
-    const appPrompt = `The user wants to learn ${selectedProgLang.label} by building a complete small APPLICATION. UI language is ${uiLabel}: write ALL explanations, section titles, code comments and texts shown by the app in ${uiLabel}.
-They described the app: "${input}"
-REQUIREMENTS FOR THE CODE:
-- Build a COMPLETE, working application in a SINGLE file, well organized: data model (classes/structs), functions for each feature, and a main entry point.
-- It must run as-is in a free online editor/playground, with NO external libraries or installs (standard library only).
-- Do NOT depend on interactive keyboard input (stdin), because online playgrounds usually don't support it. Instead, in main, run a demo that simulates a user using every feature of the app step by step, printing clear output for each action, so the whole app is visible when executed.
-- For JavaScript: produce a single HTML file with embedded <style> and <script> that works in the browser (buttons, inputs, etc.).
-- For TypeScript: console app runnable in the TypeScript Playground.
-- Keep it clean, commented and under about 200 lines.
-EXPLANATION: explain how the app is built so a beginner understands it. Use these sections (translated to ${uiLabel}): app architecture, how each part works, how to run it, ideas to extend it.
-Respond ONLY in this JSON (no backticks), with the code correctly escaped as a JSON string:
-{"code":"...","explanation":"... use ## for section titles and - for bullet points"}`;
-
-    const prompt = isAppMode ? appPrompt : functionsPrompt;
     try {
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": import.meta.env.VITE_API_KEY,
-          "anthropic-version": "2023-06-01",
-          "anthropic-dangerous-direct-browser-access": "true",
-        },
-        body: JSON.stringify({ model: "claude-haiku-4-5-20251001", max_tokens: isAppMode ? 8000 : 1000, messages: [{ role: "user", content: prompt }] }),
+      // La llamada a Claude ahora la hace el servidor (Supabase Edge Function "generate").
+      // La clave de Anthropic ya NO está en el navegador.
+      const { data, error: fnError } = await supabase.functions.invoke("generate", {
+        body: { input, lang: selectedProgLang.label, uiLang: UI_LANGS[uiLang].label, mode },
       });
-      const data = await res.json();
-      const raw = data.content.map(b => b.text || "").join("");
-      const parsed = parseAIResponse(raw);
+      if (fnError) {
+        let info = {};
+        try { info = await fnError.context.json(); } catch {}
+        if (info.error === "limit_reached") {
+          setDailyCount(info.dailyCount ?? FREE_DAILY_LIMIT);
+          return;
+        }
+        throw fnError;
+      }
+      const parsed = { code: data.code, explanation: data.explanation };
+      if (typeof data.dailyCount === "number") setDailyCount(data.dailyCount);
       setResult(parsed);
       const newEntry = {
         id: Date.now(),
@@ -1066,7 +1043,6 @@ Respond ONLY in this JSON (no backticks), with the code correctly escaped as a J
       const newHistory = [newEntry, ...history].slice(0, 20);
       setHistory(newHistory);
       try { localStorage.setItem("cl_history", JSON.stringify(newHistory)); } catch {}
-      await incrementCount();
       setTimeout(() => outputRef.current?.scrollIntoView({ behavior: "smooth" }), 100);
     } catch { setError(t.error); }
     finally { setLoading(false); }
@@ -1172,7 +1148,7 @@ Respond ONLY in this JSON (no backticks), with the code correctly escaped as a J
           <ExplanationBlock explanation={result.explanation} />
         </div>
       </div>
-      <NextSteps progLang={progLang} t={t} />
+      <NextSteps progLang={progLang} t={t} mode={mode} />
     </div>
   ) : isLandscape ? (
     <div style={styles.emptyState}>
