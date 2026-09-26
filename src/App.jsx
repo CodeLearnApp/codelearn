@@ -523,6 +523,23 @@ function useOrientation() {
   return isLandscape;
 }
 
+// true en pantallas angostas (celular en vertical)
+function useIsNarrow(maxWidth = 600) {
+  const [isNarrow, setIsNarrow] = useState(
+    typeof window !== "undefined" ? window.innerWidth <= maxWidth : false
+  );
+  useEffect(() => {
+    const check = () => setIsNarrow(window.innerWidth <= maxWidth);
+    window.addEventListener("resize", check);
+    window.addEventListener("orientationchange", check);
+    return () => {
+      window.removeEventListener("resize", check);
+      window.removeEventListener("orientationchange", check);
+    };
+  }, [maxWidth]);
+  return isNarrow;
+}
+
 function CopyButton({ text, t }) {
   const [copied, setCopied] = useState(false);
   const copy = () => {
@@ -726,12 +743,12 @@ function ExplanationBlock({ explanation }) {
   return <div style={styles.expBody}>{elements}</div>;
 }
 
-function LangSwitcher({ uiLang, setUiLang, t }) {
+function LangSwitcher({ uiLang, setUiLang, t, compact = false }) {
   const [open, setOpen] = useState(false);
   return (
-    <div style={{ position: "relative" }}>
-      <button onClick={() => setOpen(o => !o)} style={styles.langSwitchBtn}>
-        {UI_LANGS[uiLang].flag} {UI_LANGS[uiLang].label} ▾
+    <div style={{ position: "relative", flexShrink: 0 }}>
+      <button onClick={() => setOpen(o => !o)} style={{ ...styles.langSwitchBtn, ...(compact ? { padding: "7px 10px" } : {}) }}>
+        {UI_LANGS[uiLang].flag}{compact ? "" : ` ${UI_LANGS[uiLang].label}`} ▾
       </button>
       {open && (
         <div style={styles.langDropdown}>
@@ -904,6 +921,7 @@ export default function App() {
   });
   const outputRef               = useRef(null);
   const isLandscape             = useOrientation();
+  const isNarrow                = useIsNarrow();
 
   const isAppMode = mode === "app";
   const baseT = { ...UI_LANGS[uiLang], ...APP_TEXTS[uiLang] };
@@ -1197,24 +1215,36 @@ export default function App() {
       {showHistory && <HistoryPanel history={history} setHistory={setHistory} onSelect={setInput} setProgLang={setProgLang} setMode={switchMode} t={t} onClose={() => setShowHistory(false)} />}
 
       <header style={{ ...styles.header, padding: isLandscape ? "0 16px" : "0 20px" }}>
-        <div style={{ ...styles.headerInner, padding: isLandscape ? "10px 0" : "16px 0" }}>
+        <div style={{
+          ...styles.headerInner,
+          padding: isLandscape ? "10px 0" : isNarrow ? "12px 0" : "16px 0",
+          ...(isNarrow ? { flexWrap: "wrap", rowGap: 10 } : {}),
+        }}>
           <div style={styles.logo}>
             <span style={{ ...styles.logoIcon, fontSize: isLandscape ? 20 : 26 }}>{"</>"}</span>
             {!isLandscape && <div><div style={styles.logoTitle}>CodeLearn</div><div style={styles.logoSub}>{t.tagline}</div></div>}
             {isLandscape && <div style={styles.logoTitle}>CodeLearn</div>}
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          {isNarrow && (
+            <LangSwitcher compact uiLang={uiLang} setUiLang={(l) => { setUiLang(l); setResult(null); setError(null); }} t={t} />
+          )}
+          <div style={{
+            display: "flex", alignItems: "center", gap: isNarrow ? 6 : 8,
+            ...(isNarrow ? { width: "100%", flexWrap: "wrap", justifyContent: "flex-end" } : {}),
+          }}>
             {user ? (
               <>
-                <span style={{ ...styles.badge, fontSize: 11 }}>{isPremium ? t.premiumBadge : t.freeBadge}</span>
-                {!isPremium && <button onClick={handleUpgrade} style={styles.upgradeBtn}>⭐ Premium</button>}
+                <span style={{ ...styles.badge, fontSize: 11, whiteSpace: "nowrap" }}>{isPremium ? t.premiumBadge : t.freeBadge}</span>
+                {!isPremium && <button onClick={handleUpgrade} style={{ ...styles.upgradeBtn, whiteSpace: "nowrap" }}>⭐ Premium</button>}
                 <button onClick={() => setShowHistory(true)} style={styles.historyBtn}>📋</button>
-                <button onClick={() => supabase.auth.signOut()} style={styles.logoutBtn}>{t.logoutBtn}</button>
+                <button onClick={() => supabase.auth.signOut()} style={{ ...styles.logoutBtn, whiteSpace: "nowrap" }}>{t.logoutBtn}</button>
               </>
             ) : (
-              <button onClick={() => setShowAuth(true)} style={styles.loginHeaderBtn}>👤 {t.loginBtn}</button>
+              <button onClick={() => setShowAuth(true)} style={{ ...styles.loginHeaderBtn, whiteSpace: "nowrap" }}>👤 {t.loginBtn}</button>
             )}
-            <LangSwitcher uiLang={uiLang} setUiLang={(l) => { setUiLang(l); setResult(null); setError(null); }} t={t} />
+            {!isNarrow && (
+              <LangSwitcher uiLang={uiLang} setUiLang={(l) => { setUiLang(l); setResult(null); setError(null); }} t={t} />
+            )}
           </div>
         </div>
       </header>
@@ -1273,7 +1303,7 @@ export default function App() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;600;700&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #0f0f13; }
+        html, body { background: #0f0f13; overflow-x: hidden; }
         @keyframes spin { to { transform: rotate(360deg); } }
         textarea:focus { outline: none; border-color: #7c6af7 !important; box-shadow: 0 0 0 3px rgba(124,106,247,0.15); }
         button:hover:not(:disabled) { opacity: 0.88; }
