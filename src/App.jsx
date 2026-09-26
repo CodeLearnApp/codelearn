@@ -936,12 +936,25 @@ export default function App() {
     return () => subscription.unsubscribe();
   }, []);
 
+  // Usuario actual accesible desde los eventos de Paddle
+  const userRef = useRef(null);
+  useEffect(() => { userRef.current = user; }, [user]);
+
 // Load Paddle
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://cdn.paddle.com/paddle/v2/paddle.js";
     script.onload = () => {
-      window.Paddle.Initialize({ token: PADDLE_CLIENT_TOKEN });
+      window.Paddle.Initialize({
+        token: PADDLE_CLIENT_TOKEN,
+        // Premium lo activa el SERVIDOR cuando Paddle confirma el pago (webhook).
+        // Acá solo volvemos a leer el plan unos segundos después del pago.
+        eventCallback: (ev) => {
+          if (ev?.name === "checkout.completed" && userRef.current) {
+            [3000, 8000, 15000].forEach(ms => setTimeout(() => loadUserData(userRef.current), ms));
+          }
+        },
+      });
     };
     document.head.appendChild(script);
   }, []);
@@ -970,10 +983,8 @@ export default function App() {
     window.Paddle.Checkout.open({
       items: [{ priceId: PADDLE_PRODUCT_ID, quantity: 1 }],
       customer: { email: user?.email },
-      successCallback: async () => {
-        await supabase.from("user_usage").update({ plan: "premium" }).eq("user_id", user.id);
-        setUserPlan("premium");
-      },
+      // Así el webhook sabe a qué usuario de CodeLearn activarle Premium
+      customData: { user_id: user?.id },
     });
   };
 
