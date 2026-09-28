@@ -523,6 +523,73 @@ function useOrientation() {
   return isLandscape;
 }
 
+// ─── INSTALAR COMO APP (PWA) ────────────────────────────────────────
+const INSTALL_TEXTS = {
+  es: { text: "Instalá CodeLearn en tu dispositivo y usala como una app", btn: "📲 Instalar app", ios: "En iPhone: tocá Compartir y luego “Agregar a inicio”" },
+  en: { text: "Install CodeLearn on your device and use it like an app", btn: "📲 Install app", ios: "On iPhone: tap Share, then “Add to Home Screen”" },
+  pt: { text: "Instale o CodeLearn no seu dispositivo e use como um app", btn: "📲 Instalar app", ios: "No iPhone: toque em Compartilhar e depois em “Adicionar à Tela de Início”" },
+  fr: { text: "Installez CodeLearn sur votre appareil et utilisez-le comme une app", btn: "📲 Installer l'app", ios: "Sur iPhone : touchez Partager, puis « Sur l'écran d'accueil »" },
+  de: { text: "Installieren Sie CodeLearn auf Ihrem Gerät und nutzen Sie es wie eine App", btn: "📲 App installieren", ios: "Auf dem iPhone: Tippen Sie auf Teilen und dann auf „Zum Home-Bildschirm“" },
+  zh: { text: "将 CodeLearn 安装到您的设备上，像应用一样使用", btn: "📲 安装应用", ios: "在 iPhone 上：点击“分享”，然后选择“添加到主屏幕”" },
+};
+
+// Muestra un aviso con botón "Instalar app".
+// - Android / Chrome / Edge: el botón abre la ventana de instalación con un toque.
+// - iPhone / iPad: Apple no permite instalar con un botón, así que muestra cómo hacerlo.
+// - Si ya está instalada (abierta como app) o el usuario lo cerró, no aparece.
+function InstallBanner({ uiLang }) {
+  const it = INSTALL_TEXTS[uiLang] || INSTALL_TEXTS.es;
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [dismissed, setDismissed] = useState(() => {
+    try { return localStorage.getItem("cl_install_dismissed") === "1"; } catch { return false; }
+  });
+
+  const isStandalone = typeof window !== "undefined" && (
+    window.matchMedia?.("(display-mode: standalone)").matches || window.navigator.standalone === true
+  );
+  const isIOS = typeof navigator !== "undefined" && (
+    /iphone|ipad|ipod/i.test(navigator.userAgent) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+  );
+
+  useEffect(() => {
+    const onPrompt = (e) => { e.preventDefault(); setDeferredPrompt(e); };
+    const onInstalled = () => setDeferredPrompt(null);
+    window.addEventListener("beforeinstallprompt", onPrompt);
+    window.addEventListener("appinstalled", onInstalled);
+    return () => {
+      window.removeEventListener("beforeinstallprompt", onPrompt);
+      window.removeEventListener("appinstalled", onInstalled);
+    };
+  }, []);
+
+  const close = () => {
+    setDismissed(true);
+    try { localStorage.setItem("cl_install_dismissed", "1"); } catch {}
+  };
+
+  const install = async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    try { await deferredPrompt.userChoice; } catch {}
+    setDeferredPrompt(null);
+  };
+
+  if (isStandalone || dismissed) return null;
+  if (!deferredPrompt && !isIOS) return null;
+
+  return (
+    <div style={styles.installBanner}>
+      <div style={styles.installText}>
+        {it.text}
+        {isIOS && !deferredPrompt && <div style={styles.installIos}>{it.ios}</div>}
+      </div>
+      {deferredPrompt && <button onClick={install} style={styles.installBtn}>{it.btn}</button>}
+      <button onClick={close} style={styles.installClose} aria-label="Cerrar">✕</button>
+    </div>
+  );
+}
+
 // true en pantallas angostas (celular en vertical)
 function useIsNarrow(maxWidth = 600) {
   const [isNarrow, setIsNarrow] = useState(
@@ -954,6 +1021,13 @@ export default function App() {
     return () => subscription.unsubscribe();
   }, []);
 
+  // Registrar el service worker (necesario para poder instalar la web como app)
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js").catch(() => {});
+    }
+  }, []);
+
   // Usuario actual accesible desde los eventos de Paddle
   const userRef = useRef(null);
   useEffect(() => { userRef.current = user; }, [user]);
@@ -1250,6 +1324,7 @@ export default function App() {
       </header>
 
       <main style={{ ...styles.main, padding: isLandscape ? "12px 16px" : "24px 20px" }}>
+        <InstallBanner uiLang={uiLang} />
         {/* Selector de modo: Crear funciones / Crear app */}
         <div style={{ ...styles.modeSwitch, marginBottom: isLandscape ? 12 : 20 }}>
           {[
@@ -1385,6 +1460,11 @@ const styles = {
   historyLang: { fontSize: 11, fontWeight: 600, color: "#7c6af7", background: "#1e1a35", border: "1px solid #3a3060", padding: "2px 8px", borderRadius: 20 },
   historyMode: { fontSize: 10, fontWeight: 600, color: "#9691b8", background: "#16141f", border: "1px solid #2a2440", padding: "2px 8px", borderRadius: 20 },
   historyDate: { fontSize: 11, color: "#4e4b62", marginLeft: "auto" },
+  installBanner: { display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap", padding: "10px 12px", marginBottom: 14, background: "linear-gradient(135deg, #1a1630 0%, #12101c 100%)", border: "1px solid #3a3060", borderRadius: 10 },
+  installText: { flex: "1 1 180px", fontSize: 13, color: "#c4beff", lineHeight: 1.45 },
+  installIos: { fontSize: 12, color: "#9691b8", marginTop: 4 },
+  installBtn: { padding: "8px 14px", background: "linear-gradient(135deg, #7c6af7 0%, #5b4de0 100%)", border: "none", borderRadius: 8, color: "#fff", fontSize: 13, fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" },
+  installClose: { background: "none", border: "none", color: "#6b6880", fontSize: 16, cursor: "pointer", padding: "4px 6px" },
   modeSwitch: { display: "flex", gap: 4, padding: 4, background: "#13111c", border: "1px solid #2a2440", borderRadius: 10 },
   modeBtn: { flex: 1, border: "none", borderRadius: 7, background: "transparent", color: "#8e8aac", fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all 0.15s" },
   modeBtnActive: { background: "linear-gradient(135deg, #7c6af7 0%, #5b4de0 100%)", color: "#fff" },
