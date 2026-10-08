@@ -523,6 +523,16 @@ function useOrientation() {
   return isLandscape;
 }
 
+// Mensaje cuando el usuario se registró con un email temporal/descartable
+const EMAIL_BLOCK_TEXTS = {
+  es: "Los emails temporales no están permitidos. Registrate con tu email habitual para usar CodeLearn.",
+  en: "Temporary emails are not allowed. Please sign up with your regular email to use CodeLearn.",
+  pt: "E-mails temporários não são permitidos. Cadastre-se com seu e-mail habitual para usar o CodeLearn.",
+  fr: "Les e-mails temporaires ne sont pas autorisés. Inscrivez-vous avec votre e-mail habituel pour utiliser CodeLearn.",
+  de: "Temporäre E-Mail-Adressen sind nicht erlaubt. Bitte registrieren Sie sich mit Ihrer normalen E-Mail-Adresse.",
+  zh: "不允许使用临时邮箱。请使用您的常用邮箱注册以使用 CodeLearn。",
+};
+
 // ─── INSTALAR COMO APP (PWA) ────────────────────────────────────────
 const INSTALL_TEXTS = {
   es: { text: "Instalá CodeLearn en tu dispositivo y usala como una app", btn: "📲 Instalar app", ios: "En iPhone: tocá Compartir y luego “Agregar a inicio”" },
@@ -1113,6 +1123,10 @@ export default function App() {
         try { info = await fnError.context.json(); } catch {}
         if (info.error === "limit_reached") {
           setDailyCount(info.dailyCount ?? FREE_DAILY_LIMIT);
+          return;
+        }
+        if (info.error === "email_not_allowed") {
+          setError(EMAIL_BLOCK_TEXTS[uiLang] || EMAIL_BLOCK_TEXTS.es);
           return;
         }
         throw fnError;
