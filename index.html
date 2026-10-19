@@ -1,13 +1,56 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CodeLearn</title>
-    <link rel="manifest" href="/manifest.json">
+    <title>CodeLearn — Aprendé a programar con IA</title>
+    <meta name="description" content="Describí en tu idioma lo que querés programar y CodeLearn te da el código listo + la explicación paso a paso. Funciones y apps reales en Python, JavaScript, Java y 7 lenguajes más. Gratis." />
+    <link rel="canonical" href="https://www.codelearn.codes/" />
+    <meta name="theme-color" content="#7c6af7" />
+
+    <!-- Ícono, app instalable (PWA) e iPhone -->
+    <link rel="icon" type="image/png" href="/icon-192.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="CodeLearn" />
+
+    <!-- Vista previa al compartir el link (WhatsApp, Facebook, LinkedIn, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CodeLearn" />
+    <meta property="og:url" content="https://www.codelearn.codes/" />
+    <meta property="og:title" content="CodeLearn — Aprendé a programar con IA" />
+    <meta property="og:description" content="Describí lo que querés y la IA lo programa: código listo + explicación paso a paso. 10 lenguajes, 6 idiomas. Gratis." />
+    <meta property="og:image" content="https://www.codelearn.codes/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="es_ES" />
+
+    <!-- Vista previa en X / Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CodeLearn — Aprendé a programar con IA" />
+    <meta name="twitter:description" content="Describí lo que querés y la IA lo programa: código listo + explicación paso a paso." />
+    <meta name="twitter:image" content="https://www.codelearn.codes/og-image.png" />
+
+    <!-- Tipografías: se cargan antes y en paralelo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" />
+
+    <!-- Fondo oscuro desde el primer instante (evita un destello blanco al abrir) -->
+    <style>html, body { background: #0f0f13; margin: 0; }</style>
+
+    <!-- Vercel Web Analytics (activalo en Vercel → tu proyecto → Analytics) -->
+    <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+    <script defer src="/_vercel/insights/script.js"></script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <p style="color:#c4beff;font-family:sans-serif;padding:24px">
+        CodeLearn necesita JavaScript activado. Describí en tu idioma lo que querés programar y recibí el código listo + la explicación paso a paso.
+      </p>
+    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
