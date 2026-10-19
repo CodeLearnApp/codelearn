@@ -4,126 +4,158 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CodeLearn — Páginas Legales</title>
+  <meta name="description" content="Términos de servicio, política de privacidad y política de reembolsos de CodeLearn." />
+  <link rel="icon" type="image/png" href="/icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #0f0f13; color: #e8e6f0; font-family: 'Inter', sans-serif; line-height: 1.7; }
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
     header { background: #0d0c11; border-bottom: 1px solid #1e1c2a; padding: 16px 24px; display: flex; align-items: center; gap: 12px; }
+    header a { display: flex; align-items: center; gap: 12px; text-decoration: none; }
     .logo { font-family: monospace; color: #7c6af7; font-size: 22px; font-weight: 700; }
     .logo-title { font-size: 18px; font-weight: 700; color: #f0eeff; }
-    nav { background: #13111c; border-bottom: 1px solid #1e1c2a; padding: 0 24px; display: flex; gap: 0; }
+    nav { background: #13111c; border-bottom: 1px solid #1e1c2a; padding: 0 24px; display: flex; flex-wrap: wrap; }
     nav a { color: #9691b8; text-decoration: none; padding: 14px 20px; font-size: 13px; font-weight: 600; border-bottom: 2px solid transparent; display: block; }
-    nav a:hover, nav a.active { color: #7c6af7; border-bottom-color: #7c6af7; }
+    nav a:hover, nav a.active { color: #a99cff; border-bottom-color: #7c6af7; }
+    nav a:focus-visible, a:focus-visible { outline: 2px solid #7c6af7; outline-offset: 2px; }
     main { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
     .section { display: none; }
     .section.active { display: block; }
     h1 { font-size: 28px; color: #f0eeff; margin-bottom: 8px; }
-    .date { font-size: 12px; color: #4e4b62; margin-bottom: 32px; font-family: monospace; }
-    h2 { font-size: 16px; color: #7c6af7; text-transform: uppercase; letter-spacing: 0.8px; margin: 28px 0 12px; }
+    .date { font-size: 12px; color: #8a86a6; margin-bottom: 32px; font-family: monospace; }
+    h2 { font-size: 16px; color: #a99cff; text-transform: uppercase; letter-spacing: 0.8px; margin: 28px 0 12px; }
     p { color: #b0accc; font-size: 14px; margin-bottom: 12px; }
     ul { color: #b0accc; font-size: 14px; padding-left: 20px; margin-bottom: 12px; }
     li { margin-bottom: 6px; }
-    a { color: #7c6af7; }
+    strong { color: #d6d2f0; }
+    a { color: #a99cff; }
     .contact-box { background: #13111c; border: 1px solid #2a2440; border-radius: 10px; padding: 20px; margin-top: 32px; }
     .contact-box p { margin: 0; }
-    footer { text-align: center; padding: 24px; font-size: 11px; color: #3a3750; border-top: 1px solid #1a1830; margin-top: 60px; font-family: monospace; }
+    footer { text-align: center; padding: 24px; font-size: 11px; color: #8a86a6; border-top: 1px solid #1a1830; margin-top: 60px; font-family: monospace; }
+    footer a { color: #9691b8; }
   </style>
 </head>
 <body>
 
 <header>
-  <span class="logo"></></span>
-  <span class="logo-title">CodeLearn</span>
+  <a href="/" aria-label="Volver a CodeLearn">
+    <span class="logo">&lt;/&gt;</span>
+    <span class="logo-title">CodeLearn</span>
+  </a>
 </header>
 
-<nav>
-  <a href="#" class="active" onclick="show('terms', this)">Términos de servicio</a>
-  <a href="#" onclick="show('privacy', this)">Política de privacidad</a>
-  <a href="#" onclick="show('refund', this)">Política de reembolsos</a>
+<nav aria-label="Secciones legales">
+  <a href="#terms" data-section="terms" class="active">Términos de servicio</a>
+  <a href="#privacy" data-section="privacy">Política de privacidad</a>
+  <a href="#refund" data-section="refund">Política de reembolsos</a>
 </nav>
 
 <main>
 
   <!-- TÉRMINOS DE SERVICIO -->
-  <div id="terms" class="section active">
+  <div id="sec-terms" class="section active">
     <h1>Términos de Servicio</h1>
-    <p class="date">Última actualización: Septiembre 2026</p>
+    <p class="date">Última actualización: Octubre 2026</p>
 
     <h2>1. Aceptación de los términos</h2>
     <p>Al acceder y utilizar CodeLearn (codelearn.codes), aceptás estos Términos de Servicio. Si no estás de acuerdo con alguna parte de estos términos, no podés usar nuestros servicios.</p>
 
-    <h2>2. Descripción del servicio</h2>
-    <p>CodeLearn es una plataforma educativa que utiliza inteligencia artificial para generar código de programación y explicaciones didácticas. Los usuarios describen en lenguaje natural lo que quieren que haga un programa y reciben código en el lenguaje de programación de su elección.</p>
+    <h2>2. Responsable del servicio</h2>
+    <p>CodeLearn es un servicio operado por Alejandro Marin, con domicilio en Uruguay. Contacto: <a href="mailto:codelearn.app@gmail.com">codelearn.app@gmail.com</a>.</p>
 
-    <h2>3. Planes y precios</h2>
+    <h2>3. Descripción del servicio</h2>
+    <p>CodeLearn es una plataforma educativa que utiliza inteligencia artificial para generar código de programación, aplicaciones y explicaciones didácticas. Los usuarios describen en lenguaje natural lo que quieren que haga un programa y reciben código en el lenguaje de programación de su elección.</p>
+
+    <h2>4. Planes y precios</h2>
     <p><strong>Plan Free:</strong> 5 consultas por día, gratuito.</p>
-    <p><strong>Plan Premium:</strong> Consultas ilimitadas por $10 USD/mes.</p>
+    <p><strong>Plan Premium:</strong> consultas ilimitadas por $10 USD/mes, sujetas a un uso razonable y personal. Podemos limitar temporalmente cuentas con un uso automatizado o abusivo.</p>
     <p>Los precios pueden cambiar con previo aviso de 30 días.</p>
 
-    <h2>4. Uso aceptable</h2>
+    <h2>5. Pagos</h2>
+    <p>Nuestro proceso de pedidos es gestionado por nuestro revendedor en línea Paddle.com. Paddle.com es el Merchant of Record (comerciante registrado) de todos nuestros pedidos. Paddle gestiona las consultas de atención al cliente relacionadas con los pagos y se encarga de las devoluciones.</p>
+
+    <h2>6. Uso aceptable</h2>
     <p>Aceptás no usar CodeLearn para:</p>
     <ul>
       <li>Generar código malicioso o con fines ilegales</li>
       <li>Intentar sobrecargar o atacar nuestros sistemas</li>
+      <li>Crear varias cuentas para eludir los límites del plan Free</li>
       <li>Revender o redistribuir el servicio sin autorización</li>
       <li>Compartir credenciales de cuenta con terceros</li>
     </ul>
 
-    <h2>5. Propiedad intelectual</h2>
+    <h2>7. Propiedad intelectual</h2>
     <p>El código generado por CodeLearn puede ser usado libremente por el usuario para sus proyectos personales y comerciales. CodeLearn se reserva los derechos sobre la plataforma, diseño y tecnología.</p>
 
-    <h2>6. Limitación de responsabilidad</h2>
+    <h2>8. Limitación de responsabilidad</h2>
     <p>CodeLearn proporciona el código generado "tal cual". No garantizamos que el código sea perfecto o libre de errores. El usuario es responsable de revisar y probar el código antes de usarlo en producción.</p>
 
-    <h2>7. Cancelación</h2>
-    <p>Podés cancelar tu suscripción Premium en cualquier momento. El acceso Premium se mantiene hasta el final del período pagado.</p>
+    <h2>9. Cancelación</h2>
+    <p>Podés cancelar tu suscripción Premium en cualquier momento desde <strong>⚙️ Mi cuenta → Administrar suscripción</strong>. El acceso Premium se mantiene hasta el final del período pagado.</p>
 
-    <h2>8. Contacto</h2>
+    <h2>10. Ley aplicable</h2>
+    <p>Estos términos se rigen por las leyes de la República Oriental del Uruguay. Cualquier controversia se intentará resolver primero de forma amistosa escribiendo a <a href="mailto:codelearn.app@gmail.com">codelearn.app@gmail.com</a>.</p>
+
+    <h2>11. Contacto</h2>
     <div class="contact-box">
       <p>📧 Para consultas sobre estos términos: <a href="mailto:codelearn.app@gmail.com">codelearn.app@gmail.com</a></p>
     </div>
   </div>
 
   <!-- POLÍTICA DE PRIVACIDAD -->
-  <div id="privacy" class="section">
+  <div id="sec-privacy" class="section">
     <h1>Política de Privacidad</h1>
-    <p class="date">Última actualización: Septiembre 2026</p>
+    <p class="date">Última actualización: Octubre 2026</p>
 
     <h2>1. Información que recopilamos</h2>
     <p>Recopilamos la siguiente información cuando usás CodeLearn:</p>
     <ul>
       <li><strong>Email:</strong> para crear y gestionar tu cuenta</li>
       <li><strong>Datos de uso:</strong> número de consultas realizadas por día</li>
-      <li><strong>Plan de suscripción:</strong> Free o Premium</li>
+      <li><strong>Plan de suscripción:</strong> Free o Premium, y los identificadores de cliente y suscripción que nos envía Paddle</li>
+      <li><strong>Texto de tus consultas:</strong> se envía a nuestro proveedor de IA para generar el resultado. No lo guardamos en nuestros servidores</li>
+      <li><strong>Huella de conexión:</strong> para limitar el abuso del plan Free guardamos una huella irreversible de la conexión (no la dirección IP real) durante un máximo de 7 días</li>
     </ul>
 
     <h2>2. Cómo usamos tu información</h2>
     <ul>
       <li>Para gestionar tu cuenta y autenticación</li>
-      <li>Para controlar el límite de consultas del plan Free</li>
+      <li>Para generar el código y las explicaciones que pedís</li>
+      <li>Para controlar el límite de consultas del plan Free y prevenir abusos</li>
       <li>Para procesar pagos del plan Premium</li>
       <li>Para enviarte notificaciones importantes sobre el servicio</li>
     </ul>
 
-    <h2>3. Almacenamiento de datos</h2>
-    <p>Tus datos se almacenan de forma segura en Supabase, que cumple con los estándares de seguridad internacionales. Los pagos son procesados por Paddle, que maneja los datos de tarjetas de forma segura y no almacenamos información financiera.</p>
+    <h2>3. Proveedores que procesan datos</h2>
+    <p>No vendemos tu información personal. Solo la compartimos con los proveedores necesarios para operar la plataforma:</p>
+    <ul>
+      <li><strong>Supabase:</strong> base de datos y cuentas de usuario (email y uso diario).</li>
+      <li><strong>Anthropic (Claude):</strong> recibe el texto que escribís para generar el código y la explicación. No le enviamos tu email.</li>
+      <li><strong>Paddle:</strong> procesa los pagos de Premium. Nosotros no vemos ni guardamos datos de tarjetas.</li>
+      <li><strong>Vercel:</strong> aloja la web y mide visitas de forma anónima y agregada, sin cookies publicitarias.</li>
+      <li><strong>Google Fonts:</strong> sirve las tipografías de la web.</li>
+    </ul>
+    <p>Algunos de estos proveedores están fuera de Uruguay (por ejemplo, en Estados Unidos), por lo que tus datos pueden transferirse internacionalmente con las garantías que ofrecen sus políticas.</p>
 
-    <h2>4. Compartir información</h2>
-    <p>No vendemos ni compartimos tu información personal con terceros, excepto con nuestros proveedores de servicio (Supabase para base de datos, Paddle para pagos) que son necesarios para operar la plataforma.</p>
+    <h2>4. Cookies y almacenamiento local</h2>
+    <p>Usamos almacenamiento esencial para mantener tu sesión activa. En tu propio navegador guardamos tu historial de consultas y el idioma elegido; esa información no se envía a nuestros servidores. No usamos cookies de rastreo publicitario.</p>
 
-    <h2>5. Cookies</h2>
-    <p>Usamos cookies esenciales para mantener tu sesión activa. No usamos cookies de rastreo publicitario.</p>
-
-    <h2>6. Tus derechos</h2>
+    <h2>5. Tus derechos</h2>
     <p>Tenés derecho a:</p>
     <ul>
       <li>Acceder a tus datos personales</li>
-      <li>Solicitar la eliminación de tu cuenta y datos</li>
-      <li>Exportar tus datos</li>
+      <li>Eliminar tu cuenta y tus datos en cualquier momento desde <strong>⚙️ Mi cuenta → Eliminar mi cuenta</strong>. Si tenés Premium, la suscripción se cancela en ese momento</li>
+      <li>Administrar o cancelar tu suscripción desde <strong>⚙️ Mi cuenta → Administrar suscripción</strong></li>
+      <li>Exportar tus datos, escribiéndonos por email</li>
     </ul>
 
-    <h2>7. Retención de datos</h2>
-    <p>Conservamos tus datos mientras tu cuenta esté activa. Si eliminás tu cuenta, tus datos se eliminan en un plazo de 30 días.</p>
+    <h2>6. Retención de datos</h2>
+    <p>Conservamos tus datos mientras tu cuenta esté activa. Si eliminás tu cuenta desde la web, tus datos se borran en ese momento. Si lo pedís por email, lo hacemos en un plazo máximo de 30 días. Los registros de pagos los conserva Paddle según sus obligaciones legales.</p>
+
+    <h2>7. Edad mínima</h2>
+    <p>Para crear una cuenta tenés que tener al menos 13 años, o la edad mínima que exija la ley de tu país.</p>
 
     <h2>8. Contacto</h2>
     <div class="contact-box">
@@ -132,9 +164,9 @@
   </div>
 
   <!-- POLÍTICA DE REEMBOLSOS -->
-  <div id="refund" class="section">
+  <div id="sec-refund" class="section">
     <h1>Política de Reembolsos</h1>
-    <p class="date">Última actualización: Septiembre 2026</p>
+    <p class="date">Última actualización: Octubre 2026</p>
 
     <h2>1. Garantía de satisfacción</h2>
     <p>Ofrecemos una garantía de reembolso de <strong>7 días</strong> para nuevos suscriptores del plan Premium. Si no estás satisfecho con el servicio dentro de los primeros 7 días de tu suscripción, te reembolsamos el 100% del pago.</p>
@@ -144,19 +176,20 @@
     <ul>
       <li>Enviá un email a <a href="mailto:codelearn.app@gmail.com">codelearn.app@gmail.com</a></li>
       <li>Indicá tu email de registro y el motivo del reembolso</li>
-      <li>Procesamos el reembolso en un plazo de 5-10 días hábiles</li>
+      <li>El reembolso lo procesa Paddle, nuestro procesador de pagos, en un plazo de 5 a 10 días hábiles</li>
     </ul>
 
     <h2>3. Reembolsos fuera del período de garantía</h2>
     <p>Pasados los 7 días, no ofrecemos reembolsos por el período ya pagado. Sin embargo, podés cancelar tu suscripción en cualquier momento para que no se renueve el siguiente mes.</p>
 
     <h2>4. Cancelación de suscripción</h2>
-    <p>Podés cancelar tu suscripción Premium en cualquier momento. Al cancelar:</p>
+    <p>Podés cancelar tu suscripción Premium en cualquier momento desde <strong>⚙️ Mi cuenta → Administrar suscripción</strong>. Al cancelar:</p>
     <ul>
       <li>Mantenés el acceso Premium hasta el final del período pagado</li>
       <li>No se realizan cargos adicionales</li>
       <li>Tu cuenta pasa automáticamente al plan Free</li>
     </ul>
+    <p>Si en lugar de cancelar eliminás tu cuenta, la suscripción se cancela en ese momento y se pierde el tiempo restante del período pagado.</p>
 
     <h2>5. Problemas técnicos</h2>
     <p>Si experimentás problemas técnicos que impidan usar el servicio por más de 24 horas, evaluamos reembolsos o extensiones del período de suscripción caso por caso.</p>
@@ -174,13 +207,16 @@
 </footer>
 
 <script>
-  function show(id, el) {
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    el.classList.add('active');
-    return false;
+  // Muestra la sección pedida. Funciona con los links del pie de CodeLearn
+  // (/legal.html#privacy y /legal.html#refund) y con las pestañas de arriba.
+  function show(id) {
+    if (!document.getElementById('sec-' + id)) id = 'terms';
+    document.querySelectorAll('.section').forEach(s => s.classList.toggle('active', s.id === 'sec-' + id));
+    document.querySelectorAll('nav a').forEach(a => a.classList.toggle('active', a.dataset.section === id));
+    window.scrollTo(0, 0);
   }
+  window.addEventListener('hashchange', () => show(location.hash.slice(1)));
+  show(location.hash.slice(1) || 'terms');
 </script>
 
 </body>
