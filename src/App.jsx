@@ -350,16 +350,76 @@ const UI_LANGS = {
 
 
 const SUGGESTED_PROMPTS = [
-  { text: "Quiero una función que ordene una lista de nombres alfabéticamente", lang: "python", icon: "🐍" },
-  { text: "Quiero una calculadora que sume, reste, multiplique y divida", lang: "javascript", icon: "🟨" },
-  { text: "Quiero una función que verifique si una palabra es palíndromo", lang: "python", icon: "🐍" },
-  { text: "Quiero una función que cuente cuántas veces aparece una letra en un texto", lang: "typescript", icon: "🔷" },
-  { text: "Quiero un programa que convierta grados Celsius a Fahrenheit", lang: "go", icon: "🐹" },
-  { text: "Quiero una clase con atributos y métodos básicos", lang: "java", icon: "☕" },
-  { text: "Quiero una función que calcule el factorial de un número", lang: "kotlin", icon: "🎯" },
-  { text: "Quiero una función que encuentre el número mayor de una lista", lang: "swift", icon: "🍎" },
-  { text: "Quiero una función que invierta una cadena de texto", lang: "rust", icon: "🦀" },
-  { text: "Quiero una función que calcule la secuencia de Fibonacci", lang: "cpp", icon: "➕" },
+  { lang: "python", icon: "🐍", text: {
+    es: "Quiero una función que ordene una lista de nombres alfabéticamente",
+    en: "I want a function that sorts a list of names alphabetically",
+    pt: "Quero uma função que ordene uma lista de nomes em ordem alfabética",
+    fr: "Je veux une fonction qui trie une liste de prénoms par ordre alphabétique",
+    de: "Ich möchte eine Funktion, die eine Namensliste alphabetisch sortiert",
+    zh: "我想要一个按字母顺序排序名字列表的函数" } },
+  { lang: "javascript", icon: "🟨", text: {
+    es: "Quiero una calculadora que sume, reste, multiplique y divida",
+    en: "I want a calculator that adds, subtracts, multiplies and divides",
+    pt: "Quero uma calculadora que some, subtraia, multiplique e divida",
+    fr: "Je veux une calculatrice qui additionne, soustrait, multiplie et divise",
+    de: "Ich möchte einen Taschenrechner, der addiert, subtrahiert, multipliziert und dividiert",
+    zh: "我想要一个能做加减乘除的计算器" } },
+  { lang: "python", icon: "🐍", text: {
+    es: "Quiero una función que verifique si una palabra es palíndromo",
+    en: "I want a function that checks whether a word is a palindrome",
+    pt: "Quero uma função que verifique se uma palavra é um palíndromo",
+    fr: "Je veux une fonction qui vérifie si un mot est un palindrome",
+    de: "Ich möchte eine Funktion, die prüft, ob ein Wort ein Palindrom ist",
+    zh: "我想要一个判断单词是否为回文的函数" } },
+  { lang: "typescript", icon: "🔷", text: {
+    es: "Quiero una función que cuente cuántas veces aparece una letra en un texto",
+    en: "I want a function that counts how many times a letter appears in a text",
+    pt: "Quero uma função que conte quantas vezes uma letra aparece em um texto",
+    fr: "Je veux une fonction qui compte combien de fois une lettre apparaît dans un texte",
+    de: "Ich möchte eine Funktion, die zählt, wie oft ein Buchstabe in einem Text vorkommt",
+    zh: "我想要一个统计某个字母在文本中出现次数的函数" } },
+  { lang: "go", icon: "🐹", text: {
+    es: "Quiero un programa que convierta grados Celsius a Fahrenheit",
+    en: "I want a program that converts Celsius to Fahrenheit",
+    pt: "Quero um programa que converta graus Celsius para Fahrenheit",
+    fr: "Je veux un programme qui convertit les degrés Celsius en Fahrenheit",
+    de: "Ich möchte ein Programm, das Celsius in Fahrenheit umrechnet",
+    zh: "我想要一个把摄氏度转换为华氏度的程序" } },
+  { lang: "java", icon: "☕", text: {
+    es: "Quiero una clase con atributos y métodos básicos",
+    en: "I want a class with basic attributes and methods",
+    pt: "Quero uma classe com atributos e métodos básicos",
+    fr: "Je veux une classe avec des attributs et des méthodes de base",
+    de: "Ich möchte eine Klasse mit grundlegenden Attributen und Methoden",
+    zh: "我想要一个包含基本属性和方法的类" } },
+  { lang: "kotlin", icon: "🎯", text: {
+    es: "Quiero una función que calcule el factorial de un número",
+    en: "I want a function that calculates the factorial of a number",
+    pt: "Quero uma função que calcule o fatorial de um número",
+    fr: "Je veux une fonction qui calcule la factorielle d'un nombre",
+    de: "Ich möchte eine Funktion, die die Fakultät einer Zahl berechnet",
+    zh: "我想要一个计算数字阶乘的函数" } },
+  { lang: "swift", icon: "🍎", text: {
+    es: "Quiero una función que encuentre el número mayor de una lista",
+    en: "I want a function that finds the largest number in a list",
+    pt: "Quero uma função que encontre o maior número de uma lista",
+    fr: "Je veux une fonction qui trouve le plus grand nombre d'une liste",
+    de: "Ich möchte eine Funktion, die die größte Zahl in einer Liste findet",
+    zh: "我想要一个找出列表中最大数字的函数" } },
+  { lang: "rust", icon: "🦀", text: {
+    es: "Quiero una función que invierta una cadena de texto",
+    en: "I want a function that reverses a string",
+    pt: "Quero uma função que inverta um texto",
+    fr: "Je veux une fonction qui inverse une chaîne de caractères",
+    de: "Ich möchte eine Funktion, die eine Zeichenkette umkehrt",
+    zh: "我想要一个反转字符串的函数" } },
+  { lang: "cpp", icon: "➕", text: {
+    es: "Quiero una función que calcule la secuencia de Fibonacci",
+    en: "I want a function that calculates the Fibonacci sequence",
+    pt: "Quero uma função que calcule a sequência de Fibonacci",
+    fr: "Je veux une fonction qui calcule la suite de Fibonacci",
+    de: "Ich möchte eine Funktion, die die Fibonacci-Folge berechnet",
+    zh: "我想要一个计算斐波那契数列的函数" } },
 ];
 
 // ─── MODO "CREAR APP" ───────────────────────────────────────────────
@@ -453,16 +513,76 @@ const APP_TEXTS = {
 };
 
 const APP_SUGGESTED_PROMPTS = [
-  { text: "Quiero una app de lista de tareas: agregar, completar, borrar y ver las tareas pendientes", lang: "python", icon: "🐍" },
-  { text: "Quiero una app web de notas con HTML, CSS y JavaScript que guarde las notas en el navegador", lang: "javascript", icon: "🟨" },
-  { text: "Quiero una app de gastos personales que registre ingresos y gastos y muestre el saldo por categoría", lang: "typescript", icon: "🔷" },
-  { text: "Quiero un sistema de inventario de una tienda: agregar productos, actualizar stock y mostrar un reporte", lang: "rust", icon: "🦀" },
-  { text: "Quiero un sistema de biblioteca: prestar y devolver libros y ver cuáles están disponibles", lang: "go", icon: "🐹" },
-  { text: "Quiero una agenda de contactos: agregar, buscar, editar y eliminar contactos", lang: "java", icon: "☕" },
-  { text: "Quiero una app de quiz con preguntas de opción múltiple que muestre el puntaje final", lang: "kotlin", icon: "🎯" },
-  { text: "Quiero un juego de adivinar el número con intentos limitados y pistas de mayor o menor", lang: "swift", icon: "🍎" },
-  { text: "Quiero una app de gestión de notas de alumnos que calcule promedios y muestre quién aprobó", lang: "c", icon: "⚙️" },
-  { text: "Quiero un juego de ta-te-ti (tres en raya) para dos jugadores", lang: "cpp", icon: "➕" },
+  { lang: "python", icon: "🐍", text: {
+    es: "Quiero una app de lista de tareas: agregar, completar, borrar y ver las tareas pendientes",
+    en: "I want a to-do list app: add, complete, delete and see pending tasks",
+    pt: "Quero um app de lista de tarefas: adicionar, concluir, apagar e ver as tarefas pendentes",
+    fr: "Je veux une app de liste de tâches : ajouter, terminer, supprimer et voir les tâches en attente",
+    de: "Ich möchte eine To-do-App: Aufgaben hinzufügen, erledigen, löschen und offene Aufgaben sehen",
+    zh: "我想要一个待办事项应用：添加、完成、删除并查看未完成的任务" } },
+  { lang: "javascript", icon: "🟨", text: {
+    es: "Quiero una app web de notas con HTML, CSS y JavaScript que guarde las notas en el navegador",
+    en: "I want a notes web app with HTML, CSS and JavaScript that saves notes in the browser",
+    pt: "Quero um app web de notas com HTML, CSS e JavaScript que salve as notas no navegador",
+    fr: "Je veux une app web de notes en HTML, CSS et JavaScript qui enregistre les notes dans le navigateur",
+    de: "Ich möchte eine Notiz-Web-App mit HTML, CSS und JavaScript, die Notizen im Browser speichert",
+    zh: "我想要一个用 HTML、CSS 和 JavaScript 做的笔记网页应用，把笔记保存在浏览器里" } },
+  { lang: "typescript", icon: "🔷", text: {
+    es: "Quiero una app de gastos personales que registre ingresos y gastos y muestre el saldo por categoría",
+    en: "I want a personal expenses app that records income and expenses and shows the balance by category",
+    pt: "Quero um app de gastos pessoais que registre receitas e despesas e mostre o saldo por categoria",
+    fr: "Je veux une app de dépenses personnelles qui enregistre revenus et dépenses et affiche le solde par catégorie",
+    de: "Ich möchte eine Ausgaben-App, die Einnahmen und Ausgaben erfasst und den Saldo nach Kategorie zeigt",
+    zh: "我想要一个个人记账应用，记录收入和支出并按类别显示余额" } },
+  { lang: "rust", icon: "🦀", text: {
+    es: "Quiero un sistema de inventario de una tienda: agregar productos, actualizar stock y mostrar un reporte",
+    en: "I want a store inventory system: add products, update stock and show a report",
+    pt: "Quero um sistema de estoque de uma loja: adicionar produtos, atualizar o estoque e mostrar um relatório",
+    fr: "Je veux un système d'inventaire de magasin : ajouter des produits, mettre à jour le stock et afficher un rapport",
+    de: "Ich möchte ein Lagerverwaltungssystem: Produkte hinzufügen, Bestand aktualisieren und einen Bericht anzeigen",
+    zh: "我想要一个商店库存系统：添加商品、更新库存并显示报告" } },
+  { lang: "go", icon: "🐹", text: {
+    es: "Quiero un sistema de biblioteca: prestar y devolver libros y ver cuáles están disponibles",
+    en: "I want a library system: lend and return books and see which ones are available",
+    pt: "Quero um sistema de biblioteca: emprestar e devolver livros e ver quais estão disponíveis",
+    fr: "Je veux un système de bibliothèque : prêter et rendre des livres et voir ceux qui sont disponibles",
+    de: "Ich möchte ein Bibliothekssystem: Bücher ausleihen und zurückgeben und sehen, welche verfügbar sind",
+    zh: "我想要一个图书馆系统：借书、还书并查看哪些书可借" } },
+  { lang: "java", icon: "☕", text: {
+    es: "Quiero una agenda de contactos: agregar, buscar, editar y eliminar contactos",
+    en: "I want a contact book: add, search, edit and delete contacts",
+    pt: "Quero uma agenda de contatos: adicionar, buscar, editar e excluir contatos",
+    fr: "Je veux un carnet de contacts : ajouter, rechercher, modifier et supprimer des contacts",
+    de: "Ich möchte ein Adressbuch: Kontakte hinzufügen, suchen, bearbeiten und löschen",
+    zh: "我想要一个通讯录：添加、搜索、编辑和删除联系人" } },
+  { lang: "kotlin", icon: "🎯", text: {
+    es: "Quiero una app de quiz con preguntas de opción múltiple que muestre el puntaje final",
+    en: "I want a multiple-choice quiz app that shows the final score",
+    pt: "Quero um app de quiz com perguntas de múltipla escolha que mostre a pontuação final",
+    fr: "Je veux une app de quiz à choix multiples qui affiche le score final",
+    de: "Ich möchte eine Quiz-App mit Multiple-Choice-Fragen, die die Endpunktzahl anzeigt",
+    zh: "我想要一个显示最终得分的选择题测验应用" } },
+  { lang: "swift", icon: "🍎", text: {
+    es: "Quiero un juego de adivinar el número con intentos limitados y pistas de mayor o menor",
+    en: "I want a number-guessing game with limited tries and higher/lower hints",
+    pt: "Quero um jogo de adivinhar o número com tentativas limitadas e dicas de maior ou menor",
+    fr: "Je veux un jeu pour deviner un nombre avec des essais limités et des indices plus grand / plus petit",
+    de: "Ich möchte ein Zahlenratespiel mit begrenzten Versuchen und Hinweisen größer/kleiner",
+    zh: "我想要一个猜数字游戏，次数有限，并提示大了还是小了" } },
+  { lang: "c", icon: "⚙️", text: {
+    es: "Quiero una app de gestión de notas de alumnos que calcule promedios y muestre quién aprobó",
+    en: "I want a student grades app that calculates averages and shows who passed",
+    pt: "Quero um app de notas de alunos que calcule médias e mostre quem foi aprovado",
+    fr: "Je veux une app de notes d'élèves qui calcule les moyennes et montre qui a réussi",
+    de: "Ich möchte eine Notenverwaltung, die Durchschnitte berechnet und zeigt, wer bestanden hat",
+    zh: "我想要一个学生成绩应用，计算平均分并显示谁及格了" } },
+  { lang: "cpp", icon: "➕", text: {
+    es: "Quiero un juego de ta-te-ti (tres en raya) para dos jugadores",
+    en: "I want a two-player tic-tac-toe game",
+    pt: "Quero um jogo da velha para dois jogadores",
+    fr: "Je veux un jeu de morpion pour deux joueurs",
+    de: "Ich möchte ein Tic-Tac-Toe-Spiel für zwei Spieler",
+    zh: "我想要一个双人井字棋游戏" } },
 ];
 
 
@@ -522,6 +642,295 @@ function useOrientation() {
   }, []);
   return isLandscape;
 }
+
+// ─── TEXTOS EXTRA (traducciones que faltaban + cuenta + ejemplo + accesibilidad) ───
+const EXTRA_TEXTS = {
+  es: {
+    accountCreated: "¡Cuenta creada! Revisá tu email para confirmarla.",
+    resetTitle: "🔑 Nueva contraseña",
+    resetDesc: "Ingresá tu nueva contraseña. Debe tener al menos 8 caracteres.",
+    resetPlaceholder: "Nueva contraseña",
+    resetSave: "Guardar nueva contraseña",
+    resetCancel: "Cancelar",
+    resetDone: "✅ ¡Contraseña actualizada correctamente!",
+    resetTooShort: "La contraseña debe tener al menos 8 caracteres.",
+    useAgain: "↩ Usar de nuevo",
+    shareSuffix: "— Generado con CodeLearn: codelearn.codes",
+    accountTitle: "⚙️ Mi cuenta",
+    accountPlan: "Plan",
+    manageSub: "💳 Administrar suscripción",
+    manageSubDesc: "Cambiá tu forma de pago, descargá facturas o cancelá tu suscripción.",
+    deleteTitle: "Eliminar mi cuenta",
+    deleteDesc: "Se borran tu cuenta y tus datos de forma permanente. Si tenés Premium, se cancela en ese momento. No se puede deshacer.",
+    deleteType: (w) => `Para confirmar, escribí ${w}:`,
+    deleteWord: "BORRAR",
+    deleteBtn: "🗑️ Eliminar mi cuenta para siempre",
+    working: "Procesando...",
+    cancelFirst: "No pudimos cancelar tu Premium automáticamente. Cancelalo en “Administrar suscripción” y después eliminá la cuenta.",
+    actionError: "No se pudo completar la acción. Intentá de nuevo en unos minutos.",
+    seeExample: "👀 Ver un ejemplo de resultado",
+    exampleBanner: "Esto es un ejemplo. Registrate gratis para crear el tuyo con tus propias palabras.",
+    exampleCta: "👤 Crear mi cuenta gratis",
+    ariaHistory: "Historial de consultas",
+    ariaAccount: "Mi cuenta",
+    ariaClose: "Cerrar",
+    ariaDelete: "Borrar",
+  },
+  en: {
+    proFlowTitle: "A REAL DEVELOPER'S WORKFLOW",
+    proFlowDesc: "Want to go further? These are the tools professional developers use every day.",
+    step9Title: "INSTALL VS CODE — THE PROFESSIONAL EDITOR",
+    step9Desc: "VS Code is the most used code editor in the world. It's free, powerful and has thousands of extensions. Download it, open a new file, paste your code and run it from there.",
+    step9Link: "⬇️ Download VS Code for free",
+    step10Title: "SAVE YOUR CODE ON GITHUB",
+    step10Desc: "GitHub is where developers store and share their code — like Google Drive, but for code. Create a free account, upload your code and access it from any device. It's also your portfolio as a developer.",
+    step10Link: "🐙 Create a free GitHub account",
+    step11Title: "PUBLISH YOUR PROJECT ONLINE — VERCEL",
+    step11Desc: "Vercel lets you put your project on the internet in minutes, for free. Connect your GitHub repository and Vercel does the rest. In seconds you get a real URL to share with anyone.",
+    step11Link: "🚀 Publish on Vercel for free",
+    accountCreated: "Account created! Check your email to confirm it.",
+    resetTitle: "🔑 New password",
+    resetDesc: "Enter your new password. It must have at least 8 characters.",
+    resetPlaceholder: "New password",
+    resetSave: "Save new password",
+    resetCancel: "Cancel",
+    resetDone: "✅ Password updated successfully!",
+    resetTooShort: "The password must have at least 8 characters.",
+    useAgain: "↩ Use again",
+    shareSuffix: "— Made with CodeLearn: codelearn.codes",
+    accountTitle: "⚙️ My account",
+    accountPlan: "Plan",
+    manageSub: "💳 Manage subscription",
+    manageSubDesc: "Change your payment method, download invoices or cancel your subscription.",
+    deleteTitle: "Delete my account",
+    deleteDesc: "Your account and data will be permanently deleted. If you have Premium, it is cancelled right away. This cannot be undone.",
+    deleteType: (w) => `To confirm, type ${w}:`,
+    deleteWord: "DELETE",
+    deleteBtn: "🗑️ Delete my account forever",
+    working: "Working...",
+    cancelFirst: "We couldn’t cancel your Premium automatically. Cancel it in “Manage subscription”, then delete your account.",
+    actionError: "The action could not be completed. Please try again in a few minutes.",
+    seeExample: "👀 See an example result",
+    exampleBanner: "This is an example. Sign up for free to create your own with your own words.",
+    exampleCta: "👤 Create my free account",
+    ariaHistory: "Query history",
+    ariaAccount: "My account",
+    ariaClose: "Close",
+    ariaDelete: "Delete",
+  },
+  pt: {
+    proFlowTitle: "O FLUXO DE UM PROGRAMADOR DE VERDADE",
+    proFlowDesc: "Quer ir além? Estas são as ferramentas que os programadores profissionais usam todos os dias.",
+    step9Title: "INSTALE O VS CODE — O EDITOR PROFISSIONAL",
+    step9Desc: "O VS Code é o editor de código mais usado do mundo. É gratuito, poderoso e tem milhares de extensões. Baixe, abra um arquivo novo, cole seu código e execute ali mesmo.",
+    step9Link: "⬇️ Baixar o VS Code grátis",
+    step10Title: "GUARDE SEU CÓDIGO NO GITHUB",
+    step10Desc: "O GitHub é onde os programadores guardam e compartilham seu código — como o Google Drive, mas para código. Crie uma conta grátis, envie seu código e acesse de qualquer dispositivo. Também é o seu portfólio.",
+    step10Link: "🐙 Criar conta grátis no GitHub",
+    step11Title: "PUBLIQUE SEU PROJETO NA INTERNET — VERCEL",
+    step11Desc: "A Vercel permite publicar seu projeto na internet em minutos, de graça. Conecte seu repositório do GitHub e a Vercel faz o resto. Em segundos você tem uma URL real para compartilhar.",
+    step11Link: "🚀 Publicar na Vercel grátis",
+    accountCreated: "Conta criada! Verifique seu e-mail para confirmá-la.",
+    resetTitle: "🔑 Nova senha",
+    resetDesc: "Digite sua nova senha. Ela deve ter pelo menos 8 caracteres.",
+    resetPlaceholder: "Nova senha",
+    resetSave: "Salvar nova senha",
+    resetCancel: "Cancelar",
+    resetDone: "✅ Senha atualizada com sucesso!",
+    resetTooShort: "A senha deve ter pelo menos 8 caracteres.",
+    useAgain: "↩ Usar de novo",
+    shareSuffix: "— Feito com CodeLearn: codelearn.codes",
+    accountTitle: "⚙️ Minha conta",
+    accountPlan: "Plano",
+    manageSub: "💳 Gerenciar assinatura",
+    manageSubDesc: "Altere a forma de pagamento, baixe faturas ou cancele sua assinatura.",
+    deleteTitle: "Excluir minha conta",
+    deleteDesc: "Sua conta e seus dados serão apagados permanentemente. Se você tiver Premium, ele será cancelado na hora. Isso não pode ser desfeito.",
+    deleteType: (w) => `Para confirmar, digite ${w}:`,
+    deleteWord: "EXCLUIR",
+    deleteBtn: "🗑️ Excluir minha conta para sempre",
+    working: "Processando...",
+    cancelFirst: "Não conseguimos cancelar seu Premium automaticamente. Cancele em “Gerenciar assinatura” e depois exclua a conta.",
+    actionError: "Não foi possível concluir a ação. Tente novamente em alguns minutos.",
+    seeExample: "👀 Ver um exemplo de resultado",
+    exampleBanner: "Este é um exemplo. Cadastre-se grátis para criar o seu com suas próprias palavras.",
+    exampleCta: "👤 Criar minha conta grátis",
+    ariaHistory: "Histórico de consultas",
+    ariaAccount: "Minha conta",
+    ariaClose: "Fechar",
+    ariaDelete: "Apagar",
+  },
+  fr: {
+    proFlowTitle: "LE QUOTIDIEN D'UN VRAI DÉVELOPPEUR",
+    proFlowDesc: "Vous voulez aller plus loin ? Voici les outils que les développeurs professionnels utilisent chaque jour.",
+    step9Title: "INSTALLEZ VS CODE — L'ÉDITEUR PROFESSIONNEL",
+    step9Desc: "VS Code est l'éditeur de code le plus utilisé au monde. Il est gratuit, puissant et possède des milliers d'extensions. Téléchargez-le, ouvrez un nouveau fichier, collez votre code et exécutez-le.",
+    step9Link: "⬇️ Télécharger VS Code gratuitement",
+    step10Title: "ENREGISTREZ VOTRE CODE SUR GITHUB",
+    step10Desc: "GitHub est l'endroit où les développeurs stockent et partagent leur code — comme Google Drive, mais pour le code. Créez un compte gratuit et accédez à votre code depuis n'importe quel appareil. C'est aussi votre portfolio.",
+    step10Link: "🐙 Créer un compte GitHub gratuit",
+    step11Title: "PUBLIEZ VOTRE PROJET EN LIGNE — VERCEL",
+    step11Desc: "Vercel vous permet de mettre votre projet en ligne en quelques minutes, gratuitement. Connectez votre dépôt GitHub et Vercel s'occupe du reste. Vous obtenez une vraie URL à partager.",
+    step11Link: "🚀 Publier sur Vercel gratuitement",
+    accountCreated: "Compte créé ! Vérifiez votre e-mail pour le confirmer.",
+    resetTitle: "🔑 Nouveau mot de passe",
+    resetDesc: "Saisissez votre nouveau mot de passe. Il doit contenir au moins 8 caractères.",
+    resetPlaceholder: "Nouveau mot de passe",
+    resetSave: "Enregistrer le mot de passe",
+    resetCancel: "Annuler",
+    resetDone: "✅ Mot de passe mis à jour !",
+    resetTooShort: "Le mot de passe doit contenir au moins 8 caractères.",
+    useAgain: "↩ Réutiliser",
+    shareSuffix: "— Créé avec CodeLearn : codelearn.codes",
+    accountTitle: "⚙️ Mon compte",
+    accountPlan: "Formule",
+    manageSub: "💳 Gérer l'abonnement",
+    manageSubDesc: "Modifiez votre moyen de paiement, téléchargez vos factures ou annulez votre abonnement.",
+    deleteTitle: "Supprimer mon compte",
+    deleteDesc: "Votre compte et vos données seront supprimés définitivement. Si vous avez Premium, il est annulé immédiatement. Action irréversible.",
+    deleteType: (w) => `Pour confirmer, tapez ${w} :`,
+    deleteWord: "SUPPRIMER",
+    deleteBtn: "🗑️ Supprimer mon compte définitivement",
+    working: "Traitement...",
+    cancelFirst: "Nous n'avons pas pu annuler votre Premium automatiquement. Annulez-le via « Gérer l'abonnement », puis supprimez le compte.",
+    actionError: "L'action n'a pas pu aboutir. Réessayez dans quelques minutes.",
+    seeExample: "👀 Voir un exemple de résultat",
+    exampleBanner: "Ceci est un exemple. Inscrivez-vous gratuitement pour créer le vôtre avec vos propres mots.",
+    exampleCta: "👤 Créer mon compte gratuit",
+    ariaHistory: "Historique des requêtes",
+    ariaAccount: "Mon compte",
+    ariaClose: "Fermer",
+    ariaDelete: "Supprimer",
+  },
+  de: {
+    proFlowTitle: "DER ALLTAG ECHTER ENTWICKLER",
+    proFlowDesc: "Sie möchten weitergehen? Diese Werkzeuge nutzen professionelle Entwickler jeden Tag.",
+    step9Title: "VS CODE INSTALLIEREN — DER PROFI-EDITOR",
+    step9Desc: "VS Code ist der meistgenutzte Code-Editor der Welt. Er ist kostenlos, leistungsstark und hat tausende Erweiterungen. Herunterladen, neue Datei öffnen, Code einfügen und direkt ausführen.",
+    step9Link: "⬇️ VS Code kostenlos herunterladen",
+    step10Title: "CODE AUF GITHUB SPEICHERN",
+    step10Desc: "Auf GitHub speichern und teilen Entwickler ihren Code — wie Google Drive, nur für Code. Erstellen Sie ein kostenloses Konto und greifen Sie von jedem Gerät auf Ihren Code zu. Es ist auch Ihr Portfolio.",
+    step10Link: "🐙 Kostenloses GitHub-Konto erstellen",
+    step11Title: "PROJEKT ONLINE STELLEN — VERCEL",
+    step11Desc: "Mit Vercel ist Ihr Projekt in Minuten kostenlos online. Verbinden Sie Ihr GitHub-Repository, Vercel erledigt den Rest. In Sekunden haben Sie eine echte URL zum Teilen.",
+    step11Link: "🚀 Kostenlos auf Vercel veröffentlichen",
+    accountCreated: "Konto erstellt! Bitte bestätigen Sie es über die E-Mail.",
+    resetTitle: "🔑 Neues Passwort",
+    resetDesc: "Geben Sie Ihr neues Passwort ein. Es muss mindestens 8 Zeichen haben.",
+    resetPlaceholder: "Neues Passwort",
+    resetSave: "Neues Passwort speichern",
+    resetCancel: "Abbrechen",
+    resetDone: "✅ Passwort erfolgreich geändert!",
+    resetTooShort: "Das Passwort muss mindestens 8 Zeichen haben.",
+    useAgain: "↩ Erneut verwenden",
+    shareSuffix: "— Erstellt mit CodeLearn: codelearn.codes",
+    accountTitle: "⚙️ Mein Konto",
+    accountPlan: "Tarif",
+    manageSub: "💳 Abo verwalten",
+    manageSubDesc: "Zahlungsmethode ändern, Rechnungen herunterladen oder das Abo kündigen.",
+    deleteTitle: "Mein Konto löschen",
+    deleteDesc: "Ihr Konto und Ihre Daten werden dauerhaft gelöscht. Ein Premium-Abo wird sofort gekündigt. Das kann nicht rückgängig gemacht werden.",
+    deleteType: (w) => `Zur Bestätigung ${w} eingeben:`,
+    deleteWord: "LÖSCHEN",
+    deleteBtn: "🗑️ Mein Konto endgültig löschen",
+    working: "Wird bearbeitet...",
+    cancelFirst: "Ihr Premium-Abo konnte nicht automatisch gekündigt werden. Kündigen Sie es über „Abo verwalten“ und löschen Sie dann das Konto.",
+    actionError: "Die Aktion konnte nicht abgeschlossen werden. Bitte versuchen Sie es in einigen Minuten erneut.",
+    seeExample: "👀 Beispiel-Ergebnis ansehen",
+    exampleBanner: "Das ist ein Beispiel. Registrieren Sie sich kostenlos, um Ihr eigenes zu erstellen.",
+    exampleCta: "👤 Kostenloses Konto erstellen",
+    ariaHistory: "Anfragenverlauf",
+    ariaAccount: "Mein Konto",
+    ariaClose: "Schließen",
+    ariaDelete: "Löschen",
+  },
+  zh: {
+    proFlowTitle: "真正程序员的工作流程",
+    proFlowDesc: "想更进一步？这些是专业程序员每天使用的工具。",
+    step9Title: "安装 VS CODE — 专业编辑器",
+    step9Desc: "VS Code 是全球使用最多的代码编辑器，免费、强大，拥有数千个扩展。下载后新建文件，粘贴代码即可直接运行。",
+    step9Link: "⬇️ 免费下载 VS Code",
+    step10Title: "把代码保存到 GITHUB",
+    step10Desc: "GitHub 是程序员保存和分享代码的平台，就像代码版的 Google Drive。创建免费账户、上传代码，在任何设备上都能访问。它也是你的作品集。",
+    step10Link: "🐙 免费注册 GitHub",
+    step11Title: "把项目发布到网上 — VERCEL",
+    step11Desc: "Vercel 让你几分钟内免费把项目发布到网上。连接 GitHub 仓库，其余交给 Vercel。几秒钟就能得到一个可以分享的真实网址。",
+    step11Link: "🚀 免费发布到 Vercel",
+    accountCreated: "账户已创建！请查收邮件进行确认。",
+    resetTitle: "🔑 新密码",
+    resetDesc: "请输入新密码，至少 8 个字符。",
+    resetPlaceholder: "新密码",
+    resetSave: "保存新密码",
+    resetCancel: "取消",
+    resetDone: "✅ 密码已成功更新！",
+    resetTooShort: "密码至少需要 8 个字符。",
+    useAgain: "↩ 再次使用",
+    shareSuffix: "— 由 CodeLearn 生成：codelearn.codes",
+    accountTitle: "⚙️ 我的账户",
+    accountPlan: "套餐",
+    manageSub: "💳 管理订阅",
+    manageSubDesc: "更改付款方式、下载发票或取消订阅。",
+    deleteTitle: "删除我的账户",
+    deleteDesc: "你的账户和数据将被永久删除；如有高级版订阅，将立即取消。此操作无法恢复。",
+    deleteType: (w) => `请输入 ${w} 以确认：`,
+    deleteWord: "删除",
+    deleteBtn: "🗑️ 永久删除我的账户",
+    working: "处理中...",
+    cancelFirst: "无法自动取消你的高级版订阅。请先在“管理订阅”中取消，然后再删除账户。",
+    actionError: "操作未能完成，请几分钟后重试。",
+    seeExample: "👀 查看示例结果",
+    exampleBanner: "这是一个示例。免费注册，用你自己的话创建属于你的代码。",
+    exampleCta: "👤 免费创建账户",
+    ariaHistory: "查询历史",
+    ariaAccount: "我的账户",
+    ariaClose: "关闭",
+    ariaDelete: "删除",
+  },
+};
+
+// Ejemplo que ve quien entra sin cuenta (mismo código, comentarios y explicación en su idioma)
+const EXAMPLE_CODE = (c1, c2, t1, t2) => `def es_palindromo(texto):
+    # ${c1}
+    limpio = texto.replace(" ", "").lower()
+    # ${c2}
+    return limpio == limpio[::-1]
+
+print(es_palindromo("${t1}"))  # True
+print(es_palindromo("${t2}"))  # False`;
+
+const EXAMPLE_RESULT = {
+  es: { input: "Quiero una función que verifique si una frase es palíndromo",
+    code: EXAMPLE_CODE("Quitamos los espacios y pasamos todo a minúsculas", "Comparamos el texto con su versión al revés", "Anita lava la tina", "Python"),
+    explanation: "## Qué hace\nRevisa si una frase se lee igual al derecho y al revés (un palíndromo).\n## Cómo funciona\n- replace(\" \", \"\") quita los espacios y lower() pasa todo a minúsculas.\n- limpio[::-1] da el mismo texto, pero al revés.\n- == compara las dos versiones y devuelve True (sí) o False (no).\n## Probalo\n- Cambiá las frases de los print por otras y mirá qué devuelve." },
+  en: { input: "I want a function that checks whether a sentence is a palindrome",
+    code: EXAMPLE_CODE("Remove spaces and make everything lowercase", "Compare the text with its reversed version", "Never odd or even", "Python"),
+    explanation: "## What it does\nChecks whether a sentence reads the same forwards and backwards (a palindrome).\n## How it works\n- replace(\" \", \"\") removes spaces and lower() makes everything lowercase.\n- limpio[::-1] gives the same text reversed.\n- == compares both versions and returns True (yes) or False (no).\n## Try it\n- Change the sentences in the print lines and see what it returns." },
+  pt: { input: "Quero uma função que verifique se uma frase é um palíndromo",
+    code: EXAMPLE_CODE("Removemos os espaços e deixamos tudo em minúsculas", "Comparamos o texto com a sua versão invertida", "Socorram me subi no onibus em marrocos", "Python"),
+    explanation: "## O que faz\nVerifica se uma frase se lê igual de frente para trás e de trás para frente (um palíndromo).\n## Como funciona\n- replace(\" \", \"\") remove os espaços e lower() deixa tudo em minúsculas.\n- limpio[::-1] devolve o mesmo texto invertido.\n- == compara as duas versões e devolve True (sim) ou False (não).\n## Experimente\n- Troque as frases dos print por outras e veja o resultado." },
+  fr: { input: "Je veux une fonction qui vérifie si une phrase est un palindrome",
+    code: EXAMPLE_CODE("On enlève les espaces et on met tout en minuscules", "On compare le texte avec sa version inversée", "Engage le jeu que je le gagne", "Python"),
+    explanation: "## Ce que ça fait\nVérifie si une phrase se lit de la même façon dans les deux sens (un palindrome).\n## Comment ça marche\n- replace(\" \", \"\") enlève les espaces et lower() met tout en minuscules.\n- limpio[::-1] donne le même texte à l'envers.\n- == compare les deux versions et renvoie True (oui) ou False (non).\n## Essayez\n- Changez les phrases des print et observez le résultat." },
+  de: { input: "Ich möchte eine Funktion, die prüft, ob ein Satz ein Palindrom ist",
+    code: EXAMPLE_CODE("Leerzeichen entfernen und alles kleinschreiben", "Den Text mit seiner umgekehrten Version vergleichen", "Reliefpfeiler", "Python"),
+    explanation: "## Was es macht\nPrüft, ob ein Satz vorwärts und rückwärts gleich gelesen wird (ein Palindrom).\n## Wie es funktioniert\n- replace(\" \", \"\") entfernt Leerzeichen, lower() macht alles klein.\n- limpio[::-1] liefert denselben Text rückwärts.\n- == vergleicht beide Versionen und gibt True (ja) oder False (nein) zurück.\n## Ausprobieren\n- Ändern Sie die Sätze in den print-Zeilen und sehen Sie, was herauskommt." },
+  zh: { input: "我想要一个判断句子是否为回文的函数",
+    code: EXAMPLE_CODE("去掉空格并全部转为小写", "把文本和它的反转版本进行比较", "Never odd or even", "Python"),
+    explanation: "## 它做什么\n判断一句话正着读和倒着读是否一样（回文）。\n## 原理\n- replace(\" \", \"\") 去掉空格，lower() 把字母全部转为小写。\n- limpio[::-1] 得到反转后的同一段文本。\n- == 比较两个版本，返回 True（是）或 False（否）。\n## 动手试试\n- 把 print 里的句子换成别的，看看结果。" },
+};
+
+// Idioma inicial: el que eligió antes el usuario, o el de su navegador, o español
+function detectInitialLang() {
+  try {
+    const saved = localStorage.getItem("cl_lang");
+    if (saved && UI_LANGS[saved]) return saved;
+  } catch {}
+  const nav = (typeof navigator !== "undefined" ? (navigator.languages?.[0] || navigator.language || "") : "").slice(0, 2).toLowerCase();
+  return UI_LANGS[nav] ? nav : "es";
+}
+
+// ¿Pantalla táctil? (para no mostrar "Ctrl + Enter" en celulares)
+const IS_TOUCH = typeof window !== "undefined" && !!window.matchMedia?.("(pointer: coarse)").matches;
 
 // Mensaje cuando el usuario se registró con un email temporal/descartable
 const EMAIL_BLOCK_TEXTS = {
@@ -631,10 +1040,10 @@ function CopyButton({ text, t }) {
   );
 }
 
-function ShareButton({ text, label, shared, style }) {
+function ShareButton({ text, label, shared, style, suffix }) {
   const [sharing, setSharing] = useState(false);
   const share = async () => {
-    const shareText = text + "\n\n— Generado con CodeLearn: codelearn.codes";
+    const shareText = text + "\n\n" + (suffix || "— Generado con CodeLearn: codelearn.codes");
     if (navigator.share) {
       try { await navigator.share({ text: shareText }); } catch (e) {}
     } else {
@@ -651,7 +1060,7 @@ function ShareButton({ text, label, shared, style }) {
 }
 
 
-function SuggestedPrompts({ onSelect, setProgLang, t, prompts = SUGGESTED_PROMPTS }) {
+function SuggestedPrompts({ onSelect, setProgLang, t, uiLang = "es", prompts = SUGGESTED_PROMPTS }) {
   const [open, setOpen] = useState(false);
   return (
     <div style={styles.suggestedWrap}>
@@ -665,14 +1074,14 @@ function SuggestedPrompts({ onSelect, setProgLang, t, prompts = SUGGESTED_PROMPT
             <button
               key={i}
               onClick={() => {
-                onSelect(p.text);
+                onSelect(p.text[uiLang] || p.text.es);
                 setProgLang(p.lang);
                 setOpen(false);
               }}
               style={styles.suggestedBtn}
             >
               <span>{p.icon}</span>
-              <span>{p.text}</span>
+              <span>{p.text[uiLang] || p.text.es}</span>
             </button>
           ))}
         </div>
@@ -824,7 +1233,7 @@ function LangSwitcher({ uiLang, setUiLang, t, compact = false }) {
   const [open, setOpen] = useState(false);
   return (
     <div style={{ position: "relative", flexShrink: 0 }}>
-      <button onClick={() => setOpen(o => !o)} style={{ ...styles.langSwitchBtn, ...(compact ? { padding: "7px 10px" } : {}) }}>
+      <button onClick={() => setOpen(o => !o)} aria-label={t.uiLangLabel} aria-expanded={open} style={{ ...styles.langSwitchBtn, ...(compact ? { padding: "7px 10px" } : {}) }}>
         {UI_LANGS[uiLang].flag}{compact ? "" : ` ${UI_LANGS[uiLang].label}`} ▾
       </button>
       {open && (
@@ -858,7 +1267,7 @@ function HistoryPanel({ history, setHistory, onSelect, setProgLang, setMode, t, 
       <div style={{ ...styles.modal, maxWidth: 600, maxHeight: "80vh", display: "flex", flexDirection: "column" }} onClick={e => e.stopPropagation()}>
         <div style={styles.modalHeader}>
           <div style={styles.modalTitle}>{t.historyTitle}</div>
-          <button onClick={onClose} style={styles.modalClose}>✕</button>
+          <button onClick={onClose} style={styles.modalClose} aria-label={t.ariaClose}>✕</button>
         </div>
         <div style={{ overflowY: "auto", flex: 1, padding: "12px" }}>
           {history.length === 0 ? (
@@ -869,7 +1278,7 @@ function HistoryPanel({ history, setHistory, onSelect, setProgLang, setMode, t, 
                 <span style={styles.historyLang}>{h.icon} {h.lang}</span>
                 <span style={styles.historyMode}>{h.mode === "app" ? "📱 App" : "🧩"}</span>
                 <span style={styles.historyDate}>{h.date}</span>
-                <button onClick={() => deleteEntry(h.id)} style={styles.historyDelete}>{t.historyDelete}</button>
+                <button onClick={() => deleteEntry(h.id)} style={styles.historyDelete} aria-label={t.ariaDelete}>{t.historyDelete}</button>
               </div>
               <div style={styles.historyInput}>{h.input}{h.input.length >= 80 ? "..." : ""}</div>
               <button
@@ -881,7 +1290,7 @@ function HistoryPanel({ history, setHistory, onSelect, setProgLang, setMode, t, 
                 }}
                 style={styles.historyUseBtn}
               >
-                ↩ Usar de nuevo
+                {t.useAgain}
               </button>
             </div>
           ))}
@@ -913,7 +1322,7 @@ function AuthModal({ t, onClose }) {
       } else if (isRegister) {
         const { error } = await supabase.auth.signUp({ email, password });
         if (error) throw error;
-        setSuccess("¡Cuenta creada! Revisá tu email para confirmar.");
+        setSuccess(t.accountCreated);
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
@@ -931,7 +1340,7 @@ function AuthModal({ t, onClose }) {
       <div style={styles.modal}>
         <div style={styles.modalHeader}>
           <div style={styles.modalTitle}>{isForgot ? (t.resetPassword || "Resetear contraseña") : isRegister ? t.registerBtn : t.loginTitle}</div>
-          <button onClick={onClose} style={styles.modalClose}>✕</button>
+          <button onClick={onClose} style={styles.modalClose} aria-label={t.ariaClose}>✕</button>
         </div>
         <div style={{ padding: "20px" }}>
           <input
@@ -976,8 +1385,104 @@ function AuthModal({ t, onClose }) {
   );
 }
 
+
+// "Mi cuenta": administrar la suscripción (portal de Paddle) y eliminar la cuenta.
+// Todo pasa por la función "account" del servidor.
+function AccountModal({ t, user, isPremium, onClose, onDeleted }) {
+  const [busy, setBusy] = useState(null); // "portal" | "delete" | null
+  const [msg, setMsg] = useState("");
+  const [confirmText, setConfirmText] = useState("");
+
+  const callAccount = async (action) => {
+    const { data, error } = await supabase.functions.invoke("account", { body: { action } });
+    if (error) {
+      let info = {};
+      try { info = await error.context.json(); } catch {}
+      return { error: info.error || "error" };
+    }
+    return data || {};
+  };
+
+  const openPortal = async () => {
+    setMsg(""); setBusy("portal");
+    // Se abre la pestaña antes de esperar, para que el navegador no la bloquee
+    const win = window.open("", "_blank");
+    const res = await callAccount("portal");
+    setBusy(null);
+    if (res.url) {
+      if (win) win.location.href = res.url; else window.location.href = res.url;
+    } else {
+      if (win) win.close();
+      setMsg(t.actionError);
+    }
+  };
+
+  const deleteAccount = async () => {
+    setMsg(""); setBusy("delete");
+    const res = await callAccount("delete");
+    setBusy(null);
+    if (res.ok) { onDeleted(); return; }
+    setMsg(res.error === "cancel_first" ? t.cancelFirst : t.actionError);
+  };
+
+  const canDelete = confirmText.trim().toUpperCase() === t.deleteWord.toUpperCase();
+
+  return (
+    <div style={styles.modalOverlay} onClick={onClose}>
+      <div style={{ ...styles.modal, maxWidth: 440 }} onClick={e => e.stopPropagation()}>
+        <div style={styles.modalHeader}>
+          <div style={styles.modalTitle}>{t.accountTitle}</div>
+          <button onClick={onClose} style={styles.modalClose} aria-label={t.ariaClose}>✕</button>
+        </div>
+        <div style={{ padding: "20px", display: "flex", flexDirection: "column", gap: 16 }}>
+          <div style={{ fontSize: 13, color: "#c4beff", wordBreak: "break-all" }}>
+            {user?.email}
+            <div style={{ marginTop: 6 }}>
+              <span style={styles.badge}>{t.accountPlan}: {isPremium ? t.premiumBadge : t.freeBadge}</span>
+            </div>
+          </div>
+
+          {isPremium && (
+            <div style={styles.accountBox}>
+              <div style={styles.accountBoxText}>{t.manageSubDesc}</div>
+              <button onClick={openPortal} disabled={!!busy} style={{ ...styles.generateBtn, width: "100%" }}>
+                {busy === "portal" ? t.working : t.manageSub}
+              </button>
+            </div>
+          )}
+
+          <div style={{ ...styles.accountBox, borderColor: "#4a1515", background: "#1a0d10" }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: "#f08080" }}>{t.deleteTitle}</div>
+            <div style={styles.accountBoxText}>{t.deleteDesc}</div>
+            <label style={{ ...styles.accountBoxText, color: "#c4beff" }}>
+              {t.deleteType(t.deleteWord)}
+              <input
+                value={confirmText}
+                onChange={e => setConfirmText(e.target.value)}
+                style={{ ...styles.authInput, marginTop: 6 }}
+                aria-label={t.deleteType(t.deleteWord)}
+              />
+            </label>
+            <button
+              onClick={deleteAccount}
+              disabled={!canDelete || !!busy}
+              style={{ ...styles.dangerBtn, ...(!canDelete || busy ? styles.generateBtnDisabled : {}) }}
+            >
+              {busy === "delete" ? t.working : t.deleteBtn}
+            </button>
+          </div>
+
+          {msg && <div style={styles.authError}>{msg}</div>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
-  const [uiLang, setUiLang]     = useState("es");
+  const [uiLang, setUiLang]     = useState(detectInitialLang);
+  const [showAccount, setShowAccount] = useState(false);
+  const [isExample, setIsExample] = useState(false);
   const [mode, setMode]         = useState("functions"); // "functions" | "app"
   const [progLang, setProgLang] = useState("python");
   const [input, setInput]       = useState("");
@@ -1002,12 +1507,20 @@ export default function App() {
 
   const isAppMode = mode === "app";
   const baseT = { ...UI_LANGS[uiLang], ...APP_TEXTS[uiLang] };
-  const t = isAppMode ? baseT : { ...baseT, ...UI_LANGS[uiLang] };
+  const extraT = EXTRA_TEXTS[uiLang] || EXTRA_TEXTS.es;
+  const t = isAppMode ? { ...extraT, ...baseT } : { ...extraT, ...baseT, ...UI_LANGS[uiLang] };
   const selectedProgLang = PROG_LANGS.find(l => l.id === progLang);
+
+  // Recordar el idioma elegido y avisarle al navegador (accesibilidad y buscadores)
+  useEffect(() => {
+    try { localStorage.setItem("cl_lang", uiLang); } catch {}
+    document.documentElement.lang = uiLang;
+  }, [uiLang]);
 
   const switchMode = (m) => {
     if (m === mode) return;
     setMode(m);
+    setIsExample(false);
     setResult(null);
     setInput("");
     setError(null);
@@ -1042,24 +1555,33 @@ export default function App() {
   const userRef = useRef(null);
   useEffect(() => { userRef.current = user; }, [user]);
 
-// Load Paddle
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://cdn.paddle.com/paddle/v2/paddle.js";
-    script.onload = () => {
-      window.Paddle.Initialize({
-        token: PADDLE_CLIENT_TOKEN,
-        // Premium lo activa el SERVIDOR cuando Paddle confirma el pago (webhook).
-        // Acá solo volvemos a leer el plan unos segundos después del pago.
-        eventCallback: (ev) => {
-          if (ev?.name === "checkout.completed" && userRef.current) {
-            [3000, 8000, 15000].forEach(ms => setTimeout(() => loadUserData(userRef.current), ms));
-          }
-        },
+// Paddle se descarga SOLO cuando el usuario toca "Premium" (la web carga más rápido)
+  const paddlePromiseRef = useRef(null);
+  const loadPaddle = () => {
+    if (window.Paddle) return Promise.resolve(window.Paddle);
+    if (!paddlePromiseRef.current) {
+      paddlePromiseRef.current = new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = "https://cdn.paddle.com/paddle/v2/paddle.js";
+        script.onload = () => {
+          window.Paddle.Initialize({
+            token: PADDLE_CLIENT_TOKEN,
+            // Premium lo activa el SERVIDOR cuando Paddle confirma el pago (webhook).
+            // Acá solo volvemos a leer el plan unos segundos después del pago.
+            eventCallback: (ev) => {
+              if (ev?.name === "checkout.completed" && userRef.current) {
+                [3000, 8000, 15000].forEach(ms => setTimeout(() => loadUserData(userRef.current), ms));
+              }
+            },
+          });
+          resolve(window.Paddle);
+        };
+        script.onerror = () => { paddlePromiseRef.current = null; reject(new Error("paddle")); };
+        document.head.appendChild(script);
       });
-    };
-    document.head.appendChild(script);
-  }, []);
+    }
+    return paddlePromiseRef.current;
+  };
    
 
   // Solo LEE el uso del usuario. Crear la fila, resetear el día y sumar consultas
@@ -1080,8 +1602,9 @@ export default function App() {
     );
   };
 
-  const handleUpgrade = () => {
-    if (!window.Paddle) return;
+  const handleUpgrade = async () => {
+    if (!user) { setShowAuth(true); return; }
+    try { await loadPaddle(); } catch { setError(t.actionError); return; }
     window.Paddle.Checkout.open({
       items: [{ priceId: PADDLE_PRODUCT_ID, quantity: 1 }],
       customer: { email: user?.email },
@@ -1092,8 +1615,8 @@ export default function App() {
 
   const handleResetPassword = async () => {
     setResetError("");
-    if (newPassword.length < 6) {
-      setResetError("La contraseña debe tener al menos 6 caracteres.");
+    if (newPassword.length < 8) {
+      setResetError(t.resetTooShort);
       return;
     }
     const { error } = await supabase.auth.updateUser({ password: newPassword });
@@ -1111,7 +1634,7 @@ export default function App() {
     if (!user) { setShowAuth(true); return; }
     if (limitReached) return;
 
-    setLoading(true); setResult(null); setError(null);
+    setLoading(true); setResult(null); setError(null); setIsExample(false);
     try {
       // La llamada a Claude ahora la hace el servidor (Supabase Edge Function "generate").
       // La clave de Anthropic ya NO está en el navegador.
@@ -1179,13 +1702,13 @@ export default function App() {
           onKeyDown={e => { if (e.key === "Enter" && e.ctrlKey) generate(); }}
           rows={4}
         />
-        {!landscape && (
+        {!landscape && !IS_TOUCH && (
           <div style={styles.inputFooter}>
             <span style={styles.hint}>{t.ctrlHint}</span>
           </div>
         )}
       {!input && (
-  <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} landscape={landscape} prompts={isAppMode ? APP_SUGGESTED_PROMPTS : SUGGESTED_PROMPTS} />
+  <SuggestedPrompts onSelect={setInput} setProgLang={setProgLang} t={t} uiLang={uiLang} landscape={landscape} prompts={isAppMode ? APP_SUGGESTED_PROMPTS : SUGGESTED_PROMPTS} />
 )}
       </div>
 
@@ -1216,24 +1739,48 @@ export default function App() {
         </button>
       )}
 
+      {/* Visitantes sin cuenta: pueden ver un resultado de ejemplo antes de registrarse */}
+      {!user && !result && (
+        <button onClick={showExample} style={styles.exampleBtn}>{t.seeExample}</button>
+      )}
+
       {error && <div style={{ ...styles.error, marginTop: 10 }}>{error}</div>}
     </div>
   );
 
+  const showExample = () => {
+    const ex = EXAMPLE_RESULT[uiLang] || EXAMPLE_RESULT.es;
+    if (mode !== "functions") setMode("functions");
+    setProgLang("python");
+    setError(null);
+    setIsExample(true);
+    setResult({ code: ex.code, explanation: ex.explanation });
+    setTimeout(() => outputRef.current?.scrollIntoView({ behavior: "smooth" }), 100);
+  };
+
   const renderResult = () => result ? (
     <div style={{ display: "flex", flexDirection: "column", gap: isLandscape ? 12 : 16 }}>
       <button
-        onClick={() => { setResult(null); setInput(""); setError(null); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+        onClick={() => { setResult(null); setIsExample(false); setInput(""); setError(null); window.scrollTo({ top: 0, behavior: "smooth" }); }}
         style={styles.newQueryBtn}
       >
         {t.newQuery || "🔄 Nueva consulta"}
       </button>
+      {isExample && (
+        <div style={styles.exampleBanner}>
+          <div style={{ marginBottom: 10 }}>
+            <strong style={{ color: "#c4beff" }}>“{(EXAMPLE_RESULT[uiLang] || EXAMPLE_RESULT.es).input}”</strong>
+            <div style={{ marginTop: 6 }}>{t.exampleBanner}</div>
+          </div>
+          <button onClick={() => setShowAuth(true)} style={{ ...styles.generateBtn, width: "100%" }}>{t.exampleCta}</button>
+        </div>
+      )}
       <div style={styles.card}>
         <div style={styles.cardHeader}>
           <div style={styles.cardTitle}>{t.codeTitle(selectedProgLang.label, selectedProgLang.icon)}</div>
           <div style={styles.btnGroup}>
             <CopyButton text={result.code} t={t} />
-            <ShareButton text={result.code} label={t.shareCode} shared={t.shared} />
+            <ShareButton text={result.code} label={t.shareCode} shared={t.shared} suffix={t.shareSuffix} />
           </div>
         </div>
         <pre style={{ ...styles.codeBlock, ...(isLandscape ? { fontSize: 12, maxHeight: "30vh", overflowY: "auto" } : {}) }}>
@@ -1245,7 +1792,7 @@ export default function App() {
           <div style={styles.cardTitle}>📖 {t.explainTitle}</div>
           <div style={styles.btnGroup}>
             <span style={styles.badge}>{selectedProgLang.label}</span>
-            <ShareButton text={result.explanation} label={t.shareExplanation} shared={t.shared} />
+            <ShareButton text={result.explanation} label={t.shareExplanation} shared={t.shared} suffix={t.shareSuffix} />
           </div>
         </div>
         <div style={isLandscape ? { maxHeight: "30vh", overflowY: "auto" } : {}}>
@@ -1264,37 +1811,51 @@ export default function App() {
   return (
     <div style={styles.root}>
       {showAuth && <AuthModal t={t} onClose={() => setShowAuth(false)} />}
+      {showAccount && user && (
+        <AccountModal
+          t={t}
+          user={user}
+          isPremium={isPremium}
+          onClose={() => setShowAccount(false)}
+          onDeleted={async () => {
+            setShowAccount(false);
+            try { localStorage.removeItem("cl_history"); } catch {}
+            setHistory([]);
+            await supabase.auth.signOut();
+          }}
+        />
+      )}
       {showResetForm && (
         <div style={styles.modalOverlay}>
           <div style={{ ...styles.modal, maxWidth: 400 }}>
             <div style={styles.modalHeader}>
-              <div style={styles.modalTitle}>🔑 Nueva contraseña</div>
+              <div style={styles.modalTitle}>{t.resetTitle}</div>
             </div>
             <div style={{ padding: "20px" }}>
               <p style={{ fontSize: 13, color: "#b0accc", marginBottom: 16 }}>
-                Ingresá tu nueva contraseña. Debe tener al menos 6 caracteres.
+                {t.resetDesc}
               </p>
               <input
                 type="password"
-                placeholder="Nueva contraseña"
+                placeholder={t.resetPlaceholder}
                 value={newPassword}
                 onChange={e => setNewPassword(e.target.value)}
                 style={styles.authInput}
                 onKeyDown={e => { if (e.key === "Enter") handleResetPassword(); }}
               />
               {resetError && <div style={styles.authError}>{resetError}</div>}
-              {resetDone && <div style={styles.authSuccess}>✅ ¡Contraseña actualizada correctamente!</div>}
+              {resetDone && <div style={styles.authSuccess}>{t.resetDone}</div>}
               <button
                 onClick={handleResetPassword}
                 style={{ ...styles.generateBtn, width: "100%", marginTop: 16 }}
               >
-                Guardar nueva contraseña
+                {t.resetSave}
               </button>
               <button
                 onClick={() => setShowResetForm(false)}
                 style={styles.switchBtn}
               >
-                Cancelar
+                {t.resetCancel}
               </button>
             </div>
           </div>
@@ -1314,7 +1875,7 @@ export default function App() {
             {isLandscape && <div style={styles.logoTitle}>CodeLearn</div>}
           </div>
           {isNarrow && (
-            <LangSwitcher compact uiLang={uiLang} setUiLang={(l) => { setUiLang(l); setResult(null); setError(null); }} t={t} />
+            <LangSwitcher compact uiLang={uiLang} setUiLang={(l) => { setUiLang(l); setResult(null); setIsExample(false); setError(null); }} t={t} />
           )}
           <div style={{
             display: "flex", alignItems: "center", gap: isNarrow ? 6 : 8,
@@ -1324,14 +1885,15 @@ export default function App() {
               <>
                 <span style={{ ...styles.badge, fontSize: 11, whiteSpace: "nowrap" }}>{isPremium ? t.premiumBadge : t.freeBadge}</span>
                 {!isPremium && <button onClick={handleUpgrade} style={{ ...styles.upgradeBtn, whiteSpace: "nowrap" }}>⭐ Premium</button>}
-                <button onClick={() => setShowHistory(true)} style={styles.historyBtn}>📋</button>
+                <button onClick={() => setShowHistory(true)} style={styles.historyBtn} aria-label={t.ariaHistory} title={t.ariaHistory}>📋</button>
+                <button onClick={() => setShowAccount(true)} style={styles.historyBtn} aria-label={t.ariaAccount} title={t.ariaAccount}>⚙️</button>
                 <button onClick={() => supabase.auth.signOut()} style={{ ...styles.logoutBtn, whiteSpace: "nowrap" }}>{t.logoutBtn}</button>
               </>
             ) : (
               <button onClick={() => setShowAuth(true)} style={{ ...styles.loginHeaderBtn, whiteSpace: "nowrap" }}>👤 {t.loginBtn}</button>
             )}
             {!isNarrow && (
-              <LangSwitcher uiLang={uiLang} setUiLang={(l) => { setUiLang(l); setResult(null); setError(null); }} t={t} />
+              <LangSwitcher uiLang={uiLang} setUiLang={(l) => { setUiLang(l); setResult(null); setIsExample(false); setError(null); }} t={t} />
             )}
           </div>
         </div>
@@ -1390,12 +1952,12 @@ export default function App() {
       )}
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;600;700&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html, body { background: #0f0f13; overflow-x: hidden; }
         @keyframes spin { to { transform: rotate(360deg); } }
         textarea:focus { outline: none; border-color: #7c6af7 !important; box-shadow: 0 0 0 3px rgba(124,106,247,0.15); }
         button:hover:not(:disabled) { opacity: 0.88; }
+        button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid #7c6af7; outline-offset: 2px; }
         ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: #0f0f13; }
         ::-webkit-scrollbar-thumb { background: #3a3060; border-radius: 4px; }
@@ -1411,7 +1973,7 @@ const styles = {
   logo: { display: "flex", alignItems: "center", gap: 10 },
   logoIcon: { fontFamily: "'IBM Plex Mono', monospace", color: "#7c6af7", fontWeight: 700 },
   logoTitle: { fontSize: 18, fontWeight: 700, color: "#f0eeff", letterSpacing: -0.5 },
-  logoSub: { fontSize: 10, color: "#6b6880", fontFamily: "'IBM Plex Mono', monospace", letterSpacing: 0.5 },
+  logoSub: { fontSize: 10, color: "#8e8aac", fontFamily: "'IBM Plex Mono', monospace", letterSpacing: 0.5 },
   langSwitchBtn: { fontSize: 12, fontWeight: 600, color: "#c4beff", background: "#1e1a35", border: "1px solid #3a3060", borderRadius: 8, padding: "7px 12px", cursor: "pointer" },
   langDropdown: { position: "absolute", right: 0, top: "calc(100% + 8px)", background: "#1a1730", border: "1px solid #2a2440", borderRadius: 10, padding: "8px", zIndex: 100, minWidth: 150, boxShadow: "0 8px 32px rgba(0,0,0,0.5)" },
   langDropdownLabel: { fontSize: 10, fontWeight: 700, color: "#4e4b62", textTransform: "uppercase", letterSpacing: 1, padding: "4px 10px 8px" },
@@ -1421,7 +1983,7 @@ const styles = {
   intro: { background: "linear-gradient(135deg, #1a1630 0%, #12101c 100%)", borderRadius: 10, border: "1px solid #2a2440" },
   introText: { fontSize: 14, color: "#b0accc", lineHeight: 1.6 },
   label: { display: "block", fontSize: 12, fontWeight: 600, color: "#9691b8", textTransform: "uppercase", letterSpacing: 0.8, marginBottom: 10 },
-  labelHint: { fontWeight: 400, textTransform: "none", letterSpacing: 0, fontSize: 11, color: "#6b6880" },
+  labelHint: { fontWeight: 400, textTransform: "none", letterSpacing: 0, fontSize: 11, color: "#8e8aac" },
   langGrid: { display: "flex", flexWrap: "wrap", gap: 6 },
   langGridLandscape: { display: "flex", flexWrap: "wrap", gap: 5 },
   progLangBtn: { display: "flex", alignItems: "center", gap: 5, padding: "7px 12px", borderRadius: 7, border: "1px solid #2a2440", background: "#16141f", cursor: "pointer", color: "#8e8aac", fontSize: 12, fontWeight: 500 },
@@ -1429,7 +1991,7 @@ const styles = {
   progLangBtnActive: { border: "1px solid #7c6af7", background: "#1e1a35", color: "#c4beff" },
   textarea: { width: "100%", background: "#13111c", border: "1px solid #2a2440", borderRadius: 8, color: "#e8e6f0", fontSize: 14, fontFamily: "'Inter', sans-serif", lineHeight: 1.6, padding: "12px 14px", resize: "vertical" },
   inputFooter: { display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 8 },
-  hint: { fontSize: 11, color: "#4e4b62", fontFamily: "'IBM Plex Mono', monospace" },
+  hint: { fontSize: 11, color: "#8a86a6", fontFamily: "'IBM Plex Mono', monospace" },
   generateBtn: { padding: "10px 20px", background: "linear-gradient(135deg, #7c6af7 0%, #5b4de0 100%)", border: "none", borderRadius: 8, color: "#fff", fontSize: 13, fontWeight: 600, cursor: "pointer", letterSpacing: 0.2 },
   generateBtnDisabled: { opacity: 0.35, cursor: "not-allowed" },
   loadingInner: { display: "flex", alignItems: "center", justifyContent: "center", gap: 8 },
@@ -1446,7 +2008,7 @@ const styles = {
   expP: { fontSize: 13, color: "#b0accc", lineHeight: 1.7, marginBottom: 8 },
   expUl: { listStyle: "none", paddingLeft: 0, marginBottom: 8 },
   expLi: { fontSize: 13, color: "#b0accc", lineHeight: 1.65, paddingLeft: 4, marginBottom: 5 },
-  footer: { textAlign: "center", padding: "16px", fontSize: 11, color: "#3a3750", borderTop: "1px solid #1a1830", fontFamily: "'IBM Plex Mono', monospace" },
+  footer: { textAlign: "center", padding: "16px", fontSize: 11, color: "#8a86a6", borderTop: "1px solid #1a1830", fontFamily: "'IBM Plex Mono', monospace" },
   btnGroup: { display: "flex", alignItems: "center", gap: 6 },
   shareBtn: { fontSize: 11, fontWeight: 600, color: "#7c6af7", background: "#1e1a35", border: "1px solid #3a3060", borderRadius: 6, padding: "5px 10px", cursor: "pointer" },
   emptyState: { display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100%", minHeight: 200, opacity: 0.25 },
@@ -1467,13 +2029,18 @@ const styles = {
   limitReached: { padding: "14px 16px", background: "#1f0e0e", border: "1px solid #4a1515", borderRadius: 8, marginBottom: 12 },
   upgradeBtn: { fontSize: 11, fontWeight: 600, color: "#f0c040", background: "#2a2010", border: "1px solid #5a4010", borderRadius: 6, padding: "5px 10px", cursor: "pointer" },
   loginHeaderBtn: { fontSize: 12, fontWeight: 600, color: "#c4beff", background: "#1e1a35", border: "1px solid #3a3060", borderRadius: 8, padding: "7px 12px", cursor: "pointer" },
-  logoutBtn: { fontSize: 11, fontWeight: 600, color: "#6b6880", background: "none", border: "1px solid #2a2440", borderRadius: 6, padding: "5px 10px", cursor: "pointer" },
+  logoutBtn: { fontSize: 11, fontWeight: 600, color: "#9691b8", background: "none", border: "1px solid #2a2440", borderRadius: 6, padding: "5px 10px", cursor: "pointer" },
   historyBtn: { fontSize: 14, background: "#1e1a35", border: "1px solid #3a3060", borderRadius: 6, padding: "5px 10px", cursor: "pointer" },
   historyItem: { background: "#0f0d18", border: "1px solid #2a2440", borderRadius: 8, padding: "12px", marginBottom: 8 },
   historyTop: { display: "flex", alignItems: "center", gap: 8, marginBottom: 6 },
   historyLang: { fontSize: 11, fontWeight: 600, color: "#7c6af7", background: "#1e1a35", border: "1px solid #3a3060", padding: "2px 8px", borderRadius: 20 },
   historyMode: { fontSize: 10, fontWeight: 600, color: "#9691b8", background: "#16141f", border: "1px solid #2a2440", padding: "2px 8px", borderRadius: 20 },
-  historyDate: { fontSize: 11, color: "#4e4b62", marginLeft: "auto" },
+  historyDate: { fontSize: 11, color: "#8a86a6", marginLeft: "auto" },
+  accountBox: { display: "flex", flexDirection: "column", gap: 10, padding: 14, border: "1px solid #2a2440", borderRadius: 10, background: "#0f0d18" },
+  accountBoxText: { fontSize: 12, color: "#b0accc", lineHeight: 1.5 },
+  dangerBtn: { padding: "10px 16px", background: "#7a1f24", border: "1px solid #a3343b", borderRadius: 8, color: "#fff", fontSize: 13, fontWeight: 600, cursor: "pointer" },
+  exampleBtn: { display: "block", marginTop: 12, background: "none", border: "1px dashed #3a3060", borderRadius: 8, color: "#c4beff", fontSize: 13, fontWeight: 600, padding: "9px 14px", cursor: "pointer", width: "100%" },
+  exampleBanner: { padding: "14px 16px", background: "linear-gradient(135deg, #1a1630 0%, #12101c 100%)", border: "1px solid #3a3060", borderRadius: 10, fontSize: 13, color: "#b0accc", lineHeight: 1.5 },
   installBanner: { display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap", padding: "10px 12px", marginBottom: 14, background: "linear-gradient(135deg, #1a1630 0%, #12101c 100%)", border: "1px solid #3a3060", borderRadius: 10 },
   installText: { flex: "1 1 180px", fontSize: 13, color: "#c4beff", lineHeight: 1.45 },
   installIos: { fontSize: 12, color: "#9691b8", marginTop: 4 },
@@ -1486,9 +2053,9 @@ const styles = {
   historyInput: { fontSize: 12, color: "#9691b8", lineHeight: 1.5, marginBottom: 8 },
   historyUseBtn: { fontSize: 11, fontWeight: 600, color: "#7c6af7", background: "none", border: "1px solid #3a3060", borderRadius: 6, padding: "4px 10px", cursor: "pointer" },
   footerLinks: { display: "flex", justifyContent: "center", gap: 12, marginTop: 8, flexWrap: "wrap" },
-  footerLink: { fontSize: 11, color: "#4e4b62", textDecoration: "none" },
+  footerLink: { fontSize: 11, color: "#9691b8", textDecoration: "none" },
   suggestedWrap: { marginTop: 12, marginBottom: 4 },
-  suggestedToggle: { width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 12px", background: "#13111c", border: "1px solid #2a2440", borderRadius: 8, cursor: "pointer", color: "#6b6880", fontSize: 12, fontWeight: 600, marginBottom: 0 },
+  suggestedToggle: { width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 12px", background: "#13111c", border: "1px solid #2a2440", borderRadius: 8, cursor: "pointer", color: "#9691b8", fontSize: 12, fontWeight: 600, marginBottom: 0 },
   suggestedLabel: { fontSize: 11, color: "#4e4b62", fontFamily: "'IBM Plex Mono', monospace", marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.5 },
   suggestedList: { display: "flex", flexDirection: "column", gap: 6 },
   suggestedBtn: { display: "flex", alignItems: "flex-start", gap: 8, padding: "8px 12px", background: "#13111c", border: "1px solid #2a2440", borderRadius: 8, cursor: "pointer", color: "#9691b8", fontSize: 12, textAlign: "left", lineHeight: 1.4, transition: "all 0.15s" },
