@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CodeLearn — Aprendé a programar con IA</title>
-    <meta name="description" content="Describí en tu idioma lo que querés programar y CodeLearn te da el código listo + la explicación paso a paso. Funciones y apps reales en Python, JavaScript, Java y 7 lenguajes más. Gratis." />
+    <meta name="description" content="Describí lo que querés programar y recibí el código listo con explicación paso a paso. Funciones y apps en 10 lenguajes. Gratis." />
     <link rel="canonical" href="https://www.codelearn.codes/" />
     <meta name="theme-color" content="#7c6af7" />
 
@@ -24,7 +24,12 @@
     <meta property="og:image" content="https://www.codelearn.codes/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="es_ES" />
+    <meta property="og:locale" content="es_LA" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale:alternate" content="pt_BR" />
+    <meta property="og:locale:alternate" content="fr_FR" />
+    <meta property="og:locale:alternate" content="de_DE" />
+    <meta property="og:locale:alternate" content="zh_CN" />
 
     <!-- Vista previa en X / Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -32,25 +37,73 @@
     <meta name="twitter:description" content="Describí lo que querés y la IA lo programa: código listo + explicación paso a paso." />
     <meta name="twitter:image" content="https://www.codelearn.codes/og-image.png" />
 
+    <!-- Datos estructurados: le explican a Google qué es la web y cuánto cuesta -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "CodeLearn",
+      "url": "https://www.codelearn.codes/",
+      "description": "Describí lo que querés programar y recibí el código listo con explicación paso a paso. Funciones y apps en 10 lenguajes.",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Web, Android, iOS",
+      "inLanguage": ["es", "en", "pt", "fr", "de", "zh"],
+      "image": "https://www.codelearn.codes/og-image.png",
+      "offers": [
+        { "@type": "Offer", "name": "Gratis", "price": "0", "priceCurrency": "USD", "description": "5 consultas por día" },
+        { "@type": "Offer", "name": "Premium", "price": "10", "priceCurrency": "USD", "description": "Consultas ilimitadas, suscripción mensual" }
+      ]
+    }
+    </script>
+
     <!-- Tipografías: se cargan antes y en paralelo -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" />
 
-    <!-- Fondo oscuro desde el primer instante (evita un destello blanco al abrir) -->
-    <style>html, body { background: #0f0f13; margin: 0; }</style>
+    <!-- Fondo oscuro desde el primer instante + estilo del texto previo a la carga -->
+    <style>
+      html, body { background: #0f0f13; margin: 0; }
+      .cl-pre { max-width: 720px; margin: 0 auto; padding: 48px 20px; color: #c9c7d6; font-family: Inter, system-ui, sans-serif; line-height: 1.6; }
+      .cl-pre h1 { color: #ffffff; font-size: 28px; margin: 0 0 12px; }
+      .cl-pre h2 { color: #c4beff; font-size: 18px; margin: 28px 0 8px; }
+      .cl-pre a { color: #c4beff; }
+      .cl-pre ul { padding-left: 20px; }
+    </style>
 
-    <!-- Vercel Web Analytics (activalo en Vercel → tu proyecto → Analytics) -->
+    <!-- Vercel Web Analytics -->
     <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
     <script defer src="/_vercel/insights/script.js"></script>
   </head>
   <body>
-    <div id="root"></div>
-    <noscript>
-      <p style="color:#c4beff;font-family:sans-serif;padding:24px">
-        CodeLearn necesita JavaScript activado. Describí en tu idioma lo que querés programar y recibí el código listo + la explicación paso a paso.
-      </p>
-    </noscript>
+    <div id="root">
+      <!-- Este texto lo leen Google, Bing y las IAs. Cuando la app carga, React lo reemplaza solo. -->
+      <main class="cl-pre">
+        <h1>CodeLearn — Aprendé a programar con IA</h1>
+        <p>Describí en tu idioma lo que querés que haga tu programa y CodeLearn te da el código listo para copiar, con la explicación paso a paso de cada parte.</p>
+
+        <h2>Dos modos</h2>
+        <ul>
+          <li><strong>Crear funciones:</strong> funciones concretas para aprender cómo se resuelve cada problema.</li>
+          <li><strong>Crear app:</strong> aplicaciones completas y reales, adaptadas a cada lenguaje.</li>
+        </ul>
+
+        <h2>10 lenguajes de programación</h2>
+        <p>Python, JavaScript, TypeScript, Rust, Go, Java, Kotlin, Swift, C y C++.</p>
+
+        <h2>6 idiomas</h2>
+        <p>Español, English, Português, Français, Deutsch y 中文.</p>
+
+        <h2>Planes</h2>
+        <ul>
+          <li><strong>Gratis:</strong> 5 consultas por día.</li>
+          <li><strong>Premium:</strong> consultas ilimitadas por USD 10 al mes. Cancelás cuando quieras.</li>
+        </ul>
+
+        <p><a href="/legal.html">Términos, privacidad y reembolsos</a></p>
+        <noscript><p>CodeLearn necesita JavaScript activado para funcionar.</p></noscript>
+      </main>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
