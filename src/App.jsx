@@ -943,6 +943,12 @@ const EMAIL_BLOCK_TEXTS = {
 };
 
 // ─── INSTALAR COMO APP (PWA) ────────────────────────────────────────
+// Botón y link a la guía de uso (/guia.html)
+const GUIDE_TEXTS = {
+  es: "Guía de uso", en: "User guide", pt: "Guia de uso",
+  fr: "Guide d'utilisation", de: "Anleitung", zh: "使用指南",
+};
+
 const INSTALL_TEXTS = {
   es: { text: "Instalá CodeLearn en tu dispositivo y usala como una app", btn: "📲 Instalar app", ios: "En iPhone: tocá Compartir y luego “Agregar a inicio”" },
   en: { text: "Install CodeLearn on your device and use it like an app", btn: "📲 Install app", ios: "On iPhone: tap Share, then “Add to Home Screen”" },
@@ -1367,7 +1373,7 @@ function AuthModal({ t, onClose }) {
             disabled={loading}
             style={{ ...styles.generateBtn, width: "100%", marginTop: 16 }}
           >
-            {loading ? "..." : (isRegister ? t.registerBtn : t.loginBtn)}
+            {loading ? "..." : isForgot ? (t.resetPassword || "Resetear contraseña") : (isRegister ? t.registerBtn : t.loginBtn)}
           </button>
           {!isForgot && (
             <button onClick={() => setIsRegister(r => !r)} style={styles.switchBtn}>
@@ -1892,6 +1898,14 @@ export default function App() {
             ) : (
               <button onClick={() => setShowAuth(true)} style={{ ...styles.loginHeaderBtn, whiteSpace: "nowrap" }}>👤 {t.loginBtn}</button>
             )}
+            <a
+              href={`/guia.html?lang=${uiLang}`}
+              target="_blank"
+              rel="noopener"
+              style={{ ...styles.historyBtn, textDecoration: "none", display: "inline-flex", alignItems: "center" }}
+              aria-label={GUIDE_TEXTS[uiLang] || GUIDE_TEXTS.es}
+              title={GUIDE_TEXTS[uiLang] || GUIDE_TEXTS.es}
+            >📖</a>
             {!isNarrow && (
               <LangSwitcher uiLang={uiLang} setUiLang={(l) => { setUiLang(l); setResult(null); setIsExample(false); setError(null); }} t={t} />
             )}
@@ -1940,6 +1954,8 @@ export default function App() {
         <footer style={styles.footer}>
           <div>{t.footer}</div>
           <div style={styles.footerLinks}>
+            <a href={`/guia.html?lang=${uiLang}`} target="_blank" style={styles.footerLink}>📖 {GUIDE_TEXTS[uiLang] || GUIDE_TEXTS.es}</a>
+            <span style={{ color: "#2a2440" }}>·</span>
             <a href="/legal.html" target="_blank" style={styles.footerLink}>{t.footerTerms || "Términos"}</a>
             <span style={{ color: "#2a2440" }}>·</span>
             <a href="/legal.html#privacy" target="_blank" style={styles.footerLink}>{t.footerPrivacy || "Privacidad"}</a>
