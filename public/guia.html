@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía de uso — CodeLearn</title>
+  <meta name="description" content="Guía completa de CodeLearn: cómo crear tu cuenta, generar funciones y apps con IA, ejecutar el código, el historial, los planes y más." />
+  <link rel="canonical" href="https://www.codelearn.codes/guia.html" />
+  <meta name="theme-color" content="#7c6af7" />
+  <link rel="icon" type="image/png" href="/icon-192.png" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="CodeLearn" />
+  <meta property="og:url" content="https://www.codelearn.codes/guia.html" />
+  <meta property="og:title" content="Guía de uso de CodeLearn" />
+  <meta property="og:description" content="Cómo usar CodeLearn paso a paso: funciones, apps, ejecutar el código, planes y preguntas frecuentes." />
+  <meta property="og:image" content="https://www.codelearn.codes/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: #0f0f13; color: #e8e6f0; font-family: 'Inter', system-ui, sans-serif; line-height: 1.7; }
+    header { position: sticky; top: 0; z-index: 10; background: #0d0c11; border-bottom: 1px solid #1e1c2a; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo { font-family: monospace; color: #7c6af7; font-size: 22px; font-weight: 700; }
+    .logo-title { font-size: 18px; font-weight: 700; color: #f0eeff; }
+    .header-actions { display: flex; align-items: center; gap: 8px; }
+    .back { color: #c4beff; text-decoration: none; font-size: 13px; font-weight: 600; border: 1px solid #2a2440; border-radius: 8px; padding: 7px 12px; white-space: nowrap; }
+    .back:hover { border-color: #7c6af7; }
+    select { background: #13111c; color: #e8e6f0; border: 1px solid #2a2440; border-radius: 8px; padding: 7px 8px; font-size: 13px; font-family: inherit; }
+    main { max-width: 820px; margin: 0 auto; padding: 36px 20px 20px; }
+    .guide { display: none; }
+    .guide.active { display: block; }
+    h1 { font-size: 30px; line-height: 1.25; color: #f0eeff; margin-bottom: 12px; }
+    .lead { font-size: 16px; color: #b0accc; margin-bottom: 24px; }
+    .toc { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 8px; background: #13111c; border: 1px solid #2a2440; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+    .toc a { color: #c4beff; text-decoration: none; font-size: 14px; padding: 4px 6px; border-radius: 6px; }
+    .toc a:hover { background: #1c1930; }
+    section { padding-top: 28px; scroll-margin-top: 70px; }
+    h2 { font-size: 21px; color: #a99cff; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #1e1c2a; }
+    h3 { font-size: 16px; color: #f0eeff; margin: 18px 0 8px; }
+    p { color: #b0accc; font-size: 15px; margin-bottom: 12px; }
+    ul, ol { color: #b0accc; font-size: 15px; padding-left: 22px; margin-bottom: 12px; }
+    li { margin-bottom: 6px; }
+    strong { color: #d6d2f0; }
+    em { color: #d6d2f0; }
+    a { color: #a99cff; }
+    code { font-family: 'IBM Plex Mono', monospace; background: #1c1930; color: #c4beff; padding: 1px 6px; border-radius: 4px; font-size: 13px; }
+    .tip { background: rgba(124,106,247,0.08); border-left: 3px solid #7c6af7; border-radius: 0 8px 8px 0; padding: 12px 14px; margin: 14px 0; color: #b0accc; font-size: 14px; }
+    .table-wrap { overflow-x: auto; margin: 12px 0; border: 1px solid #2a2440; border-radius: 10px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 520px; }
+    th { background: #13111c; color: #c4beff; text-align: left; padding: 10px 12px; font-weight: 600; }
+    td { color: #b0accc; padding: 10px 12px; border-top: 1px solid #1e1c2a; vertical-align: top; }
+    td:first-child { color: #f0eeff; font-weight: 600; white-space: nowrap; }
+    .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin: 12px 0 8px; }
+    .plan { background: #13111c; border: 1px solid #2a2440; border-radius: 12px; padding: 16px 18px; }
+    .plan h3 { margin-top: 0; }
+    .plan-premium { border-color: #7c6af7; }
+    .price { font-size: 20px; font-weight: 700; color: #f0eeff; margin-bottom: 8px; }
+    .plan ul { margin-bottom: 0; }
+    details { background: #13111c; border: 1px solid #2a2440; border-radius: 10px; padding: 12px 16px; margin-bottom: 8px; }
+    summary { cursor: pointer; color: #f0eeff; font-weight: 600; font-size: 15px; }
+    details[open] summary { margin-bottom: 8px; }
+    details p { margin-bottom: 0; }
+    .contact-box { background: #13111c; border: 1px solid #2a2440; border-radius: 12px; padding: 20px; margin-top: 36px; text-align: center; }
+    .cta { display: inline-block; margin-top: 8px; background: #7c6af7; color: #fff; text-decoration: none; font-weight: 700; padding: 11px 22px; border-radius: 10px; }
+    .cta:hover { opacity: 0.9; }
+    footer { text-align: center; padding: 24px; font-size: 12px; color: #8a86a6; border-top: 1px solid #1a1830; margin-top: 48px; font-family: monospace; }
+    footer a { color: #9691b8; }
+    a:focus-visible, select:focus-visible, summary:focus-visible { outline: 2px solid #7c6af7; outline-offset: 2px; }
+    @media (max-width: 520px) {
+      h1 { font-size: 24px; }
+      .logo-title { font-size: 16px; }
+      .toc { grid-template-columns: 1fr; }
+      section { scroll-margin-top: 120px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="/" aria-label="CodeLearn">
+    <span class="logo">&lt;/&gt;</span>
+    <span class="logo-title">CodeLearn</span>
+  </a>
+  <div class="header-actions">
+    <select id="lang" aria-label="Idioma">
+      <option value="es">🇪🇸 Español</option>
+      <option value="en">🇬🇧 English</option>
+      <option value="pt">🇧🇷 Português</option>
+      <option value="fr">🇫🇷 Français</option>
+      <option value="de">🇩🇪 Deutsch</option>
+      <option value="zh">🇨🇳 中文</option>
+    </select>
+    <a class="back" id="back" href="/">← Volver a la app</a>
+  </div>
+</header>
+
+<main>
+<article class="guide active" lang="es" data-lang="es">
+  <h1>Guía de uso de CodeLearn</h1>
+  <p class="lead">Todo lo que necesitás saber para usar CodeLearn, desde crear tu cuenta hasta ejecutar tu primera app. Leela de corrido o saltá directo a la parte que te interesa.</p>
+
+  <nav class="toc" aria-label="Contenido">
+    <a href="#es-que-es">1. ¿Qué es CodeLearn?</a>
+    <a href="#es-cuenta">2. Crear tu cuenta</a>
+    <a href="#es-pantalla">3. Conocé la pantalla</a>
+    <a href="#es-modos">4. Los dos modos</a>
+    <a href="#es-generar">5. Tu primera consulta, paso a paso</a>
+    <a href="#es-resultado">6. El resultado</a>
+    <a href="#es-ejecutar">7. Cómo ejecutar el código</a>
+    <a href="#es-consejos">8. Cómo escribir buenos pedidos</a>
+    <a href="#es-historial">9. El historial</a>
+    <a href="#es-idiomas">10. Idiomas</a>
+    <a href="#es-planes">11. Planes y límites</a>
+    <a href="#es-micuenta">12. Mi cuenta</a>
+    <a href="#es-instalar">13. Instalar CodeLearn como app</a>
+    <a href="#es-faq">14. Preguntas frecuentes</a>
+  </nav>
+
+  <section id="es-que-es">
+    <h2>1. ¿Qué es CodeLearn?</h2>
+    <p>CodeLearn es una web para <strong>aprender a programar con inteligencia artificial</strong>. Describís con tus propias palabras, en tu idioma, lo que querés que haga un programa, y CodeLearn te da:</p>
+    <ul>
+      <li><strong>El código completo</strong>, listo para copiar y ejecutar.</li>
+      <li><strong>Una explicación paso a paso</strong> de qué hace cada parte y por qué.</li>
+      <li><strong>Una guía de próximos pasos</strong> para ejecutarlo, modificarlo y seguir aprendiendo.</li>
+    </ul>
+    <p>No necesitás saber programar para empezar: la idea es que aprendas viendo código real, explicado en un lenguaje simple. Funciona en computadora, tablet y celular, y no hay que instalar nada.</p>
+  </section>
+
+  <section id="es-cuenta">
+    <h2>2. Crear tu cuenta</h2>
+    <p>Sin cuenta podés recorrer la web y tocar <strong>👀 Ver un ejemplo de resultado</strong> para ver cómo es una respuesta real. Para hacer tus propias consultas necesitás una cuenta gratis:</p>
+    <ol>
+      <li>Tocá <strong>👤 Ingresar</strong>, arriba a la derecha.</li>
+      <li>Tocá <strong>¿No tenés cuenta? Registrate</strong>.</li>
+      <li>Escribí tu email y una contraseña, y tocá <strong>Registrarse</strong>.</li>
+      <li>Te llega un email de confirmación. Abrilo y tocá el enlace. Si no lo ves, revisá la carpeta de spam o promociones.</li>
+      <li>Volvé a CodeLearn, tocá <strong>👤 Ingresar</strong> y entrá con tu email y contraseña.</li>
+    </ol>
+    <div class="tip"><strong>Importante:</strong> no se aceptan emails temporales o descartables. Usá un email real, porque es el que vas a necesitar para recuperar tu contraseña.</div>
+    <h3>¿Olvidaste tu contraseña?</h3>
+    <p>En la ventana de <strong>Ingresar</strong>, tocá <strong>¿Olvidaste tu contraseña?</strong>, escribí tu email y tocá <strong>Resetear contraseña</strong>. Te llega un email con un enlace; al abrirlo, CodeLearn te pide una contraseña nueva de al menos 8 caracteres.</p>
+  </section>
+
+  <section id="es-pantalla">
+    <h2>3. Conocé la pantalla</h2>
+    <p>Arriba, en la barra superior, vas a encontrar:</p>
+    <ul>
+      <li><strong>🆓 Free</strong> o <strong>⭐ Premium</strong>: el plan que tenés.</li>
+      <li><strong>⭐ Premium</strong> (botón): para pasarte al plan Premium. Solo aparece si tenés el plan gratis.</li>
+      <li><strong>📋</strong>: tu historial de consultas.</li>
+      <li><strong>⚙️</strong>: tu cuenta (suscripción y eliminar cuenta).</li>
+      <li><strong>📖</strong>: esta guía.</li>
+      <li><strong>Cerrar sesión</strong>.</li>
+      <li><strong>Selector de idioma</strong> (la bandera): cambia el idioma de toda la web.</li>
+    </ul>
+    <p>Debajo está el área de trabajo: el selector de modo (<strong>🧩 Crear funciones</strong> / <strong>📱 Crear app</strong>), los 10 lenguajes de programación, el cuadro donde escribís tu pedido y el botón para generar.</p>
+    <div class="tip"><strong>En el celular:</strong> si lo ponés horizontal, la pantalla se divide en dos columnas: a la izquierda escribís y a la derecha ves el resultado.</div>
+  </section>
+
+  <section id="es-modos">
+    <h2>4. Los dos modos</h2>
+    <p>Arriba del área de trabajo elegís qué querés crear:</p>
+    <h3>🧩 Crear funciones</h3>
+    <p>Para aprender cómo se resuelve un problema concreto: ordenar una lista, calcular un promedio, validar un email, contar palabras… Recibís una función clara y corta, con ejemplos de uso, ideal para entender un concepto a la vez. <strong>Es el mejor modo para empezar.</strong></p>
+    <h3>📱 Crear app</h3>
+    <p>Para construir una aplicación completa que funciona de verdad: una lista de tareas, una calculadora de gastos, un juego de preguntas… Recibís todo el código de la app en un solo archivo y una explicación de cómo está armada. El tipo de app depende del lenguaje que elijas:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Lenguaje</th><th>Qué app recibís</th><th>Dónde se ejecuta</th></tr></thead>
+        <tbody>
+          <tr><td>JavaScript</td><td>App web completa en un solo archivo HTML. Guarda los datos en el navegador.</td><td>CodePen, o guardándola como <code>index.html</code> y abriéndola.</td></tr>
+          <tr><td>Python</td><td>App web con Flask: servidor y página incluidos.</td><td>Replit</td></tr>
+          <tr><td>TypeScript, Go, Java, Kotlin, Rust</td><td>App web con su propio servidor, que se abre como una página.</td><td>Replit</td></tr>
+          <tr><td>Swift</td><td>App para iPhone y iPad con SwiftUI.</td><td>Swift Playgrounds (necesitás un iPad o una Mac).</td></tr>
+          <tr><td>C, C++</td><td>App de consola con menú: elegís opciones escribiendo con el teclado.</td><td>Replit</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip">Crear una app tarda más que una función: puede demorar hasta un minuto. No cierres la página mientras dice <strong>Creando app...</strong></div>
+  </section>
+
+  <section id="es-generar">
+    <h2>5. Tu primera consulta, paso a paso</h2>
+    <ol>
+      <li><strong>Elegí el modo:</strong> 🧩 Crear funciones o 📱 Crear app.</li>
+      <li><strong>Elegí el lenguaje</strong> que querés aprender, tocando uno de los 10 botones (Python, JavaScript, TypeScript, Rust, Go, Java, Kotlin, Swift, C o C++). Si no sabés cuál elegir, empezá con <strong>Python</strong>: es el más fácil de leer.</li>
+      <li><strong>Escribí tu pedido</strong> en el cuadro de texto, como si se lo explicaras a una persona. Por ejemplo: <em>"Quiero una función que reciba una lista de números y devuelva solo los pares, ordenados de mayor a menor"</em>.</li>
+      <li>¿No se te ocurre nada? Tocá <strong>💡 Ejemplos para empezar</strong> y elegí uno: se escribe solo y se selecciona el lenguaje adecuado.</li>
+      <li>Tocá el botón <strong>Generar en…</strong> (o <strong>Crear app en…</strong>). En computadora también podés apretar <strong>Ctrl + Enter</strong>.</li>
+      <li>Esperá unos segundos y bajá para ver el resultado.</li>
+    </ol>
+    <p>Cada consulta generada cuenta para tu límite diario si tenés el plan gratis (ver <a href="#es-planes">Planes y límites</a>).</p>
+  </section>
+
+  <section id="es-resultado">
+    <h2>6. El resultado</h2>
+    <p>El resultado tiene tres partes:</p>
+    <h3>💻 El código</h3>
+    <p>El programa completo. Arriba a la derecha de ese recuadro tenés dos botones:</p>
+    <ul>
+      <li><strong>📋 Copiar</strong>: copia todo el código para pegarlo donde quieras.</li>
+      <li><strong>📤 Compartir código</strong>: en el celular abre el menú para compartir (WhatsApp, Telegram, email…); en la computadora lo copia listo para pegar en un mensaje.</li>
+    </ul>
+    <h3>📖 La explicación</h3>
+    <p>En el modo funciones se llama <strong>¿Qué hace y por qué?</strong> y en el modo app, <strong>¿Cómo está armada la app?</strong>. Te explica el código parte por parte, en tu idioma. También la podés compartir con <strong>📤 Compartir explicación</strong>.</p>
+    <h3>📚 ¿Qué hago con este código?</h3>
+    <p>Una guía desplegable de 11 pasos: desde entender y ejecutar el código hasta guardarlo en GitHub y publicarlo en internet. Tocala para abrirla (ver la sección siguiente).</p>
+    <p>Cuando termines, tocá <strong>🔄 Nueva consulta</strong> para empezar otra.</p>
+  </section>
+
+  <section id="es-ejecutar">
+    <h2>7. Cómo ejecutar el código</h2>
+    <p>No necesitás instalar nada: el código se ejecuta en editores online gratuitos.</p>
+    <ol>
+      <li>Abrí <strong>📚 ¿Qué hago con este código?</strong> debajo del resultado.</li>
+      <li>En el paso 2 tocá <strong>▶️ Abrir editor</strong>. Se abre un editor online con tu lenguaje ya preparado.</li>
+      <li>Volvé a CodeLearn, tocá <strong>📋 Copiar</strong> y pegá el código en el editor (Ctrl + V, o mantener apretado y Pegar en el celular).</li>
+      <li>Tocá <strong>Run</strong> o <strong>▶️</strong> en el editor y mirá el resultado.</li>
+    </ol>
+    <p>Los editores que abre CodeLearn son:</p>
+    <ul>
+      <li><strong>Modo funciones:</strong> Replit (Python, Java, C y C++), CodePen (JavaScript), TypeScript Playground, Rust Playground, Go Playground, Kotlin Playground y SwiftFiddle (Swift).</li>
+      <li><strong>Modo app:</strong> Replit para casi todos los lenguajes, CodePen para JavaScript y Swift Playgrounds para Swift.</li>
+    </ul>
+    <div class="tip"><strong>Replit</strong> puede pedirte crear una cuenta gratis la primera vez. En las apps web, después de tocar Run, Replit muestra la app en una vista previa a la derecha (o en una pestaña aparte).</div>
+    <p>Si el editor muestra un error, leé el mensaje con calma: suele decir en qué línea está el problema. También podés pegar el error en CodeLearn y pedirle que te explique cómo corregirlo.</p>
+    <p>La guía sigue con más pasos para ir más allá: experimentar cambiando valores, personalizar el código, instalar <strong>VS Code</strong> (el editor profesional), guardar tu código en <strong>GitHub</strong> y publicar tu proyecto en internet con <strong>Vercel</strong>.</p>
+  </section>
+
+  <section id="es-consejos">
+    <h2>8. Cómo escribir buenos pedidos</h2>
+    <p>Cuanto más claro es tu pedido, mejor es el resultado. Algunos consejos:</p>
+    <ul>
+      <li><strong>Decí qué recibe y qué devuelve.</strong> "Una función que reciba una frase y devuelva cuántas vocales tiene" funciona mucho mejor que "algo con vocales".</li>
+      <li><strong>En las apps, enumerá las funciones.</strong> "Una app de gastos donde pueda agregar un gasto con monto y categoría, ver el total del mes y borrar gastos".</li>
+      <li><strong>Empezá simple.</strong> Primero pedí la versión básica; después, en otra consulta, pedí una versión con más cosas.</li>
+      <li><strong>Usá tu propio idioma</strong> y palabras normales: no hace falta usar términos técnicos.</li>
+      <li><strong>Probá el mismo pedido en otro lenguaje</strong> para comparar cómo se resuelve. Es una gran forma de aprender.</li>
+      <li>El pedido puede tener hasta 2000 caracteres.</li>
+    </ul>
+    <div class="tip"><strong>Privacidad:</strong> no escribas contraseñas, datos de tarjetas ni información personal en tus pedidos. Lo que escribís se envía a la IA para generar la respuesta.</div>
+  </section>
+
+  <section id="es-historial">
+    <h2>9. El historial</h2>
+    <p>Tocá <strong>📋</strong> en la barra de arriba para ver tus últimas <strong>20 consultas</strong>, con el lenguaje, el modo y la fecha.</p>
+    <ul>
+      <li><strong>↩ Usar de nuevo</strong>: vuelve a poner ese pedido en el cuadro, con el mismo lenguaje y modo. Podés modificarlo antes de generar. Generarlo de nuevo cuenta como una consulta nueva.</li>
+      <li><strong>🗑️</strong>: borra esa consulta del historial.</li>
+    </ul>
+    <div class="tip">El historial se guarda <strong>en este dispositivo y este navegador</strong>. Si entrás desde otro celular o computadora, vas a ver un historial distinto. Si querés conservar un código, copialo y guardalo (por ejemplo, en GitHub).</div>
+  </section>
+
+  <section id="es-idiomas">
+    <h2>10. Idiomas</h2>
+    <p>CodeLearn funciona en 6 idiomas: <strong>español, inglés, portugués, francés, alemán y chino</strong>. La web elige automáticamente el idioma de tu dispositivo, y podés cambiarlo cuando quieras con el selector de la bandera, arriba a la derecha. CodeLearn recuerda tu elección para la próxima vez.</p>
+    <p>El idioma elegido cambia los textos de la web y también el idioma de las explicaciones y de los comentarios del código.</p>
+    <div class="tip">Al cambiar de idioma se borra el resultado que está en pantalla, pero la consulta queda guardada en tu historial.</div>
+  </section>
+
+  <section id="es-planes">
+    <h2>11. Planes y límites</h2>
+    <div class="plans">
+      <div class="plan">
+        <h3>🆓 Free</h3>
+        <p class="price">Gratis</p>
+        <ul>
+          <li>5 consultas por día</li>
+          <li>Los dos modos y los 10 lenguajes</li>
+          <li>Historial y todas las funciones</li>
+        </ul>
+      </div>
+      <div class="plan plan-premium">
+        <h3>⭐ Premium</h3>
+        <p class="price">USD 10 / mes</p>
+        <ul>
+          <li>Consultas ilimitadas (uso personal razonable)</li>
+          <li>Los dos modos y los 10 lenguajes</li>
+          <li>Cancelás cuando quieras</li>
+        </ul>
+      </div>
+    </div>
+    <h3>El límite diario</h3>
+    <p>Con el plan gratis, debajo del cuadro de texto ves una barra que dice <strong>Consultas hoy: X/5</strong>. Cada consulta generada suma una, en cualquiera de los dos modos. El contador vuelve a cero todos los días a las <strong>00:00 hora UTC</strong> (por ejemplo, a las 21:00 en Uruguay y Argentina, o a las 18:00 en México).</p>
+    <h3>Pasarte a Premium</h3>
+    <ol>
+      <li>Tocá <strong>⭐ Premium</strong> en la barra de arriba (o <strong>🚀 Ir a Premium</strong> cuando llegás al límite).</li>
+      <li>Se abre la ventana de pago segura de <strong>Paddle</strong>, nuestro procesador de pagos. CodeLearn nunca ve ni guarda los datos de tu tarjeta.</li>
+      <li>Completá el pago. Tu cuenta pasa a Premium en unos segundos. Si no lo ves, recargá la página.</li>
+    </ol>
+    <p>La suscripción se renueva sola cada mes. Tenés <strong>7 días de garantía</strong>: si no te convence, escribinos y te devolvemos el dinero. Más detalles en la <a href="/legal.html#refund">Política de reembolsos</a>.</p>
+  </section>
+
+  <section id="es-micuenta">
+    <h2>12. Mi cuenta</h2>
+    <p>Tocá <strong>⚙️</strong> en la barra de arriba. Ahí ves tu email y tu plan, y tenés dos opciones:</p>
+    <h3>💳 Administrar suscripción</h3>
+    <p>Solo para Premium. Abre el portal de Paddle, donde podés cambiar la tarjeta, descargar tus facturas o <strong>cancelar la suscripción</strong>. Si cancelás, seguís con Premium hasta el final del mes ya pagado y después pasás al plan gratis.</p>
+    <h3>🗑️ Eliminar mi cuenta</h3>
+    <p>Borra tu cuenta y tus datos para siempre. Para confirmar tenés que escribir <strong>BORRAR</strong> y tocar <strong>Eliminar mi cuenta para siempre</strong>. Si tenés Premium, la suscripción se cancela en ese momento y se pierde el tiempo que quedaba del mes. No se puede deshacer.</p>
+  </section>
+
+  <section id="es-instalar">
+    <h2>13. Instalar CodeLearn como app</h2>
+    <p>Podés tener CodeLearn en tu pantalla de inicio, como cualquier app, sin pasar por ninguna tienda:</p>
+    <ul>
+      <li><strong>Android, y Chrome o Edge en computadora:</strong> tocá <strong>📲 Instalar app</strong> en el aviso que aparece arriba de la web. Si lo cerraste, abrí el menú del navegador (⋮) y elegí <strong>Instalar app</strong> o <strong>Agregar a pantalla de inicio</strong>.</li>
+      <li><strong>iPhone y iPad:</strong> abrí la web en Safari, tocá el botón <strong>Compartir</strong> (el cuadrado con la flecha) y elegí <strong>Agregar a inicio</strong>.</li>
+    </ul>
+    <p>La app instalada es la misma web: usa tu misma cuenta, tu mismo plan y se actualiza sola.</p>
+  </section>
+
+  <section id="es-faq">
+    <h2>14. Preguntas frecuentes</h2>
+    <details>
+      <summary>Me salió "Hubo un error generando el código"</summary>
+      <p>Esperá unos segundos y tocá generar de nuevo. Si vuelve a pasar, describí tu pedido de forma más simple o más corta, sobre todo en el modo app. Una consulta que da error no se descuenta de tu límite.</p>
+    </details>
+    <details>
+      <summary>No me llegó el email de confirmación</summary>
+      <p>Revisá las carpetas de spam y promociones. Si pasaron varios minutos y no aparece, escribinos a <a href="mailto:codelearn.app@gmail.com">codelearn.app@gmail.com</a>.</p>
+    </details>
+    <details>
+      <summary>Dice que llegué al límite, pero no hice 5 consultas</summary>
+      <p>Para evitar abusos del plan gratis, también hay un límite por conexión. Si usás CodeLearn desde una red compartida (una escuela, una oficina o un wifi público), puede que otras personas ya hayan hecho consultas desde esa misma red. El límite se reinicia a las 00:00 UTC.</p>
+    </details>
+    <details>
+      <summary>El código me da un error en el editor</summary>
+      <p>Revisá que copiaste el código completo con <strong>📋 Copiar</strong> y que el editor es del mismo lenguaje. En el modo app, revisá en la explicación las instrucciones para ejecutarla. Si el error sigue, pegá el mensaje de error en CodeLearn y pedile que te explique cómo corregirlo.</p>
+    </details>
+    <details>
+      <summary>¿Puedo usar el código en mis proyectos?</summary>
+      <p>Sí. El código que genera CodeLearn lo podés usar libremente en tus proyectos personales y comerciales. Igual, revisalo y probalo antes de usarlo en algo importante: la IA puede equivocarse.</p>
+    </details>
+    <details>
+      <summary>¿CodeLearn ejecuta el código por mí?</summary>
+      <p>No. CodeLearn genera y explica el código; lo ejecutás vos en un editor online gratuito (ver <a href="#es-ejecutar">Cómo ejecutar el código</a>). Ejecutarlo y modificarlo vos mismo es la mejor forma de aprender.</p>
+    </details>
+    <details>
+      <summary>¿Cómo cancelo Premium?</summary>
+      <p>Desde <strong>⚙️ → 💳 Administrar suscripción</strong>. Seguís con Premium hasta el final del período pagado.</p>
+    </details>
+    <details>
+      <summary>¿Dónde está mi historial en otro dispositivo?</summary>
+      <p>El historial se guarda en cada dispositivo por separado, así que en otro celular o computadora empieza vacío. Tu cuenta y tu plan sí son los mismos en todos lados.</p>
+    </details>
+  </section>
+
+  <div class="contact-box">
+    <p>¿Te quedó alguna duda? Escribinos a <a href="mailto:codelearn.app@gmail.com">codelearn.app@gmail.com</a> y te respondemos.</p>
+    <a class="cta" href="/">🚀 Ir a CodeLearn</a>
+  </div>
+</article>
+
+<article class="guide" lang="en" data-lang="en">
+  <h1>CodeLearn User Guide</h1>
+  <p class="lead">Everything you need to know to use CodeLearn, from creating your account to running your first app. Read it from start to finish or jump straight to the part you're interested in.</p>
+
+  <nav class="toc" aria-label="Contents">
+    <a href="#en-que-es">1. What is CodeLearn?</a>
+    <a href="#en-cuenta">2. Create your account</a>
+    <a href="#en-pantalla">3. Get to know the screen</a>
+    <a href="#en-modos">4. The two modes</a>
+    <a href="#en-generar">5. Your first query, step by step</a>
+    <a href="#en-resultado">6. The result</a>
+    <a href="#en-ejecutar">7. How to run the code</a>
+    <a href="#en-consejos">8. How to write good requests</a>
+    <a href="#en-historial">9. Your history</a>
+    <a href="#en-idiomas">10. Languages</a>
+    <a href="#en-planes">11. Plans and limits</a>
+    <a href="#en-micuenta">12. My account</a>
+    <a href="#en-instalar">13. Install CodeLearn as an app</a>
+    <a href="#en-faq">14. Frequently asked questions</a>
+  </nav>
+
+  <section id="en-que-es">
+    <h2>1. What is CodeLearn?</h2>
+    <p>CodeLearn is a website for <strong>learning to code with artificial intelligence</strong>. You describe in your own words, in your own language, what you want a program to do, and CodeLearn gives you:</p>
+    <ul>
+      <li><strong>The complete code</strong>, ready to copy and run.</li>
+      <li><strong>A step-by-step explanation</strong> of what each part does and why.</li>
+      <li><strong>A next-steps guide</strong> to run it, change it and keep learning.</li>
+    </ul>
+    <p>You don't need to know how to code to get started: the idea is that you learn by looking at real code, explained in simple language. It works on computers, tablets and phones, and there's nothing to install.</p>
+  </section>
+
+  <section id="en-cuenta">
+    <h2>2. Create your account</h2>
+    <p>Without an account you can look around the site and tap <strong>👀 See an example result</strong> to see what a real answer looks like. To make your own queries you need a free account:</p>
+    <ol>
+      <li>Tap <strong>👤 Sign in</strong>, at the top right.</li>
+      <li>Tap <strong>Don't have an account? Register</strong>.</li>
+      <li>Enter your email and a password, and tap <strong>Register</strong>.</li>
+      <li>You'll get a confirmation email. Open it and tap the link. If you don't see it, check your spam or promotions folder.</li>
+      <li>Go back to CodeLearn, tap <strong>👤 Sign in</strong> and log in with your email and password.</li>
+    </ol>
+    <div class="tip"><strong>Important:</strong> temporary or disposable emails are not accepted. Use a real email, because it's the one you'll need to recover your password.</div>
+    <h3>Forgot your password?</h3>
+    <p>In the <strong>Sign in</strong> window, tap <strong>Forgot your password?</strong>, enter your email and tap <strong>Reset password</strong>. You'll get an email with a link; when you open it, CodeLearn asks you for a new password with at least 8 characters.</p>
+  </section>
+
+  <section id="en-pantalla">
+    <h2>3. Get to know the screen</h2>
+    <p>In the top bar you'll find:</p>
+    <ul>
+      <li><strong>🆓 Free</strong> or <strong>⭐ Premium</strong>: the plan you have.</li>
+      <li><strong>⭐ Premium</strong> (button): to upgrade to the Premium plan. It only appears if you're on the free plan.</li>
+      <li><strong>📋</strong>: your query history.</li>
+      <li><strong>⚙️</strong>: your account (subscription and account deletion).</li>
+      <li><strong>📖</strong>: this guide.</li>
+      <li><strong>Sign out</strong>.</li>
+      <li><strong>Language selector</strong> (the flag): changes the language of the whole site.</li>
+    </ul>
+    <p>Below that is the work area: the mode selector (<strong>🧩 Create functions</strong> / <strong>📱 Create app</strong>), the 10 programming languages, the box where you type your request and the button to generate.</p>
+    <div class="tip"><strong>On your phone:</strong> if you turn it sideways, the screen splits into two columns: you type on the left and see the result on the right.</div>
+  </section>
+
+  <section id="en-modos">
+    <h2>4. The two modes</h2>
+    <p>At the top of the work area you choose what you want to create:</p>
+    <h3>🧩 Create functions</h3>
+    <p>To learn how to solve a specific problem: sorting a list, calculating an average, validating an email, counting words… You get a short, clear function with usage examples, ideal for understanding one concept at a time. <strong>It's the best mode to start with.</strong></p>
+    <h3>📱 Create app</h3>
+    <p>To build a complete app that really works: a to-do list, an expense calculator, a quiz game… You get all the app's code in a single file and an explanation of how it's built. The type of app depends on the language you choose:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Language</th><th>What app you get</th><th>Where it runs</th></tr></thead>
+        <tbody>
+          <tr><td>JavaScript</td><td>A complete web app in a single HTML file. It saves data in the browser.</td><td>CodePen, or by saving it as <code>index.html</code> and opening it.</td></tr>
+          <tr><td>Python</td><td>A web app with Flask: server and page included.</td><td>Replit</td></tr>
+          <tr><td>TypeScript, Go, Java, Kotlin, Rust</td><td>A web app with its own server, which opens like a web page.</td><td>Replit</td></tr>
+          <tr><td>Swift</td><td>An iPhone and iPad app with SwiftUI.</td><td>Swift Playgrounds (you need an iPad or a Mac).</td></tr>
+          <tr><td>C, C++</td><td>A console app with a menu: you choose options by typing on the keyboard.</td><td>Replit</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip">Creating an app takes longer than a function: it can take up to a minute. Don't close the page while it says <strong>Creating app...</strong></div>
+  </section>
+
+  <section id="en-generar">
+    <h2>5. Your first query, step by step</h2>
+    <ol>
+      <li><strong>Choose the mode:</strong> 🧩 Create functions or 📱 Create app.</li>
+      <li><strong>Choose the language</strong> you want to learn by tapping one of the 10 buttons (Python, JavaScript, TypeScript, Rust, Go, Java, Kotlin, Swift, C or C++). If you're not sure which one to pick, start with <strong>Python</strong>: it's the easiest to read.</li>
+      <li><strong>Type your request</strong> in the text box, as if you were explaining it to a person. For example: <em>"I want a function that takes a list of numbers and returns only the even ones, sorted descending"</em>.</li>
+      <li>Can't think of anything? Tap <strong>💡 Examples to get started</strong> and pick one: it fills in the text for you and selects the right language.</li>
+      <li>Tap the <strong>Generate in…</strong> button (or <strong>Create app in…</strong>). On a computer you can also press <strong>Ctrl + Enter</strong>.</li>
+      <li>Wait a few seconds and scroll down to see the result.</li>
+    </ol>
+    <p>Each query you generate counts toward your daily limit if you're on the free plan (see <a href="#en-planes">Plans and limits</a>).</p>
+  </section>
+
+  <section id="en-resultado">
+    <h2>6. The result</h2>
+    <p>The result has three parts:</p>
+    <h3>💻 The code</h3>
+    <p>The complete program. At the top right of that box you have two buttons:</p>
+    <ul>
+      <li><strong>📋 Copy</strong>: copies all the code so you can paste it wherever you want.</li>
+      <li><strong>📤 Share code</strong>: on your phone it opens the share menu (WhatsApp, Telegram, email…); on a computer it copies it, ready to paste into a message.</li>
+    </ul>
+    <h3>📖 The explanation</h3>
+    <p>In functions mode it's called <strong>What does it do and why?</strong> and in app mode, <strong>How is the app built?</strong>. It explains the code part by part, in your language. You can also share it with <strong>📤 Share explanation</strong>.</p>
+    <h3>📚 What do I do with this code?</h3>
+    <p>An expandable 11-step guide: from understanding and running the code to saving it on GitHub and publishing it online. Tap it to open it (see the next section).</p>
+    <p>When you're done, tap <strong>🔄 New query</strong> to start another one.</p>
+  </section>
+
+  <section id="en-ejecutar">
+    <h2>7. How to run the code</h2>
+    <p>You don't need to install anything: the code runs in free online editors.</p>
+    <ol>
+      <li>Open <strong>📚 What do I do with this code?</strong> below the result.</li>
+      <li>In step 2, tap <strong>▶️ Open editor</strong>. An online editor opens with your language already set up.</li>
+      <li>Go back to CodeLearn, tap <strong>📋 Copy</strong> and paste the code into the editor (Ctrl + V, or press and hold and tap Paste on your phone).</li>
+      <li>Tap <strong>Run</strong> or <strong>▶️</strong> in the editor and look at the result.</li>
+    </ol>
+    <p>The editors CodeLearn opens are:</p>
+    <ul>
+      <li><strong>Functions mode:</strong> Replit (Python, Java, C and C++), CodePen (JavaScript), TypeScript Playground, Rust Playground, Go Playground, Kotlin Playground and SwiftFiddle (Swift).</li>
+      <li><strong>App mode:</strong> Replit for almost every language, CodePen for JavaScript and Swift Playgrounds for Swift.</li>
+    </ul>
+    <div class="tip"><strong>Replit</strong> may ask you to create a free account the first time. For web apps, after you tap Run, Replit shows the app in a preview on the right (or in a separate tab).</div>
+    <p>If the editor shows an error, read the message calmly: it usually tells you which line the problem is on. You can also paste the error into CodeLearn and ask it to explain how to fix it.</p>
+    <p>The guide continues with more steps to go further: experimenting by changing values, customizing the code, installing <strong>VS Code</strong> (the professional editor), saving your code on <strong>GitHub</strong> and publishing your project online with <strong>Vercel</strong>.</p>
+  </section>
+
+  <section id="en-consejos">
+    <h2>8. How to write good requests</h2>
+    <p>The clearer your request, the better the result. Some tips:</p>
+    <ul>
+      <li><strong>Say what it takes in and what it gives back.</strong> "A function that takes a sentence and returns how many vowels it has" works much better than "something with vowels".</li>
+      <li><strong>For apps, list the features.</strong> "An expenses app where I can add an expense with an amount and a category, see the month's total and delete expenses".</li>
+      <li><strong>Start simple.</strong> Ask for the basic version first; then, in another query, ask for a version with more features.</li>
+      <li><strong>Use your own language</strong> and everyday words: you don't need technical terms.</li>
+      <li><strong>Try the same request in another language</strong> to compare how it's solved. It's a great way to learn.</li>
+      <li>Your request can be up to 2000 characters long.</li>
+    </ul>
+    <div class="tip"><strong>Privacy:</strong> don't type passwords, card details or personal information in your requests. What you type is sent to the AI to generate the answer.</div>
+  </section>
+
+  <section id="en-historial">
+    <h2>9. Your history</h2>
+    <p>Tap <strong>📋</strong> in the top bar to see your last <strong>20 queries</strong>, with the language, the mode and the date.</p>
+    <ul>
+      <li><strong>↩ Use again</strong>: puts that request back in the box, with the same language and mode. You can edit it before generating. Generating it again counts as a new query.</li>
+      <li><strong>🗑️</strong>: deletes that query from your history.</li>
+    </ul>
+    <div class="tip">Your history is saved <strong>on this device and in this browser</strong>. If you sign in from another phone or computer, you'll see a different history. If you want to keep some code, copy it and save it (for example, on GitHub).</div>
+  </section>
+
+  <section id="en-idiomas">
+    <h2>10. Languages</h2>
+    <p>CodeLearn works in 6 languages: <strong>Spanish, English, Portuguese, French, German and Chinese</strong>. The site automatically picks your device's language, and you can change it whenever you want with the flag selector at the top right. CodeLearn remembers your choice for next time.</p>
+    <p>The language you choose changes the site's text and also the language of the explanations and the code comments.</p>
+    <div class="tip">When you change the language, the result on screen is cleared, but the query stays saved in your history.</div>
+  </section>
+
+  <section id="en-planes">
+    <h2>11. Plans and limits</h2>
+    <div class="plans">
+      <div class="plan">
+        <h3>🆓 Free</h3>
+        <p class="price">Free</p>
+        <ul>
+          <li>5 queries per day</li>
+          <li>Both modes and all 10 languages</li>
+          <li>History and all features</li>
+        </ul>
+      </div>
+      <div class="plan plan-premium">
+        <h3>⭐ Premium</h3>
+        <p class="price">USD 10 / month</p>
+        <ul>
+          <li>Unlimited queries (reasonable personal use)</li>
+          <li>Both modes and all 10 languages</li>
+          <li>Cancel anytime</li>
+        </ul>
+      </div>
+    </div>
+    <h3>The daily limit</h3>
+    <p>On the free plan, below the text box you'll see a bar that says <strong>Today's queries: X/5</strong>. Each query you generate adds one, in either mode. The counter goes back to zero every day at <strong>00:00 UTC</strong> (for example, at 7:00 pm in New York in winter and 8:00 pm in summer, or at midnight in London in winter and 1:00 am in summer).</p>
+    <h3>Upgrading to Premium</h3>
+    <ol>
+      <li>Tap <strong>⭐ Premium</strong> in the top bar (or <strong>🚀 Go Premium</strong> when you reach the limit).</li>
+      <li>The secure checkout window from <strong>Paddle</strong>, our payment processor, opens. CodeLearn never sees or stores your card details.</li>
+      <li>Complete the payment. Your account switches to Premium within a few seconds. If you don't see it, reload the page.</li>
+    </ol>
+    <p>The subscription renews automatically every month. You have a <strong>7-day guarantee</strong>: if you're not happy with it, write to us and we'll refund your money. More details in the <a href="/legal.html#refund">Refund Policy</a>.</p>
+  </section>
+
+  <section id="en-micuenta">
+    <h2>12. My account</h2>
+    <p>Tap <strong>⚙️</strong> in the top bar. There you'll see your email and your plan, and you have two options:</p>
+    <h3>💳 Manage subscription</h3>
+    <p>Premium only. It opens the Paddle portal, where you can change your card, download your invoices or <strong>cancel your subscription</strong>. If you cancel, you keep Premium until the end of the month you've already paid for, and then you move to the free plan.</p>
+    <h3>🗑️ Delete my account</h3>
+    <p>Deletes your account and your data forever. To confirm, you have to type <strong>DELETE</strong> and tap <strong>Delete my account forever</strong>. If you have Premium, the subscription is cancelled right then and you lose the time left in the month. This cannot be undone.</p>
+  </section>
+
+  <section id="en-instalar">
+    <h2>13. Install CodeLearn as an app</h2>
+    <p>You can have CodeLearn on your home screen, like any other app, without going through an app store:</p>
+    <ul>
+      <li><strong>Android, and Chrome or Edge on a computer:</strong> tap <strong>📲 Install app</strong> in the banner that appears at the top of the site. If you closed it, open the browser menu (⋮) and choose <strong>Install app</strong> or <strong>Add to Home screen</strong>.</li>
+      <li><strong>iPhone and iPad:</strong> open the site in Safari, tap the <strong>Share</strong> button (the square with the arrow) and choose <strong>Add to Home Screen</strong>.</li>
+    </ul>
+    <p>The installed app is the same website: it uses the same account and the same plan, and it updates itself.</p>
+  </section>
+
+  <section id="en-faq">
+    <h2>14. Frequently asked questions</h2>
+    <details>
+      <summary>I got "There was an error generating the code"</summary>
+      <p>Wait a few seconds and tap generate again. If it happens again, describe your request in a simpler or shorter way, especially in app mode. A query that fails doesn't count toward your limit.</p>
+    </details>
+    <details>
+      <summary>I didn't get the confirmation email</summary>
+      <p>Check your spam and promotions folders. If several minutes have passed and it still hasn't arrived, write to us at <a href="mailto:codelearn.app@gmail.com">codelearn.app@gmail.com</a>.</p>
+    </details>
+    <details>
+      <summary>It says I reached the limit, but I haven't made 5 queries</summary>
+      <p>To prevent abuse of the free plan, there's also a limit per connection. If you use CodeLearn from a shared network (a school, an office or public Wi-Fi), other people may have already made queries from that same network. The limit resets at 00:00 UTC.</p>
+    </details>
+    <details>
+      <summary>The code gives me an error in the editor</summary>
+      <p>Make sure you copied all the code with <strong>📋 Copy</strong> and that the editor is for the same language. In app mode, check the explanation for the instructions on how to run it. If the error persists, paste the error message into CodeLearn and ask it to explain how to fix it.</p>
+    </details>
+    <details>
+      <summary>Can I use the code in my projects?</summary>
+      <p>Yes. You can freely use the code CodeLearn generates in your personal and commercial projects. Still, review and test it before using it in anything important: AI can make mistakes.</p>
+    </details>
+    <details>
+      <summary>Does CodeLearn run the code for me?</summary>
+      <p>No. CodeLearn generates and explains the code; you run it yourself in a free online editor (see <a href="#en-ejecutar">How to run the code</a>). Running and changing it yourself is the best way to learn.</p>
+    </details>
+    <details>
+      <summary>How do I cancel Premium?</summary>
+      <p>From <strong>⚙️ → 💳 Manage subscription</strong>. You keep Premium until the end of the period you paid for.</p>
+    </details>
+    <details>
+      <summary>Where's my history on another device?</summary>
+      <p>Your history is saved separately on each device, so on another phone or computer it starts out empty. Your account and your plan are the same everywhere, though.</p>
+    </details>
+  </section>
+
+  <div class="contact-box">
+    <p>Still have questions? Write to us at <a href="mailto:codelearn.app@gmail.com">codelearn.app@gmail.com</a> and we'll get back to you.</p>
+    <a class="cta" href="/">🚀 Go to CodeLearn</a>
+  </div>
+</article>
+
+<article class="guide" lang="pt" data-lang="pt">
+  <h1>Guia de uso do CodeLearn</h1>
+  <p class="lead">Tudo o que você precisa saber para usar o CodeLearn, desde criar sua conta até executar seu primeiro app. Leia do começo ao fim ou vá direto para a parte que te interessa.</p>
+
+  <nav class="toc" aria-label="Conteúdo">
+    <a href="#pt-que-es">1. O que é o CodeLearn?</a>
+    <a href="#pt-cuenta">2. Criar sua conta</a>
+    <a href="#pt-pantalla">3. Conheça a tela</a>
+    <a href="#pt-modos">4. Os dois modos</a>
+    <a href="#pt-generar">5. Sua primeira consulta, passo a passo</a>
+    <a href="#pt-resultado">6. O resultado</a>
+    <a href="#pt-ejecutar">7. Como executar o código</a>
+    <a href="#pt-consejos">8. Como escrever bons pedidos</a>
+    <a href="#pt-historial">9. O histórico</a>
+    <a href="#pt-idiomas">10. Idiomas</a>
+    <a href="#pt-planes">11. Planos e limites</a>
+    <a href="#pt-micuenta">12. Minha conta</a>
+    <a href="#pt-instalar">13. Instalar o CodeLearn como app</a>
+    <a href="#pt-faq">14. Perguntas frequentes</a>
+  </nav>
+
+  <section id="pt-que-es">
+    <h2>1. O que é o CodeLearn?</h2>
+    <p>O CodeLearn é um site para <strong>aprender a programar com inteligência artificial</strong>. Você descreve com suas próprias palavras, no seu idioma, o que quer que um programa faça, e o CodeLearn te entrega:</p>
+    <ul>
+      <li><strong>O código completo</strong>, pronto para copiar e executar.</li>
+      <li><strong>Uma explicação passo a passo</strong> do que cada parte faz e por quê.</li>
+      <li><strong>Um guia de próximos passos</strong> para executar, modificar e continuar aprendendo.</li>
+    </ul>
+    <p>Você não precisa saber programar para começar: a ideia é que você aprenda vendo código de verdade, explicado em uma linguagem simples. Funciona no computador, no tablet e no celular, e não é preciso instalar nada.</p>
+  </section>
+
+  <section id="pt-cuenta">
+    <h2>2. Criar sua conta</h2>
+    <p>Sem conta, você pode navegar pelo site e tocar em <strong>👀 Ver um exemplo de resultado</strong> para ver como é uma resposta de verdade. Para fazer suas próprias consultas, você precisa de uma conta grátis:</p>
+    <ol>
+      <li>Toque em <strong>👤 Entrar</strong>, no canto superior direito.</li>
+      <li>Toque em <strong>Não tem conta? Registre-se</strong>.</li>
+      <li>Digite seu e-mail e uma senha, e toque em <strong>Registrar</strong>.</li>
+      <li>Você vai receber um e-mail de confirmação. Abra e toque no link. Se não encontrar, confira a pasta de spam ou de promoções.</li>
+      <li>Volte ao CodeLearn, toque em <strong>👤 Entrar</strong> e acesse com seu e-mail e senha.</li>
+    </ol>
+    <div class="tip"><strong>Importante:</strong> e-mails temporários ou descartáveis não são aceitos. Use um e-mail real, porque é ele que você vai precisar para recuperar sua senha.</div>
+    <h3>Esqueceu sua senha?</h3>
+    <p>Na janela <strong>Entrar</strong>, toque em <strong>Esqueceu sua senha?</strong>, digite seu e-mail e toque em <strong>Redefinir senha</strong>. Você vai receber um e-mail com um link; ao abri-lo, o CodeLearn pede uma senha nova com pelo menos 8 caracteres.</p>
+  </section>
+
+  <section id="pt-pantalla">
+    <h2>3. Conheça a tela</h2>
+    <p>Em cima, na barra superior, você vai encontrar:</p>
+    <ul>
+      <li><strong>🆓 Free</strong> ou <strong>⭐ Premium</strong>: o plano que você tem.</li>
+      <li><strong>⭐ Premium</strong> (botão): para mudar para o plano Premium. Só aparece se você tiver o plano grátis.</li>
+      <li><strong>📋</strong>: seu histórico de consultas.</li>
+      <li><strong>⚙️</strong>: sua conta (assinatura e excluir conta).</li>
+      <li><strong>📖</strong>: este guia.</li>
+      <li><strong>Sair</strong>.</li>
+      <li><strong>Seletor de idioma</strong> (a bandeira): muda o idioma de todo o site.</li>
+    </ul>
+    <p>Logo abaixo fica a área de trabalho: o seletor de modo (<strong>🧩 Criar funções</strong> / <strong>📱 Criar app</strong>), as 10 linguagens de programação, a caixa onde você escreve seu pedido e o botão para gerar.</p>
+    <div class="tip"><strong>No celular:</strong> se você virar o aparelho na horizontal, a tela se divide em duas colunas: à esquerda você escreve e à direita vê o resultado.</div>
+  </section>
+
+  <section id="pt-modos">
+    <h2>4. Os dois modos</h2>
+    <p>Acima da área de trabalho, você escolhe o que quer criar:</p>
+    <h3>🧩 Criar funções</h3>
+    <p>Para aprender como se resolve um problema específico: ordenar uma lista, calcular uma média, validar um e-mail, contar palavras… Você recebe uma função clara e curta, com exemplos de uso, ideal para entender um conceito de cada vez. <strong>É o melhor modo para começar.</strong></p>
+    <h3>📱 Criar app</h3>
+    <p>Para construir um aplicativo completo que funciona de verdade: uma lista de tarefas, uma calculadora de gastos, um jogo de perguntas… Você recebe todo o código do app em um único arquivo e uma explicação de como ele é montado. O tipo de app depende da linguagem que você escolher:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Linguagem</th><th>Que app você recebe</th><th>Onde executar</th></tr></thead>
+        <tbody>
+          <tr><td>JavaScript</td><td>App web completo em um único arquivo HTML. Salva os dados no navegador.</td><td>CodePen, ou salvando como <code>index.html</code> e abrindo o arquivo.</td></tr>
+          <tr><td>Python</td><td>App web com Flask: servidor e página incluídos.</td><td>Replit</td></tr>
+          <tr><td>TypeScript, Go, Java, Kotlin, Rust</td><td>App web com seu próprio servidor, que abre como uma página.</td><td>Replit</td></tr>
+          <tr><td>Swift</td><td>App para iPhone e iPad com SwiftUI.</td><td>Swift Playgrounds (você precisa de um iPad ou de um Mac).</td></tr>
+          <tr><td>C, C++</td><td>App de console com menu: você escolhe as opções digitando no teclado.</td><td>Replit</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip">Criar um app leva mais tempo do que uma função: pode demorar até um minuto. Não feche a página enquanto aparecer <strong>Criando app...</strong></div>
+  </section>
+
+  <section id="pt-generar">
+    <h2>5. Sua primeira consulta, passo a passo</h2>
+    <ol>
+      <li><strong>Escolha o modo:</strong> 🧩 Criar funções ou 📱 Criar app.</li>
+      <li><strong>Escolha a linguagem</strong> que você quer aprender, tocando em um dos 10 botões (Python, JavaScript, TypeScript, Rust, Go, Java, Kotlin, Swift, C ou C++). Se não souber qual escolher, comece com <strong>Python</strong>: é a mais fácil de ler.</li>
+      <li><strong>Escreva seu pedido</strong> na caixa de texto, como se estivesse explicando para uma pessoa. Por exemplo: <em>"Quero uma função que receba uma lista de números e retorne só os pares, ordenados do maior para o menor"</em>.</li>
+      <li>Está sem ideias? Toque em <strong>💡 Exemplos para começar</strong> e escolha um: o texto é preenchido sozinho e a linguagem certa já fica selecionada.</li>
+      <li>Toque no botão <strong>Gerar em…</strong> (ou <strong>Criar app em…</strong>). No computador, você também pode apertar <strong>Ctrl + Enter</strong>.</li>
+      <li>Espere alguns segundos e role a tela para baixo para ver o resultado.</li>
+    </ol>
+    <p>Cada consulta gerada conta para o seu limite diário se você tiver o plano grátis (veja <a href="#pt-planes">Planos e limites</a>).</p>
+  </section>
+
+  <section id="pt-resultado">
+    <h2>6. O resultado</h2>
+    <p>O resultado tem três partes:</p>
+    <h3>💻 O código</h3>
+    <p>O programa completo. No canto superior direito desse quadro, você tem dois botões:</p>
+    <ul>
+      <li><strong>📋 Copiar</strong>: copia todo o código para você colar onde quiser.</li>
+      <li><strong>📤 Compartilhar código</strong>: no celular, abre o menu de compartilhamento (WhatsApp, Telegram, e-mail…); no computador, copia o código pronto para colar em uma mensagem.</li>
+    </ul>
+    <h3>📖 A explicação</h3>
+    <p>No modo funções ela se chama <strong>O que faz e por quê?</strong> e no modo app, <strong>Como o app é montado?</strong>. Ela explica o código parte por parte, no seu idioma. Você também pode compartilhá-la com <strong>📤 Compartilhar explicação</strong>.</p>
+    <h3>📚 O que faço com este código?</h3>
+    <p>Um guia expansível de 11 passos: desde entender e executar o código até guardá-lo no GitHub e publicá-lo na internet. Toque nele para abrir (veja a próxima seção).</p>
+    <p>Quando terminar, toque em <strong>🔄 Nova consulta</strong> para começar outra.</p>
+  </section>
+
+  <section id="pt-ejecutar">
+    <h2>7. Como executar o código</h2>
+    <p>Você não precisa instalar nada: o código roda em editores online gratuitos.</p>
+    <ol>
+      <li>Abra <strong>📚 O que faço com este código?</strong> abaixo do resultado.</li>
+      <li>No passo 2, toque em <strong>▶️ Abrir editor</strong>. Vai abrir um editor online com a sua linguagem já configurada.</li>
+      <li>Volte ao CodeLearn, toque em <strong>📋 Copiar</strong> e cole o código no editor (Ctrl + V, ou, no celular, mantenha o dedo pressionado e toque em Colar).</li>
+      <li>Toque em <strong>Run</strong> ou <strong>▶️</strong> no editor e veja o resultado.</li>
+    </ol>
+    <p>Os editores que o CodeLearn abre são:</p>
+    <ul>
+      <li><strong>Modo funções:</strong> Replit (Python, Java, C e C++), CodePen (JavaScript), TypeScript Playground, Rust Playground, Go Playground, Kotlin Playground e SwiftFiddle (Swift).</li>
+      <li><strong>Modo app:</strong> Replit para quase todas as linguagens, CodePen para JavaScript e Swift Playgrounds para Swift.</li>
+    </ul>
+    <div class="tip">O <strong>Replit</strong> pode pedir que você crie uma conta grátis na primeira vez. Nos apps web, depois de tocar em Run, o Replit mostra o app em uma pré-visualização à direita (ou em uma aba separada).</div>
+    <p>Se o editor mostrar um erro, leia a mensagem com calma: normalmente ela diz em qual linha está o problema. Você também pode colar o erro no CodeLearn e pedir que ele explique como corrigi-lo.</p>
+    <p>O guia continua com mais passos para você ir além: experimentar mudando valores, personalizar o código, instalar o <strong>VS Code</strong> (o editor profissional), guardar seu código no <strong>GitHub</strong> e publicar seu projeto na internet com a <strong>Vercel</strong>.</p>
+  </section>
+
+  <section id="pt-consejos">
+    <h2>8. Como escrever bons pedidos</h2>
+    <p>Quanto mais claro for o seu pedido, melhor o resultado. Algumas dicas:</p>
+    <ul>
+      <li><strong>Diga o que entra e o que sai.</strong> "Uma função que receba uma frase e retorne quantas vogais ela tem" funciona muito melhor do que "alguma coisa com vogais".</li>
+      <li><strong>Nos apps, liste as funções.</strong> "Um app de gastos onde eu possa adicionar um gasto com valor e categoria, ver o total do mês e apagar gastos".</li>
+      <li><strong>Comece simples.</strong> Primeiro peça a versão básica; depois, em outra consulta, peça uma versão com mais recursos.</li>
+      <li><strong>Use seu próprio idioma</strong> e palavras do dia a dia: não precisa usar termos técnicos.</li>
+      <li><strong>Teste o mesmo pedido em outra linguagem</strong> para comparar como o problema é resolvido. É uma ótima forma de aprender.</li>
+      <li>O pedido pode ter até 2000 caracteres.</li>
+    </ul>
+    <div class="tip"><strong>Privacidade:</strong> não escreva senhas, dados de cartão nem informações pessoais nos seus pedidos. O que você escreve é enviado para a IA para gerar a resposta.</div>
+  </section>
+
+  <section id="pt-historial">
+    <h2>9. O histórico</h2>
+    <p>Toque em <strong>📋</strong> na barra superior para ver suas últimas <strong>20 consultas</strong>, com a linguagem, o modo e a data.</p>
+    <ul>
+      <li><strong>↩ Usar de novo</strong>: coloca esse pedido de volta na caixa, com a mesma linguagem e o mesmo modo. Você pode modificá-lo antes de gerar. Gerar de novo conta como uma consulta nova.</li>
+      <li><strong>🗑️</strong>: apaga essa consulta do histórico.</li>
+    </ul>
+    <div class="tip">O histórico fica salvo <strong>neste dispositivo e neste navegador</strong>. Se você entrar por outro celular ou computador, vai ver um histórico diferente. Se quiser guardar um código, copie e salve em outro lugar (por exemplo, no GitHub).</div>
+  </section>
+
+  <section id="pt-idiomas">
+    <h2>10. Idiomas</h2>
+    <p>O CodeLearn funciona em 6 idiomas: <strong>espanhol, inglês, português, francês, alemão e chinês</strong>. O site escolhe automaticamente o idioma do seu dispositivo, e você pode mudá-lo quando quiser com o seletor da bandeira, no canto superior direito. O CodeLearn lembra a sua escolha para a próxima vez.</p>
+    <p>O idioma escolhido muda os textos do site e também o idioma das explicações e dos comentários do código.</p>
+    <div class="tip">Ao mudar de idioma, o resultado que está na tela é apagado, mas a consulta continua salva no seu histórico.</div>
+  </section>
+
+  <section id="pt-planes">
+    <h2>11. Planos e limites</h2>
+    <div class="plans">
+      <div class="plan">
+        <h3>🆓 Free</h3>
+        <p class="price">Grátis</p>
+        <ul>
+          <li>5 consultas por dia</li>
+          <li>Os dois modos e as 10 linguagens</li>
+          <li>Histórico e todas as funções</li>
+        </ul>
+      </div>
+      <div class="plan plan-premium">
+        <h3>⭐ Premium</h3>
+        <p class="price">USD 10 / mês</p>
+        <ul>
+          <li>Consultas ilimitadas (uso pessoal razoável)</li>
+          <li>Os dois modos e as 10 linguagens</li>
+          <li>Cancele quando quiser</li>
+        </ul>
+      </div>
+    </div>
+    <h3>O limite diário</h3>
+    <p>No plano grátis, abaixo da caixa de texto você vê uma barra que diz <strong>Consultas hoje: X/5</strong>. Cada consulta gerada soma uma, em qualquer um dos dois modos. O contador volta a zero todos os dias às <strong>00:00 no horário UTC</strong> (por exemplo, às 21:00 no horário de Brasília, ou em Portugal à 01:00 no verão e à 00:00 no inverno).</p>
+    <h3>Mudar para o Premium</h3>
+    <ol>
+      <li>Toque em <strong>⭐ Premium</strong> na barra superior (ou em <strong>🚀 Ir para Premium</strong> quando você atingir o limite).</li>
+      <li>Vai abrir a janela de pagamento segura da <strong>Paddle</strong>, nossa processadora de pagamentos. O CodeLearn nunca vê nem guarda os dados do seu cartão.</li>
+      <li>Conclua o pagamento. Sua conta passa para Premium em alguns segundos. Se não aparecer, recarregue a página.</li>
+    </ol>
+    <p>A assinatura é renovada automaticamente todo mês. Você tem <strong>7 dias de garantia</strong>: se não gostar, escreva para a gente e devolvemos o seu dinheiro. Mais detalhes na <a href="/legal.html#refund">Política de reembolso</a>.</p>
+  </section>
+
+  <section id="pt-micuenta">
+    <h2>12. Minha conta</h2>
+    <p>Toque em <strong>⚙️</strong> na barra superior. Lá você vê seu e-mail e seu plano, e tem duas opções:</p>
+    <h3>💳 Gerenciar assinatura</h3>
+    <p>Só para Premium. Abre o portal da Paddle, onde você pode trocar o cartão, baixar suas faturas ou <strong>cancelar a assinatura</strong>. Se cancelar, você continua com o Premium até o fim do mês já pago e depois passa para o plano grátis.</p>
+    <h3>🗑️ Excluir minha conta</h3>
+    <p>Apaga sua conta e seus dados para sempre. Para confirmar, você precisa digitar <strong>EXCLUIR</strong> e tocar em <strong>Excluir minha conta para sempre</strong>. Se você tiver Premium, a assinatura é cancelada na hora e o tempo que restava do mês é perdido. Não dá para desfazer.</p>
+  </section>
+
+  <section id="pt-instalar">
+    <h2>13. Instalar o CodeLearn como app</h2>
+    <p>Você pode ter o CodeLearn na sua tela inicial, como qualquer app, sem passar por nenhuma loja:</p>
+    <ul>
+      <li><strong>Android, e Chrome ou Edge no computador:</strong> toque em <strong>📲 Instalar app</strong> no aviso que aparece no topo do site. Se você fechou o aviso, abra o menu do navegador (⋮) e escolha <strong>Instalar app</strong> ou <strong>Adicionar à tela inicial</strong>.</li>
+      <li><strong>iPhone e iPad:</strong> abra o site no Safari, toque no botão <strong>Compartilhar</strong> (o quadrado com a seta) e escolha <strong>Adicionar à Tela de Início</strong>.</li>
+    </ul>
+    <p>O app instalado é o mesmo site: usa a mesma conta, o mesmo plano e se atualiza sozinho.</p>
+  </section>
+
+  <section id="pt-faq">
+    <h2>14. Perguntas frequentes</h2>
+    <details>
+      <summary>Apareceu "Houve um erro ao gerar o código"</summary>
+      <p>Espere alguns segundos e toque em gerar de novo. Se acontecer outra vez, descreva seu pedido de forma mais simples ou mais curta, principalmente no modo app. Uma consulta que dá erro não é descontada do seu limite.</p>
+    </details>
+    <details>
+      <summary>Não recebi o e-mail de confirmação</summary>
+      <p>Confira as pastas de spam e de promoções. Se já passaram vários minutos e ele não aparece, escreva para <a href="mailto:codelearn.app@gmail.com">codelearn.app@gmail.com</a>.</p>
+    </details>
+    <details>
+      <summary>Diz que atingi o limite, mas não fiz 5 consultas</summary>
+      <p>Para evitar abusos do plano grátis, também existe um limite por conexão. Se você usa o CodeLearn em uma rede compartilhada (uma escola, um escritório ou um Wi-Fi público), pode ser que outras pessoas já tenham feito consultas pela mesma rede. O limite é reiniciado às 00:00 UTC.</p>
+    </details>
+    <details>
+      <summary>O código dá erro no editor</summary>
+      <p>Confira se você copiou o código completo com <strong>📋 Copiar</strong> e se o editor é da mesma linguagem. No modo app, veja na explicação as instruções para executá-lo. Se o erro continuar, cole a mensagem de erro no CodeLearn e peça que ele explique como corrigi-lo.</p>
+    </details>
+    <details>
+      <summary>Posso usar o código nos meus projetos?</summary>
+      <p>Sim. Você pode usar livremente o código gerado pelo CodeLearn nos seus projetos pessoais e comerciais. Mesmo assim, revise e teste antes de usá-lo em algo importante: a IA pode errar.</p>
+    </details>
+    <details>
+      <summary>O CodeLearn executa o código por mim?</summary>
+      <p>Não. O CodeLearn gera e explica o código; quem executa é você, em um editor online gratuito (veja <a href="#pt-ejecutar">Como executar o código</a>). Executar e modificar o código você mesmo é a melhor forma de aprender.</p>
+    </details>
+    <details>
+      <summary>Como cancelo o Premium?</summary>
+      <p>Em <strong>⚙️ → 💳 Gerenciar assinatura</strong>. Você continua com o Premium até o fim do período pago.</p>
+    </details>
+    <details>
+      <summary>Onde está meu histórico em outro dispositivo?</summary>
+      <p>O histórico é salvo separadamente em cada dispositivo, então em outro celular ou computador ele começa vazio. Já a sua conta e o seu plano são os mesmos em todos os lugares.</p>
+    </details>
+  </section>
+
+  <div class="contact-box">
+    <p>Ficou com alguma dúvida? Escreva para <a href="mailto:codelearn.app@gmail.com">codelearn.app@gmail.com</a> e a gente te responde.</p>
+    <a class="cta" href="/">🚀 Ir para o CodeLearn</a>
+  </div>
+</article>
+
+<article class="guide" lang="fr" data-lang="fr">
+  <h1>Guide d'utilisation de CodeLearn</h1>
+  <p class="lead">Tout ce que vous devez savoir pour utiliser CodeLearn, de la création de votre compte jusqu'à l'exécution de votre première app. Lisez-le d'une traite ou allez directement à la partie qui vous intéresse.</p>
+
+  <nav class="toc" aria-label="Sommaire">
+    <a href="#fr-que-es">1. Qu'est-ce que CodeLearn ?</a>
+    <a href="#fr-cuenta">2. Créer votre compte</a>
+    <a href="#fr-pantalla">3. Découvrez l'écran</a>
+    <a href="#fr-modos">4. Les deux modes</a>
+    <a href="#fr-generar">5. Votre première requête, étape par étape</a>
+    <a href="#fr-resultado">6. Le résultat</a>
+    <a href="#fr-ejecutar">7. Comment exécuter le code</a>
+    <a href="#fr-consejos">8. Comment bien formuler vos demandes</a>
+    <a href="#fr-historial">9. L'historique</a>
+    <a href="#fr-idiomas">10. Langues</a>
+    <a href="#fr-planes">11. Formules et limites</a>
+    <a href="#fr-micuenta">12. Mon compte</a>
+    <a href="#fr-instalar">13. Installer CodeLearn comme une app</a>
+    <a href="#fr-faq">14. Questions fréquentes</a>
+  </nav>
+
+  <section id="fr-que-es">
+    <h2>1. Qu'est-ce que CodeLearn ?</h2>
+    <p>CodeLearn est un site web pour <strong>apprendre à programmer avec l'intelligence artificielle</strong>. Vous décrivez avec vos propres mots, dans votre langue, ce que vous voulez qu'un programme fasse, et CodeLearn vous donne :</p>
+    <ul>
+      <li><strong>Le code complet</strong>, prêt à copier et à exécuter.</li>
+      <li><strong>Une explication pas à pas</strong> de ce que fait chaque partie et pourquoi.</li>
+      <li><strong>Un guide des prochaines étapes</strong> pour l'exécuter, le modifier et continuer à apprendre.</li>
+    </ul>
+    <p>Pas besoin de savoir programmer pour commencer : l'idée est que vous appreniez en voyant du vrai code, expliqué dans un langage simple. Ça fonctionne sur ordinateur, tablette et téléphone, et il n'y a rien à installer.</p>
+  </section>
+
+  <section id="fr-cuenta">
+    <h2>2. Créer votre compte</h2>
+    <p>Sans compte, vous pouvez parcourir le site et toucher <strong>👀 Voir un exemple de résultat</strong> pour voir à quoi ressemble une vraie réponse. Pour faire vos propres requêtes, il vous faut un compte gratuit :</p>
+    <ol>
+      <li>Touchez <strong>👤 Connexion</strong>, en haut à droite.</li>
+      <li>Touchez <strong>Pas de compte ? S'inscrire</strong>.</li>
+      <li>Saisissez votre e-mail et un mot de passe, puis touchez <strong>S'inscrire</strong>.</li>
+      <li>Vous recevez un e-mail de confirmation. Ouvrez-le et touchez le lien. Si vous ne le voyez pas, regardez dans le dossier spam ou promotions.</li>
+      <li>Revenez sur CodeLearn, touchez <strong>👤 Connexion</strong> et connectez-vous avec votre e-mail et votre mot de passe.</li>
+    </ol>
+    <div class="tip"><strong>Important :</strong> les e-mails temporaires ou jetables ne sont pas acceptés. Utilisez une vraie adresse e-mail, car c'est celle dont vous aurez besoin pour récupérer votre mot de passe.</div>
+    <h3>Mot de passe oublié ?</h3>
+    <p>Dans la fenêtre <strong>Se connecter</strong>, touchez <strong>Mot de passe oublié ?</strong>, saisissez votre e-mail et touchez <strong>Réinitialiser le mot de passe</strong>. Vous recevez un e-mail avec un lien ; en l'ouvrant, CodeLearn vous demande un nouveau mot de passe d'au moins 8 caractères.</p>
+  </section>
+
+  <section id="fr-pantalla">
+    <h2>3. Découvrez l'écran</h2>
+    <p>En haut, dans la barre supérieure, vous trouverez :</p>
+    <ul>
+      <li><strong>🆓 Free</strong> ou <strong>⭐ Premium</strong> : votre formule actuelle.</li>
+      <li><strong>⭐ Premium</strong> (bouton) : pour passer à la formule Premium. Il n'apparaît que si vous avez la formule gratuite.</li>
+      <li><strong>📋</strong> : l'historique de vos requêtes.</li>
+      <li><strong>⚙️</strong> : votre compte (abonnement et suppression du compte).</li>
+      <li><strong>📖</strong> : ce guide.</li>
+      <li><strong>Déconnexion</strong>.</li>
+      <li><strong>Sélecteur de langue</strong> (le drapeau) : change la langue de tout le site.</li>
+    </ul>
+    <p>En dessous se trouve l'espace de travail : le sélecteur de mode (<strong>🧩 Créer des fonctions</strong> / <strong>📱 Créer une app</strong>), les 10 langages de programmation, la zone où vous écrivez votre demande et le bouton pour générer.</p>
+    <div class="tip"><strong>Sur téléphone :</strong> si vous le mettez à l'horizontale, l'écran se divise en deux colonnes : à gauche vous écrivez, à droite vous voyez le résultat.</div>
+  </section>
+
+  <section id="fr-modos">
+    <h2>4. Les deux modes</h2>
+    <p>Au-dessus de l'espace de travail, vous choisissez ce que vous voulez créer :</p>
+    <h3>🧩 Créer des fonctions</h3>
+    <p>Pour apprendre à résoudre un problème précis : trier une liste, calculer une moyenne, valider un e-mail, compter des mots… Vous recevez une fonction claire et courte, avec des exemples d'utilisation, idéale pour comprendre un concept à la fois. <strong>C'est le meilleur mode pour commencer.</strong></p>
+    <h3>📱 Créer une app</h3>
+    <p>Pour construire une application complète qui fonctionne vraiment : une liste de tâches, un suivi de dépenses, un jeu de questions… Vous recevez tout le code de l'app dans un seul fichier et une explication de sa structure. Le type d'app dépend du langage choisi :</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Langage</th><th>App que vous recevez</th><th>Où l'exécuter</th></tr></thead>
+        <tbody>
+          <tr><td>JavaScript</td><td>App web complète dans un seul fichier HTML. Elle enregistre les données dans le navigateur.</td><td>CodePen, ou en l'enregistrant sous <code>index.html</code> et en l'ouvrant.</td></tr>
+          <tr><td>Python</td><td>App web avec Flask : serveur et page inclus.</td><td>Replit</td></tr>
+          <tr><td>TypeScript, Go, Java, Kotlin, Rust</td><td>App web avec son propre serveur, qui s'ouvre comme une page.</td><td>Replit</td></tr>
+          <tr><td>Swift</td><td>App pour iPhone et iPad avec SwiftUI.</td><td>Swift Playgrounds (il vous faut un iPad ou un Mac).</td></tr>
+          <tr><td>C, C++</td><td>App en console avec un menu : vous choisissez les options en tapant au clavier.</td><td>Replit</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip">Créer une app prend plus de temps qu'une fonction : cela peut durer jusqu'à une minute. Ne fermez pas la page tant qu'elle affiche <strong>Création de l'app...</strong></div>
+  </section>
+
+  <section id="fr-generar">
+    <h2>5. Votre première requête, étape par étape</h2>
+    <ol>
+      <li><strong>Choisissez le mode :</strong> 🧩 Créer des fonctions ou 📱 Créer une app.</li>
+      <li><strong>Choisissez le langage</strong> que vous voulez apprendre, en touchant l'un des 10 boutons (Python, JavaScript, TypeScript, Rust, Go, Java, Kotlin, Swift, C ou C++). Si vous ne savez pas lequel choisir, commencez par <strong>Python</strong> : c'est le plus facile à lire.</li>
+      <li><strong>Écrivez votre demande</strong> dans la zone de texte, comme si vous l'expliquiez à quelqu'un. Par exemple : <em>"Je veux une fonction qui reçoit une liste de nombres et retourne uniquement les pairs"</em>.</li>
+      <li>Pas d'idée ? Touchez <strong>💡 Exemples pour commencer</strong> et choisissez-en un : le texte s'écrit tout seul et le bon langage est sélectionné.</li>
+      <li>Touchez le bouton <strong>Générer en…</strong> (ou <strong>Créer l'app en…</strong>). Sur ordinateur, vous pouvez aussi appuyer sur <strong>Ctrl + Entrée</strong>.</li>
+      <li>Patientez quelques secondes et faites défiler vers le bas pour voir le résultat.</li>
+    </ol>
+    <p>Chaque requête générée compte dans votre limite quotidienne si vous avez la formule gratuite (voir <a href="#fr-planes">Formules et limites</a>).</p>
+  </section>
+
+  <section id="fr-resultado">
+    <h2>6. Le résultat</h2>
+    <p>Le résultat comporte trois parties :</p>
+    <h3>💻 Le code</h3>
+    <p>Le programme complet. En haut à droite de ce cadre, vous avez deux boutons :</p>
+    <ul>
+      <li><strong>📋 Copier</strong> : copie tout le code pour le coller où vous voulez.</li>
+      <li><strong>📤 Partager le code</strong> : sur téléphone, ouvre le menu de partage (WhatsApp, Telegram, e-mail…) ; sur ordinateur, le copie prêt à coller dans un message.</li>
+    </ul>
+    <h3>📖 L'explication</h3>
+    <p>En mode fonctions, elle s'appelle <strong>Que fait-il et pourquoi ?</strong> et en mode app, <strong>Comment l'app est-elle construite ?</strong>. Elle vous explique le code partie par partie, dans votre langue. Vous pouvez aussi la partager avec <strong>📤 Partager l'explication</strong>.</p>
+    <h3>📚 Que faire avec ce code?</h3>
+    <p>Un guide dépliable en 11 étapes : de la compréhension et l'exécution du code jusqu'à son enregistrement sur GitHub et sa publication sur internet. Touchez-le pour l'ouvrir (voir la section suivante).</p>
+    <p>Quand vous avez terminé, touchez <strong>🔄 Nouvelle requête</strong> pour en commencer une autre.</p>
+  </section>
+
+  <section id="fr-ejecutar">
+    <h2>7. Comment exécuter le code</h2>
+    <p>Rien à installer : le code s'exécute dans des éditeurs en ligne gratuits.</p>
+    <ol>
+      <li>Ouvrez <strong>📚 Que faire avec ce code?</strong> sous le résultat.</li>
+      <li>À l'étape 2, touchez <strong>▶️ Ouvrir l'éditeur</strong>. Un éditeur en ligne s'ouvre avec votre langage déjà prêt.</li>
+      <li>Revenez sur CodeLearn, touchez <strong>📋 Copier</strong> et collez le code dans l'éditeur (Ctrl + V, ou appui long puis Coller sur téléphone).</li>
+      <li>Touchez <strong>Run</strong> ou <strong>▶️</strong> dans l'éditeur et regardez le résultat.</li>
+    </ol>
+    <p>Les éditeurs ouverts par CodeLearn sont :</p>
+    <ul>
+      <li><strong>Mode fonctions :</strong> Replit (Python, Java, C et C++), CodePen (JavaScript), TypeScript Playground, Rust Playground, Go Playground, Kotlin Playground et SwiftFiddle (Swift).</li>
+      <li><strong>Mode app :</strong> Replit pour presque tous les langages, CodePen pour JavaScript et Swift Playgrounds pour Swift.</li>
+    </ul>
+    <div class="tip"><strong>Replit</strong> peut vous demander de créer un compte gratuit la première fois. Pour les apps web, après avoir touché Run, Replit affiche l'app dans un aperçu à droite (ou dans un onglet séparé).</div>
+    <p>Si l'éditeur affiche une erreur, lisez le message calmement : il indique souvent à quelle ligne se trouve le problème. Vous pouvez aussi coller l'erreur dans CodeLearn et lui demander de vous expliquer comment la corriger.</p>
+    <p>Le guide continue avec d'autres étapes pour aller plus loin : expérimenter en changeant des valeurs, personnaliser le code, installer <strong>VS Code</strong> (l'éditeur professionnel), enregistrer votre code sur <strong>GitHub</strong> et publier votre projet sur internet avec <strong>Vercel</strong>.</p>
+  </section>
+
+  <section id="fr-consejos">
+    <h2>8. Comment bien formuler vos demandes</h2>
+    <p>Plus votre demande est claire, meilleur est le résultat. Quelques conseils :</p>
+    <ul>
+      <li><strong>Dites ce que le programme reçoit et ce qu'il renvoie.</strong> « Une fonction qui reçoit une phrase et renvoie le nombre de voyelles qu'elle contient » fonctionne bien mieux que « un truc avec des voyelles ».</li>
+      <li><strong>Pour les apps, énumérez les fonctionnalités.</strong> « Une app de dépenses où je peux ajouter une dépense avec un montant et une catégorie, voir le total du mois et supprimer des dépenses ».</li>
+      <li><strong>Commencez simple.</strong> Demandez d'abord la version de base ; ensuite, dans une autre requête, demandez une version plus complète.</li>
+      <li><strong>Utilisez votre propre langue</strong> et des mots de tous les jours : pas besoin de termes techniques.</li>
+      <li><strong>Essayez la même demande dans un autre langage</strong> pour comparer les solutions. C'est une excellente façon d'apprendre.</li>
+      <li>La demande peut contenir jusqu'à 2000 caractères.</li>
+    </ul>
+    <div class="tip"><strong>Confidentialité :</strong> n'écrivez pas de mots de passe, de données de carte bancaire ni d'informations personnelles dans vos demandes. Ce que vous écrivez est envoyé à l'IA pour générer la réponse.</div>
+  </section>
+
+  <section id="fr-historial">
+    <h2>9. L'historique</h2>
+    <p>Touchez <strong>📋</strong> dans la barre du haut pour voir vos <strong>20 dernières requêtes</strong>, avec le langage, le mode et la date.</p>
+    <ul>
+      <li><strong>↩ Réutiliser</strong> : remet cette demande dans la zone de texte, avec le même langage et le même mode. Vous pouvez la modifier avant de générer. La générer à nouveau compte comme une nouvelle requête.</li>
+      <li><strong>🗑️</strong> : supprime cette requête de l'historique.</li>
+    </ul>
+    <div class="tip">L'historique est enregistré <strong>sur cet appareil et dans ce navigateur</strong>. Si vous vous connectez depuis un autre téléphone ou ordinateur, vous verrez un historique différent. Si vous voulez conserver un code, copiez-le et enregistrez-le (par exemple sur GitHub).</div>
+  </section>
+
+  <section id="fr-idiomas">
+    <h2>10. Langues</h2>
+    <p>CodeLearn fonctionne en 6 langues : <strong>espagnol, anglais, portugais, français, allemand et chinois</strong>. Le site choisit automatiquement la langue de votre appareil, et vous pouvez la changer quand vous voulez avec le sélecteur du drapeau, en haut à droite. CodeLearn retient votre choix pour la prochaine fois.</p>
+    <p>La langue choisie change les textes du site, ainsi que la langue des explications et des commentaires du code.</p>
+    <div class="tip">Quand vous changez de langue, le résultat affiché à l'écran est effacé, mais la requête reste enregistrée dans votre historique.</div>
+  </section>
+
+  <section id="fr-planes">
+    <h2>11. Formules et limites</h2>
+    <div class="plans">
+      <div class="plan">
+        <h3>🆓 Free</h3>
+        <p class="price">Gratuit</p>
+        <ul>
+          <li>5 requêtes par jour</li>
+          <li>Les deux modes et les 10 langages</li>
+          <li>Historique et toutes les fonctionnalités</li>
+        </ul>
+      </div>
+      <div class="plan plan-premium">
+        <h3>⭐ Premium</h3>
+        <p class="price">10 USD / mois</p>
+        <ul>
+          <li>Requêtes illimitées (usage personnel raisonnable)</li>
+          <li>Les deux modes et les 10 langages</li>
+          <li>Résiliable à tout moment</li>
+        </ul>
+      </div>
+    </div>
+    <h3>La limite quotidienne</h3>
+    <p>Avec la formule gratuite, sous la zone de texte, vous voyez une barre qui indique <strong>Requêtes aujourd'hui: X/5</strong>. Chaque requête générée compte pour une, dans l'un ou l'autre des deux modes. Le compteur revient à zéro tous les jours à <strong>00h00 heure UTC</strong> (par exemple, à 1h00 à Paris en hiver et 2h00 en été, ou à 19h00 à Montréal en hiver et 20h00 en été).</p>
+    <h3>Passer à Premium</h3>
+    <ol>
+      <li>Touchez <strong>⭐ Premium</strong> dans la barre du haut (ou <strong>🚀 Passer au Premium</strong> quand vous atteignez la limite).</li>
+      <li>La fenêtre de paiement sécurisée de <strong>Paddle</strong>, notre prestataire de paiement, s'ouvre. CodeLearn ne voit ni n'enregistre jamais les données de votre carte.</li>
+      <li>Finalisez le paiement. Votre compte passe à Premium en quelques secondes. Si vous ne le voyez pas, rechargez la page.</li>
+    </ol>
+    <p>L'abonnement se renouvelle automatiquement chaque mois. Vous avez <strong>7 jours de garantie</strong> : si vous n'êtes pas convaincu, écrivez-nous et nous vous remboursons. Plus de détails dans la <a href="/legal.html#refund">Politique de remboursement</a>.</p>
+  </section>
+
+  <section id="fr-micuenta">
+    <h2>12. Mon compte</h2>
+    <p>Touchez <strong>⚙️</strong> dans la barre du haut. Vous y voyez votre e-mail et votre formule, et vous avez deux options :</p>
+    <h3>💳 Gérer l'abonnement</h3>
+    <p>Uniquement pour Premium. Ouvre le portail Paddle, où vous pouvez changer de carte, télécharger vos factures ou <strong>annuler l'abonnement</strong>. Si vous annulez, vous gardez Premium jusqu'à la fin du mois déjà payé, puis vous passez à la formule gratuite.</p>
+    <h3>🗑️ Supprimer mon compte</h3>
+    <p>Supprime votre compte et vos données pour toujours. Pour confirmer, vous devez taper <strong>SUPPRIMER</strong> et toucher <strong>Supprimer mon compte définitivement</strong>. Si vous avez Premium, l'abonnement est annulé immédiatement et le temps restant du mois est perdu. C'est irréversible.</p>
+  </section>
+
+  <section id="fr-instalar">
+    <h2>13. Installer CodeLearn comme une app</h2>
+    <p>Vous pouvez avoir CodeLearn sur votre écran d'accueil, comme n'importe quelle app, sans passer par aucune boutique :</p>
+    <ul>
+      <li><strong>Android, et Chrome ou Edge sur ordinateur :</strong> touchez <strong>📲 Installer l'app</strong> dans le bandeau qui apparaît en haut du site. Si vous l'avez fermé, ouvrez le menu du navigateur (⋮) et choisissez <strong>Installer l'application</strong> ou <strong>Ajouter à l'écran d'accueil</strong>.</li>
+      <li><strong>iPhone et iPad :</strong> ouvrez le site dans Safari, touchez le bouton <strong>Partager</strong> (le carré avec la flèche) et choisissez <strong>Sur l'écran d'accueil</strong>.</li>
+    </ul>
+    <p>L'app installée est le même site : elle utilise le même compte, la même formule et se met à jour toute seule.</p>
+  </section>
+
+  <section id="fr-faq">
+    <h2>14. Questions fréquentes</h2>
+    <details>
+      <summary>J'ai eu le message "Une erreur s'est produite"</summary>
+      <p>Patientez quelques secondes et relancez la génération. Si cela se reproduit, décrivez votre demande de façon plus simple ou plus courte, surtout en mode app. Une requête qui échoue n'est pas décomptée de votre limite.</p>
+    </details>
+    <details>
+      <summary>Je n'ai pas reçu l'e-mail de confirmation</summary>
+      <p>Regardez dans les dossiers spam et promotions. Si plusieurs minutes se sont écoulées et qu'il n'apparaît toujours pas, écrivez-nous à <a href="mailto:codelearn.app@gmail.com">codelearn.app@gmail.com</a>.</p>
+    </details>
+    <details>
+      <summary>On me dit que j'ai atteint la limite, mais je n'ai pas fait 5 requêtes</summary>
+      <p>Pour éviter les abus de la formule gratuite, il existe aussi une limite par connexion. Si vous utilisez CodeLearn depuis un réseau partagé (une école, un bureau ou un wifi public), d'autres personnes ont peut-être déjà fait des requêtes depuis ce même réseau. La limite est réinitialisée à 00h00 UTC.</p>
+    </details>
+    <details>
+      <summary>Le code me donne une erreur dans l'éditeur</summary>
+      <p>Vérifiez que vous avez copié le code en entier avec <strong>📋 Copier</strong> et que l'éditeur correspond au bon langage. En mode app, consultez les instructions d'exécution dans l'explication. Si l'erreur persiste, collez le message d'erreur dans CodeLearn et demandez-lui de vous expliquer comment la corriger.</p>
+    </details>
+    <details>
+      <summary>Puis-je utiliser le code dans mes projets ?</summary>
+      <p>Oui. Vous pouvez utiliser librement le code généré par CodeLearn dans vos projets personnels et commerciaux. Relisez-le et testez-le quand même avant de l'utiliser pour quelque chose d'important : l'IA peut se tromper.</p>
+    </details>
+    <details>
+      <summary>CodeLearn exécute-t-il le code à ma place ?</summary>
+      <p>Non. CodeLearn génère et explique le code ; c'est vous qui l'exécutez dans un éditeur en ligne gratuit (voir <a href="#fr-ejecutar">Comment exécuter le code</a>). L'exécuter et le modifier vous-même est la meilleure façon d'apprendre.</p>
+    </details>
+    <details>
+      <summary>Comment annuler Premium ?</summary>
+      <p>Depuis <strong>⚙️ → 💳 Gérer l'abonnement</strong>. Vous gardez Premium jusqu'à la fin de la période payée.</p>
+    </details>
+    <details>
+      <summary>Où est mon historique sur un autre appareil ?</summary>
+      <p>L'historique est enregistré séparément sur chaque appareil, donc sur un autre téléphone ou ordinateur il est vide au départ. Votre compte et votre formule, en revanche, sont les mêmes partout.</p>
+    </details>
+  </section>
+
+  <div class="contact-box">
+    <p>Une question ? Écrivez-nous à <a href="mailto:codelearn.app@gmail.com">codelearn.app@gmail.com</a> et nous vous répondrons.</p>
+    <a class="cta" href="/">🚀 Aller sur CodeLearn</a>
+  </div>
+</article>
+
+<article class="guide" lang="de" data-lang="de">
+  <h1>CodeLearn-Anleitung</h1>
+  <p class="lead">Alles, was Sie für die Nutzung von CodeLearn wissen müssen – vom Erstellen Ihres Kontos bis zum Ausführen Ihrer ersten App. Lesen Sie die Anleitung von Anfang bis Ende oder springen Sie direkt zu dem Teil, der Sie interessiert.</p>
+
+  <nav class="toc" aria-label="Inhalt">
+    <a href="#de-que-es">1. Was ist CodeLearn?</a>
+    <a href="#de-cuenta">2. Ihr Konto erstellen</a>
+    <a href="#de-pantalla">3. Die Oberfläche im Überblick</a>
+    <a href="#de-modos">4. Die zwei Modi</a>
+    <a href="#de-generar">5. Ihre erste Anfrage, Schritt für Schritt</a>
+    <a href="#de-resultado">6. Das Ergebnis</a>
+    <a href="#de-ejecutar">7. So führen Sie den Code aus</a>
+    <a href="#de-consejos">8. So schreiben Sie gute Beschreibungen</a>
+    <a href="#de-historial">9. Der Verlauf</a>
+    <a href="#de-idiomas">10. Sprachen</a>
+    <a href="#de-planes">11. Tarife und Limits</a>
+    <a href="#de-micuenta">12. Mein Konto</a>
+    <a href="#de-instalar">13. CodeLearn als App installieren</a>
+    <a href="#de-faq">14. Häufige Fragen</a>
+  </nav>
+
+  <section id="de-que-es">
+    <h2>1. Was ist CodeLearn?</h2>
+    <p>CodeLearn ist eine Website, mit der Sie <strong>mit künstlicher Intelligenz programmieren lernen</strong>. Sie beschreiben mit Ihren eigenen Worten und in Ihrer Sprache, was ein Programm tun soll, und CodeLearn liefert Ihnen:</p>
+    <ul>
+      <li><strong>Den vollständigen Code</strong>, fertig zum Kopieren und Ausführen.</li>
+      <li><strong>Eine Schritt-für-Schritt-Erklärung</strong>, was jeder Teil macht und warum.</li>
+      <li><strong>Eine Anleitung für die nächsten Schritte</strong>, um den Code auszuführen, zu verändern und weiterzulernen.</li>
+    </ul>
+    <p>Sie müssen nicht programmieren können, um loszulegen: Die Idee ist, dass Sie anhand von echtem Code lernen, der in einfacher Sprache erklärt wird. CodeLearn funktioniert auf Computer, Tablet und Handy, und Sie müssen nichts installieren.</p>
+  </section>
+
+  <section id="de-cuenta">
+    <h2>2. Ihr Konto erstellen</h2>
+    <p>Ohne Konto können Sie sich auf der Website umsehen und auf <strong>👀 Beispiel-Ergebnis ansehen</strong> klicken, um zu sehen, wie eine echte Antwort aussieht. Für eigene Anfragen brauchen Sie ein kostenloses Konto:</p>
+    <ol>
+      <li>Klicken Sie oben rechts auf <strong>👤 Anmelden</strong>.</li>
+      <li>Klicken Sie auf <strong>Kein Konto? Registrieren</strong>.</li>
+      <li>Geben Sie Ihre E-Mail-Adresse und ein Passwort ein und klicken Sie auf <strong>Registrieren</strong>.</li>
+      <li>Sie erhalten eine Bestätigungs-E-Mail. Öffnen Sie sie und klicken Sie auf den Link. Falls Sie sie nicht finden, sehen Sie im Spam- oder Werbe-Ordner nach.</li>
+      <li>Kehren Sie zu CodeLearn zurück, klicken Sie auf <strong>👤 Anmelden</strong> und melden Sie sich mit Ihrer E-Mail-Adresse und Ihrem Passwort an.</li>
+    </ol>
+    <div class="tip"><strong>Wichtig:</strong> Temporäre oder Wegwerf-E-Mail-Adressen werden nicht akzeptiert. Verwenden Sie eine echte E-Mail-Adresse, denn Sie brauchen sie, um Ihr Passwort wiederherzustellen.</div>
+    <h3>Passwort vergessen?</h3>
+    <p>Klicken Sie im Fenster <strong>Anmelden</strong> auf <strong>Passwort vergessen?</strong>, geben Sie Ihre E-Mail-Adresse ein und klicken Sie auf <strong>Passwort zurücksetzen</strong>. Sie erhalten eine E-Mail mit einem Link; wenn Sie ihn öffnen, bittet CodeLearn Sie um ein neues Passwort mit mindestens 8 Zeichen.</p>
+  </section>
+
+  <section id="de-pantalla">
+    <h2>3. Die Oberfläche im Überblick</h2>
+    <p>Oben in der Kopfleiste finden Sie:</p>
+    <ul>
+      <li><strong>🆓 Free</strong> oder <strong>⭐ Premium</strong>: Ihr aktueller Tarif.</li>
+      <li><strong>⭐ Premium</strong> (Schaltfläche): zum Wechsel auf den Premium-Tarif. Erscheint nur, wenn Sie den kostenlosen Tarif haben.</li>
+      <li><strong>📋</strong>: Ihr Anfragenverlauf.</li>
+      <li><strong>⚙️</strong>: Ihr Konto (Abo und Konto löschen).</li>
+      <li><strong>📖</strong>: diese Anleitung.</li>
+      <li><strong>Abmelden</strong>.</li>
+      <li><strong>Sprachauswahl</strong> (die Flagge): ändert die Sprache der gesamten Website.</li>
+    </ul>
+    <p>Darunter liegt der Arbeitsbereich: die Modusauswahl (<strong>🧩 Funktionen erstellen</strong> / <strong>📱 App erstellen</strong>), die 10 Programmiersprachen, das Feld, in das Sie Ihre Beschreibung schreiben, und die Schaltfläche zum Generieren.</p>
+    <div class="tip"><strong>Auf dem Handy:</strong> Wenn Sie es quer halten, teilt sich der Bildschirm in zwei Spalten: Links schreiben Sie, rechts sehen Sie das Ergebnis.</div>
+  </section>
+
+  <section id="de-modos">
+    <h2>4. Die zwei Modi</h2>
+    <p>Oberhalb des Arbeitsbereichs wählen Sie, was Sie erstellen möchten:</p>
+    <h3>🧩 Funktionen erstellen</h3>
+    <p>Um zu lernen, wie man ein bestimmtes Problem löst: eine Liste sortieren, einen Durchschnitt berechnen, eine E-Mail-Adresse prüfen, Wörter zählen … Sie erhalten eine klare, kurze Funktion mit Anwendungsbeispielen – ideal, um ein Konzept nach dem anderen zu verstehen. <strong>Das ist der beste Modus für den Einstieg.</strong></p>
+    <h3>📱 App erstellen</h3>
+    <p>Um eine vollständige Anwendung zu bauen, die wirklich funktioniert: eine Aufgabenliste, einen Ausgabenrechner, ein Quizspiel … Sie erhalten den gesamten Code der App in einer einzigen Datei und eine Erklärung, wie sie aufgebaut ist. Welche Art von App Sie bekommen, hängt von der gewählten Sprache ab:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Sprache</th><th>Welche App Sie erhalten</th><th>Wo sie läuft</th></tr></thead>
+        <tbody>
+          <tr><td>JavaScript</td><td>Vollständige Web-App in einer einzigen HTML-Datei. Speichert die Daten im Browser.</td><td>CodePen, oder Sie speichern sie als <code>index.html</code> und öffnen sie.</td></tr>
+          <tr><td>Python</td><td>Web-App mit Flask: Server und Seite inklusive.</td><td>Replit</td></tr>
+          <tr><td>TypeScript, Go, Java, Kotlin, Rust</td><td>Web-App mit eigenem Server, die sich wie eine Webseite öffnet.</td><td>Replit</td></tr>
+          <tr><td>Swift</td><td>App für iPhone und iPad mit SwiftUI.</td><td>Swift Playgrounds (Sie brauchen ein iPad oder einen Mac).</td></tr>
+          <tr><td>C, C++</td><td>Konsolen-App mit Menü: Sie wählen Optionen per Tastatureingabe.</td><td>Replit</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip">Eine App zu erstellen dauert länger als eine Funktion: Es kann bis zu einer Minute dauern. Schließen Sie die Seite nicht, solange <strong>App wird erstellt...</strong> angezeigt wird.</div>
+  </section>
+
+  <section id="de-generar">
+    <h2>5. Ihre erste Anfrage, Schritt für Schritt</h2>
+    <ol>
+      <li><strong>Wählen Sie den Modus:</strong> 🧩 Funktionen erstellen oder 📱 App erstellen.</li>
+      <li><strong>Wählen Sie die Sprache</strong>, die Sie lernen möchten, indem Sie auf eine der 10 Schaltflächen klicken (Python, JavaScript, TypeScript, Rust, Go, Java, Kotlin, Swift, C oder C++). Wenn Sie nicht wissen, welche Sie wählen sollen, beginnen Sie mit <strong>Python</strong>: Es ist am leichtesten zu lesen.</li>
+      <li><strong>Schreiben Sie Ihre Beschreibung</strong> in das Textfeld, so als würden Sie es einem Menschen erklären. Zum Beispiel: <em>„Ich möchte eine Funktion, die eine Zahlenliste nimmt und nur die geraden zurückgibt“</em>.</li>
+      <li>Ihnen fällt nichts ein? Klicken Sie auf <strong>💡 Beispiele zum Einstieg</strong> und wählen Sie eines aus: Der Text wird automatisch eingetragen und die passende Sprache ausgewählt.</li>
+      <li>Klicken Sie auf die Schaltfläche <strong>In … generieren</strong> (bzw. <strong>App in … erstellen</strong>). Am Computer können Sie auch <strong>Strg + Eingabe</strong> drücken.</li>
+      <li>Warten Sie ein paar Sekunden und scrollen Sie nach unten, um das Ergebnis zu sehen.</li>
+    </ol>
+    <p>Jede generierte Anfrage zählt zu Ihrem Tageslimit, wenn Sie den kostenlosen Tarif nutzen (siehe <a href="#de-planes">Tarife und Limits</a>).</p>
+  </section>
+
+  <section id="de-resultado">
+    <h2>6. Das Ergebnis</h2>
+    <p>Das Ergebnis besteht aus drei Teilen:</p>
+    <h3>💻 Der Code</h3>
+    <p>Das vollständige Programm. Oben rechts in diesem Feld gibt es zwei Schaltflächen:</p>
+    <ul>
+      <li><strong>📋 Kopieren</strong>: kopiert den gesamten Code, damit Sie ihn überall einfügen können.</li>
+      <li><strong>📤 Code teilen</strong>: öffnet auf dem Handy das Teilen-Menü (WhatsApp, Telegram, E-Mail …); am Computer wird der Code so kopiert, dass Sie ihn direkt in eine Nachricht einfügen können.</li>
+    </ul>
+    <h3>📖 Die Erklärung</h3>
+    <p>Im Funktionsmodus heißt sie <strong>Was macht es und warum?</strong> und im App-Modus <strong>Wie ist die App aufgebaut?</strong>. Sie erklärt Ihnen den Code Teil für Teil, in Ihrer Sprache. Auch die Erklärung können Sie mit <strong>📤 Erklärung teilen</strong> weitergeben.</p>
+    <h3>📚 Was mache ich mit diesem Code?</h3>
+    <p>Eine aufklappbare Anleitung mit 11 Schritten: vom Verstehen und Ausführen des Codes bis zum Speichern auf GitHub und zur Veröffentlichung im Internet. Klicken Sie darauf, um sie zu öffnen (siehe nächster Abschnitt).</p>
+    <p>Wenn Sie fertig sind, klicken Sie auf <strong>🔄 Neue Anfrage</strong>, um eine weitere zu starten.</p>
+  </section>
+
+  <section id="de-ejecutar">
+    <h2>7. So führen Sie den Code aus</h2>
+    <p>Sie müssen nichts installieren: Der Code läuft in kostenlosen Online-Editoren.</p>
+    <ol>
+      <li>Öffnen Sie <strong>📚 Was mache ich mit diesem Code?</strong> unter dem Ergebnis.</li>
+      <li>Klicken Sie in Schritt 2 auf <strong>▶️ Editor öffnen</strong>. Ein Online-Editor öffnet sich, in dem Ihre Sprache bereits eingestellt ist.</li>
+      <li>Kehren Sie zu CodeLearn zurück, klicken Sie auf <strong>📋 Kopieren</strong> und fügen Sie den Code in den Editor ein (Strg + V, oder auf dem Handy lange drücken und Einfügen wählen).</li>
+      <li>Klicken Sie im Editor auf <strong>Run</strong> oder <strong>▶️</strong> und sehen Sie sich das Ergebnis an.</li>
+    </ol>
+    <p>CodeLearn öffnet diese Editoren:</p>
+    <ul>
+      <li><strong>Funktionsmodus:</strong> Replit (Python, Java, C und C++), CodePen (JavaScript), TypeScript Playground, Rust Playground, Go Playground, Kotlin Playground und SwiftFiddle (Swift).</li>
+      <li><strong>App-Modus:</strong> Replit für fast alle Sprachen, CodePen für JavaScript und Swift Playgrounds für Swift.</li>
+    </ul>
+    <div class="tip"><strong>Replit</strong> bittet Sie beim ersten Mal eventuell, ein kostenloses Konto zu erstellen. Bei Web-Apps zeigt Replit die App nach dem Klick auf Run in einer Vorschau rechts an (oder in einem eigenen Tab).</div>
+    <p>Wenn der Editor einen Fehler anzeigt, lesen Sie die Meldung in Ruhe: Meist steht darin, in welcher Zeile das Problem liegt. Sie können den Fehler auch in CodeLearn einfügen und sich erklären lassen, wie Sie ihn beheben.</p>
+    <p>Die Anleitung geht mit weiteren Schritten noch weiter: mit Werten experimentieren, den Code anpassen, <strong>VS Code</strong> (den Profi-Editor) installieren, Ihren Code auf <strong>GitHub</strong> speichern und Ihr Projekt mit <strong>Vercel</strong> im Internet veröffentlichen.</p>
+  </section>
+
+  <section id="de-consejos">
+    <h2>8. So schreiben Sie gute Beschreibungen</h2>
+    <p>Je klarer Ihre Beschreibung, desto besser das Ergebnis. Ein paar Tipps:</p>
+    <ul>
+      <li><strong>Sagen Sie, was hineinkommt und was herauskommen soll.</strong> „Eine Funktion, die einen Satz bekommt und zurückgibt, wie viele Vokale er hat“ funktioniert viel besser als „irgendwas mit Vokalen“.</li>
+      <li><strong>Zählen Sie bei Apps die Funktionen auf.</strong> „Eine Ausgaben-App, in der ich eine Ausgabe mit Betrag und Kategorie hinzufügen, die Summe des Monats sehen und Ausgaben löschen kann“.</li>
+      <li><strong>Fangen Sie einfach an.</strong> Fragen Sie zuerst nach der Grundversion; bitten Sie danach in einer weiteren Anfrage um eine Version mit mehr Funktionen.</li>
+      <li><strong>Verwenden Sie Ihre eigene Sprache</strong> und normale Wörter: Fachbegriffe sind nicht nötig.</li>
+      <li><strong>Probieren Sie dieselbe Beschreibung in einer anderen Programmiersprache aus</strong>, um zu vergleichen, wie das Problem dort gelöst wird. Das ist eine großartige Art zu lernen.</li>
+      <li>Die Beschreibung darf bis zu 2000 Zeichen lang sein.</li>
+    </ul>
+    <div class="tip"><strong>Datenschutz:</strong> Schreiben Sie keine Passwörter, Kartendaten oder persönlichen Informationen in Ihre Beschreibungen. Was Sie schreiben, wird an die KI gesendet, um die Antwort zu erstellen.</div>
+  </section>
+
+  <section id="de-historial">
+    <h2>9. Der Verlauf</h2>
+    <p>Klicken Sie in der Kopfleiste auf <strong>📋</strong>, um Ihre letzten <strong>20 Anfragen</strong> mit Sprache, Modus und Datum zu sehen.</p>
+    <ul>
+      <li><strong>↩ Erneut verwenden</strong>: setzt diese Beschreibung wieder in das Feld ein, mit derselben Sprache und demselben Modus. Sie können sie vor dem Generieren noch ändern. Erneutes Generieren zählt als neue Anfrage.</li>
+      <li><strong>🗑️</strong>: löscht diese Anfrage aus dem Verlauf.</li>
+    </ul>
+    <div class="tip">Der Verlauf wird <strong>auf diesem Gerät und in diesem Browser</strong> gespeichert. Wenn Sie CodeLearn auf einem anderen Handy oder Computer öffnen, sehen Sie einen anderen Verlauf. Wenn Sie einen Code behalten möchten, kopieren und speichern Sie ihn (zum Beispiel auf GitHub).</div>
+  </section>
+
+  <section id="de-idiomas">
+    <h2>10. Sprachen</h2>
+    <p>CodeLearn gibt es in 6 Sprachen: <strong>Spanisch, Englisch, Portugiesisch, Französisch, Deutsch und Chinesisch</strong>. Die Website wählt automatisch die Sprache Ihres Geräts, und Sie können sie jederzeit über die Flagge oben rechts ändern. CodeLearn merkt sich Ihre Wahl für das nächste Mal.</p>
+    <p>Die gewählte Sprache ändert die Texte der Website und auch die Sprache der Erklärungen und der Kommentare im Code.</p>
+    <div class="tip">Wenn Sie die Sprache wechseln, wird das Ergebnis auf dem Bildschirm gelöscht, die Anfrage bleibt aber in Ihrem Verlauf gespeichert.</div>
+  </section>
+
+  <section id="de-planes">
+    <h2>11. Tarife und Limits</h2>
+    <div class="plans">
+      <div class="plan">
+        <h3>🆓 Free</h3>
+        <p class="price">Kostenlos</p>
+        <ul>
+          <li>5 Anfragen pro Tag</li>
+          <li>Beide Modi und alle 10 Sprachen</li>
+          <li>Verlauf und alle Funktionen</li>
+        </ul>
+      </div>
+      <div class="plan plan-premium">
+        <h3>⭐ Premium</h3>
+        <p class="price">10 USD / Monat</p>
+        <ul>
+          <li>Unbegrenzte Anfragen (angemessene persönliche Nutzung)</li>
+          <li>Beide Modi und alle 10 Sprachen</li>
+          <li>Jederzeit kündbar</li>
+        </ul>
+      </div>
+    </div>
+    <h3>Das Tageslimit</h3>
+    <p>Mit dem kostenlosen Tarif sehen Sie unter dem Textfeld eine Leiste mit <strong>Anfragen heute: X/5</strong>. Jede generierte Anfrage zählt eins dazu, in beiden Modi. Der Zähler wird jeden Tag um <strong>00:00 Uhr UTC</strong> auf null zurückgesetzt (zum Beispiel in Berlin, Wien und Zürich um 1:00 Uhr im Winter bzw. um 2:00 Uhr während der Sommerzeit).</p>
+    <h3>Zu Premium wechseln</h3>
+    <ol>
+      <li>Klicken Sie in der Kopfleiste auf <strong>⭐ Premium</strong> (oder auf <strong>🚀 Zu Premium</strong>, wenn Sie das Limit erreicht haben).</li>
+      <li>Es öffnet sich das sichere Zahlungsfenster von <strong>Paddle</strong>, unserem Zahlungsanbieter. CodeLearn sieht und speichert Ihre Kartendaten nie.</li>
+      <li>Schließen Sie die Zahlung ab. Ihr Konto wird in wenigen Sekunden auf Premium umgestellt. Falls Sie es nicht sehen, laden Sie die Seite neu.</li>
+    </ol>
+    <p>Das Abo verlängert sich automatisch jeden Monat. Sie haben eine <strong>7-tägige Geld-zurück-Garantie</strong>: Wenn es Sie nicht überzeugt, schreiben Sie uns, und wir erstatten Ihnen das Geld. Mehr dazu in der <a href="/legal.html#refund">Rückerstattungsrichtlinie</a>.</p>
+  </section>
+
+  <section id="de-micuenta">
+    <h2>12. Mein Konto</h2>
+    <p>Klicken Sie in der Kopfleiste auf <strong>⚙️</strong>. Dort sehen Sie Ihre E-Mail-Adresse und Ihren Tarif und haben zwei Möglichkeiten:</p>
+    <h3>💳 Abo verwalten</h3>
+    <p>Nur für Premium. Öffnet das Paddle-Portal, in dem Sie Ihre Karte ändern, Ihre Rechnungen herunterladen oder <strong>das Abo kündigen</strong> können. Wenn Sie kündigen, behalten Sie Premium bis zum Ende des bereits bezahlten Monats und wechseln danach in den kostenlosen Tarif.</p>
+    <h3>🗑️ Mein Konto löschen</h3>
+    <p>Löscht Ihr Konto und Ihre Daten für immer. Zur Bestätigung müssen Sie <strong>LÖSCHEN</strong> eingeben und auf <strong>Mein Konto endgültig löschen</strong> klicken. Wenn Sie Premium haben, wird das Abo sofort gekündigt und die restliche Zeit des Monats verfällt. Das kann nicht rückgängig gemacht werden.</p>
+  </section>
+
+  <section id="de-instalar">
+    <h2>13. CodeLearn als App installieren</h2>
+    <p>Sie können CodeLearn wie jede andere App auf Ihrem Startbildschirm haben, ganz ohne App-Store:</p>
+    <ul>
+      <li><strong>Android sowie Chrome oder Edge am Computer:</strong> Klicken Sie im Hinweis oben auf der Website auf <strong>📲 App installieren</strong>. Wenn Sie ihn geschlossen haben, öffnen Sie das Browser-Menü (⋮) und wählen Sie <strong>App installieren</strong> oder <strong>Zum Startbildschirm hinzufügen</strong>.</li>
+      <li><strong>iPhone und iPad:</strong> Öffnen Sie die Website in Safari, tippen Sie auf die Schaltfläche <strong>Teilen</strong> (das Quadrat mit dem Pfeil) und wählen Sie <strong>Zum Home-Bildschirm</strong>.</li>
+    </ul>
+    <p>Die installierte App ist dieselbe Website: Sie nutzt dasselbe Konto und denselben Tarif und aktualisiert sich automatisch.</p>
+  </section>
+
+  <section id="de-faq">
+    <h2>14. Häufige Fragen</h2>
+    <details>
+      <summary>Ich sehe die Meldung „Beim Generieren ist ein Fehler aufgetreten“</summary>
+      <p>Warten Sie ein paar Sekunden und klicken Sie erneut auf Generieren. Wenn es wieder passiert, beschreiben Sie Ihren Wunsch einfacher oder kürzer, vor allem im App-Modus. Eine Anfrage, die mit einem Fehler endet, wird nicht von Ihrem Limit abgezogen.</p>
+    </details>
+    <details>
+      <summary>Ich habe keine Bestätigungs-E-Mail erhalten</summary>
+      <p>Sehen Sie im Spam- und im Werbe-Ordner nach. Wenn sie nach einigen Minuten immer noch nicht da ist, schreiben Sie uns an <a href="mailto:codelearn.app@gmail.com">codelearn.app@gmail.com</a>.</p>
+    </details>
+    <details>
+      <summary>Es heißt, ich hätte das Limit erreicht, aber ich habe keine 5 Anfragen gestellt</summary>
+      <p>Um Missbrauch des kostenlosen Tarifs zu verhindern, gibt es zusätzlich ein Limit pro Internetverbindung. Wenn Sie CodeLearn in einem gemeinsam genutzten Netzwerk verwenden (Schule, Büro oder öffentliches WLAN), haben möglicherweise schon andere Personen über dasselbe Netzwerk Anfragen gestellt. Das Limit wird um 00:00 Uhr UTC zurückgesetzt.</p>
+    </details>
+    <details>
+      <summary>Der Code zeigt im Editor einen Fehler an</summary>
+      <p>Prüfen Sie, ob Sie den vollständigen Code mit <strong>📋 Kopieren</strong> kopiert haben und ob der Editor für dieselbe Sprache ist. Sehen Sie im App-Modus in der Erklärung nach, wie die App ausgeführt wird. Wenn der Fehler bleibt, fügen Sie die Fehlermeldung in CodeLearn ein und lassen Sie sich erklären, wie Sie ihn beheben.</p>
+    </details>
+    <details>
+      <summary>Darf ich den Code in meinen Projekten verwenden?</summary>
+      <p>Ja. Den Code, den CodeLearn erstellt, dürfen Sie frei in Ihren privaten und kommerziellen Projekten verwenden. Prüfen und testen Sie ihn trotzdem, bevor Sie ihn für etwas Wichtiges einsetzen: Die KI kann sich irren.</p>
+    </details>
+    <details>
+      <summary>Führt CodeLearn den Code für mich aus?</summary>
+      <p>Nein. CodeLearn erstellt und erklärt den Code; ausführen tun Sie ihn selbst in einem kostenlosen Online-Editor (siehe <a href="#de-ejecutar">So führen Sie den Code aus</a>). Den Code selbst auszuführen und zu verändern ist die beste Art zu lernen.</p>
+    </details>
+    <details>
+      <summary>Wie kündige ich Premium?</summary>
+      <p>Über <strong>⚙️ → 💳 Abo verwalten</strong>. Sie behalten Premium bis zum Ende des bezahlten Zeitraums.</p>
+    </details>
+    <details>
+      <summary>Wo ist mein Verlauf auf einem anderen Gerät?</summary>
+      <p>Der Verlauf wird auf jedem Gerät separat gespeichert, deshalb ist er auf einem anderen Handy oder Computer zunächst leer. Ihr Konto und Ihr Tarif sind dagegen überall dieselben.</p>
+    </details>
+  </section>
+
+  <div class="contact-box">
+    <p>Noch Fragen? Schreiben Sie uns an <a href="mailto:codelearn.app@gmail.com">codelearn.app@gmail.com</a>, wir antworten Ihnen gerne.</p>
+    <a class="cta" href="/">🚀 Zu CodeLearn</a>
+  </div>
+</article>
+
+<article class="guide" lang="zh" data-lang="zh">
+  <h1>CodeLearn 使用指南</h1>
+  <p class="lead">从创建账户到运行你的第一个应用，使用 CodeLearn 需要知道的一切都在这里。你可以从头读到尾，也可以直接跳到你感兴趣的部分。</p>
+
+  <nav class="toc" aria-label="目录">
+    <a href="#zh-que-es">1. CodeLearn 是什么？</a>
+    <a href="#zh-cuenta">2. 创建账户</a>
+    <a href="#zh-pantalla">3. 认识界面</a>
+    <a href="#zh-modos">4. 两种模式</a>
+    <a href="#zh-generar">5. 第一次查询，一步一步来</a>
+    <a href="#zh-resultado">6. 查看结果</a>
+    <a href="#zh-ejecutar">7. 如何运行代码</a>
+    <a href="#zh-consejos">8. 如何写出好的需求</a>
+    <a href="#zh-historial">9. 查询历史</a>
+    <a href="#zh-idiomas">10. 语言</a>
+    <a href="#zh-planes">11. 套餐与限制</a>
+    <a href="#zh-micuenta">12. 我的账户</a>
+    <a href="#zh-instalar">13. 把 CodeLearn 安装成应用</a>
+    <a href="#zh-faq">14. 常见问题</a>
+  </nav>
+
+  <section id="zh-que-es">
+    <h2>1. CodeLearn 是什么？</h2>
+    <p>CodeLearn 是一个<strong>借助人工智能学习编程</strong>的网站。你只需用自己的话、用你的语言描述想让程序做什么，CodeLearn 就会给你：</p>
+    <ul>
+      <li><strong>完整的代码</strong>，可以直接复制并运行。</li>
+      <li><strong>一步一步的讲解</strong>，告诉你每一部分做什么、为什么这样写。</li>
+      <li><strong>后续步骤指南</strong>，教你如何运行、修改代码，并继续学习。</li>
+    </ul>
+    <p>开始之前不需要会编程：我们的理念是让你通过真实的代码来学习，并用简单易懂的语言讲解。电脑、平板和手机都能用，无需安装任何东西。</p>
+  </section>
+
+  <section id="zh-cuenta">
+    <h2>2. 创建账户</h2>
+    <p>没有账户也可以浏览网站，并点击 <strong>👀 查看示例结果</strong>，看看真实的回答是什么样子。要进行你自己的查询，需要一个免费账户：</p>
+    <ol>
+      <li>点击右上角的 <strong>👤 登录</strong>。</li>
+      <li>点击 <strong>没有账户？注册</strong>。</li>
+      <li>输入你的邮箱和密码，然后点击 <strong>注册</strong>。</li>
+      <li>你会收到一封确认邮件。打开它并点击里面的链接。如果没看到，请检查垃圾邮件或推广邮件文件夹。</li>
+      <li>回到 CodeLearn，点击 <strong>👤 登录</strong>，用你的邮箱和密码登录。</li>
+    </ol>
+    <div class="tip"><strong>重要：</strong>不接受临时或一次性邮箱。请使用真实的邮箱，因为找回密码时需要用到它。</div>
+    <h3>忘记密码了？</h3>
+    <p>在 <strong>登录</strong> 窗口中，点击 <strong>忘记密码？</strong>，输入你的邮箱，然后点击 <strong>重置密码</strong>。你会收到一封带链接的邮件；打开链接后，CodeLearn 会请你设置一个至少 8 个字符的新密码。</p>
+  </section>
+
+  <section id="zh-pantalla">
+    <h2>3. 认识界面</h2>
+    <p>在页面顶部的工具栏中，你会看到：</p>
+    <ul>
+      <li><strong>🆓 免费</strong> 或 <strong>⭐ 高级版</strong>：你当前的套餐。</li>
+      <li><strong>⭐ Premium</strong>（按钮）：用于升级到高级版。只有使用免费套餐时才会显示。</li>
+      <li><strong>📋</strong>：你的查询历史。</li>
+      <li><strong>⚙️</strong>：你的账户（订阅和删除账户）。</li>
+      <li><strong>📖</strong>：本指南。</li>
+      <li><strong>退出</strong>。</li>
+      <li><strong>语言选择器</strong>（国旗图标）：切换整个网站的语言。</li>
+    </ul>
+    <p>下方是工作区：模式选择（<strong>🧩 创建函数</strong> / <strong>📱 创建应用</strong>）、10 种编程语言、输入需求的文本框，以及生成按钮。</p>
+    <div class="tip"><strong>在手机上：</strong>把手机横过来，屏幕会分成两栏：左边输入，右边查看结果。</div>
+  </section>
+
+  <section id="zh-modos">
+    <h2>4. 两种模式</h2>
+    <p>在工作区上方选择你想创建什么：</p>
+    <h3>🧩 创建函数</h3>
+    <p>用来学习如何解决一个具体问题：给列表排序、计算平均值、验证邮箱、统计单词数……你会得到一个清晰简短的函数，附带使用示例，非常适合一次理解一个概念。<strong>这是最适合入门的模式。</strong></p>
+    <h3>📱 创建应用</h3>
+    <p>用来构建一个真正能用的完整应用：待办事项清单、记账计算器、问答游戏……你会在一个文件里得到应用的全部代码，并附上应用结构的说明。应用的类型取决于你选择的编程语言：</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>编程语言</th><th>你会得到什么应用</th><th>在哪里运行</th></tr></thead>
+        <tbody>
+          <tr><td>JavaScript</td><td>一个单个 HTML 文件的完整网页应用。数据保存在浏览器中。</td><td>CodePen，或者保存为 <code>index.html</code> 后直接打开。</td></tr>
+          <tr><td>Python</td><td>使用 Flask 的网页应用：包含服务器和页面。</td><td>Replit</td></tr>
+          <tr><td>TypeScript, Go, Java, Kotlin, Rust</td><td>自带服务器的网页应用，以网页形式打开。</td><td>Replit</td></tr>
+          <tr><td>Swift</td><td>使用 SwiftUI 的 iPhone 和 iPad 应用。</td><td>Swift Playgrounds（需要 iPad 或 Mac）。</td></tr>
+          <tr><td>C, C++</td><td>带菜单的控制台应用：用键盘输入来选择选项。</td><td>Replit</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip">创建应用比创建函数花的时间更长：可能需要将近一分钟。显示 <strong>正在创建应用...</strong> 时，请不要关闭页面。</div>
+  </section>
+
+  <section id="zh-generar">
+    <h2>5. 第一次查询，一步一步来</h2>
+    <ol>
+      <li><strong>选择模式：</strong>🧩 创建函数 或 📱 创建应用。</li>
+      <li><strong>选择你想学的编程语言</strong>，点击 10 个按钮中的一个（Python、JavaScript、TypeScript、Rust、Go、Java、Kotlin、Swift、C 或 C++）。如果不知道选哪个，就从 <strong>Python</strong> 开始：它是最容易读懂的。</li>
+      <li><strong>在文本框中写下你的需求</strong>，就像向别人解释一样。例如：<em>"我想要一个函数，接收一个数字列表，只返回偶数，并按降序排列"</em>。</li>
+      <li>想不出写什么？点击 <strong>💡 入门示例</strong> 并选一个：需求会自动填好，并选中合适的编程语言。</li>
+      <li>点击 <strong>用…生成</strong> 按钮（或 <strong>用…创建应用</strong>）。在电脑上也可以按 <strong>Ctrl + Enter</strong>。</li>
+      <li>等待几秒钟，然后向下滚动查看结果。</li>
+    </ol>
+    <p>如果你使用的是免费套餐，每次生成的查询都会计入你的每日限额（参见<a href="#zh-planes">套餐与限制</a>）。</p>
+  </section>
+
+  <section id="zh-resultado">
+    <h2>6. 查看结果</h2>
+    <p>结果分为三部分：</p>
+    <h3>💻 代码</h3>
+    <p>完整的程序。在这个代码框的右上角有两个按钮：</p>
+    <ul>
+      <li><strong>📋 复制</strong>：复制全部代码，粘贴到任何你想要的地方。</li>
+      <li><strong>📤 分享代码</strong>：在手机上会打开分享菜单（WhatsApp、Telegram、邮件……）；在电脑上会把代码复制好，方便直接粘贴到消息里。</li>
+    </ul>
+    <h3>📖 讲解</h3>
+    <p>在函数模式下，标题是 <strong>它做什么？为什么这样写？</strong>；在应用模式下，标题是 <strong>应用是如何构建的？</strong>。它会用你的语言逐部分讲解代码。你也可以通过 <strong>📤 分享解释</strong> 分享它。</p>
+    <h3>📚 我该如何使用这段代码?</h3>
+    <p>一个可展开的 11 步指南：从理解和运行代码，到把它保存到 GitHub 并发布到网上。点击即可展开（见下一节）。</p>
+    <p>完成后，点击 <strong>🔄 新查询</strong> 开始下一次查询。</p>
+  </section>
+
+  <section id="zh-ejecutar">
+    <h2>7. 如何运行代码</h2>
+    <p>不需要安装任何东西：代码可以在免费的在线编辑器中运行。</p>
+    <ol>
+      <li>打开结果下方的 <strong>📚 我该如何使用这段代码?</strong>。</li>
+      <li>在第 2 步点击 <strong>▶️ 打开编辑器</strong>。会打开一个已经为你的编程语言准备好的在线编辑器。</li>
+      <li>回到 CodeLearn，点击 <strong>📋 复制</strong>，然后把代码粘贴到编辑器中（按 Ctrl + V；在手机上长按并选择“粘贴”）。</li>
+      <li>在编辑器中点击 <strong>Run</strong> 或 <strong>▶️</strong>，查看运行结果。</li>
+    </ol>
+    <p>CodeLearn 会打开的编辑器有：</p>
+    <ul>
+      <li><strong>函数模式：</strong>Replit（Python、Java、C 和 C++）、CodePen（JavaScript）、TypeScript Playground、Rust Playground、Go Playground、Kotlin Playground 和 SwiftFiddle（Swift）。</li>
+      <li><strong>应用模式：</strong>几乎所有语言都用 Replit，JavaScript 用 CodePen，Swift 用 Swift Playgrounds。</li>
+    </ul>
+    <div class="tip">第一次使用 <strong>Replit</strong> 时，它可能会要求你创建一个免费账户。对于网页应用，点击 Run 后，Replit 会在右侧的预览窗口（或单独的标签页）中显示应用。</div>
+    <p>如果编辑器显示错误，请耐心阅读错误信息：它通常会告诉你问题出在哪一行。你也可以把错误信息粘贴到 CodeLearn，请它解释如何修正。</p>
+    <p>指南后面还有更多进阶步骤：通过修改数值来做实验、自定义代码、安装 <strong>VS Code</strong>（专业编辑器）、把代码保存到 <strong>GitHub</strong>，以及用 <strong>Vercel</strong> 把你的项目发布到网上。</p>
+  </section>
+
+  <section id="zh-consejos">
+    <h2>8. 如何写出好的需求</h2>
+    <p>需求写得越清楚，结果就越好。一些小建议：</p>
+    <ul>
+      <li><strong>说明输入什么、返回什么。</strong>“一个接收一句话并返回其中有多少个元音字母的函数”比“跟元音有关的东西”效果好得多。</li>
+      <li><strong>写应用时，列出它要有的功能。</strong>“一个记账应用，可以添加带金额和类别的支出、查看本月总额、删除支出”。</li>
+      <li><strong>从简单开始。</strong>先要基础版本；之后再用另一次查询要一个功能更多的版本。</li>
+      <li><strong>使用你自己的语言</strong>和日常用语：不需要使用专业术语。</li>
+      <li><strong>用另一种编程语言试试同样的需求</strong>，比较它们的解决方式。这是很棒的学习方法。</li>
+      <li>需求最多可以写 2000 个字符。</li>
+    </ul>
+    <div class="tip"><strong>隐私：</strong>不要在需求中写密码、银行卡信息或个人信息。你写的内容会发送给 AI 来生成回答。</div>
+  </section>
+
+  <section id="zh-historial">
+    <h2>9. 查询历史</h2>
+    <p>点击顶部工具栏中的 <strong>📋</strong>，可以查看你最近的 <strong>20 次查询</strong>，包括编程语言、模式和日期。</p>
+    <ul>
+      <li><strong>↩ 再次使用</strong>：把这条需求重新填回文本框，并使用相同的编程语言和模式。生成之前你可以修改它。再次生成会算作一次新的查询。</li>
+      <li><strong>🗑️</strong>：从历史中删除这条查询。</li>
+    </ul>
+    <div class="tip">查询历史保存在<strong>当前设备和当前浏览器</strong>中。如果你从另一部手机或电脑登录，看到的历史会不一样。如果想保留某段代码，请复制并保存它（例如保存到 GitHub）。</div>
+  </section>
+
+  <section id="zh-idiomas">
+    <h2>10. 语言</h2>
+    <p>CodeLearn 支持 6 种语言：<strong>西班牙语、英语、葡萄牙语、法语、德语和中文</strong>。网站会自动使用你设备的语言，你也可以随时通过右上角的国旗语言选择器切换。CodeLearn 会记住你的选择，下次直接使用。</p>
+    <p>所选语言会改变网站上的文字，也会改变讲解和代码注释的语言。</p>
+    <div class="tip">切换语言时，屏幕上当前的结果会被清除，但这次查询仍会保存在你的查询历史中。</div>
+  </section>
+
+  <section id="zh-planes">
+    <h2>11. 套餐与限制</h2>
+    <div class="plans">
+      <div class="plan">
+        <h3>🆓 免费</h3>
+        <p class="price">免费</p>
+        <ul>
+          <li>每天 5 次查询</li>
+          <li>两种模式和 10 种编程语言</li>
+          <li>查询历史及全部功能</li>
+        </ul>
+      </div>
+      <div class="plan plan-premium">
+        <h3>⭐ 高级版</h3>
+        <p class="price">10 美元 / 月</p>
+        <ul>
+          <li>无限次查询（合理的个人使用）</li>
+          <li>两种模式和 10 种编程语言</li>
+          <li>随时可以取消</li>
+        </ul>
+      </div>
+    </div>
+    <h3>每日限额</h3>
+    <p>使用免费套餐时，文本框下方会显示一个进度条，上面写着 <strong>今日查询: X/5</strong>。无论哪种模式，每生成一次查询就加一。计数器每天 <strong>UTC 时间 00:00</strong> 归零（例如北京时间早上 8:00；台湾、香港和新加坡同样是早上 8:00）。</p>
+    <h3>升级到高级版</h3>
+    <ol>
+      <li>点击顶部工具栏中的 <strong>⭐ Premium</strong>（或在达到限额时点击 <strong>🚀 升级到高级版</strong>）。</li>
+      <li>会打开我们的支付服务商 <strong>Paddle</strong> 的安全支付窗口。CodeLearn 永远不会看到或保存你的银行卡信息。</li>
+      <li>完成付款。几秒钟后你的账户就会变成高级版。如果没有看到变化，请刷新页面。</li>
+    </ol>
+    <p>订阅每月自动续费。你享有 <strong>7 天保障</strong>：如果不满意，给我们写信，我们会退款。详情请见<a href="/legal.html#refund">退款政策</a>。</p>
+  </section>
+
+  <section id="zh-micuenta">
+    <h2>12. 我的账户</h2>
+    <p>点击顶部工具栏中的 <strong>⚙️</strong>。在这里可以看到你的邮箱和套餐，并有两个选项：</p>
+    <h3>💳 管理订阅</h3>
+    <p>仅限高级版用户。它会打开 Paddle 门户，你可以在那里更换银行卡、下载发票或<strong>取消订阅</strong>。取消后，你仍可使用高级版直到已付费月份结束，之后会转为免费套餐。</p>
+    <h3>🗑️ 删除我的账户</h3>
+    <p>永久删除你的账户和数据。确认时需要输入 <strong>删除</strong>，然后点击 <strong>永久删除我的账户</strong>。如果你是高级版用户，订阅会立即取消，当月剩余的时间也会作废。此操作无法撤销。</p>
+  </section>
+
+  <section id="zh-instalar">
+    <h2>13. 把 CodeLearn 安装成应用</h2>
+    <p>你可以像其他应用一样把 CodeLearn 放到主屏幕上，无需经过任何应用商店：</p>
+    <ul>
+      <li><strong>Android，以及电脑上的 Chrome 或 Edge：</strong>点击网站顶部提示条中的 <strong>📲 安装应用</strong>。如果你已经关掉了提示条，请打开浏览器菜单（⋮），选择 <strong>安装应用</strong> 或 <strong>添加到主屏幕</strong>。</li>
+      <li><strong>iPhone 和 iPad：</strong>用 Safari 打开网站，点击 <strong>分享</strong> 按钮（带箭头的方框），然后选择 <strong>添加到主屏幕</strong>。</li>
+    </ul>
+    <p>安装后的应用就是同一个网站：使用同一个账户、同一个套餐，并且会自动更新。</p>
+  </section>
+
+  <section id="zh-faq">
+    <h2>14. 常见问题</h2>
+    <details>
+      <summary>出现了“生成代码时出错”</summary>
+      <p>等几秒钟，然后再点一次生成。如果还是出错，请把需求描述得更简单或更简短一些，尤其是在应用模式下。出错的查询不会计入你的限额。</p>
+    </details>
+    <details>
+      <summary>没有收到确认邮件</summary>
+      <p>请检查垃圾邮件和推广邮件文件夹。如果过了几分钟还是没有，请写信到 <a href="mailto:codelearn.app@gmail.com">codelearn.app@gmail.com</a>。</p>
+    </details>
+    <details>
+      <summary>提示我已达到限额，但我还没查询满 5 次</summary>
+      <p>为了防止免费套餐被滥用，每个网络连接也有限额。如果你在共享网络（学校、办公室或公共 Wi-Fi）上使用 CodeLearn，可能已经有其他人用同一个网络进行过查询。限额会在 UTC 时间 00:00 重置。</p>
+    </details>
+    <details>
+      <summary>代码在编辑器里报错</summary>
+      <p>请确认你是用 <strong>📋 复制</strong> 复制了完整的代码，并且编辑器的编程语言与代码一致。在应用模式下，请查看讲解中关于如何运行的说明。如果还是报错，把错误信息粘贴到 CodeLearn，请它解释如何修正。</p>
+    </details>
+    <details>
+      <summary>我可以在自己的项目中使用这些代码吗？</summary>
+      <p>可以。CodeLearn 生成的代码可以自由用于你的个人和商业项目。不过，在用于重要的事情之前，请先检查并测试：AI 也可能出错。</p>
+    </details>
+    <details>
+      <summary>CodeLearn 会帮我运行代码吗？</summary>
+      <p>不会。CodeLearn 负责生成和讲解代码；由你自己在免费的在线编辑器中运行（参见<a href="#zh-ejecutar">如何运行代码</a>）。亲自运行和修改代码是最好的学习方式。</p>
+    </details>
+    <details>
+      <summary>如何取消高级版？</summary>
+      <p>在 <strong>⚙️ → 💳 管理订阅</strong> 中取消。你仍可使用高级版直到已付费周期结束。</p>
+    </details>
+    <details>
+      <summary>在另一台设备上怎么看不到我的查询历史？</summary>
+      <p>查询历史分别保存在每台设备上，所以在另一部手机或电脑上，历史一开始是空的。不过你的账户和套餐在所有设备上都是一样的。</p>
+    </details>
+  </section>
+
+  <div class="contact-box">
+    <p>还有疑问吗？写信到 <a href="mailto:codelearn.app@gmail.com">codelearn.app@gmail.com</a>，我们会回复你。</p>
+    <a class="cta" href="/">🚀 前往 CodeLearn</a>
+  </div>
+</article>
+
+</main>
+
+<footer>
+  © 2026 CodeLearn — codelearn.codes · <a href="/legal.html" id="legal-link">Términos y privacidad</a> · <a href="mailto:codelearn.app@gmail.com">codelearn.app@gmail.com</a>
+</footer>
+
+<script>
+  // Idioma: ?lang=xx (desde la app) → el que eligió en la app (cl_lang) → el del navegador → español
+  (function () {
+    var LANGS = ['es', 'en', 'pt', 'fr', 'de', 'zh'];
+    var UI = {
+      es: { title: 'Guía de uso — CodeLearn', back: '← Volver a la app', legal: 'Términos y privacidad', label: 'Idioma' },
+      en: { title: 'User guide — CodeLearn', back: '← Back to the app', legal: 'Terms and privacy', label: 'Language' },
+      pt: { title: 'Guia de uso — CodeLearn', back: '← Voltar ao app', legal: 'Termos e privacidade', label: 'Idioma' },
+      fr: { title: "Guide d'utilisation — CodeLearn", back: "← Retour à l'app", legal: 'Conditions et confidentialité', label: 'Langue' },
+      de: { title: 'Anleitung — CodeLearn', back: '← Zurück zur App', legal: 'Bedingungen und Datenschutz', label: 'Sprache' },
+      zh: { title: '使用指南 — CodeLearn', back: '← 返回应用', legal: '条款与隐私', label: '语言' }
+    };
+
+    function pick() {
+      try {
+        var q = new URLSearchParams(location.search).get('lang');
+        if (q && LANGS.indexOf(q) > -1) return q;
+      } catch (e) {}
+      try {
+        var saved = localStorage.getItem('cl_lang');
+        if (saved && LANGS.indexOf(saved) > -1) return saved;
+      } catch (e) {}
+      var nav = ((navigator.languages && navigator.languages[0]) || navigator.language || '').slice(0, 2).toLowerCase();
+      return LANGS.indexOf(nav) > -1 ? nav : 'es';
+    }
+
+    function show(lang) {
+      document.querySelectorAll('.guide').forEach(function (g) {
+        g.classList.toggle('active', g.dataset.lang === lang);
+      });
+      var t = UI[lang];
+      document.documentElement.lang = lang;
+      document.title = t.title;
+      document.getElementById('back').textContent = t.back;
+      document.getElementById('legal-link').textContent = t.legal;
+      document.getElementById('lang').setAttribute('aria-label', t.label);
+      document.getElementById('lang').value = lang;
+    }
+
+    var current = pick();
+    show(current);
+
+    document.getElementById('lang').addEventListener('change', function (e) {
+      var lang = e.target.value;
+      // Se guarda igual que en la app, así CodeLearn también queda en ese idioma
+      try { localStorage.setItem('cl_lang', lang); } catch (err) {}
+      show(lang);
+      try { history.replaceState(null, '', '?lang=' + lang); } catch (err) {}
+      window.scrollTo(0, 0);
+    });
+  })();
+</script>
+
+</body>
+</html>
