@@ -1210,6 +1210,293 @@ function NextSteps({ progLang, t, mode }) {
 }
 
 
+// ─── 🧠 PONETE A PRUEBA: textos en los 6 idiomas ───
+const QUIZ_TEXTS = {
+  es: {
+    btn: "🧠 Ponete a prueba",
+    desc: "3 preguntas + 1 mini desafío sobre este código para comprobar que lo entendiste.",
+    freeNote: "Plan Free: 1 prueba por día · Premium: ilimitadas",
+    loading: "Preparando tu prueba...",
+    question: (i, n) => `Pregunta ${i} de ${n}`,
+    correct: "✅ ¡Correcto!",
+    wrong: "❌ No es la correcta.",
+    score: (s, n) => `Tu resultado: ${s}/${n}`,
+    perfect: "¡Perfecto! Entendiste muy bien este código. 🎉",
+    good: "¡Muy bien! Repasá la explicación de la pregunta que fallaste.",
+    low: "Volvé a leer la explicación con calma: cada error es una lección.",
+    challengeTitle: "💪 Mini desafío",
+    challengeTip: "Intentalo primero en el editor. Mirá la solución solo después de probar.",
+    hintBtn: "💡 Ver pista",
+    solutionBtn: "👀 Ver solución",
+    hideSolution: "🙈 Ocultar solución",
+    limit: "Ya usaste tu prueba gratis de hoy. Con Premium tenés pruebas ilimitadas.",
+    error: "No se pudo crear la prueba. Intentá de nuevo en unos segundos.",
+    exampleNote: "Registrate gratis para ponerte a prueba con tus propios códigos.",
+  },
+  en: {
+    btn: "🧠 Test yourself",
+    desc: "3 questions + 1 mini challenge about this code to check you understood it.",
+    freeNote: "Free plan: 1 test per day · Premium: unlimited",
+    loading: "Preparing your test...",
+    question: (i, n) => `Question ${i} of ${n}`,
+    correct: "✅ Correct!",
+    wrong: "❌ Not quite.",
+    score: (s, n) => `Your score: ${s}/${n}`,
+    perfect: "Perfect! You understood this code really well. 🎉",
+    good: "Well done! Review the explanation of the question you missed.",
+    low: "Read the explanation again calmly: every mistake is a lesson.",
+    challengeTitle: "💪 Mini challenge",
+    challengeTip: "Try it first in the editor. Only look at the solution after you've tried.",
+    hintBtn: "💡 Show hint",
+    solutionBtn: "👀 Show solution",
+    hideSolution: "🙈 Hide solution",
+    limit: "You've used your free test for today. With Premium you get unlimited tests.",
+    error: "The test couldn't be created. Please try again in a few seconds.",
+    exampleNote: "Sign up for free to test yourself with your own code.",
+  },
+  pt: {
+    btn: "🧠 Teste seus conhecimentos",
+    desc: "3 perguntas + 1 mini desafio sobre este código para ver se você entendeu.",
+    freeNote: "Plano Free: 1 teste por dia · Premium: ilimitados",
+    loading: "Preparando seu teste...",
+    question: (i, n) => `Pergunta ${i} de ${n}`,
+    correct: "✅ Correto!",
+    wrong: "❌ Não é a correta.",
+    score: (s, n) => `Seu resultado: ${s}/${n}`,
+    perfect: "Perfeito! Você entendeu muito bem este código. 🎉",
+    good: "Muito bem! Revise a explicação da pergunta que você errou.",
+    low: "Leia a explicação de novo com calma: cada erro é uma lição.",
+    challengeTitle: "💪 Mini desafio",
+    challengeTip: "Tente primeiro no editor. Veja a solução só depois de tentar.",
+    hintBtn: "💡 Ver dica",
+    solutionBtn: "👀 Ver solução",
+    hideSolution: "🙈 Ocultar solução",
+    limit: "Você já usou seu teste grátis de hoje. Com o Premium os testes são ilimitados.",
+    error: "Não foi possível criar o teste. Tente de novo em alguns segundos.",
+    exampleNote: "Cadastre-se grátis para se testar com seus próprios códigos.",
+  },
+  fr: {
+    btn: "🧠 Testez-vous",
+    desc: "3 questions + 1 mini défi sur ce code pour vérifier que vous l'avez compris.",
+    freeNote: "Formule Free : 1 test par jour · Premium : illimités",
+    loading: "Préparation de votre test...",
+    question: (i, n) => `Question ${i} sur ${n}`,
+    correct: "✅ Correct !",
+    wrong: "❌ Ce n'est pas la bonne réponse.",
+    score: (s, n) => `Votre score : ${s}/${n}`,
+    perfect: "Parfait ! Vous avez très bien compris ce code. 🎉",
+    good: "Très bien ! Relisez l'explication de la question manquée.",
+    low: "Relisez l'explication tranquillement : chaque erreur est une leçon.",
+    challengeTitle: "💪 Mini défi",
+    challengeTip: "Essayez d'abord dans l'éditeur. Ne regardez la solution qu'après avoir essayé.",
+    hintBtn: "💡 Voir l'indice",
+    solutionBtn: "👀 Voir la solution",
+    hideSolution: "🙈 Masquer la solution",
+    limit: "Vous avez utilisé votre test gratuit du jour. Avec Premium, les tests sont illimités.",
+    error: "Impossible de créer le test. Réessayez dans quelques secondes.",
+    exampleNote: "Inscrivez-vous gratuitement pour vous tester avec vos propres codes.",
+  },
+  de: {
+    btn: "🧠 Testen Sie sich",
+    desc: "3 Fragen + 1 Mini-Aufgabe zu diesem Code, um zu prüfen, ob Sie ihn verstanden haben.",
+    freeNote: "Free-Plan: 1 Test pro Tag · Premium: unbegrenzt",
+    loading: "Ihr Test wird vorbereitet...",
+    question: (i, n) => `Frage ${i} von ${n}`,
+    correct: "✅ Richtig!",
+    wrong: "❌ Leider falsch.",
+    score: (s, n) => `Ihr Ergebnis: ${s}/${n}`,
+    perfect: "Perfekt! Sie haben diesen Code sehr gut verstanden. 🎉",
+    good: "Sehr gut! Lesen Sie die Erklärung zur falsch beantworteten Frage.",
+    low: "Lesen Sie die Erklärung in Ruhe noch einmal: Jeder Fehler ist eine Lektion.",
+    challengeTitle: "💪 Mini-Aufgabe",
+    challengeTip: "Versuchen Sie es zuerst im Editor. Schauen Sie die Lösung erst danach an.",
+    hintBtn: "💡 Tipp anzeigen",
+    solutionBtn: "👀 Lösung anzeigen",
+    hideSolution: "🙈 Lösung ausblenden",
+    limit: "Sie haben Ihren kostenlosen Test für heute genutzt. Mit Premium sind Tests unbegrenzt.",
+    error: "Der Test konnte nicht erstellt werden. Bitte in ein paar Sekunden erneut versuchen.",
+    exampleNote: "Registrieren Sie sich kostenlos, um sich mit Ihrem eigenen Code zu testen.",
+  },
+  zh: {
+    btn: "🧠 自我测试",
+    desc: "关于这段代码的 3 道题 + 1 个小挑战，检验你是否真正理解。",
+    freeNote: "免费版：每天 1 次测试 · 高级版：无限次",
+    loading: "正在准备你的测试...",
+    question: (i, n) => `第 ${i} 题，共 ${n} 题`,
+    correct: "✅ 回答正确！",
+    wrong: "❌ 回答错误。",
+    score: (s, n) => `你的得分：${s}/${n}`,
+    perfect: "完美！你非常理解这段代码。🎉",
+    good: "很好！复习一下答错那道题的解释。",
+    low: "再冷静地读一遍讲解：每个错误都是一次学习。",
+    challengeTitle: "💪 小挑战",
+    challengeTip: "先在编辑器里自己尝试，试过之后再看答案。",
+    hintBtn: "💡 查看提示",
+    solutionBtn: "👀 查看答案",
+    hideSolution: "🙈 隐藏答案",
+    limit: "你今天的免费测试已用完。升级高级版即可无限次测试。",
+    error: "无法创建测试，请几秒后重试。",
+    exampleNote: "免费注册，用你自己的代码进行自我测试。",
+  },
+};
+
+// Muestra `fragmentos` de código dentro de un texto
+function InlineCode({ text }) {
+  return String(text).split("`").map((part, i) =>
+    i % 2 === 1 ? <code key={i} style={styles.quizInlineCode}>{part}</code> : <span key={i}>{part}</span>
+  );
+}
+
+function QuizBlock({ result, langLabel, uiLang, mode, user, isPremium, isExample, t, onUpgrade, onNeedAuth }) {
+  const q = QUIZ_TEXTS[uiLang] || QUIZ_TEXTS.es;
+  const [status, setStatus] = useState("idle"); // idle | loading | ready | limit | error
+  const [quiz, setQuiz] = useState(null);
+  const [picked, setPicked] = useState([]);
+  const [showHint, setShowHint] = useState(false);
+  const [showSolution, setShowSolution] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  // Resultado nuevo → prueba nueva
+  useEffect(() => {
+    setStatus("idle"); setQuiz(null); setPicked([]);
+    setShowHint(false); setShowSolution(false); setErrorMsg("");
+  }, [result]);
+
+  const start = async () => {
+    if (!user || isExample) { onNeedAuth(); return; }
+    setStatus("loading"); setErrorMsg("");
+    try {
+      const { data, error } = await supabase.functions.invoke("quiz", {
+        body: { code: result.code, explanation: result.explanation, lang: langLabel, uiLang: UI_LANGS[uiLang].label, mode },
+      });
+      if (error) {
+        let info = {};
+        try { info = await error.context.json(); } catch {}
+        if (info.error === "quiz_limit") { setStatus("limit"); return; }
+        if (info.error === "email_not_allowed") { setErrorMsg(EMAIL_BLOCK_TEXTS[uiLang] || EMAIL_BLOCK_TEXTS.es); setStatus("error"); return; }
+        throw error;
+      }
+      if (!data?.quiz?.questions?.length) throw new Error("empty quiz");
+      setQuiz(data.quiz);
+      setPicked(new Array(data.quiz.questions.length).fill(null));
+      setStatus("ready");
+    } catch {
+      setErrorMsg(q.error);
+      setStatus("error");
+    }
+  };
+
+  const pick = (qi, oi) => {
+    if (picked[qi] !== null) return;
+    setPicked(p => p.map((v, i) => (i === qi ? oi : v)));
+  };
+
+  // Botón inicial (también se muestra de nuevo si hubo un error)
+  if (status === "idle" || status === "error" || status === "loading") {
+    return (
+      <div style={styles.quizIntro}>
+        <button onClick={start} disabled={status === "loading"}
+          style={{ ...styles.generateBtn, width: "100%", fontSize: 14, padding: "12px 20px", ...(status === "loading" ? { opacity: 0.7, cursor: "wait" } : {}) }}>
+          {status === "loading"
+            ? <span style={styles.loadingInner}><span style={styles.spinner} />{q.loading}</span>
+            : q.btn}
+        </button>
+        <div style={styles.quizIntroDesc}>{isExample || !user ? q.exampleNote : q.desc}</div>
+        {user && !isPremium && !isExample && <div style={styles.quizFreeNote}>{q.freeNote}</div>}
+        {status === "error" && <div style={{ ...styles.error, marginTop: 10 }}>{errorMsg}</div>}
+      </div>
+    );
+  }
+
+  if (status === "limit") {
+    return (
+      <div style={styles.limitReached}>
+        <div style={{ fontSize: 13, color: "#f08080", marginBottom: 10 }}>{q.limit}</div>
+        <button onClick={onUpgrade} style={{ ...styles.generateBtn, width: "100%" }}>{t.upgradeBtn}</button>
+      </div>
+    );
+  }
+
+  const total = quiz.questions.length;
+  const answered = picked.filter(v => v !== null).length;
+  const score = quiz.questions.reduce((s, qq, i) => s + (picked[i] === qq.answer ? 1 : 0), 0);
+
+  return (
+    <div style={styles.card}>
+      <div style={styles.cardHeader}>
+        <div style={styles.cardTitle}>{q.btn}</div>
+        <span style={styles.badge}>{answered}/{total}</span>
+      </div>
+      <div style={{ padding: 16, display: "flex", flexDirection: "column", gap: 18 }}>
+        {quiz.questions.map((qq, qi) => {
+          const done = picked[qi] !== null;
+          return (
+            <div key={qi}>
+              <div style={styles.quizQNum}>{q.question(qi + 1, total)}</div>
+              <div style={styles.quizQText}><InlineCode text={qq.q} /></div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                {qq.options.map((opt, oi) => {
+                  const isRight = oi === qq.answer;
+                  const isPicked = picked[qi] === oi;
+                  const look = !done ? {} : isRight ? styles.quizOptRight : isPicked ? styles.quizOptWrong : styles.quizOptDim;
+                  return (
+                    <button key={oi} onClick={() => pick(qi, oi)} disabled={done}
+                      style={{ ...styles.quizOpt, ...look, cursor: done ? "default" : "pointer" }}>
+                      <span style={styles.quizOptLetter}>{"ABCD"[oi]}</span>
+                      <span><InlineCode text={opt} /></span>
+                    </button>
+                  );
+                })}
+              </div>
+              {done && (
+                <div style={styles.quizWhy}>
+                  <strong style={{ color: picked[qi] === qq.answer ? "#7ee2a8" : "#f08080" }}>
+                    {picked[qi] === qq.answer ? q.correct : q.wrong}
+                  </strong>{" "}
+                  <InlineCode text={qq.why} />
+                </div>
+              )}
+            </div>
+          );
+        })}
+
+        {answered === total && (
+          <div style={styles.quizScore}>
+            <div style={{ fontSize: 18, fontWeight: 700, color: "#f0eeff", marginBottom: 4 }}>{q.score(score, total)}</div>
+            <div style={{ fontSize: 13, color: "#b0accc" }}>{score === total ? q.perfect : score >= total - 1 ? q.good : q.low}</div>
+          </div>
+        )}
+
+        <div style={styles.quizChallenge}>
+          <div style={styles.quizChallengeTitle}>{q.challengeTitle}</div>
+          <div style={styles.quizQText}><InlineCode text={quiz.challenge.task} /></div>
+          <div style={{ fontSize: 12, color: "#8a86a6", marginBottom: 10 }}>{q.challengeTip}</div>
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            {quiz.challenge.hint && (
+              <button onClick={() => setShowHint(h => !h)} style={styles.shareBtn}>{q.hintBtn}</button>
+            )}
+            <button onClick={() => setShowSolution(s => !s)} style={styles.shareBtn}>
+              {showSolution ? q.hideSolution : q.solutionBtn}
+            </button>
+          </div>
+          {showHint && quiz.challenge.hint && (
+            <div style={{ ...styles.quizWhy, marginTop: 10 }}>💡 <InlineCode text={quiz.challenge.hint} /></div>
+          )}
+          {showSolution && (
+            <div style={{ ...styles.card, marginTop: 10 }}>
+              <div style={styles.cardHeader}>
+                <div style={styles.cardTitle}>{langLabel}</div>
+                <CopyButton text={quiz.challenge.solution} t={t} />
+              </div>
+              <pre style={styles.codeBlock}><code>{quiz.challenge.solution}</code></pre>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ExplanationBlock({ explanation }) {
   const lines = explanation.split("\n");
   const elements = [];
@@ -1805,6 +2092,18 @@ export default function App() {
           <ExplanationBlock explanation={result.explanation} />
         </div>
       </div>
+      <QuizBlock
+        result={result}
+        langLabel={selectedProgLang.label}
+        uiLang={uiLang}
+        mode={mode}
+        user={user}
+        isPremium={isPremium}
+        isExample={isExample}
+        t={t}
+        onUpgrade={handleUpgrade}
+        onNeedAuth={() => setShowAuth(true)}
+      />
       <NextSteps progLang={progLang} t={t} mode={mode} />
     </div>
   ) : isLandscape ? (
@@ -2075,6 +2374,21 @@ const styles = {
   suggestedLabel: { fontSize: 11, color: "#4e4b62", fontFamily: "'IBM Plex Mono', monospace", marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.5 },
   suggestedList: { display: "flex", flexDirection: "column", gap: 6 },
   suggestedBtn: { display: "flex", alignItems: "flex-start", gap: 8, padding: "8px 12px", background: "#13111c", border: "1px solid #2a2440", borderRadius: 8, cursor: "pointer", color: "#9691b8", fontSize: 12, textAlign: "left", lineHeight: 1.4, transition: "all 0.15s" },
+  quizIntro: { padding: "14px 16px", background: "linear-gradient(135deg, #1a1630 0%, #12101c 100%)", border: "1px solid #3a3060", borderRadius: 10 },
+  quizIntroDesc: { fontSize: 12, color: "#b0accc", marginTop: 10, textAlign: "center", lineHeight: 1.5 },
+  quizFreeNote: { fontSize: 11, color: "#8a86a6", marginTop: 4, textAlign: "center" },
+  quizQNum: { fontSize: 11, fontWeight: 700, color: "#7c6af7", textTransform: "uppercase", letterSpacing: 0.8, marginBottom: 6 },
+  quizQText: { fontSize: 14, color: "#e8e6f0", lineHeight: 1.6, marginBottom: 10 },
+  quizOpt: { display: "flex", alignItems: "flex-start", gap: 10, textAlign: "left", width: "100%", padding: "10px 12px", background: "#0f0d18", border: "1px solid #2a2440", borderRadius: 8, color: "#d6d2f0", fontSize: 13, lineHeight: 1.5 },
+  quizOptLetter: { flexShrink: 0, width: 22, height: 22, borderRadius: "50%", background: "#1e1a35", color: "#c4beff", fontSize: 11, fontWeight: 700, display: "inline-flex", alignItems: "center", justifyContent: "center" },
+  quizOptRight: { background: "rgba(46,160,90,0.15)", border: "1px solid #2ea05a", color: "#e8fff0" },
+  quizOptWrong: { background: "rgba(240,128,128,0.12)", border: "1px solid #c04848", color: "#ffe8e8" },
+  quizOptDim: { opacity: 0.55 },
+  quizWhy: { marginTop: 8, padding: "10px 12px", background: "#0f0d18", borderLeft: "3px solid #7c6af7", borderRadius: "0 8px 8px 0", fontSize: 13, color: "#b0accc", lineHeight: 1.6 },
+  quizInlineCode: { fontFamily: "'IBM Plex Mono', monospace", fontSize: 12, background: "#1e1a35", color: "#c8c2ff", padding: "1px 5px", borderRadius: 4 },
+  quizScore: { textAlign: "center", padding: "14px 16px", background: "#1a1630", border: "1px solid #3a3060", borderRadius: 10 },
+  quizChallenge: { padding: "14px 16px", background: "#0f0d18", border: "1px dashed #3a3060", borderRadius: 10 },
+  quizChallengeTitle: { fontSize: 13, fontWeight: 700, color: "#f0c040", marginBottom: 8 },
   nextStepsWrap: { marginTop: 8 },
   nextStepsToggle: { width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px", background: "#13111c", border: "1px solid #2a2440", borderRadius: 10, cursor: "pointer", color: "#7c6af7", fontSize: 13, fontWeight: 600 },
   nextStepsList: { background: "#13111c", border: "1px solid #2a2440", borderTop: "none", borderRadius: "0 0 10px 10px", padding: "8px 0" },
